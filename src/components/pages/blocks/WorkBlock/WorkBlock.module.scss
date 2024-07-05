@@ -1,0 +1,69 @@
+@import "../../../../styles/mixins.scss";
+
+@mixin vars() {
+  --transition: 200ms;
+  --container-min-width: 100%;
+  --container-height: 400px;
+  @media (min-width: $tablet) {
+  }
+
+  @media (min-width: $laptop) {
+    --container-min-width: 400px;
+  }
+
+  @media (min-width: $desktop) {
+  }
+}
+
+.workBlock {
+  align-items: stretch !important;
+  row-gap: var(--pad-5) !important;
+}
+
+.container {
+  @include vars;
+
+  position: relative;
+  overflow: hidden;
+  min-width: var(--container-min-width);
+  min-height: var(--container-height);
+  cursor: pointer;
+  flex: 1;
+
+  .content {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    flex: 1;
+    h3 {
+      font-size: var(--heading-seto-h4) !important;
+      line-height: var(--heading-seto-h4-line) !important;
+    }
+  }
+
+  &:hover {
+    .imgWrapper {
+      img {
+        transition: var(--transition);
+        transform: scale(1.1);
+      }
+    }
+    .content {
+      transition: var(--transition);
+      background-color: rgba(0, 0, 0, 0.1);
+      .title {
+        transition: var(--transition);
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.grid {
+  .content {
+    background-color: var(--black);
+    > * {
+      color: var(--white) !important;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+@import "../../../styles/mixins.scss";
+
+@mixin vars() {
+  @media (min-width: $tablet) {
+  }
+
+  @media (min-width: $laptop) {
+    --translate-y: 56.5px;
+  }
+
+  @media (min-width: $desktop) {
+    --translate-y: 64.5px;
+  }
+}
+
+.dropdown {
+  @include vars;
+  background: var(--yellow);
+  width: 100vw;
+  position: relative;
+  margin-top: var(--pad-2);
+  box-sizing: content-box !important;
+
+  @media (min-width: $laptop) {
+    width: fit-content;
+    position: absolute;
+    margin-top: 0;
+    top: 0;
+    transform: translateY(var(--translate-y));
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.1),
+      inset 0 2px 6px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 5px 5px;
+  }
+  nav path {
+    fill: var(--black) !important;
+  }
+  p:hover {
+    color: var(--black) !important;
+  }
+  p {
+    text-wrap: nowrap;
+  }
+}

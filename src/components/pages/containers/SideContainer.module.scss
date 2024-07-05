@@ -1,0 +1,49 @@
+@import "../../../styles/mixins.scss";
+
+@mixin vars() {
+  --text-lines: 3;
+  --width: 100%;
+  @media (min-width: $tablet) {
+    --text-lines: 5;
+  }
+
+  @media (min-width: $laptop) {
+    --width: calc(100% / 3);
+    --text-lines: 6;
+  }
+
+  @media (min-width: $desktop) {
+  }
+}
+
+.wrapper {
+  @include vars;
+  @include flex(center, stretch);
+  // @include blurEffect;
+
+  $padding: calc((100vw - var(--screen-width-small)) / 2);
+  width: var(--width);
+  z-index: 1;
+
+  .container {
+    height: 100%;
+    gap: var(--pad-3);
+    padding-right: $padding !important;
+    padding-left: $padding !important;
+    background-color: var(--black);
+
+    .text {
+      z-index: 1;
+      .description {
+        @include paragraphMaxLines(var(--text-lines));
+      }
+    }
+  }
+
+  @media (min-width: $laptop) {
+    .container {
+      padding-left: var(--pad-7) !important;
+      padding-right: var(--pad-7) !important;
+    }
+  }
+}
