@@ -170,14 +170,18 @@ export interface INotFound {
 /* eslint-disable */
 export enum LocalPaths {
   HOME = "/home",
-  ABOUT = "/about-work",
+  SERVICE = "/service",
+  TATTOOING = "/tattooing",
+  TEST_TATTOO = "/test-tattoo",
+  HENNA = "/henna",
+  COURSE = "/course",
+  ONLINE = "/online",
+  IN_PERSON = "/in-person",
+  PORTFOLIO = "/portfolio",
+  BOUTIQUE = "/boutique",
   BLOG = "/blog",
+  CART = "/cart",
   CONTACT = "/contact",
   LEGAL = "/legal",
-  SERVICE = "/service",
-  BRANDING = "/branding",
-  WEB = "/web-design",
-  PACKAGE = "/total-package",
-  CUSTOM = "/custom-work",
 }
 /* eslint-enable */
