@@ -4,7 +4,6 @@ import styles from "./About.module.scss";
 import { Block } from "../../containers/Block";
 import FlexDiv from "../../../reuse/FlexDiv";
 import { Heading } from "../../../reuse/Heading";
-import { FancyText } from "../../../reuse/FancyText";
 import { IAbout } from "../../../../data.d";
 import { Paragraph } from "../../../reuse/Paragraph";
 import { SanityImage } from "../../../reuse/SanityImage/SanityImage";
@@ -98,7 +97,6 @@ export const About: React.FC<IAbout> = ({ content }) => {
                 flex={{ direction: "column", x: "flex-start" }}
                 gapArray={[1]}
               >
-                <FancyText {...title1} mode="paragraph" dark />
                 <Paragraph
                   level="regular"
                   color="black"

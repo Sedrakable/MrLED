@@ -15,7 +15,7 @@
 
 .dropdown {
   @include vars;
-  background: var(--yellow);
+  background: var(--burgundy);
   width: 100vw;
   position: relative;
   margin-top: var(--pad-2);
@@ -32,10 +32,10 @@
     border-radius: 0 0 5px 5px;
   }
   nav path {
-    fill: var(--black) !important;
+    fill: var(--darkest-burgundy) !important;
   }
   p:hover {
-    color: var(--black) !important;
+    color: var(--darkest-burgundy) !important;
   }
   p {
     text-wrap: nowrap;

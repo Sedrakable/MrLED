@@ -38,7 +38,7 @@
     }
   }
   .left {
-    background: var(--black);
+    background: var(--darkest-burgundy);
     width: var(--left-width);
     box-sizing: content-box;
     position: relative;
@@ -48,12 +48,12 @@
       transform: translateX(50%);
       height: var(--logo-height);
       path {
-        fill: var(--yellow);
+        fill: var(--burgundy);
       }
     }
   }
   .right {
-    background: var(--white);
+    background: var(--cream-white);
     width: var(--right-width);
   }
 }

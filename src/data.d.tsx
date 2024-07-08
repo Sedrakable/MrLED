@@ -1,4 +1,3 @@
-import { FancyTextProps } from "./components/reuse/FancyText";
 // @ts-ignore
 import { ICustomImage } from "./components/reuse/SanityImage/SanityImage";
 
@@ -17,15 +16,10 @@ export interface ISlug {
   current: string;
   _type: string;
 }
-export interface IFancyText {
-  part1: string;
-  part2: string;
-  part3?: string;
-}
 
 export interface IHero {
-  subTitle?: IFancyText;
-  title: IFancyText;
+  subTitle?: string;
+  title: string;
   desc: string;
   customImage: ICustomImage;
   ctas?: {
@@ -85,7 +79,7 @@ export interface IValue {
 export interface IAboutContent {
   customImage: ICustomImage;
   name?: string;
-  title1: FancyTextProps;
+  title1: string;
   desc1: string;
   title2?: string;
   desc2?: string;
@@ -127,7 +121,8 @@ export interface IWork {
 }
 
 export interface INavLink {
-  title: string;
+  text: string;
+  link: string;
   ctaArray: ICta[];
 }
 
@@ -171,13 +166,15 @@ export interface INotFound {
 export enum LocalPaths {
   HOME = "/home",
   SERVICE = "/service",
-  TATTOOING = "/tattooing",
   TEST_TATTOO = "/test-tattoo",
-  HENNA = "/henna",
   COURSE = "/course",
   ONLINE = "/online",
   IN_PERSON = "/in-person",
   PORTFOLIO = "/portfolio",
+  HENNA = "/henna",
+  TATTOO = "/tattoo",
+  FLASH = "/flash",
+  TOILES = "/toiles",
   BOUTIQUE = "/boutique",
   BLOG = "/blog",
   CART = "/cart",

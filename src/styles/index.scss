@@ -9,51 +9,39 @@
   --transition-time: 200ms;
 
   --white: #ffffff;
-  --black: #0f0f0f;
-  --grey: #bcbcbc;
-  --yellow: #fec301;
-  --gold-grad: linear-gradient(
-    90deg,
-    var(--yellow) 0%,
-    #febb01 50%,
-    var(--yellow) 100%
-  );
+  --cream-white: #fff1eb;
+  --light-burgundy: #dcb2c1;
+  --burgundy: #853d57;
+  --dark-burgundy: #572839;
+  --darkest-burgundy: #2a131c;
   --pad-0: 0px;
-  --pad-1: 5px;
-  --pad-2: 10px;
-  --pad-3: 15px;
-  --pad-4: 20px;
-  --pad-5: 30px;
-  --pad-6: 45px;
-  --pad-7: 60px;
-  --pad-8: 90px;
-  --pad-9: 120px;
-  --pad-10: 180px;
-  --pad-11: 240px;
+  --pad-1: 2px;
+  --pad-2: 4px;
+  --pad-3: 8px;
+  --pad-4: 16px;
+  --pad-5: 24px;
+  --pad-6: 32px;
+  --pad-7: 48px;
+  --pad-8: 64px;
+  --pad-9: 96px;
+  --pad-10: 128px;
+  --pad-11: 192px;
+  --pad-12: 256px;
+  --pad-13: 320px;
 
-  --heading-seto-h1: 80px;
-  --heading-seto-h2: 64px;
-  --heading-seto-h3: 48px;
-  --heading-seto-h4: 32px;
-  --heading-seto-h5: 20px;
+  --heading-h1: 256px;
+  --heading-h2: 178px;
+  --heading-h3: 110px;
+  --heading-h4: 68px;
+  --heading-h5: 42px;
+  --heading-h6: 26px;
 
-  --heading-seto-h1-line: 128px;
-  --heading-seto-h2-line: 80px;
-  --heading-seto-h3-line: 64px;
-  --heading-seto-h4-line: 48px;
-  --heading-seto-h5-line: 24px;
-
-  --heading-caveat-h1: 128px;
-  --heading-caveat-h2: 80px;
-  --heading-caveat-h3: 64px;
-  --heading-caveat-h4: 48px;
-  --heading-caveat-h5: 30px;
-
-  --heading-caveat-h1-line: 128px;
-  --heading-caveat-h2-line: 80px;
-  --heading-caveat-h3-line: 64px;
-  --heading-caveat-h4-line: 48px;
-  --heading-caveat-h5-line: 30px;
+  --heading-h1-line: 234px;
+  --heading-h2-line: 162px;
+  --heading-h3-line: 121px;
+  --heading-h4-line: 75px;
+  --heading-h5-line: 53px;
+  --heading-h6-line: 29px;
 
   --paragraph-big: 32px;
   --paragraph-regular: 24px;
@@ -62,26 +50,26 @@
   --paragraph-regular-line: 28px;
   --paragraph-small-line: 22px;
 
-  --navbar-height: 64px;
+  --navbar-height: 120px;
   --screen-width-large: calc(100vw - var(--pad-6));
   --screen-width-small: calc(100vw - var(--pad-6));
   --max-height: 1600px;
 
   @media (min-width: $tablet) {
-    --navbar-height: 80px;
     --screen-width-small: calc(100vw - var(--pad-9));
     --screen-width-large: calc(100vw - var(--pad-7));
     --max-height: 1600px;
   }
 
   @media (min-width: $laptop) {
+    --navbar-height: 100px;
     --screen-width-small: calc(100vw - (var(--pad-10) * 2));
     --screen-width-large: calc(100vw - var(--pad-10));
     --max-height: 1920px;
   }
 
   @media (min-width: $desktop) {
-    --navbar-height: 96px;
+    --navbar-height: 120px;
     --screen-width-small: calc(var(--desktop) - (var(--pad-9) * 2));
     --screen-width-large: calc(var(--desktop) - var(--pad-6));
     --max-height: 2160px !important;

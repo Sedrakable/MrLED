@@ -4,7 +4,6 @@ import emailjs from "@emailjs/browser";
 import styles from "./Form.module.scss";
 import cn from "classnames";
 import { Button } from "../../reuse/Button";
-import { FancyText } from "../../reuse/FancyText";
 import FlexDiv from "../../reuse/FlexDiv";
 import { useWindowResize } from "../../../helpers/useWindowResize";
 import { IForm } from "../../../data.d";
@@ -92,7 +91,6 @@ export const Form: React.FC<IForm> = ({ desc }) => {
         </FlexDiv>
       ) : (
         <>
-          <FancyText {...desc} mode="paragraph" textAlign="center" />
           <form
             ref={form}
             className={cn(styles.form, styles.contactForm)}

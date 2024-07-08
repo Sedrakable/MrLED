@@ -6,16 +6,16 @@ import {
   SpacingArrayType,
   useSpacingGenerator,
 } from "../../helpers/SpacingGenerator";
-import { Caveat } from "next/font/google";
+import { Josefin_Sans } from "next/font/google";
 
-const caveat = Caveat({
+const josefin = Josefin_Sans({
   variable: "--font-caveat",
   subsets: ["latin"],
 });
 
 export type ColorType = "white" | "black" | "yellow" | "grey";
 
-export const HeadingLevelArray = ["1", "2", "3", "4", "5"] as const;
+export const HeadingLevelArray = ["1", "2", "3", "4", "5", "6"] as const;
 
 type HeadingLevelType = typeof HeadingLevelArray[number];
 
@@ -41,10 +41,10 @@ type textAlign =
   | "match-parent";
 
 export interface HeadingProps {
-  font: "Seto" | "Cursive";
   children: string | JSX.Element;
   level: HeadingLevelType;
   as: HeadingAsType;
+  weight?: 300 | 400 | 500;
   textAlign?: textAlign;
   paddingBottomArray?: SpacingArrayType;
   color?: ColorType;
@@ -59,8 +59,8 @@ export const capitalizeString = (str: string): string => {
 };
 
 export const Heading: React.FC<HeadingProps> = ({
-  font = "Seto",
   children,
+  weight = 300,
   level,
   as,
   textAlign,
@@ -86,17 +86,16 @@ export const Heading: React.FC<HeadingProps> = ({
     <CustomHeading
       className={cn(
         styles.heading,
+        josefin.variable,
         styles[`level${level}`],
         {
           [styles.gradient]: color.includes("grad"),
           [styles.clickable]: clickable,
-          [styles.seto]: font === "Seto",
-          [styles.cursive]: font === "Cursive",
-          [caveat.variable]: font === "Cursive",
         },
         className
       )}
       style={{
+        fontWeight: weight,
         color: `var(--${color})`,
         textAlign,
         paddingBottom: spacingNum && `var(--pad-${spacingNum})`,

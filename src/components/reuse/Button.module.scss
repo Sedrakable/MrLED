@@ -65,13 +65,13 @@
     min-height: var(--button-height);
     height: var(--button-height);
     transition: 300ms;
-    background: var(--white);
+    background: var(--cream-white);
     border-radius: calc(var(--button-height) / 2);
-    border: 2px solid var(--yellow);
+    border: 2px solid var(--burgundy);
     &:hover {
-      background: var(--yellow);
+      background: var(--burgundy);
       > * {
-        color: var(--white) !important;
+        color: var(--cream-white) !important;
       }
     }
   }
@@ -80,13 +80,13 @@
     min-height: var(--button-height);
     height: var(--button-height);
     transition: 300ms;
-    background: var(--yellow);
+    background: var(--burgundy);
     border-radius: calc(var(--button-height) / 2);
-    border: 2px solid var(--yellow);
+    border: 2px solid var(--burgundy);
     &:hover {
-      background: var(--white);
+      background: var(--cream-white);
       > * {
-        color: var(--yellow) !important;
+        color: var(--burgundy) !important;
       }
     }
   }
@@ -116,7 +116,7 @@
 
   .fancy {
     @include button(
-      var(--yellow),
+      var(--burgundy),
       "https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png",
       3000%,
       100%,

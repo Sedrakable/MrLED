@@ -27,7 +27,7 @@
   box-shadow: 0 0 6px 0px rgba(0, 0, 0, 0.1);
 
   .top {
-    background: var(--black);
+    background: var(--darkest-burgundy);
   }
   .middle {
     width: 100%;
@@ -35,7 +35,7 @@
     aspect-ratio: var(--ratio) !important;
   }
   .content {
-    background: var(--white);
+    background: var(--cream-white);
 
     flex: 1;
     .tags > * {

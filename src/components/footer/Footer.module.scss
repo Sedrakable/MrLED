@@ -35,8 +35,8 @@
   @include vars;
 
   width: 100vw;
-  background: var(--black);
-  border-top: var(--border-width) solid var(--yellow);
+  background: var(--darkest-burgundy);
+  border-top: var(--border-width) solid var(--burgundy);
 
   .container {
     width: var(--screen-width-large);
@@ -48,7 +48,7 @@
       p {
         text-decoration: underline;
         // &:hover {
-        //   color: var(--yellow);
+        //   color: var(--burgundy);
         // }
       }
     }

@@ -1,23 +1,23 @@
 @import "../../styles/mixins.scss";
 
-@mixin sizing($font, $size) {
-  font-size: var(--heading#{$font}-h#{$size});
-  line-height: var(--heading#{$font}-h#{$size}-line);
+@mixin sizing($size) {
+  font-size: var(--heading-h#{$size});
+  line-height: var(--heading-h#{$size}-line);
 }
 
-@mixin level($font, $desk, $lap, $tab, $mob) {
-  @include sizing($font, $mob);
+@mixin level($desk, $lap, $tab, $mob) {
+  @include sizing($mob);
 
   @media (min-width: $tablet) {
-    @include sizing($font, $tab);
+    @include sizing($tab);
   }
 
   @media (min-width: $laptop) {
-    @include sizing($font, $lap);
+    @include sizing($lap);
   }
 
   @media (min-width: $desktop) {
-    @include sizing($font, $desk);
+    @include sizing($desk);
   }
 }
 
@@ -25,49 +25,19 @@
   text-decoration: none !important;
   &.clickable {
     &:hover {
-      color: var(--yellow) !important;
+      color: var(--burgundy) !important;
     }
   }
-}
 
-.seto {
-  @include fontHeaderSeto;
-
-  @for $i from 1 through 3 {
+  @for $i from 1 through 4 {
     &.level#{$i} {
-      @include level(-seto, $i, $i + 1, $i + 1, $i + 2);
+      @include level($i, $i + 1, $i + 1, $i + 2);
     }
-  }
-  &.level4 {
-    @include level(-seto, 4, 4, 4, 5);
   }
   &.level5 {
-    @include level(-seto, 5, 5, 5, 5);
+    @include level(5, 6, 6, 6);
   }
-}
-
-.cursive {
-  font-family: var(--font-caveat);
-
-  font-weight: 600;
-  @for $i from 1 through 3 {
-    &.level#{$i} {
-      @include level(-caveat, $i, $i + 1, $i + 1, $i + 2);
-    }
-  }
-  &.level4 {
-    @include level(-caveat, 4, 4, 4, 5);
-  }
-  &.level5 {
-    @include level(-caveat, 5, 5, 5, 5);
-  }
-}
-
-@keyframes moveGradient {
-  0% {
-    background-position: -100% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
+  &.level6 {
+    @include level(6, 6, 6, 6);
   }
 }

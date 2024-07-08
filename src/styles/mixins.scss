@@ -1,15 +1,5 @@
 @import "./vars.scss";
 
-@font-face {
-  font-family: "Seto";
-  src: url("../assets/fonts/Seto.otf") format("opentype");
-}
-
-@mixin fontHeaderSeto() {
-  font-family: "Seto", sans-serif;
-  font-weight: normal;
-}
-
 @mixin flex($x: center, $y: center) {
   display: flex;
   justify-content: $x;

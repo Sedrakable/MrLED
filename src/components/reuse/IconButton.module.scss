@@ -18,13 +18,13 @@
 
   &.black {
     &:hover {
-      --button-hover-color: var(--white);
+      --button-hover-color: var(--cream-white);
     }
   }
 
   &.white {
     &:hover {
-      --button-hover-color: var(--black);
+      --button-hover-color: var(--darkest-burgundy);
     }
   }
 }

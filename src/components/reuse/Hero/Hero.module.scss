@@ -47,7 +47,7 @@
   }
   .left {
     @include flexColumn;
-    background: var(--white);
+    background: var(--cream-white);
     flex: var(--left-flex);
     width: 100%;
     aspect-ratio: var(--ratio);
@@ -121,7 +121,7 @@
       height: 100%;
       max-height: auto;
       padding-bottom: unset !important;
-      border-bottom: 3px solid var(--black);
+      border-bottom: 3px solid var(--darkest-burgundy);
       svg {
         position: absolute;
         right: calc(var(--logo-offset) * -1);

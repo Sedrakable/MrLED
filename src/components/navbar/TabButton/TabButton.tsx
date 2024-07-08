@@ -8,7 +8,6 @@ import FlexDiv from "../../reuse/FlexDiv";
 import { Icon } from "../../reuse/Icon";
 import { DropDown } from "../Dropdown/DropDown";
 import { ICta } from "../../../data.d";
-import { FancyText } from "../../reuse/FancyText";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -19,28 +18,6 @@ export interface TabButtonProps {
   onClick?: Function;
   dropdown?: ICta[];
 }
-
-const FancyHeadingComponent: FC<{ text: string }> = ({ text }) => {
-  const [hasFancyText, part1, part2, part3] = useFancyText(text);
-
-  return hasFancyText ? (
-    <FancyText mode="tab" part1={part1} part2={part2} part3={part3} dark />
-  ) : (
-    <Heading font="Seto" level="5" as="h5" color="black">
-      {text}
-    </Heading>
-  );
-};
-
-const useFancyText = (text: string) => {
-  const parts = text.split("+");
-  type FancyTextPartsType = [boolean, string, string, string];
-  if (parts.length === 1) {
-    return [false, text, "", ""] as FancyTextPartsType;
-  } else {
-    return [true, parts[0], "+ ", parts[1]] as FancyTextPartsType;
-  }
-};
 
 const TabButton: FC<TabButtonProps> = ({
   children,
@@ -67,7 +44,9 @@ const TabButton: FC<TabButtonProps> = ({
         gapArray={[2]}
         className={styles.textWrapper}
       >
-        <FancyHeadingComponent text={children} />
+        <Heading level="6" as="h6" color="black">
+          {children}
+        </Heading>
         {dropdown && <Icon icon="arrow" size="small" rotate={90} />}
       </FlexDiv>
     );

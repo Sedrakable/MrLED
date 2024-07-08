@@ -6,13 +6,13 @@ import { Paragraph } from "../Paragraph";
 import { IHero, LocalPaths } from "../../../data.d";
 import FlexDiv from "../FlexDiv";
 import Logo from "@/assets/vector/LogoBig.svg";
-import { FancyText } from "../FancyText";
 import { Button } from "../Button";
 import { Quote } from "../Quote";
 import { SanityImage } from "../SanityImage/SanityImage";
 import { useWindowResize } from "../../../helpers/useWindowResize";
 import { useLocale } from "next-intl";
 import { LangType } from "@/i18n";
+import { Heading } from "../Heading";
 
 export type VersionType = 1 | 2;
 
@@ -78,8 +78,12 @@ export const Hero: React.FC<HeroProps> = ({
             customStyle={{ zIndex: 1 }}
             as="header"
           >
-            {subTitle && <FancyText {...subTitle} mode="paragraph" />}
-            {title && <FancyText mode="heading" {...title} />}
+            <Heading as="h1" level="1">
+              {title}
+            </Heading>
+            <Heading as="h3" level="3">
+              {title}
+            </Heading>
             <Paragraph
               level="small"
               weight="weak"

@@ -48,13 +48,13 @@
       left: 20%;
       right: 20%;
       height: 8px;
-      background-color: var(--white);
+      background-color: var(--cream-white);
       border-radius: 4px;
       overflow: hidden;
       z-index: 4;
       .progress {
         height: 100%;
-        background: var(--yellow);
+        background: var(--burgundy);
       }
     }
 
@@ -79,14 +79,14 @@
         margin-left: calc(100% / 3);
         padding: var(--pad-3) var(--pad-5);
         transform: translate(-100%, var(--pad-3));
-        background: var(--white);
+        background: var(--cream-white);
       }
 
       .nextArrow {
         padding: var(--pad-3) var(--pad-5);
 
         transform: translate(calc(-100% - 1px), var(--pad-3));
-        background: var(--black);
+        background: var(--darkest-burgundy);
         // border-radius: 0 60px 60px 0;
       }
     }
@@ -104,7 +104,7 @@
       overflow: hidden;
 
       .imgGrid {
-        background-color: var(--yellow);
+        background-color: var(--burgundy);
         display: grid;
         gap: var(--grid-gap);
         width: 100%;

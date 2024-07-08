@@ -48,7 +48,7 @@
 
 .block {
   @include vars;
-  background: var(--white);
+  background: var(--cream-white);
   position: relative;
   overflow: hidden;
   flex: 1;
@@ -60,7 +60,7 @@
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.15) inset;
   }
   &.dark {
-    background: var(--black);
+    background: var(--darkest-burgundy);
   }
   &.grid {
     background-image: url("/photos/Textures/GridTexture.webp");

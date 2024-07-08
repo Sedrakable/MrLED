@@ -35,7 +35,7 @@
       left: calc((var(--circle-size) - var(--circle-border-width)) / 2);
       width: var(--circle-border-width);
       height: calc(100% + var(--pad-9));
-      background: var(--yellow);
+      background: var(--burgundy);
     }
   }
   svg {
@@ -71,9 +71,9 @@
       width: var(--circle-size);
       height: var(--circle-size);
       min-width: var(--circle-size);
-      border: var(--circle-border-width) solid var(--yellow);
+      border: var(--circle-border-width) solid var(--burgundy);
       border-radius: 50%;
-      background-color: var(--white);
+      background-color: var(--cream-white);
     }
     p {
       @include paragraphMaxLines(var(--paragraph-max-lines));

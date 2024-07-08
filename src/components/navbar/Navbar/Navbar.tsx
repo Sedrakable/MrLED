@@ -8,7 +8,7 @@ import cn from "classnames";
 import FlexDiv from "../../reuse/FlexDiv";
 import Logo from "@/assets/vector/LogoSmall.svg";
 import { Button } from "../../reuse/Button";
-import { ICta, INavBar, INavLink, LocalPaths } from "../../../data.d";
+import { ICta, INavLink, LocalPaths } from "../../../data.d";
 import { LangSwitcher } from "../LangSwitcher/LangSwitcher";
 import { useAtom } from "jotai";
 import { getTranslations } from "../../../helpers/langUtils";
@@ -26,10 +26,46 @@ const Sidebar = dynamic(
 );
 
 export const isCta = (link: INavLink | ICta): link is ICta => {
-  return (link as ICta).link !== undefined;
+  return (link as INavLink).ctaArray == undefined;
 };
 
-export const Navbar: React.FC<INavBar> = ({ links }) => {
+//FIX: Make titles hardcoded text. FR and EN
+const links: (INavLink | ICta)[] = [
+  {
+    text: "Services",
+    link: LocalPaths.SERVICE,
+    ctaArray: [
+      { text: "Tattooing", link: LocalPaths.TATTOO },
+      {
+        text: "Test Tattoo",
+        link: LocalPaths.TEST_TATTOO,
+      },
+      { text: "Henna", link: LocalPaths.HENNA },
+    ],
+  } as INavLink,
+  {
+    text: "Courses",
+    link: LocalPaths.COURSE,
+    ctaArray: [
+      { text: "Online", link: LocalPaths.ONLINE },
+      { text: "In Person", link: LocalPaths.IN_PERSON },
+    ],
+  } as INavLink,
+  {
+    text: "Portfolio",
+    link: LocalPaths.PORTFOLIO,
+    ctaArray: [
+      { text: "Tattoo", link: LocalPaths.TATTOO },
+      { text: "FLASH", link: LocalPaths.FLASH },
+      { text: "Henna", link: LocalPaths.HENNA },
+      { text: "Toiles", link: LocalPaths.TOILES },
+    ],
+  } as INavLink,
+  { text: "Boutique", link: LocalPaths.BOUTIQUE } as ICta,
+  { text: "Blog", link: LocalPaths.BLOG } as ICta,
+];
+
+export const Navbar = () => {
   const { isMobile, isMobileOrTablet } = useWindowResize();
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
@@ -69,19 +105,6 @@ export const Navbar: React.FC<INavBar> = ({ links }) => {
             {!isMobile && (
               <FlexDiv gapArray={[5, 4, 5, 6]} as="ul">
                 {links?.map((link: INavLink | ICta, key) => {
-                  if (key === links.length - 1 && isCta(link)) {
-                    return (
-                      <li key={key}>
-                        <Button
-                          variant="fancy"
-                          small={isMobile}
-                          path={`/${locale}${LocalPaths.CONTACT}`}
-                        >
-                          {link.text}
-                        </Button>
-                      </li>
-                    );
-                  }
                   return (
                     !isMobileOrTablet &&
                     (isCta(link) ? (
@@ -98,6 +121,25 @@ export const Navbar: React.FC<INavBar> = ({ links }) => {
                     ))
                   );
                 })}
+
+                <li>
+                  <Button
+                    variant="secondary"
+                    small={isMobile}
+                    path={`/${locale}${LocalPaths.CART}`}
+                  >
+                    CART
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    variant="fancy"
+                    small={isMobile}
+                    path={`/${locale}${LocalPaths.CONTACT}`}
+                  >
+                    Rendez-Vous
+                  </Button>
+                </li>
               </FlexDiv>
             )}
             {!isMobile && <LangSwitcher />}
@@ -137,9 +179,9 @@ export const dropDown = (navLink: INavLink, locale: LangType, key?: number) => (
   <TabButton
     key={key}
     className={styles.tab}
-    path={`/${locale}${LocalPaths.SERVICE}`}
+    path={`/${locale}${navLink.link}`}
     dropdown={navLink.ctaArray}
   >
-    {navLink.title}
+    {navLink.text}
   </TabButton>
 );

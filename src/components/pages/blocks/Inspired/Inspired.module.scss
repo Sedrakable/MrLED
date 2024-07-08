@@ -17,10 +17,10 @@
 
 .block {
   @include vars;
-  background: var(--yellow);
+  background: var(--burgundy);
   position: relative;
   overflow: hidden;
-  border-top: var(--border-width) solid var(--yellow);
+  border-top: var(--border-width) solid var(--burgundy);
   .wrapper {
     width: var(--screen-width-large);
     .title {

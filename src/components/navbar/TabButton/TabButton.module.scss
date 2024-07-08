@@ -9,7 +9,7 @@
     .textWrapper {
       h5 {
         transition: 100ms;
-        color: var(--yellow) !important;
+        color: var(--burgundy) !important;
       }
     }
   }
@@ -19,11 +19,11 @@
     max-width: 100%;
     width: 100%;
     path {
-      fill: var(--yellow);
+      fill: var(--burgundy);
     }
   }
   .dropdown {
-    background: var(--yellow);
+    background: var(--burgundy);
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -33,7 +33,7 @@
       inset 0 2px 6px 0px rgba(0, 0, 0, 0.1);
     border-radius: 0 0 5px 5px;
     button:hover > * {
-      color: var(--black) !important;
+      color: var(--darkest-burgundy) !important;
     }
   }
 }

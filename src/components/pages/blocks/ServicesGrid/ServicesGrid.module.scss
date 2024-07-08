@@ -28,7 +28,7 @@
     text-wrap: wrap;
   }
   .priceWrapper {
-    background-color: var(--white);
+    background-color: var(--cream-white);
     border-radius: var(--price-wrapper-border-radius);
     width: fit-content;
     margin: 0 auto;
@@ -92,8 +92,8 @@
       }
     }
     thead {
-      background: var(--yellow);
-      border: 2px solid var(--yellow);
+      background: var(--burgundy);
+      border: 2px solid var(--burgundy);
       border-bottom: none;
       th {
         padding: var(--pad-3) var(--pad-2) var(--pad-2) var(--pad-2);
@@ -102,7 +102,7 @@
       }
     }
     tbody {
-      background: var(--white);
+      background: var(--cream-white);
       border-right: 2px solid var(--grey);
       border-bottom: 2px solid var(--grey);
       td {
@@ -113,8 +113,8 @@
       }
     }
     tfoot {
-      background: var(--black);
-      border: var(--black) 2px solid;
+      background: var(--darkest-burgundy);
+      border: var(--darkest-burgundy) 2px solid;
       td {
         padding-top: var(--pad-2);
       }

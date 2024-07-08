@@ -22,12 +22,13 @@ import gridTexture from "/public/photos/Textures/GridTexture.webp";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const Footer = dynamic(
-  () => import("@/components/footer/Footer").then((module) => module.Footer),
-  {
-    ssr: false,
-  }
-);
+// const Footer = dynamic(
+//   () => import("@/components/footer/Footer").then((module) => module.Footer),
+//   {
+//     ssr: false,
+//   }
+// );
+
 const Navbar = dynamic(
   () =>
     import("@/components/navbar/Navbar/Navbar").then((module) => module.Navbar),
@@ -63,11 +64,11 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: LangType };
 }>) {
-  const navType = "navbar";
+  // const navType = "navbar";
   const footerType = "footer";
-  const navbarQuery = navbarPageQuery(locale);
+  // const navbarQuery = navbarPageQuery(locale);
   const footerQuery = footerPageQuery(locale);
-  const navbarData: INavBar = await useFetchPage(navbarQuery, navType);
+  // const navbarData: INavBar = await useFetchPage(navbarQuery, navType);
   const footerData: IFooter = await useFetchPage(footerQuery, footerType);
   return (
     <html lang={locale}>
@@ -113,14 +114,14 @@ export default async function LocaleLayout({
         <body className={inter.className}>
           <div id="root">
             <div className={styles.app}>
-              <Navbar {...navbarData} />
+              <Navbar />
               <div className={styles.page}>{children}</div>
-              <Footer
+              {/* <Footer
                 legals={footerData?.legals}
                 trademark={footerData?.trademark}
                 links={navbarData?.links}
                 socials={{ links: footerData?.socials?.links }}
-              />
+              /> */}
             </div>
           </div>
         </body>

@@ -111,12 +111,13 @@ export default async function HomePage({
   const homePageData = await getHomePageData(locale);
   return (
     <>
-      <Hero {...homePageData?.hero} />
+      HomePage
+      {/* <Hero {...homePageData?.hero} />
       <WorkSlider {...homePageData?.work} />
       <Services {...homePageData.services} />
       <Values {...homePageData.values} />
       <About content={{ ...homePageData?.about?.content, cta: true }} />
-      <Inspired />
+      <Inspired /> */}
     </>
   );
 }
