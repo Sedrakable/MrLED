@@ -3,15 +3,16 @@
 
 $rotations: (90deg, 180deg, 270deg);
 $icon-sizes: (
-  extra-small: 10px,
-  small: 20px,
-  regular: 40px,
-  big: 60px,
+  small: 12px,
+  regular: 24px,
+  large: 32px,
 );
 $colors: (
-  white: var(--cream-white),
-  black: var(--darkest-burgundy),
-  yellow: var(--burgundy),
+  cream_white: var(--cream-white),
+  light_burgundy: var(--light-burgundy),
+  burgundy: var(--burgundy),
+  dark_burgundy: var(--dark-burgundy),
+  darkest_burgundy: var(--darkest-burgundy),
 );
 
 @each $rotation in $rotations {

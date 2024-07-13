@@ -69,10 +69,10 @@ const About = dynamic(
 export interface HomePageProps {
   meta: ISeo;
   hero: IHero;
-  services: IServices;
-  values: IValues;
-  about: IAbout;
-  work: IWorkBlock;
+  // services: IServices;
+  // values: IValues;
+  // about: IAbout;
+  // work: IWorkBlock;
 }
 
 export const getHomePageData = async (locale: LangType) => {
@@ -111,9 +111,8 @@ export default async function HomePage({
   const homePageData = await getHomePageData(locale);
   return (
     <>
-      HomePage
-      {/* <Hero {...homePageData?.hero} />
-      <WorkSlider {...homePageData?.work} />
+      <Hero {...homePageData?.hero} version={1} />
+      {/* <WorkSlider {...homePageData?.work} />
       <Services {...homePageData.services} />
       <Values {...homePageData.values} />
       <About content={{ ...homePageData?.about?.content, cta: true }} />

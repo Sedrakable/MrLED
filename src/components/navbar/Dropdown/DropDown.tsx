@@ -1,11 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import styles from "./DropDown.module.scss";
 import FlexDiv from "../../reuse/FlexDiv";
+import cn from "classnames";
 import { ICta } from "../../../data.d";
 import { Paragraph } from "../../reuse/Paragraph";
 import { useAtom } from "jotai";
 import { sidebarData } from "../Sidebar/Sidebar";
 import Link from "next/link";
+import { usePathname } from "@/navigation";
+import { useLocale } from "next-intl";
 
 export interface DropDownProps {
   parentPath: string;
@@ -17,33 +20,11 @@ export const DropDown: React.FC<DropDownProps> = ({
   parentPath,
   dropdown,
   isOpen,
-  onClose,
 }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [, setSidebar] = useAtom(sidebarData);
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
-      setTimeout(() => {
-        if (
-          dropdownRef.current &&
-          !dropdownRef.current.contains(event.target as Node)
-        ) {
-          onClose();
-        }
-      }, 50);
-    };
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
-    } else {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [isOpen, onClose]);
+  const pathname = usePathname();
+  const locale = useLocale();
 
   if (!isOpen) return null;
 
@@ -51,23 +32,34 @@ export const DropDown: React.FC<DropDownProps> = ({
     isOpen && (
       <FlexDiv
         flex={{ direction: "column", x: "flex-start" }}
-        gapArray={[3, 3, 2, 2]}
-        padding={{ vertical: [3], horizontal: [3] }}
+        padding={{ vertical: [0, 0, 3, 3] }}
         className={styles.dropdown}
         ref={dropdownRef}
         as="ul"
       >
         {dropdown?.map((cta, index) => {
+          const isActive =
+            `/${locale}${pathname}` === `${parentPath}${cta.link}`;
+          console.log(`/${locale}${pathname}`, `${parentPath}${cta.link}`);
           return (
-            <FlexDiv key={index} flex={{ x: "space-between" }} width100 as="li">
-              <Link
-                href={`${parentPath}${cta.link!}`}
-                onClick={() => setSidebar(false)}
-                aria-label={cta.text}
+            <Link
+              key={index}
+              href={`${parentPath}${cta.link!}`}
+              onClick={() => setSidebar(false)}
+              aria-label={cta.text}
+            >
+              <FlexDiv
+                flex={{ x: "space-between" }}
+                width100
+                as="li"
+                padding={{ vertical: [4, 4, 3], horizontal: [5] }}
+                className={cn(styles.tab, { [styles.selected]: isActive })}
               >
-                <Paragraph level="regular">{cta.text}</Paragraph>
-              </Link>
-            </FlexDiv>
+                <Paragraph level="regular" color="dark-burgundy">
+                  {cta.text}
+                </Paragraph>
+              </FlexDiv>
+            </Link>
           );
         })}
       </FlexDiv>

@@ -11,9 +11,14 @@
   --white: #ffffff;
   --cream-white: #fff1eb;
   --light-burgundy: #dcb2c1;
+  --light-burgundy-30: rgba(220, 178, 194, 0.3);
   --burgundy: #853d57;
   --dark-burgundy: #572839;
   --darkest-burgundy: #2a131c;
+
+  --light-shadow: 0px 0px 4px 0px rgba(133, 61, 87, 0.1);
+  --text-shadow: 0px 0px 8px rgba(87, 40, 57, 0.5);
+
   --pad-0: 0px;
   --pad-1: 2px;
   --pad-2: 4px;
@@ -36,21 +41,18 @@
   --heading-h5: 42px;
   --heading-h6: 26px;
 
-  --heading-h1-line: 234px;
-  --heading-h2-line: 162px;
-  --heading-h3-line: 121px;
-  --heading-h4-line: 75px;
-  --heading-h5-line: 53px;
-  --heading-h6-line: 29px;
+  --heading-h1-line: 0.9em;
+  --heading-h2-line: 0.9em;
+  --heading-h3-line: 1.1em;
+  --heading-h4-line: 1.1em;
+  --heading-h5-line: 1.25em;
+  --heading-h6-line: 1.25em;
 
-  --paragraph-big: 32px;
-  --paragraph-regular: 24px;
-  --paragraph-small: 20px;
-  --paragraph-big-line: 34px;
-  --paragraph-regular-line: 28px;
-  --paragraph-small-line: 22px;
+  --paragraph-big: 26px;
+  --paragraph-regular: 16px;
+  --paragraph-small: 12px;
 
-  --navbar-height: 120px;
+  --navbar-height: 100px;
   --screen-width-large: calc(100vw - var(--pad-6));
   --screen-width-small: calc(100vw - var(--pad-6));
   --max-height: 1600px;

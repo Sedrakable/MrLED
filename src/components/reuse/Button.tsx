@@ -2,14 +2,16 @@
 import React, { PropsWithChildren, ButtonHTMLAttributes, FC } from "react";
 import styles from "./Button.module.scss";
 import cn from "classnames";
-import { Heading } from "./Heading";
-import ButtonStroke from "@/assets/vector/ButtonStroke.svg";
 import Link, { LinkProps } from "next/link";
+import { IconType, Icon } from "./Icon";
+import { Paragraph } from "./Paragraph";
+import { useWindowResize } from "@/helpers/useWindowResize";
 
 export interface ButtonProps {
-  variant: "fancy" | "primary" | "secondary";
+  variant: "primary" | "transparent" | "white" | "extra";
   small?: boolean;
   fit?: "grow" | "shrink";
+  icon?: IconType;
   onClick?: () => void;
   path?: string;
   disabled?: boolean;
@@ -19,54 +21,64 @@ export interface ButtonProps {
 
 export const Button: FC<PropsWithChildren<
   ButtonProps & (ButtonHTMLAttributes<HTMLButtonElement> | LinkProps)
->> = ({ children, variant, path, disabled, small, fit, target, ...props }) => {
+>> = ({
+  children,
+  variant,
+  icon,
+  path,
+  disabled,
+  small,
+  fit,
+  target,
+  ...props
+}) => {
+  const { isMobile } = useWindowResize();
+
   const onClick = () => {
     if (props?.onClick) {
       props.onClick();
     }
   };
 
-  const ButtonHeading: React.FC<{ className?: string }> = ({ className }) => (
-    <Heading
-      font="Seto"
-      level={small ? "5" : "5"}
-      as="span"
-      color={variant === "secondary" ? "yellow" : "white"}
-      className={className}
+  const ButtonHeading: React.FC = () => (
+    <Paragraph
+      level="regular"
+      textAlign="center"
+      color={variant === "primary" ? "cream-white" : "burgundy"}
+      className={styles.textWrapper}
     >
       {children as string}
-    </Heading>
+    </Paragraph>
   );
 
-  return (
-    <div className={styles.container}>
-      {variant === "fancy" && <ButtonStroke className={styles.stroke} />}
-      {path ? (
-        <Link
-          href={path}
-          className={cn(styles.button, styles[variant], {
-            [styles.small]: small,
-          })}
-          style={{ width: fit === "grow" ? "100%" : "auto" }}
-          target={target}
-          aria-label={children as string}
-        >
-          <ButtonHeading />
-        </Link>
-      ) : (
-        <button
-          className={cn(styles.button, styles[variant], {
-            [styles.small]: small,
-          })}
-          style={{ width: fit === "grow" ? "100%" : "auto" }}
-          onClick={() => onClick()}
-          disabled={disabled}
-          aria-label={children as string}
-        >
-          <ButtonHeading />
-        </button>
-      )}
-      {variant === "fancy" && <ButtonHeading className={styles.hoverText} />}
-    </div>
+  const ButtonIcon = ({ icon }: { icon: IconType }) => {
+    return <Icon icon={icon} color="burgundy" />;
+  };
+
+  return path ? (
+    <Link
+      href={path}
+      className={cn(styles.button, styles[variant], {
+        [styles.small]: small,
+        [styles.withIcon]: icon,
+      })}
+      style={{ width: fit === "grow" || isMobile ? "100%" : "auto" }}
+      target={target}
+      aria-label={children as string}
+    >
+      {icon ? <ButtonIcon icon={icon} /> : <ButtonHeading />}
+    </Link>
+  ) : (
+    <button
+      className={cn(styles.button, styles[variant], {
+        [styles.small]: small,
+      })}
+      style={{ width: fit === "grow" || isMobile ? "100%" : "auto" }}
+      onClick={() => onClick()}
+      disabled={disabled}
+      aria-label={children as string}
+    >
+      <ButtonHeading />
+    </button>
   );
 };

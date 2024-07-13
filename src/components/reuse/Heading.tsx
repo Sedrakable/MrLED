@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { CSSProperties } from "react";
 import styles from "./Heading.module.scss";
 import cn from "classnames";
 import {
@@ -8,12 +8,19 @@ import {
 } from "../../helpers/SpacingGenerator";
 import { Josefin_Sans } from "next/font/google";
 
-const josefin = Josefin_Sans({
-  variable: "--font-caveat",
+export const josefin = Josefin_Sans({
+  // variable: "--font-jose",
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
 });
 
-export type ColorType = "white" | "black" | "yellow" | "grey";
+export type ColorType =
+  | "cream-white"
+  | "light-burgundy"
+  | "burgundy"
+  | "dark-burgundy"
+  | "darkest-burgundy";
 
 export const HeadingLevelArray = ["1", "2", "3", "4", "5", "6"] as const;
 
@@ -31,21 +38,14 @@ export const HeadingAsArray = [
 
 type HeadingAsType = typeof HeadingAsArray[number];
 
-type textAlign =
-  | "start"
-  | "end"
-  | "left"
-  | "right"
-  | "center"
-  | "justify"
-  | "match-parent";
+export type TextWeightType = 300 | 400 | 500;
 
 export interface HeadingProps {
   children: string | JSX.Element;
   level: HeadingLevelType;
   as: HeadingAsType;
-  weight?: 300 | 400 | 500;
-  textAlign?: textAlign;
+  weight?: TextWeightType;
+  textAlign?: CSSProperties["textAlign"];
   paddingBottomArray?: SpacingArrayType;
   color?: ColorType;
   upperCase?: boolean;
@@ -53,10 +53,6 @@ export interface HeadingProps {
   clickable?: boolean;
   className?: string;
 }
-
-export const capitalizeString = (str: string): string => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};
 
 export const Heading: React.FC<HeadingProps> = ({
   children,
@@ -67,7 +63,6 @@ export const Heading: React.FC<HeadingProps> = ({
   paddingBottomArray,
   color = "white",
   upperCase = true,
-  capitalise,
   clickable,
   className,
 }) => {
@@ -78,18 +73,15 @@ export const Heading: React.FC<HeadingProps> = ({
   const finalString =
     typeof children === "string" && upperCase
       ? children?.toUpperCase()
-      : capitalise
-      ? capitalizeString(children as string)
       : children;
 
   return (
     <CustomHeading
       className={cn(
         styles.heading,
-        josefin.variable,
+        josefin.className,
         styles[`level${level}`],
         {
-          [styles.gradient]: color.includes("grad"),
           [styles.clickable]: clickable,
         },
         className

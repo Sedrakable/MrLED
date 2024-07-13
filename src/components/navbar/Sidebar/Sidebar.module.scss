@@ -10,8 +10,9 @@
   height: 100vh;
   z-index: -1;
 }
+
 .sidebar {
-  @include flexColumn(flex-start, flex-start);
+  @include flexColumn(flex-start, stretch);
 
   position: fixed;
   width: 100%;
@@ -20,15 +21,15 @@
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 12;
-  transition: transform 200ms ease;
+  z-index: 50;
 
   &.isOpen {
+    transition: 500ms ease;
     transform: translateX(0);
   }
 
   .closeTab {
-    height: var(--navbar-height);
+    min-height: var(--navbar-height);
     background-color: var(--darkest-burgundy);
     path:global(.x) {
       fill: var(--cream-white);
@@ -39,21 +40,15 @@
     .tabWrapper {
       background-color: var(--cream-white);
       width: 100%;
-      min-height: var(--navbar-height);
-      height: fit-content;
-      border-bottom: 1px solid var(--grey);
-
-      &:last-child {
-        background-color: transparent;
-        padding: var(--pad-3) var(--pad-4) !important;
-        height: fit-content !important;
+      border-bottom: 1px solid var(--light-burgundy-30);
+    }
+    .bottom {
+      .tabWrapper {
         border-bottom: none;
-        @media (min-width: $tablet) {
-          display: none !important;
+        &:last-child {
+          height: 100%;
+          align-items: flex-end !important  ;
         }
-      }
-      &:nth-last-child(2) {
-        border-bottom-color: var(--cream-white);
       }
     }
   }

@@ -17,7 +17,7 @@ export const IconButton: FC<PropsWithChildren<
   IconButtonProps &
     ButtonHTMLAttributes<HTMLButtonElement> &
     AnchorHTMLAttributes<HTMLAnchorElement>
->> = ({ iconProps, background = "black", ...props }) => {
+>> = ({ iconProps, background = "white", ...props }) => {
   const as = props.href ? "a" : "button";
 
   return React.createElement(

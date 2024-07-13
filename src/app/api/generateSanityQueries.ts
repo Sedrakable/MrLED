@@ -21,38 +21,45 @@ export const footerPageQuery = (locale: LangType): string => {
 export const homePageQuery = (locale: LangType): string => {
   return `*[_type == 'homePage' && lang == '${locale}'][0] {
         meta,
-        hero{
-          ...,
-          quote->,
-        },
-        services-> {
-          services[]->{
-            path,
-            title,
-            features->{
-              features[]->{
-                title,
-                customImage,
-              }
-            },
-            processes,
-            price
-          },
-        },
-        values->,
-        about->,
-        work->{
-          works[]->{
-            slug,
-            thumbnailImage,
-            customImages,
-            title,
-            desc,
-            primaryLink,
-          },
-        },
+        hero,
       }`;
 };
+
+// export const homePageQuery = (locale: LangType): string => {
+//   return `*[_type == 'homePage' && lang == '${locale}'][0] {
+//         meta,
+//         hero{
+//           ...,
+//           quote->,
+//         },
+//         services-> {
+//           services[]->{
+//             path,
+//             title,
+//             features->{
+//               features[]->{
+//                 title,
+//                 customImage,
+//               }
+//             },
+//             processes,
+//             price
+//           },
+//         },
+//         values->,
+//         about->,
+//         work->{
+//           works[]->{
+//             slug,
+//             thumbnailImage,
+//             customImages,
+//             title,
+//             desc,
+//             primaryLink,
+//           },
+//         },
+//       }`;
+// };
 
 export const servicePageQuery = (locale: LangType, slug: string): string => {
   return `*[_type == 'servicePage' && lang == '${locale}' && path == '/${slug}'][0] {

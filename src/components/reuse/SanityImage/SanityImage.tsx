@@ -6,11 +6,15 @@ export interface ICustomImage extends Omit<ImageProps, "src"> {
   alt: string;
   image: SanityImageSource;
   width?: number;
+  figureClassName?: string;
+  quality?: number;
 }
 
 export const SanityImage: React.FC<ICustomImage> = (props) => {
+  const { quality = 30 } = props;
   return (
     <figure
+      className={props.figureClassName}
       style={{
         position: "relative",
         width: "100%", // Ensure the container fills its parent width
@@ -19,7 +23,7 @@ export const SanityImage: React.FC<ICustomImage> = (props) => {
       }}
     >
       <Img
-        src={urlFor(props.image).format("webp").quality(30).url()}
+        src={urlFor(props.image).format("webp").quality(quality).url()}
         fill
         placeholder="blur"
         blurDataURL={urlFor(props.image).width(24).height(24).blur(10).url()}

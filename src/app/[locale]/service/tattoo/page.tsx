@@ -7,5 +7,5 @@ export default async function ServicePage({
   params: { locale: LangType; slug: string };
 }) {
   // const servicePageData = await getServicePageData(locale, slug);
-  return <>Test Tattoo</>;
+  return <>Tattoo</>;
 }

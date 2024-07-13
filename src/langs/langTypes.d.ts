@@ -29,8 +29,19 @@ interface Form {
 
 interface Nav {
   home: string;
-  about: string;
   services: string;
+  tattoo: string;
+  henna: string;
+  testTattoo: string;
+  courses: string;
+  inPerson: string;
+  online: string;
+  portfolio: string;
+  flash: string;
+  canvases: string;
+  boutique: string;
+  contact: string;
+  blog: string;
 }
 
 interface Other {

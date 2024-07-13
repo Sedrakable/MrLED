@@ -1,45 +1,32 @@
 import React, { ReactNode } from "react";
 import styles from "./Icon.module.scss";
 import cn from "classnames";
-import { ColorType } from "./Heading";
 
 import Burger from "@/assets/vector/Burger.svg";
 import Close from "@/assets/vector/X.svg";
-import Diamond from "@/assets/vector/Diamond.svg";
+import Cart from "@/assets/vector/Cart.svg";
 import Arrow from "@/assets/vector/Arrow.svg";
 import Bulb from "@/assets/vector/Bulb.svg";
 import Layout from "@/assets/vector/Layout.svg";
-import Palette from "@/assets/vector/ColorPalette.svg";
 import Package from "@/assets/vector/Package.svg";
 import Internet from "@/assets/vector/Internet.svg";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import {
-  faInstagram,
-  faKickstarter,
-  faTiktok,
-  faFacebook,
-  faBehance,
-  faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
+import Instagram from "@/assets/vector/Instagram.svg";
+import Tiktik from "@/assets/vector/TikTok.svg";
+import Facebook from "@/assets/vector/Facebook.svg";
 
 const icons: {
-  [key: string]: ReactNode | IconDefinition;
+  [key: string]: ReactNode;
 } = {
-  kickstarter: faKickstarter,
-  instagram: faInstagram,
-  tiktok: faTiktok,
-  facebook: faFacebook,
-  behance: faBehance,
-  linkedin: faLinkedin,
+  instagram: <Instagram />,
+  tiktok: <Tiktik />,
+  facebook: <Facebook />,
   burger: <Burger />,
-  diamond: <Diamond />,
   close: <Close />,
+  cart: <Cart />,
   arrow: <Arrow />,
   bulb: <Bulb />,
   layout: <Layout />,
-  palette: <Palette />,
   package: <Package />,
   internet: <Internet />,
 };
@@ -54,26 +41,27 @@ export const Rotations = [90, 180, 270] as const;
 
 export type RotateType = typeof Rotations[number];
 
-export type IconSizes = "extra-small" | "small" | "regular" | "big";
+export type IconSizes = "small" | "regular" | "large";
+
+type IconColorType =
+  | "cream_white"
+  | "light_burgundy"
+  | "burgundy"
+  | "dark_burgundy"
+  | "darkest_burgundy";
 
 export interface IconProps {
   icon: IconType;
   rotate?: RotateType;
-  color?: ColorType;
+  color?: IconColorType;
   size?: IconSizes;
   className?: string;
 }
 
-const isIconDefinition = (
-  icon: IconDefinition | ReactNode
-): icon is IconDefinition => {
-  return (icon as IconDefinition).iconName !== undefined;
-};
-
 export const Icon: React.FC<IconProps> = ({
   icon,
   rotate,
-  color = "yellow",
+  color = "burgundy",
   size = "regular",
   className,
 }) => {
@@ -81,11 +69,6 @@ export const Icon: React.FC<IconProps> = ({
     console.error(`Icon ${icon} not found`);
     return null;
   }
-  const IconComponent = isIconDefinition(icons[icon]) ? (
-    <FontAwesomeIcon icon={icons[icon] as IconDefinition} />
-  ) : (
-    (icons[icon] as ReactNode)
-  );
 
   return (
     <span
@@ -95,7 +78,7 @@ export const Icon: React.FC<IconProps> = ({
         [styles[size]]: size,
       })}
     >
-      {IconComponent}
+      {icons[icon] as ReactNode}
     </span>
   );
 };

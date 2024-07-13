@@ -5,39 +5,48 @@
   }
 
   @media (min-width: $laptop) {
-    --translate-y: 56.5px;
+    --translate-y: 100%;
   }
 
   @media (min-width: $desktop) {
-    --translate-y: 64.5px;
+    // --translate-y: 64.5px;
   }
 }
 
 .dropdown {
   @include vars;
-  background: var(--burgundy);
+  background: var(--cream-white);
   width: 100vw;
   position: relative;
-  margin-top: var(--pad-2);
   box-sizing: content-box !important;
 
   @media (min-width: $laptop) {
     width: fit-content;
     position: absolute;
-    margin-top: 0;
-    top: 0;
-    transform: translateY(var(--translate-y));
-    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.1),
-      inset 0 2px 6px 0px rgba(0, 0, 0, 0.1);
-    border-radius: 0 0 5px 5px;
+
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%);
+    border-radius: var(--pad-3);
+    box-shadow: var(--light-shadow);
   }
-  nav path {
-    fill: var(--darkest-burgundy) !important;
+  a {
+    width: 100%;
   }
-  p:hover {
-    color: var(--darkest-burgundy) !important;
+  .selected {
+    background: var(--light-burgundy-30);
+    border-top: 1px solid var(--light-burgundy);
+    border-bottom: 1px solid var(--light-burgundy);
   }
-  p {
-    text-wrap: nowrap;
+  .tab {
+    &:hover {
+      background: var(--white);
+      p {
+        color: var(--burgundy);
+      }
+    }
+    p {
+      text-wrap: nowrap;
+    }
   }
 }

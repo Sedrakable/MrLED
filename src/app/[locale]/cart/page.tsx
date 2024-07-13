@@ -55,5 +55,5 @@ export default async function Cart({
 }) {
   const cartPageData: CartPageProps = await getCartPageData(locale);
 
-  // return cartPageData && <CartBlock {...cartPageData} />;
+  return <>Cart</>;
 }

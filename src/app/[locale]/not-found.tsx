@@ -13,7 +13,7 @@ const NotFoundComp = dynamic(
 
 export default async function NotFound() {
   const type = "notFoundPage";
-  const notFoundQuery = notFoundPageQuery("en");
+  const notFoundQuery = notFoundPageQuery("fr");
   const notFoundPageData: INotFound = await useFetchPage(notFoundQuery, type);
-  return <NotFoundComp data={notFoundPageData} locale={"en"} />;
+  return <NotFoundComp data={notFoundPageData} locale={"fr"} />;
 }

@@ -4,7 +4,6 @@ import FlexDiv from "../../reuse/FlexDiv";
 import Image from "next/image";
 import cn from "classnames";
 import { Title } from "../../reuse/Title/Title";
-import bigStroke from "/public/photos/BigStroke.webp";
 
 export const BlockVariants = ["grid", "dark", "fabric", "fabric-hori"] as const;
 
@@ -38,13 +37,7 @@ export const Block: React.FC<PropsWithChildren<BlockProps>> = ({
       as="article"
     >
       <Title title={title} color={variant === "dark" ? "white" : "black"} />
-      {strokes && variant === "dark" && (
-        <div className={styles.strokes}>
-          <Image src={bigStroke.src} alt="stroke" width={800} height={200} />
-          <Image src={bigStroke.src} alt="stroke" width={800} height={200} />
-          <Image src={bigStroke.src} alt="stroke" width={800} height={200} />
-        </div>
-      )}
+      {strokes && variant === "dark" && <div className={styles.strokes}></div>}
       <FlexDiv
         className={styles.content}
         width100

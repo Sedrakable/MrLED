@@ -4,7 +4,6 @@ import { useRouter, usePathname } from "@/navigation";
 import { useTransition } from "react";
 import { useParams } from "next/navigation";
 import FlexDiv from "@/components/reuse/FlexDiv";
-import { Icon } from "@/components/reuse/Icon";
 import { Paragraph } from "@/components/reuse/Paragraph";
 
 export const LangSwitcher: React.FC<{ onClick?: Function }> = ({ onClick }) => {
@@ -29,11 +28,10 @@ export const LangSwitcher: React.FC<{ onClick?: Function }> = ({ onClick }) => {
   };
 
   return (
-    <FlexDiv gapArray={[2]} className={styles.langWrapper} onClick={langClick}>
-      <Paragraph level="big" color="yellow">
+    <FlexDiv className={styles.langWrapper} onClick={langClick}>
+      <Paragraph level="big" color="burgundy">
         {locale?.toUpperCase()}
       </Paragraph>
-      <Icon icon="internet" size="regular" />
     </FlexDiv>
   );
 };

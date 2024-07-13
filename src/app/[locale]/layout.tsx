@@ -15,10 +15,6 @@ import { getHomePageData } from "./home/page";
 import { setMetadata } from "@/components/SEO";
 import dynamic from "next/dynamic";
 import { navbarPageQuery, footerPageQuery } from "../api/generateSanityQueries";
-import bigStroke from "/public/photos/BigStroke.webp";
-import titleStroke from "/public/photos/TitleStroke.webp";
-import fabricTexture from "/public/photos/Textures/FabricTexture.webp";
-import gridTexture from "/public/photos/Textures/GridTexture.webp";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -74,10 +70,6 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <NextIntlClientProvider locale={locale}>
         <head>
-          <link rel="preload" href={bigStroke.src} as="image" />
-          <link rel="preload" href={titleStroke.src} as="image" />
-          <link rel="preload" href={fabricTexture.src} as="image" />
-          <link rel="preload" href={gridTexture.src} as="image" />
           <meta name="theme-color" content="#fec301" />
           <meta
             name="facebook-domain-verification"

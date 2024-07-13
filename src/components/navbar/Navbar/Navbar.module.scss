@@ -1,34 +1,49 @@
 @import "../../../styles/mixins.scss";
 
 @mixin vars() {
-  --logo-size: 40px;
+  --logo-size: 80px;
   --sidebar-width: 100%;
+  --logo-translateY: -20px;
+  --logo-translateY-hover: -12px;
+  --logo-color: var(--burgundy);
 
   @media (min-width: $tablet) {
-    --logo-size: 48px;
   }
 
   @media (min-width: $laptop) {
-    --logo-size: 56px;
+    --logo-translateY: -20px;
+    --logo-translateY-hover: -12px;
   }
 
   @media (min-width: $desktop) {
-    --logo-size: 64px;
+    --logo-translateY: -24px;
+    --logo-translateY-hover: -14px;
+    --logo-size: 100px;
   }
 }
 
 .logo {
   @include vars;
-  height: var(--logo-size);
 
-  transition: 200ms;
   cursor: pointer;
+  height: 100%;
+  transition: 200ms;
+  transform: translateY(var(--logo-translateY));
   svg {
     height: 100%;
-    width: auto;
+    width: var(--logo-size);
+    path {
+      fill: var(--burgundy);
+    }
   }
   &:hover {
-    transform: scale(1.1);
+    transform: translateY(var(--logo-translateY-hover));
+  }
+
+  &.light {
+    path {
+      fill: var(--light-burgundy);
+    }
   }
 }
 
@@ -42,10 +57,9 @@
   z-index: 10;
   transition: 500ms;
   background: var(--cream-white, #fff);
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.1);
 
   .navbar {
-    width: var(--screen-width-large);
+    width: 100%;
     position: relative;
   }
 }

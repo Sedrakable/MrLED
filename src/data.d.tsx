@@ -1,6 +1,10 @@
 // @ts-ignore
 import { ICustomImage } from "./components/reuse/SanityImage/SanityImage";
 
+export interface IFancyText {
+  part1: string;
+  part2: string;
+}
 export interface ISeo {
   metaTitle: string;
   metaDesc: string;
@@ -18,15 +22,17 @@ export interface ISlug {
 }
 
 export interface IHero {
-  subTitle?: string;
-  title: string;
+  backgroundImage: ICustomImage;
+  foregroundImage?: ICustomImage;
+  title: IFancyText;
+  subTitle1?: string;
+  subTitle2?: string;
   desc: string;
-  customImage: ICustomImage;
   ctas?: {
     cta1: ICta;
     cta2?: ICta;
+    cta3?: ICta;
   };
-  quote: IQuote;
 }
 
 export interface IQuote {
@@ -151,10 +157,6 @@ export interface IFooter {
   legals: { title: string; path: string }[];
   trademark: string;
   socials: ISocials;
-}
-
-export interface IForm {
-  desc: IFancyText;
 }
 
 export interface INotFound {

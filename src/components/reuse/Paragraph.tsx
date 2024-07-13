@@ -6,29 +6,19 @@ import {
   SpacingArrayType,
   useSpacingGenerator,
 } from "../../helpers/SpacingGenerator";
-import { Anek_Gurmukhi } from "next/font/google";
-
-const anek = Anek_Gurmukhi({
-  variable: "--font-anek",
-  subsets: ["latin"],
-});
+import { ColorType, josefin, TextWeightType } from "./Heading";
 
 export interface ParagraphProps {
   children: string | JSX.Element;
   level: "small" | "regular" | "big";
   textAlign?: CSSProperties["textAlign"];
   paddingBottomArray?: SpacingArrayType;
-  color?: "white" | "black" | "grey" | "yellow";
-  weight?: "weak" | "regular";
+  color?: ColorType;
+  weight?: TextWeightType;
   capitalise?: boolean;
   clickable?: boolean;
   className?: string;
 }
-
-const fontWeights = {
-  weak: 300,
-  regular: 400,
-};
 
 const processChildren = (children: string | JSX.Element) => {
   if (typeof children === "string") {
@@ -47,9 +37,10 @@ export const Paragraph: React.FC<ParagraphProps> = ({
   children,
   level = "regular",
   textAlign,
-  weight = "weak",
+  weight = 400,
   paddingBottomArray,
   color = "white",
+  capitalise,
   clickable,
   className,
 }) => {
@@ -59,7 +50,7 @@ export const Paragraph: React.FC<ParagraphProps> = ({
     <p
       className={cn(
         styles.paragraph,
-        anek.variable,
+        josefin.className,
         styles[level],
         {
           [styles.clickable]: clickable,
@@ -67,9 +58,10 @@ export const Paragraph: React.FC<ParagraphProps> = ({
         className
       )}
       style={{
+        textTransform: capitalise ? "capitalize" : "none",
         color: `var(--${color})`,
         textAlign,
-        fontWeight: fontWeights[weight],
+        fontWeight: weight,
         paddingBottom: spacingNum && `var(--pad-${spacingNum})`,
       }}
     >

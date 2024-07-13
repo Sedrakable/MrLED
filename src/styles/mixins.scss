@@ -44,3 +44,19 @@
   -webkit-line-clamp: $n;
   -webkit-box-orient: vertical;
 }
+
+@mixin level($desk, $lap, $tab, $mob) {
+  @include sizing($mob);
+
+  @media (min-width: $tablet) {
+    @include sizing($tab);
+  }
+
+  @media (min-width: $laptop) {
+    @include sizing($lap);
+  }
+
+  @media (min-width: $desktop) {
+    @include sizing($desk);
+  }
+}

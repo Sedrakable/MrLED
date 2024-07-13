@@ -3,14 +3,12 @@
 .langWrapper {
   cursor: pointer;
   p {
-    margin-top: 10px;
+    margin-top: 6px;
   }
   &:hover {
     p {
-      color: var(--darkest-burgundy) !important;
-    }
-    path {
-      fill: var(--darkest-burgundy) !important;
+      transition: var(--transition-time);
+      color: var(--light-burgundy) !important;
     }
   }
 }

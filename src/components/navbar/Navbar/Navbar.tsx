@@ -6,17 +6,19 @@ import { useWindowResize } from "../../../helpers/useWindowResize";
 import { IconButton } from "../../reuse/IconButton";
 import cn from "classnames";
 import FlexDiv from "../../reuse/FlexDiv";
-import Logo from "@/assets/vector/LogoSmall.svg";
+import Logo from "@/assets/vector/EyeLogo.svg";
 import { Button } from "../../reuse/Button";
 import { ICta, INavLink, LocalPaths } from "../../../data.d";
 import { LangSwitcher } from "../LangSwitcher/LangSwitcher";
 import { useAtom } from "jotai";
 import { getTranslations } from "../../../helpers/langUtils";
+import { Translations } from "@/langs/langTypes";
 import { sidebarData } from "../Sidebar/Sidebar";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 import { LangType } from "@/i18n";
 import dynamic from "next/dynamic";
+import { Socials } from "@/components/footer/Socials";
 
 const Sidebar = dynamic(
   () => import("../Sidebar/Sidebar").then((module) => module.Sidebar),
@@ -30,47 +32,54 @@ export const isCta = (link: INavLink | ICta): link is ICta => {
 };
 
 //FIX: Make titles hardcoded text. FR and EN
-const links: (INavLink | ICta)[] = [
-  {
-    text: "Services",
-    link: LocalPaths.SERVICE,
-    ctaArray: [
-      { text: "Tattooing", link: LocalPaths.TATTOO },
-      {
-        text: "Test Tattoo",
-        link: LocalPaths.TEST_TATTOO,
-      },
-      { text: "Henna", link: LocalPaths.HENNA },
-    ],
-  } as INavLink,
-  {
-    text: "Courses",
-    link: LocalPaths.COURSE,
-    ctaArray: [
-      { text: "Online", link: LocalPaths.ONLINE },
-      { text: "In Person", link: LocalPaths.IN_PERSON },
-    ],
-  } as INavLink,
-  {
-    text: "Portfolio",
-    link: LocalPaths.PORTFOLIO,
-    ctaArray: [
-      { text: "Tattoo", link: LocalPaths.TATTOO },
-      { text: "FLASH", link: LocalPaths.FLASH },
-      { text: "Henna", link: LocalPaths.HENNA },
-      { text: "Toiles", link: LocalPaths.TOILES },
-    ],
-  } as INavLink,
-  { text: "Boutique", link: LocalPaths.BOUTIQUE } as ICta,
-  { text: "Blog", link: LocalPaths.BLOG } as ICta,
-];
+const links = (trans: Translations): (INavLink | ICta)[] => {
+  return [
+    {
+      text: trans.nav.services,
+      link: LocalPaths.SERVICE,
+      ctaArray: [
+        { text: trans.nav.tattoo, link: LocalPaths.TATTOO },
+        {
+          text: trans.nav.testTattoo,
+          link: LocalPaths.TEST_TATTOO,
+        },
+        { text: trans.nav.henna, link: LocalPaths.HENNA },
+      ],
+    } as INavLink,
+    {
+      text: trans.nav.courses,
+      link: LocalPaths.COURSE,
+      ctaArray: [
+        { text: trans.nav.online, link: LocalPaths.ONLINE },
+        { text: trans.nav.inPerson, link: LocalPaths.IN_PERSON },
+      ],
+    } as INavLink,
+    {
+      text: trans.nav.portfolio,
+      link: LocalPaths.PORTFOLIO,
+    } as ICta,
+    { text: trans.nav.boutique, link: LocalPaths.BOUTIQUE } as ICta,
+    { text: trans.nav.blog, link: LocalPaths.BLOG } as ICta,
+  ];
+};
+
+export const socialsIcons = (
+  <Socials
+    links={[
+      { text: "instagram", link: "www.instagram.com" },
+      { text: "facebook", link: "www.facebook.com" },
+      { text: "tiktok", link: "www.tiktok.com" },
+    ]}
+  />
+);
 
 export const Navbar = () => {
   const { isMobile, isMobileOrTablet } = useWindowResize();
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const locale = useLocale() as LangType;
-  const [, setSidebar] = useAtom(sidebarData);
+  const translations = getTranslations(locale);
+  const [sidebar, setSidebar] = useAtom(sidebarData);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -95,16 +104,17 @@ export const Navbar = () => {
           className={styles.navbar}
           flex={{ x: "space-between", y: "center" }}
           height100
+          padding={{ horizontal: [5, 6, 7, 8] }}
         >
           <LogoLink locale={locale} />
 
           <FlexDiv
             flex={{ x: "space-between", y: "center" }}
-            gapArray={[3, 5, 6, 7]}
+            gapArray={[5, 6, 7, 7]}
           >
             {!isMobile && (
-              <FlexDiv gapArray={[5, 4, 5, 6]} as="ul">
-                {links?.map((link: INavLink | ICta, key) => {
+              <FlexDiv gapArray={[6]} as="ul">
+                {links(translations)?.map((link: INavLink | ICta, key) => {
                   return (
                     !isMobileOrTablet &&
                     (isCta(link) ? (
@@ -121,52 +131,60 @@ export const Navbar = () => {
                     ))
                   );
                 })}
-
-                <li>
-                  <Button
-                    variant="secondary"
-                    small={isMobile}
-                    path={`/${locale}${LocalPaths.CART}`}
-                  >
-                    CART
-                  </Button>
-                </li>
-                <li>
-                  <Button
-                    variant="fancy"
-                    small={isMobile}
-                    path={`/${locale}${LocalPaths.CONTACT}`}
-                  >
-                    Rendez-Vous
-                  </Button>
-                </li>
               </FlexDiv>
             )}
-            {!isMobile && <LangSwitcher />}
+
+            <FlexDiv gapArray={[5]} as="ul">
+              {!isMobile && (
+                <li>
+                  <Button
+                    variant="extra"
+                    path={`/${locale}${LocalPaths.CART}`}
+                    icon="cart"
+                  />
+                </li>
+              )}
+              <li>
+                <Button
+                  variant="primary"
+                  path={`/${locale}${LocalPaths.CONTACT}`}
+                >
+                  {translations.nav.contact}
+                </Button>
+              </li>
+
+              {!isMobile && <LangSwitcher />}
+              {!isMobileOrTablet && socialsIcons}
+            </FlexDiv>
+
             {isMobileOrTablet && (
               <IconButton
                 onClick={() => setSidebar(true)}
-                iconProps={{ icon: "burger", size: "regular" }}
-                background="white"
+                iconProps={{ icon: "burger", size: "large" }}
                 aria-label="burger menu"
               />
             )}
           </FlexDiv>
         </FlexDiv>
       </nav>
-      {isMobileOrTablet && <Sidebar links={links} lang={locale} />}
+      {isMobileOrTablet && sidebar && (
+        <Sidebar links={links(translations)} lang={locale} />
+      )}
     </>
   );
 };
 
 // Helper components
-export const LogoLink: React.FC<{ locale: LangType }> = ({ locale }) => {
+export const LogoLink: React.FC<{ locale: LangType; light?: boolean }> = ({
+  locale,
+  light = false,
+}) => {
   const translations = getTranslations(locale);
   const [, setSidebar] = useAtom(sidebarData);
   return (
     <Link
       href={`/${locale}${LocalPaths.HOME}`}
-      className={styles.logo}
+      className={cn(styles.logo, { [styles.light]: light })}
       aria-label={translations.nav.home}
       onClick={() => setSidebar(false)}
     >

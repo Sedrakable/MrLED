@@ -3,118 +3,133 @@ import React from "react";
 import styles from "./Hero.module.scss";
 import cn from "classnames";
 import { Paragraph } from "../Paragraph";
-import { IHero, LocalPaths } from "../../../data.d";
+import { IHero } from "../../../data.d";
 import FlexDiv from "../FlexDiv";
-import Logo from "@/assets/vector/LogoBig.svg";
+import AdehnnaWordmark from "@/assets/vector/AdhennaWordmark.svg";
+import Image from "next/image";
 import { Button } from "../Button";
-import { Quote } from "../Quote";
 import { SanityImage } from "../SanityImage/SanityImage";
 import { useWindowResize } from "../../../helpers/useWindowResize";
 import { useLocale } from "next-intl";
 import { LangType } from "@/i18n";
 import { Heading } from "../Heading";
+import { FancyText } from "../FancyText/FancyText";
+import fishes from "/public/photos/Fishes.jpeg";
 
-export type VersionType = 1 | 2;
+export type VersionType = 1 | 2 | 3;
 
 interface HeroProps extends IHero {
   version?: VersionType;
 }
 
 export const Hero: React.FC<HeroProps> = ({
-  customImage,
-  desc,
+  backgroundImage,
+  foregroundImage,
   title,
+  subTitle1,
+  subTitle2,
+  desc,
   ctas,
-  subTitle,
-  quote,
-  version = 1,
+  version = 2,
 }) => {
   const { isMobileOrTablet } = useWindowResize();
   const locale = useLocale() as LangType;
   return (
     <header className={cn(styles.hero)}>
-      {!isMobileOrTablet && (
-        <div className={styles.quote}>
-          <Quote {...quote} version={version} />
-        </div>
-      )}
-
-      {version === 1 && (
-        <FlexDiv
-          className={styles.left}
-          padding={{
-            horizontal: [3, 8, 0],
-            vertical: [0, 5, 0],
-          }}
-          id="hero-left"
-          rel="preload"
-        >
-          <Logo />
-        </FlexDiv>
-      )}
-      {isMobileOrTablet && version === 1 && (
-        <div className={styles.quote}>
-          <Quote {...quote} version={version} />
-        </div>
-      )}
-      <FlexDiv className={styles.right}>
+      <div className={styles.illustration}>
+        <Image src={fishes.src} alt="fishes" width={800} height={1200} />
+      </div>
+      <FlexDiv
+        className={styles.content}
+        flex={{ direction: "column", x: "flex-start", y: "stretch" }}
+        width100
+        height100
+      >
         <SanityImage
-          image={customImage?.image}
-          alt={customImage?.alt}
+          image={backgroundImage?.image}
+          alt={backgroundImage?.alt}
           loading="eager"
           fetchPriority="high"
           rel="preload"
-          sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 66vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw"
+          figureClassName={cn(styles.image, styles.backgroundImage)}
+          quality={10}
         />
         <FlexDiv
-          className={styles.container}
+          padding={{ left: [0, 0, 10, 11] }}
+          customStyle={{ zIndex: 1 }}
+          className={styles.title}
+        >
+          <FancyText {...title} />
+        </FlexDiv>
+        <FlexDiv
           flex={{ direction: "column", x: "flex-start", y: "flex-start" }}
-          padding={{ vertical: [6, 8, 9, 11], horizontal: [5, 7, 8, 10] }}
-          gapArray={[3, 4, 4, 5]}
+          padding={{ horizontal: [0, 0, 11, 12] }}
+          className={styles.main}
+          gapArray={[0, 0, 0, 6]}
+          width100
+          height100
+          customStyle={{ zIndex: 1 }}
         >
           <FlexDiv
             flex={{ direction: "column", x: "flex-start" }}
-            gapArray={[3]}
-            customStyle={{ zIndex: 1 }}
-            as="header"
+            className={styles.textWrapper}
+            width100
           >
-            <Heading as="h1" level="1">
-              {title}
-            </Heading>
-            <Heading as="h3" level="3">
-              {title}
-            </Heading>
-            <Paragraph
-              level="small"
-              weight="weak"
-              className={styles.description}
+            {subTitle1 && (
+              <Heading
+                as="h2"
+                level="4"
+                color="dark-burgundy"
+                className={styles.subTitle1}
+              >
+                {subTitle1}
+              </Heading>
+            )}
+            <FlexDiv
+              flex={{ direction: "column", x: "flex-start" }}
+              className={styles.desc}
             >
-              {desc}
-            </Paragraph>
+              {subTitle2 && (
+                <Paragraph level="big" color="burgundy">
+                  {subTitle2}
+                </Paragraph>
+              )}
+              <Paragraph level="regular" color="darkest-burgundy">
+                {desc}
+              </Paragraph>
+            </FlexDiv>
           </FlexDiv>
           {ctas && (
-            <FlexDiv gapArray={[4]} flex={{ x: "flex-start" }} width100 wrap>
-              <Button
-                variant="fancy"
-                id="primary"
-                path={`/${locale}${LocalPaths.CONTACT}`}
-              >
-                {ctas?.cta1.text}
+            <FlexDiv gapArray={[0, 0, 0, 4]}>
+              <Button variant="primary" path={`/${locale}${ctas.cta1?.link}`}>
+                {ctas.cta1?.text}
               </Button>
-              {ctas?.cta2 && (
-                <Button variant="secondary" id="secondary">
-                  {ctas?.cta1.text}
+              {ctas.cta2 && (
+                <Button
+                  variant="transparent"
+                  path={`/${locale}${ctas.cta2?.link}`}
+                >
+                  {ctas.cta2?.text}
                 </Button>
               )}
             </FlexDiv>
           )}
         </FlexDiv>
+        <AdehnnaWordmark className={styles.wordMark} />
+        {foregroundImage && (
+          <SanityImage
+            image={foregroundImage?.image}
+            alt={foregroundImage?.alt}
+            loading="eager"
+            fetchPriority="high"
+            rel="preload"
+            sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw"
+            figureClassName={cn(styles.image, styles.foregroundImage)}
+            quality={90}
+          />
+        )}
       </FlexDiv>
-      {isMobileOrTablet && version === 2 && (
-        <q className={styles.quote}>
-          <Quote {...quote} version={version} />
-        </q>
-      )}
     </header>
   );
 };

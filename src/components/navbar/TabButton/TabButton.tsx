@@ -1,15 +1,15 @@
 "use client";
 import React, { FC, useState } from "react";
-import { Heading } from "../../reuse/Heading";
 import styles from "./TabButton.module.scss";
 import cn from "classnames";
-import Line from "@/assets/vector/Line.svg";
 import FlexDiv from "../../reuse/FlexDiv";
 import { Icon } from "../../reuse/Icon";
 import { DropDown } from "../Dropdown/DropDown";
 import { ICta } from "../../../data.d";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Paragraph } from "@/components/reuse/Paragraph";
+import { useWindowResize } from "@/helpers/useWindowResize";
 
 export interface TabButtonProps {
   children: string;
@@ -28,33 +28,69 @@ const TabButton: FC<TabButtonProps> = ({
 }) => {
   const pathname = usePathname();
   const [dropDownOpen, setDropDownOpen] = useState(false);
+  const { isMobileOrTablet } = useWindowResize();
 
-  const onTabClick = () => {
+  const handleDropdownToggle = () => {
     if (dropdown) {
-      setDropDownOpen((prevState) => !prevState);
-    } else {
-      onClick && onClick();
+      setDropDownOpen(!dropDownOpen);
+    }
+  };
+
+  const handleMouseEnter = () => {
+    if (!isMobileOrTablet && dropdown) {
+      setDropDownOpen(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (!isMobileOrTablet && dropdown) {
+      setDropDownOpen(false);
+    }
+  };
+
+  const handleClick = () => {
+    if (isMobileOrTablet) {
+      handleDropdownToggle();
+    }
+    if (onClick) {
+      onClick();
     }
   };
 
   const TabContent = () => {
     return (
       <FlexDiv
-        padding={{ bottom: [1], top: [1] }}
-        gapArray={[2]}
-        className={styles.textWrapper}
+        padding={{ horizontal: [3] }}
+        gapArray={[3]}
+        className={styles.content}
       >
-        <Heading level="6" as="h6" color="black">
+        <Paragraph
+          level="regular"
+          color="dark-burgundy"
+          textAlign="left"
+          capitalise
+          clickable
+        >
           {children}
-        </Heading>
-        {dropdown && <Icon icon="arrow" size="small" rotate={90} />}
+        </Paragraph>
+        {dropdown && (
+          <Icon
+            icon="arrow"
+            size="small"
+            rotate={dropDownOpen ? 180 : undefined}
+          />
+        )}
       </FlexDiv>
     );
   };
 
+  console.log(path, pathname);
   return (
-    <div
-      onClick={() => onTabClick()}
+    <FlexDiv
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
+      flex={{ direction: "column", x: "flex-start" }}
       className={cn(styles.tabButton, className)}
     >
       {dropdown ? (
@@ -64,7 +100,9 @@ const TabButton: FC<TabButtonProps> = ({
           <TabContent />
         </Link>
       )}
-      {path === pathname && <Line className={styles.line} />}
+      {pathname.includes(path) && !dropDownOpen && (
+        <div className={styles.line} />
+      )}
       {dropDownOpen && dropdown && (
         <DropDown
           dropdown={dropdown}
@@ -73,7 +111,7 @@ const TabButton: FC<TabButtonProps> = ({
           onClose={() => setDropDownOpen(false)}
         />
       )}
-    </div>
+    </FlexDiv>
   );
 };
 
