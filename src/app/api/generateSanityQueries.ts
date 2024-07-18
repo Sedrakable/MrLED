@@ -61,33 +61,12 @@ export const homePageQuery = (locale: LangType): string => {
 //       }`;
 // };
 
-export const servicePageQuery = (locale: LangType, slug: string): string => {
-  return `*[_type == 'servicePage' && lang == '${locale}' && path == '/${slug}'][0] {
+export const tattooServicePageQuery = (locale: LangType): string => {
+  return `*[_type == 'tattooServicePage' && lang == '${locale}'][0] {
     meta,
     hero{
       ...,
       quote->,
-    },
-    features->{
-      features[]->,
-    },
-    processes->{
-      processes[]->{
-        ...,
-        features[]->,
-      },
-    },
-    price,
-    work->{
-      title,
-      works[]->{
-        slug,
-        customImages,
-        thumbnailImage,
-        title,
-        desc,
-        primaryLink,
-      }
     },
   }`;
 };

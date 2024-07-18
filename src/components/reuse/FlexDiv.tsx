@@ -1,5 +1,10 @@
 "use client";
-import React, { ElementType, HTMLAttributes, PropsWithChildren } from "react";
+import React, {
+  CSSProperties,
+  ElementType,
+  HTMLAttributes,
+  PropsWithChildren,
+} from "react";
 import {
   useSpacingGenerator,
   SpacingArrayType,
@@ -15,7 +20,7 @@ type Justify =
   | "space-evenly"
   | "stretch";
 interface FlexProps {
-  direction?: "row" | "column";
+  direction?: CSSProperties["flexDirection"];
   x?: Justify;
   y?: Justify;
 }
@@ -25,7 +30,7 @@ export interface FlexDivProps<T extends ElementType = "div"> {
   flex?: FlexProps;
   height100?: boolean;
   width100?: boolean;
-  customStyle?: React.CSSProperties;
+  customStyle?: CSSProperties;
   wrap?: boolean;
   as?: T; // Add the 'as' prop
 }

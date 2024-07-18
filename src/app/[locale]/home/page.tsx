@@ -112,6 +112,13 @@ export default async function HomePage({
   return (
     <>
       <Hero {...homePageData?.hero} version={1} />
+      <div
+        style={{
+          height: "500px",
+          width: "100vw",
+          background: "red",
+        }}
+      ></div>
       {/* <WorkSlider {...homePageData?.work} />
       <Services {...homePageData.services} />
       <Values {...homePageData.values} />

@@ -4,6 +4,7 @@ import { useWindowDimensions } from "./useWindowDimensions";
 
 export const DESKTOP_BREAKPOINT_WIDTH = 1680;
 export const LAPTOP_BREAKPOINT_WIDTH = 1200;
+export const TABLET_PLUS_BREAKPOINT_WIDTH = 900;
 export const TABLET_BREAKPOINT_WIDTH = 640;
 
 export function useWindowResize() {
@@ -12,6 +13,7 @@ export function useWindowResize() {
   const [responsiveView, setResponsiveView] = useState<{
     isMobile: boolean;
     isTablet: boolean;
+    isTabletPlus: boolean;
     isLaptop: boolean;
     isDesktop: boolean;
     isMobileOrTablet: boolean;
@@ -33,6 +35,8 @@ function calculateResponsiveView(width: number | null) {
   const isMobile = width! < TABLET_BREAKPOINT_WIDTH;
   const isTablet =
     width! >= TABLET_BREAKPOINT_WIDTH && width! < LAPTOP_BREAKPOINT_WIDTH;
+  const isTabletPlus =
+    width! >= TABLET_PLUS_BREAKPOINT_WIDTH && width! < LAPTOP_BREAKPOINT_WIDTH;
   const isLaptop =
     width! >= LAPTOP_BREAKPOINT_WIDTH && width! < DESKTOP_BREAKPOINT_WIDTH;
   const isDesktop = width! >= DESKTOP_BREAKPOINT_WIDTH;
@@ -40,6 +44,7 @@ function calculateResponsiveView(width: number | null) {
   return {
     isMobile,
     isTablet,
+    isTabletPlus,
     isLaptop,
     isDesktop,
     isMobileOrTablet: isMobile || isTablet,
