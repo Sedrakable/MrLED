@@ -40,7 +40,6 @@ export const DropDown: React.FC<DropDownProps> = ({
         {dropdown?.map((cta, index) => {
           const isActive =
             `/${locale}${pathname}` === `${parentPath}${cta.link}`;
-          console.log(`/${locale}${pathname}`, `${parentPath}${cta.link}`);
           return (
             <Link
               key={index}

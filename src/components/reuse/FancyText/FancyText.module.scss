@@ -21,9 +21,22 @@
 }
 
 .title {
-  .part1 {
-  }
   .part2 {
     text-shadow: 0px 0px 8px rgba(87, 40, 57, 0.5);
   }
+}
+
+.overflowing {
+  position: relative;
+  overflow: hidden;
+}
+
+.rightAligned {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.reverse.overflowing {
+  justify-content: flex-start !important;
 }

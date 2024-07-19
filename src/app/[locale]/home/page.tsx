@@ -6,6 +6,8 @@ import {
   IWorkBlock,
   LocalPaths,
   ISeo,
+  IHomeHero,
+  IDisplay,
 } from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
 import { LangType } from "@/i18n";
@@ -68,8 +70,8 @@ const About = dynamic(
 
 export interface HomePageProps {
   meta: ISeo;
-  hero: IHero;
-  // services: IServices;
+  homeHero: IHomeHero;
+  services: IDisplay[];
   // values: IValues;
   // about: IAbout;
   // work: IWorkBlock;
@@ -109,18 +111,22 @@ export default async function HomePage({
   params: { locale: LangType };
 }) {
   const homePageData = await getHomePageData(locale);
+
   return (
     <>
-      <Hero {...homePageData?.hero} version={1} />
-      <div
+      {homePageData?.homeHero && (
+        <Hero {...homePageData?.homeHero} version={1} />
+      )}
+      {homePageData?.services && <Services services={homePageData.services} />}
+      {/* <div
         style={{
           height: "500px",
           width: "100vw",
           background: "red",
         }}
-      ></div>
+      ></div> */}
       {/* <WorkSlider {...homePageData?.work} />
-      <Services {...homePageData.services} />
+      
       <Values {...homePageData.values} />
       <About content={{ ...homePageData?.about?.content, cta: true }} />
       <Inspired /> */}

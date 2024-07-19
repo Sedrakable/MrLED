@@ -3,7 +3,6 @@
 
 :root {
   --tablet: 640px;
-  --tablet-plus: 900px;
   --laptop: 1200px;
   --desktop: 1680px;
 
@@ -44,7 +43,7 @@
 
   --heading-h1-line: 0.9em;
   --heading-h2-line: 0.9em;
-  --heading-h3-line: 1.1em;
+  --heading-h3-line: 0.9em;
   --heading-h4-line: 1.1em;
   --heading-h5-line: 1.25em;
   --heading-h6-line: 1.25em;
@@ -55,27 +54,18 @@
 
   --navbar-height: 100px;
   --screen-width-large: calc(100vw - var(--pad-6));
-  --screen-width-small: calc(100vw - var(--pad-6));
-  --max-height: 1600px;
 
   @media (min-width: $tablet) {
-    --screen-width-small: calc(100vw - var(--pad-9));
-    --screen-width-large: calc(100vw - var(--pad-7));
-    --max-height: 1600px;
+    --screen-width-large: calc(100vw - var(--pad-9));
   }
 
   @media (min-width: $laptop) {
-    --navbar-height: 100px;
-    --screen-width-small: calc(100vw - (var(--pad-10) * 2));
-    --screen-width-large: calc(100vw - var(--pad-10));
-    --max-height: 1920px;
+    --screen-width-large: calc(100vw - var(--pad-11));
   }
 
   @media (min-width: $desktop) {
     --navbar-height: 120px;
-    --screen-width-small: calc(var(--desktop) - (var(--pad-9) * 2));
-    --screen-width-large: calc(var(--desktop) - var(--pad-6));
-    --max-height: 2160px !important;
+    --screen-width-large: calc(var(--desktop) - var(--pad-12));
   }
 }
 

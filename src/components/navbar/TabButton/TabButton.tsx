@@ -84,7 +84,6 @@ const TabButton: FC<TabButtonProps> = ({
     );
   };
 
-  console.log(path, pathname);
   return (
     <FlexDiv
       onMouseEnter={handleMouseEnter}

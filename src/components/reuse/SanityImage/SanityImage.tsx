@@ -18,7 +18,6 @@ export const SanityImage: React.FC<ICustomImage> = (props) => {
       style={{
         position: "relative",
         width: "100%", // Ensure the container fills its parent width
-        height: "100%", // Ensure the container fills its parent height
         overflow: "hidden", // Hide any overflow from the image
       }}
     >

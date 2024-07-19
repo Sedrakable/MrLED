@@ -3,45 +3,37 @@ import styles from "./Block.module.scss";
 import FlexDiv from "../../reuse/FlexDiv";
 import Image from "next/image";
 import cn from "classnames";
-import { Title } from "../../reuse/Title/Title";
 
-export const BlockVariants = ["grid", "dark", "fabric", "fabric-hori"] as const;
+export const BlockVariants = ["default", "full-width"] as const;
 
 export type BlockVariantType = typeof BlockVariants[number];
 
 interface BlockProps {
-  title: string;
   variant: BlockVariantType;
-  strokes?: boolean;
-  shadow?: boolean;
-  hero?: boolean;
+  illustrations?: boolean;
 }
 export const Block: React.FC<PropsWithChildren<BlockProps>> = ({
-  title,
-  variant = "dark",
-  shadow = true,
-  hero = false,
-  strokes,
+  variant = "default",
+  illustrations,
   children,
 }) => {
   return (
     <FlexDiv
       flex={{ direction: "column" }}
-      className={cn(styles.block, styles[variant], {
-        [styles.light]: variant !== "dark" && shadow,
-        [styles.hero]: hero,
-      })}
-      gapArray={[5, 6, 6, 7]}
-      padding={{ top: [6, 7, 7, 8], bottom: [8, 8, 8, 9] }}
+      className={cn(styles.block, styles[variant])}
+      padding={{
+        horizontal: variant === "full-width" ? [0] : [6, 9, 11, 12],
+        top: variant === "full-width" ? [10, 10, 10, 11] : [9, 9, 9, 10],
+        bottom: variant === "full-width" ? [10, 10, 10, 11] : [7, 9, 9, 10],
+      }}
       width100
       as="article"
     >
-      <Title title={title} color={variant === "dark" ? "white" : "black"} />
-      {strokes && variant === "dark" && <div className={styles.strokes}></div>}
       <FlexDiv
-        className={styles.content}
-        width100
         flex={{ direction: "column" }}
+        className={cn(styles.content)}
+        gapArray={variant === "full-width" ? [11, 10, 11, 12] : [9, 9, 9, 10]}
+        width100
       >
         {children}
       </FlexDiv>

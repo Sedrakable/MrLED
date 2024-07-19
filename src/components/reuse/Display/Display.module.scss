@@ -1,0 +1,129 @@
+@import "../../../styles/mixins.scss";
+
+@mixin vars() {
+  --service-height: fit-content;
+  --image-width: 1;
+  --special-pink: #f4669a;
+
+  @media (min-width: $tablet) {
+    --service-height: 400px;
+    --subtitle-column-span: 5;
+    --desc-column-span: 4;
+    --image-width: 3/5;
+  }
+
+  @media (min-width: $laptop) {
+    --subtitle-column-span: 5;
+    --desc-column-span: 4;
+    --image-width: 2/3;
+  }
+
+  @media (min-width: $desktop) {
+    --service-height: 500px;
+    --desc-column-span: 3;
+  }
+}
+
+.display {
+  @include vars;
+  position: relative;
+  min-height: var(--service-height);
+  height: fit-content;
+  .image {
+    z-index: -1;
+
+    aspect-ratio: 3/4;
+    overflow: clip;
+    overflow-x: visible;
+    &::after {
+      content: "";
+      @include absoluteFill;
+      background: radial-gradient(
+          100% 100% at 90% 0%,
+          hsl(from var(--cream-white) h s l / 0.2) 50%,
+          var(--cream-white) 95%
+        ),
+        hsl(from var(--special-pink) h s l / 0.25);
+    }
+  }
+  .content {
+    margin-top: -256px;
+    .subTitle {
+      width: calc(var(--subtitle-column-span) / 7 * 100%);
+    }
+    .desc {
+      width: calc(var(--desc-column-span) / 7 * 100%);
+    }
+  }
+
+  @media (min-width: $tablet) {
+    .image {
+      width: calc(var(--image-width) * 100vw) !important;
+      position: absolute !important;
+      inset: 0;
+      left: auto;
+      height: 100%;
+      &::after {
+        background: radial-gradient(
+            100% 250% at 95% 0%,
+            hsl(from var(--cream-white) h s l / 0.2) 50%,
+            var(--cream-white) 95%
+          ),
+          hsl(from var(--special-pink) h s l / 0.25);
+      }
+    }
+    .content {
+      margin-top: 0;
+    }
+    &::after {
+      content: "";
+      background: var(--cream-white);
+      width: calc((var(--image-width) * 100vw) - 7.5vw) !important;
+      height: 50px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translateY(-100%);
+    }
+  }
+}
+
+.reverse {
+  .image {
+    &::after {
+      background: radial-gradient(
+          100% 100% at 10% 0%,
+          hsl(from var(--cream-white) h s l / 0.2) 50%,
+          var(--cream-white) 95%
+        ),
+        hsl(from var(--special-pink) h s l / 0.25);
+    }
+  }
+  @media (min-width: $tablet) {
+    .image {
+      right: auto;
+      left: 0;
+      &::after {
+        background: radial-gradient(
+            100% 250% at 5% 0%,
+            hsl(from var(--cream-white) h s l / 0.2) 50%,
+            var(--cream-white) 95%
+          ),
+          hsl(from var(--special-pink) h s l / 0.25);
+      }
+    }
+    .content {
+      margin-top: 0;
+    }
+    &::after {
+      content: "";
+      background: var(--cream-white);
+      width: calc((var(--image-width) * 100vw) - 7.5vw) !important;
+      height: 50px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translateY(-100%);
+    }
+  }
+}

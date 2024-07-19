@@ -26,7 +26,7 @@
   @include flex;
 
   position: relative;
-  padding: 12px;
+  padding: 8px;
   min-width: var(--button-min-width);
   width: var(--button-width);
   text-decoration: none;
@@ -36,7 +36,7 @@
 
   .textWrapper {
     @include flex;
-    height: 24px;
+    height: 32px;
     padding: 2px var(--button-padding) 0px var(--button-padding);
     box-sizing: border-box;
   }
@@ -54,9 +54,10 @@
   }
 
   &.transparent {
-    background: transparent;
+    background: hsl(from var(--cream-white) h s l / 0.15);
     border: var(--pad-1, 2px) solid var(--burgundy, #853d57);
-    padding: 10px;
+    backdrop-filter: blur(calc(var(--pad-3, 8px) / 2));
+    padding: 6px;
     &:hover {
       background: var(--burgundy);
       > * {

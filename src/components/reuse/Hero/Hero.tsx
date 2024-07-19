@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./Hero.module.scss";
 import cn from "classnames";
 import { Paragraph } from "../Paragraph";
-import { IHero } from "../../../data.d";
+import { IHomeHero } from "../../../data.d";
 import FlexDiv from "../FlexDiv";
 import AdehnnaWordmark from "@/assets/vector/AdhennaWordmark.svg";
 import Image from "next/image";
@@ -18,7 +18,7 @@ import fishes from "/public/photos/Fishes.jpeg";
 
 export type VersionType = 1 | 2 | 3;
 
-interface HeroProps extends IHero {
+interface HeroProps extends IHomeHero {
   version?: VersionType;
 }
 
@@ -26,7 +26,7 @@ export const Hero: React.FC<HeroProps> = ({
   backgroundImage,
   foregroundImage,
   title,
-  subTitle1,
+  subTitle,
   subTitle2,
   desc,
   ctas,
@@ -35,20 +35,40 @@ export const Hero: React.FC<HeroProps> = ({
   const { isMobile, isMobileOrTablet } = useWindowResize();
   const locale = useLocale() as LangType;
 
-  const vertical: boolean =
-    (version == 1 && isMobileOrTablet) || (version == 2 && isMobile);
-  const subTitleComp = subTitle1 && (
-    <Heading
-      as="h2"
-      level="4"
-      color="dark-burgundy"
-      className={styles.subTitle1}
-    >
-      {subTitle1}
-    </Heading>
-  );
+  const vertical =
+    (version === 1 && isMobileOrTablet) || (version === 2 && isMobile);
 
-  const mainComp = (
+  const SubTitle = () =>
+    subTitle && (
+      <Heading
+        as="h2"
+        level="4"
+        color="dark-burgundy"
+        className={styles.subTitle}
+      >
+        {subTitle}
+      </Heading>
+    );
+
+  const CTAs = () =>
+    ctas && (
+      <FlexDiv
+        gapArray={[4, 4, 4, 4]}
+        flex={{ direction: isMobile ? "column" : "row", x: "flex-start" }}
+        width100
+      >
+        <Button variant="primary" path={`/${locale}${ctas.cta1?.link}`}>
+          {ctas.cta1?.text}
+        </Button>
+        {ctas.cta2 && (
+          <Button variant="transparent" path={`/${locale}${ctas.cta2?.link}`}>
+            {ctas.cta2?.text}
+          </Button>
+        )}
+      </FlexDiv>
+    );
+
+  const MainContent = () => (
     <FlexDiv
       flex={{ direction: "column", x: "flex-start", y: "flex-start" }}
       padding={{
@@ -66,7 +86,7 @@ export const Hero: React.FC<HeroProps> = ({
         className={styles.textWrapper}
         width100
       >
-        {!vertical && subTitleComp}
+        {!vertical && <SubTitle />}
         <FlexDiv
           flex={{ direction: "column", x: "flex-start" }}
           className={styles.desc}
@@ -85,22 +105,7 @@ export const Hero: React.FC<HeroProps> = ({
           </Paragraph>
         </FlexDiv>
       </FlexDiv>
-      {ctas && (
-        <FlexDiv
-          gapArray={[4, 4, 4, 4]}
-          flex={{ direction: isMobile ? "column" : "row", x: "flex-start" }}
-          width100
-        >
-          <Button variant="primary" path={`/${locale}${ctas.cta1?.link}`}>
-            {ctas.cta1?.text}
-          </Button>
-          {ctas.cta2 && (
-            <Button variant="transparent" path={`/${locale}${ctas.cta2?.link}`}>
-              {ctas.cta2?.text}
-            </Button>
-          )}
-        </FlexDiv>
-      )}
+      <CTAs />
     </FlexDiv>
   );
 
@@ -121,32 +126,32 @@ export const Hero: React.FC<HeroProps> = ({
         width100
         padding={{ horizontal: [6, 7, 0, 0] }}
       >
-        <div style={{ overflow: "hidden" }}>
-          <SanityImage
-            image={backgroundImage?.image}
-            alt={backgroundImage?.alt}
-            loading="eager"
-            fetchPriority="high"
-            rel="preload"
-            sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw"
-            figureClassName={cn(styles.image, styles.backgroundImage)}
-            quality={version == 1 ? 10 : 40}
-          />
-        </div>
+        <SanityImage
+          image={backgroundImage?.image}
+          alt={backgroundImage?.alt}
+          loading="eager"
+          fetchPriority="high"
+          rel="preload"
+          sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw"
+          figureClassName={cn(styles.image, styles.backgroundImage)}
+          quality={version == 1 ? 10 : 40}
+        />
+
         <FlexDiv
           padding={{ left: [0, 0, 10, 11] }}
           customStyle={{ zIndex: 1 }}
           className={styles.title}
           width100
+          flex={{ x: "flex-start" }}
         >
           <FancyText
             {...title}
             reverse={vertical}
-            // flexHorizontal={isMobileOrTablet ? "center" : "flex-start"}
+            overflowText={version == 2}
           />
         </FlexDiv>
-        {vertical && subTitleComp}
-        {!vertical && mainComp}
+        {vertical && <SubTitle />}
+        {!vertical && <MainContent />}
         <AdehnnaWordmark className={styles.wordMark} />
         {foregroundImage && (
           <SanityImage
@@ -161,7 +166,7 @@ export const Hero: React.FC<HeroProps> = ({
           />
         )}
       </FlexDiv>
-      {vertical && mainComp}
+      {vertical && <MainContent />}
     </header>
   );
 };

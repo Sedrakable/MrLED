@@ -11,6 +11,11 @@ export interface ISeo {
   metaKeywords: string[];
 }
 
+export interface ITrippleCtas {
+  cta1: ICta;
+  cta2?: ICta;
+  cta3?: ICta;
+}
 export interface ICta {
   text: string;
   link?: string;
@@ -21,36 +26,30 @@ export interface ISlug {
   _type: string;
 }
 
+export interface IHomeHero extends IHero {
+  foregroundImage?: ICustomImage;
+  subTitle2?: string;
+}
+
 export interface IHero {
   backgroundImage: ICustomImage;
-  foregroundImage?: ICustomImage;
   title: IFancyText;
-  subTitle1?: string;
-  subTitle2?: string;
+  subTitle?: string;
   desc: string;
-  ctas?: {
-    cta1: ICta;
-    cta2?: ICta;
-    cta3?: ICta;
-  };
+  ctas?: ITrippleCtas;
+}
+
+export interface IServices {
+  services: IDisplay[];
+}
+
+export interface IDisplay extends IHero {
+  // date?: string;
 }
 
 export interface IQuote {
   leftText: string;
   rightText: string;
-}
-
-export interface IServices {
-  services: IService[];
-}
-
-export interface IService {
-  title: string;
-  metaTitle: string;
-  path: string;
-  features: IFeatures;
-  processes: IProcesses;
-  price?: string;
 }
 
 export interface IFeatures {

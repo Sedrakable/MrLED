@@ -8,7 +8,8 @@
   --desc-column-span: 7;
   --title-line-height: 0.9em;
   --title-font-size: 140px;
-  --profile-image-width: 600px;
+  --profile-image-width-1: 600px;
+  --profile-image-width-2: 400px;
   --profile-image-bottom: -260px;
   --profile-image-right: -160px;
   --wordmark-image-width: 200px;
@@ -23,7 +24,8 @@
     --title-font-size: var(--heading-h2);
     --subtitle1-column-span: 4;
     --desc-column-span: 4;
-    --profile-image-width: 850px;
+    --profile-image-width-1: 850px;
+    --profile-image-width-2: 600px;
     --profile-image-bottom: -400px;
     --profile-image-right: 0px;
     --wordmark-image-width: 280px;
@@ -39,7 +41,8 @@
     --hero-height-2: 600px;
     --title-line-height: var(--heading-h1-line);
     --title-font-size: var(--heading-h1);
-    --profile-image-width: 900px;
+    --profile-image-width-1: 900px;
+    --profile-image-width-2: 900px;
     --profile-image-bottom: -300px;
     --profile-image-right: -120px;
     --wordmark-image-bottom: 280px;
@@ -55,7 +58,8 @@
     --desc-column-span: 3;
     --title-line-height: 330px;
     --title-font-size: 360px;
-    --profile-image-width: 1200px;
+    --profile-image-width-1: 1200px;
+    --profile-image-width-2: 1200px;
     --profile-image-bottom: -450px;
     --profile-image-right: -5vw;
     --wordmark-image-width: 500px;
@@ -67,7 +71,6 @@
 
 @mixin switchToHorizontal() {
   height: auto;
-  position: unset;
   .main {
     background-color: transparent;
   }
@@ -77,13 +80,6 @@
     }
 
     .backgroundImage {
-      left: unset;
-      right: var(--profile-image-right);
-      img {
-        top: unset !important;
-        left: unset !important;
-        transform: unset;
-      }
       &::after {
         left: -200px;
         background: radial-gradient(
@@ -119,9 +115,9 @@
   width: 100%;
   box-sizing: border-box;
   min-height: var(--hero-min-height);
-
-  // max-height: var(--hero-height-1);
   background-color: var(--cream-white);
+  z-index: 1;
+
   @media (min-width: $laptop) {
     height: var(--hero-height-1);
   }
@@ -129,7 +125,7 @@
     position: absolute !important;
     left: 0;
     bottom: 0;
-    // z-index: 1;
+
     img {
       mix-blend-mode: luminosity;
       width: var(--illustration-width);
@@ -166,7 +162,6 @@
 
       bottom: 0;
       top: 0;
-      width: var(--profile-image-width) !important;
       height: auto !important;
       overflow: hidden !important;
       display: flex;
@@ -219,14 +214,8 @@
     }
 
     .subTitle1 {
-      width: calc(var(--subtitle1-column-span) / 7 * 100%);
       z-index: 1;
       padding-top: var(--pad-4);
-    }
-    .textWrapper {
-      .desc {
-        width: calc(var(--desc-column-span) / 7 * 100%);
-      }
     }
     .wordMark {
       position: absolute;
@@ -242,6 +231,9 @@
 }
 
 .version1 {
+  .image {
+    width: var(--profile-image-width-1) !important;
+  }
   .illustration {
     transform: translate(-50%, 25%);
   }
@@ -260,17 +252,37 @@
       line-height: var(--title-line-height) !important;
     }
   }
+  .subTitle1 {
+    width: calc(var(--subtitle1-column-span) / 7 * 100%);
+  }
+  .textWrapper {
+    .desc {
+      width: calc(var(--desc-column-span) / 7 * 100%);
+    }
+  }
+
   @media (min-width: $laptop) {
     @include switchToHorizontal;
 
-    .title {
-      position: relative !important;
-      transform: none !important;
-      left: 0 !important;
-    }
-    .wordMark {
-      left: unset !important;
-      right: var(--wordmark-image-right);
+    .content {
+      .image {
+        left: unset !important;
+        right: var(--profile-image-right) !important;
+        img {
+          top: unset !important;
+          left: unset !important;
+          transform: unset;
+        }
+      }
+      .title {
+        position: relative !important;
+        transform: none !important;
+        left: 0 !important;
+      }
+      .wordMark {
+        left: unset !important;
+        right: var(--wordmark-image-right);
+      }
     }
   }
 }
@@ -281,7 +293,8 @@
   }
 
   .content {
-    .backgroundImage {
+    .image {
+      width: var(--profile-image-width-2) !important;
       background: var(--cream-white);
       img {
         mix-blend-mode: luminosity !important;
@@ -297,10 +310,32 @@
   @media (min-width: $tablet) {
     @include switchToHorizontal;
     height: var(--hero-height-2);
-    .title {
-      position: relative !important;
-      transform: none !important;
-      left: 0 !important;
+    .content {
+      .backgroundImage {
+        right: 0;
+        left: unset !important;
+        img {
+          inset: 0 !important;
+          top: -50% !important;
+          transform: unset !important;
+        }
+      }
+
+      .title {
+        position: relative !important;
+        transform: none !important;
+        left: 0 !important;
+      }
+    }
+  }
+  @media (min-width: $laptop) {
+    .subTitle1 {
+      width: calc(var(--subtitle1-column-span) / 7 * 100%);
+    }
+    .textWrapper {
+      .desc {
+        width: calc(var(--desc-column-span) / 7 * 100%);
+      }
     }
   }
 }

@@ -21,7 +21,8 @@ export const footerPageQuery = (locale: LangType): string => {
 export const homePageQuery = (locale: LangType): string => {
   return `*[_type == 'homePage' && lang == '${locale}'][0] {
         meta,
-        hero,
+        homeHero->,
+        services[]->,
       }`;
 };
 
