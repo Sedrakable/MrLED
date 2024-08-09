@@ -38,37 +38,37 @@ const links = (trans: Translations): (INavLink | ICta)[] => {
       text: trans.nav.services,
       link: LocalPaths.SERVICE,
       ctaArray: [
-        { text: trans.nav.tattoo, link: LocalPaths.TATTOO },
+        { text: trans.nav.tattoo, link: [LocalPaths.TATTOO] },
         {
           text: trans.nav.testTattoo,
-          link: LocalPaths.TEST_TATTOO,
+          link: [LocalPaths.TEST_TATTOO],
         },
-        { text: trans.nav.henna, link: LocalPaths.HENNA },
+        { text: trans.nav.henna, link: [LocalPaths.HENNA] },
       ],
     } as INavLink,
     {
       text: trans.nav.courses,
       link: LocalPaths.COURSE,
       ctaArray: [
-        { text: trans.nav.online, link: LocalPaths.ONLINE },
-        { text: trans.nav.inPerson, link: LocalPaths.IN_PERSON },
+        { text: trans.nav.online, link: [LocalPaths.ONLINE] },
+        { text: trans.nav.inPerson, link: [LocalPaths.IN_PERSON] },
       ],
     } as INavLink,
     {
       text: trans.nav.portfolio,
-      link: LocalPaths.PORTFOLIO,
+      link: [LocalPaths.PORTFOLIO],
     } as ICta,
-    { text: trans.nav.boutique, link: LocalPaths.BOUTIQUE } as ICta,
-    { text: trans.nav.blog, link: LocalPaths.BLOG } as ICta,
+    { text: trans.nav.boutique, link: [LocalPaths.BOUTIQUE] } as ICta,
+    { text: trans.nav.blog, link: [LocalPaths.BLOG] } as ICta,
   ];
 };
 
 export const socialsIcons = (
   <Socials
     links={[
-      { text: "instagram", link: "www.instagram.com" },
-      { text: "facebook", link: "www.facebook.com" },
-      { text: "tiktok", link: "www.tiktok.com" },
+      { text: "instagram", link: ["www.instagram.com"] },
+      { text: "facebook", link: ["www.facebook.com"] },
+      { text: "tiktok", link: ["www.tiktok.com"] },
     ]}
   />
 );
@@ -140,7 +140,7 @@ export const Navbar = () => {
                   <Button
                     variant="extra"
                     path={`/${locale}${LocalPaths.CART}`}
-                    icon="cart"
+                    iconProps={{ icon: "cart" }}
                   />
                 </li>
               )}

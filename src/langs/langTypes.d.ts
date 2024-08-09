@@ -1,10 +1,18 @@
+import {
+  IBodyPart,
+  IDateSort,
+  IFlashStyle,
+  IHennaColor,
+  IFlashStatus,
+} from "../data.d";
+
 interface Titles {
   services: string;
   values: string;
   process: string;
   features: string;
   inspired: string;
-  aboutMe: string;
+  history: string;
   work: string;
   contact: string;
   reviews: string;
@@ -45,13 +53,54 @@ interface Nav {
 }
 
 interface Other {
-  startAt: string;
+  reserve: string;
+}
+
+type BodyPartsRecord = {
+  // eslint-disable-next-line no-unused-vars
+  [K in IBodyPart]: string;
+};
+
+type FlashStyleRecord = {
+  // eslint-disable-next-line no-unused-vars
+  [K in IFlashStyle]: string;
+};
+
+type FlashStatusRecord = {
+  // eslint-disable-next-line no-unused-vars
+  [K in IFlashStatus]: string;
+};
+
+type HennaColorRecord = {
+  // eslint-disable-next-line no-unused-vars
+  [K in IHennaColor]: string;
+};
+
+type DateSortRecord = {
+  // eslint-disable-next-line no-unused-vars
+  [K in IDateSort]: string;
+};
+
+interface Select {
+  sort: string;
+  filter: string;
+  dateSort: DateSortRecord;
+  year: string;
+  bodyParts: string;
+  bodyPartsOptions: BodyPartsRecord;
+  flashStyles: string;
+  flashStylesOptions: FlashStyleRecord;
+  flashStatus: string;
+  flashStatusOptions: FlashStatusRecord;
+  hennaColors: string;
+  hennaColorsOptions: HennaColorRecord;
 }
 
 export interface Translations {
   buttons: Buttons;
-  blockTitles: Titles;
+  titles: Titles;
   form: Form;
   nav: Nav;
   other: Other;
+  select: Select;
 }

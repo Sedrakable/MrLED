@@ -1,0 +1,86 @@
+@import "../../../../styles/mixins.scss";
+
+@mixin vars() {
+  --columns: 1;
+  --grad: hsl(from var(--dark-burgundy) h s l / 0.4) 0%,
+    hsl(from var(--dark-burgundy) h s l / 0.1) 50%;
+  --row-gap: var(--pad-9);
+  @media (min-width: $tablet) {
+    --columns: 2;
+    --row-gap: var(--pad-7);
+  }
+
+  @media (min-width: $laptop) {
+    --columns: 3;
+  }
+
+  @media (min-width: $desktop) {
+    --columns: 4;
+  }
+}
+.wrapper {
+  @include vars;
+  display: grid !important;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  row-gap: var(--row-gap) !important;
+  .container {
+    .image {
+      aspect-ratio: 4/5;
+      box-shadow: var(--light-shadow);
+      border-radius: var(--border-radius);
+      position: relative !important;
+      overflow: hidden;
+    }
+    &.flash {
+      .image {
+        background: var(--cream-white);
+        box-shadow: none;
+        &::after {
+          content: "";
+          @include absoluteFill;
+          position: absolute;
+          background: radial-gradient(
+            50% 50% at 50% 50%,
+            hsl(from var(--cream-white) h s l / 0) 60%,
+            var(--cream-white) 100%
+          );
+        }
+
+        img {
+          mix-blend-mode: luminosity;
+          filter: brightness(103.5%);
+        }
+      }
+    }
+    .text {
+      position: relative;
+      .title {
+        font-size: var(--heading-h6) !important;
+        line-height: var(--heading-h6-line) !important;
+      }
+      .line {
+        position: absolute;
+        width: calc(100% + 20px);
+        height: 12px;
+        bottom: 10px;
+        path {
+          fill: var(--burgundy);
+        }
+      }
+    }
+  }
+}
+
+.selectWrapper {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  @media (min-width: $tablet) {
+    display: flex !important;
+  }
+}
+
+.navButtons {
+  .title {
+    line-height: 0.9em !important;
+  }
+}

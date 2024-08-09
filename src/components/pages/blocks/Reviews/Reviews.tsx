@@ -1,39 +1,57 @@
-// "use client";
-// import React from "react";
-// import styles from "./Reviews.module.scss";
-// import FlexDiv from "../../../reuse/FlexDiv";
-// import { getTranslations } from "../../../../helpers/langUtils";
-// import { ElfsightWidget } from "react-elfsight-widget";
-// import { Block } from "../../containers/Block";
-// import { useLocale } from "next-intl";
-// import { LangType } from "@/i18n";
+"use client";
+import React from "react";
+import styles from "./Reviews.module.scss";
+import FlexDiv from "../../../reuse/FlexDiv";
+import { IReview, IReviews } from "../../../../data.d";
 
-// export const Reviews: React.FC = () => {
-//   const locale = useLocale() as LangType;
-//   const translations = getTranslations(locale);
+import { TextWrapper } from "../../../reuse/containers/TextWrapper/TextWrapper";
+import { Paragraph } from "@/components/reuse/Paragraph";
+import { getTranslations } from "@/helpers/langUtils";
+import { LangType } from "@/i18n";
+import { useLocale } from "next-intl";
+import { TitleWrapper } from "../../../reuse/containers/TitleWrapper/TitleWrapper";
+import { Heading } from "@/components/reuse/Heading";
+import { Icon } from "@/components/reuse/Icon";
 
-//   return (
-//     <Block title={translations.blockTitles.reviews} variant="grid">
-//       <FlexDiv
-//         className={styles.reviews}
-//         gapArray={[4]}
-//         width100
-//         as="section"
-//         padding={{ top: [2, 3, 3, 4] }}
-//       >
-//         {/* <iframe
-//         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d178787.81912808729!2d-73.7118733!3d45.5591827!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa70e8c729916bbff%3A0x6f3d76a4741d1d78!2sSeto%20x%20Arts!5e0!3m2!1sen!2sca!4v1714102360199!5m2!1sen!2sca"
-//         width="600"
-//         height="450"
-//         loading="lazy"
-//         title="google maps"
-//         className={styles.map}
-//       /> */}
-//         <ElfsightWidget
-//           widgetId="0d315c90-cc18-4c1f-bf61-14fff00b69f4"
-//           style={{ fontFamily: `"Anek Gurmukhi", sans-serif` }}
-//         />
-//       </FlexDiv>
-//     </Block>
-//   );
-// };
+export const Review: React.FC<IReview> = ({ name, message }) => {
+  return (
+    <FlexDiv flex={{ direction: "column" }} className={styles.review}>
+      <Heading as="h5" level="5" color="dark-burgundy" textAlign="center">
+        {name}
+      </Heading>
+      <Paragraph
+        level="regular"
+        color="darkest-burgundy"
+        textAlign="center"
+        paddingBottomArray={[3]}
+      >
+        {`"${message}"`}
+      </Paragraph>
+      <FlexDiv gapArray={[3]}>
+        {Array.from({ length: 5 }, (_, index) => (
+          <Icon key={index} icon="star" size="regular" />
+        ))}
+      </FlexDiv>
+    </FlexDiv>
+  );
+};
+
+export const Reviews: React.FC<IReviews> = ({ reviews }) => {
+  const locale = useLocale() as LangType;
+  const translations = getTranslations(locale);
+  return (
+    <TitleWrapper title={translations.titles.reviews}>
+      <TextWrapper>
+        <FlexDiv gapArray={[7, 6, 6, 6]} className={styles.reviews} wrap>
+          {reviews.map((review) => (
+            <Review
+              key={review.name}
+              name={review.name}
+              message={review.message}
+            />
+          ))}
+        </FlexDiv>
+      </TextWrapper>
+    </TitleWrapper>
+  );
+};

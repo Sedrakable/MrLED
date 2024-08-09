@@ -2,7 +2,7 @@
 import styles from "./ArticlePage.module.scss";
 import FlexDiv from "@/components/reuse/FlexDiv";
 import { Paragraph } from "@/components/reuse/Paragraph";
-import { Block } from "@/components/pages/containers/Block";
+import { Block } from "@/components/reuse/containers/Block/Block";
 import { IArticle, IBlock } from "@/data.d";
 import { Heading } from "@/components/reuse/Heading";
 import { SanityImage } from "@/components/reuse/SanityImage/SanityImage";

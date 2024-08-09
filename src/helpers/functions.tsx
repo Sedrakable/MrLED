@@ -18,11 +18,3 @@ export const shuffleArray = (array: any[]) => {
   }
   return array;
 };
-
-export const getAllWorkImages = (works: IWork[]) => {
-  const customImages: ICustomImage[] = works?.flatMap((work) => {
-    return work.customImages;
-  });
-
-  return customImages;
-};

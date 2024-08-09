@@ -63,5 +63,6 @@ export default async function ArticlePage({
   params: { locale: LangType; slug: string };
 }) {
   const articleData: ArticlePageProps = await getArticlePageData(locale, slug);
+
   return articleData && <ArticlePageComp {...articleData} />;
 }

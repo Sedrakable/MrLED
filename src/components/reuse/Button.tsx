@@ -3,7 +3,7 @@ import React, { PropsWithChildren, ButtonHTMLAttributes, FC } from "react";
 import styles from "./Button.module.scss";
 import cn from "classnames";
 import Link, { LinkProps } from "next/link";
-import { IconType, Icon } from "./Icon";
+import { IconType, Icon, IconProps } from "./Icon";
 import { Paragraph } from "./Paragraph";
 import { useWindowResize } from "@/helpers/useWindowResize";
 
@@ -11,7 +11,7 @@ export interface ButtonProps {
   variant: "primary" | "transparent" | "white" | "extra";
   small?: boolean;
   fit?: "grow" | "shrink";
-  icon?: IconType;
+  iconProps?: IconProps;
   onClick?: () => void;
   path?: string;
   disabled?: boolean;
@@ -24,7 +24,7 @@ export const Button: FC<PropsWithChildren<
 >> = ({
   children,
   variant,
-  icon,
+  iconProps,
   path,
   disabled,
   small,
@@ -51,22 +51,18 @@ export const Button: FC<PropsWithChildren<
     </Paragraph>
   );
 
-  const ButtonIcon = ({ icon }: { icon: IconType }) => {
-    return <Icon icon={icon} color="burgundy" />;
-  };
-
   return path ? (
     <Link
       href={path}
       className={cn(styles.button, styles[variant], {
         [styles.small]: small,
-        [styles.withIcon]: icon,
+        [styles.withIcon]: iconProps,
       })}
       style={{ width: fit === "grow" || isMobile ? "100%" : "auto" }}
       target={target}
       aria-label={children as string}
     >
-      {icon ? <ButtonIcon icon={icon} /> : <ButtonHeading />}
+      {iconProps ? <Icon {...iconProps} color="burgundy" /> : <ButtonHeading />}
     </Link>
   ) : (
     <button
@@ -77,6 +73,7 @@ export const Button: FC<PropsWithChildren<
       onClick={() => onClick()}
       disabled={disabled}
       aria-label={children as string}
+      {...(props as ButtonHTMLAttributes<HTMLButtonElement>)}
     >
       <ButtonHeading />
     </button>

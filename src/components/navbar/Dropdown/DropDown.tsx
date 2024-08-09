@@ -11,7 +11,7 @@ import { usePathname } from "@/navigation";
 import { useLocale } from "next-intl";
 
 export interface DropDownProps {
-  parentPath: string;
+  parentPath?: string;
   dropdown: ICta[];
   isOpen: boolean;
   onClose: Function;
@@ -39,11 +39,11 @@ export const DropDown: React.FC<DropDownProps> = ({
       >
         {dropdown?.map((cta, index) => {
           const isActive =
-            `/${locale}${pathname}` === `${parentPath}${cta.link}`;
+            `/${locale}${pathname}` === `${parentPath}${cta.link?.join()}`;
           return (
             <Link
               key={index}
-              href={`${parentPath}${cta.link!}`}
+              href={`${parentPath}${cta.link?.join()!}`}
               onClick={() => setSidebar(false)}
               aria-label={cta.text}
             >

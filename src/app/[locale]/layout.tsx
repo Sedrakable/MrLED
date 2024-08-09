@@ -11,10 +11,10 @@ import { NextIntlClientProvider } from "next-intl";
 import { IFooter, INavBar, LocalPaths } from "@/data.d";
 import { useFetchPage } from "../api/useFetchPage";
 import { LangType } from "@/i18n";
-import { getHomePageData } from "./home/page";
 import { setMetadata } from "@/components/SEO";
 import dynamic from "next/dynamic";
 import { navbarPageQuery, footerPageQuery } from "../api/generateSanityQueries";
+import { getHomePageData } from "./page";
 
 const inter = Inter({ subsets: ["latin"] });
 

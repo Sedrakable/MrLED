@@ -11,7 +11,7 @@ import { useWindowResize } from "@/helpers/useWindowResize";
 import { LangType } from "@/i18n";
 import { useLocale } from "next-intl";
 import { getTranslations } from "@/helpers/langUtils";
-import { Block } from "@/components/pages/containers/Block";
+import { Block } from "@/components/reuse/containers/Block/Block";
 
 import Analysis from "@/assets/vector/Analysis.svg";
 import Developer from "@/assets/vector/Developer.svg";

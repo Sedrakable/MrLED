@@ -1,5 +1,5 @@
 "use client";
-import { Block } from "@/components/pages/containers/Block";
+import { Block } from "@/components/reuse/containers/Block/Block";
 import { IForm } from "@/data.d";
 import { Form } from "./Form";
 import { getTranslations } from "@/helpers/langUtils";

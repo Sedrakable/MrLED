@@ -4,7 +4,7 @@ import { useLocale } from "next-intl";
 import { LangType } from "@/i18n";
 import FlexDiv from "@/components/reuse/FlexDiv";
 import { IBlog } from "@/data.d";
-import { Block } from "../../containers/Block";
+import { Block } from "../../../reuse/containers/Block/Block";
 import { getTranslations } from "@/helpers/langUtils";
 
 export const Blog: React.FC<IBlog> = ({ articles }) => {
@@ -12,7 +12,7 @@ export const Blog: React.FC<IBlog> = ({ articles }) => {
   const translations = getTranslations(locale);
   return (
     articles && (
-      <Block title={translations.blockTitles.blog} variant="grid">
+      <Block variant="full-width">
         <FlexDiv
           width100
           flex={{ direction: "column" }}

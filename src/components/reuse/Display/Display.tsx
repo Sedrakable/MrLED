@@ -70,10 +70,6 @@ export const Display: React.FC<HeroProps> = ({
       <SanityImage
         image={backgroundImage?.image}
         alt={backgroundImage?.alt}
-        loading="eager"
-        fetchPriority="high"
-        rel="preload"
-        sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw"
         figureClassName={cn(styles.image)}
         quality={60}
       />
@@ -93,6 +89,7 @@ export const Display: React.FC<HeroProps> = ({
           reverse={reverse}
           overflowText
           flexHorizontal={reverse ? "flex-end" : "flex-start"}
+          blocker={!isMobile}
         />
         {subTitle && (
           <Heading

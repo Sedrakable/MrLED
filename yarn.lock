@@ -2279,6 +2279,29 @@ electron-to-chromium@^1.4.668:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.757.tgz#45f7c9341b538f8c4b9ca8af9692e0ed1a776a44"
   integrity sha512-jftDaCknYSSt/+KKeXzH3LX5E2CvRLm75P3Hj+J/dv3CL0qUYcOt13d5FN1NiL5IJbbhzHrb3BomeG2tkSlZmw==
 
+embla-carousel-auto-scroll@^8.1.7:
+  version "8.1.7"
+  resolved "https://registry.yarnpkg.com/embla-carousel-auto-scroll/-/embla-carousel-auto-scroll-8.1.7.tgz#dd796eb4927b9d1109945ed5c2d5fc1507551e96"
+  integrity sha512-T8j+J9VVqN0dS0OzdwON8YmoXLTI4oqMNfxE02AAAQT5K4TbIkd5xv7gXNN1K7adc/1pmC6TmULqUaP2vZGhxw==
+
+embla-carousel-react@^8.1.7:
+  version "8.1.7"
+  resolved "https://registry.yarnpkg.com/embla-carousel-react/-/embla-carousel-react-8.1.7.tgz#28b0a3036baad410a9828473656f32f1cd741266"
+  integrity sha512-ermMKzQ46LhXE4f81VBCVGxCJWvZfsu504dkyiUDO+cnEEPW8NlC2PpKULmiOWugusYWRLhQLjmyQs3b8vvOjA==
+  dependencies:
+    embla-carousel "8.1.7"
+    embla-carousel-reactive-utils "8.1.7"
+
+embla-carousel-reactive-utils@8.1.7:
+  version "8.1.7"
+  resolved "https://registry.yarnpkg.com/embla-carousel-reactive-utils/-/embla-carousel-reactive-utils-8.1.7.tgz#3834440bdb4e2e79fbaf466343a2b458f74f0091"
+  integrity sha512-FDPcWjNtW04KSuvSfGbVeoB8yl5no3E0++HikO/uW12cNkMnWt68C4OBOakZQZlpUdRQSA9KCYoBuQzfpVGvZQ==
+
+embla-carousel@8.1.7:
+  version "8.1.7"
+  resolved "https://registry.yarnpkg.com/embla-carousel/-/embla-carousel-8.1.7.tgz#cc98a86f80b5e3add2d254b1a84903607425a6e9"
+  integrity sha512-b3kBr2H+S1gx4neki0P+aqN6cA5Ibjqy4CR3Ufi3X+Q3JpoNXJgOmJMSPkoP9DKcDREwADN6UWZzRwF2oo0y9Q==
+
 emoji-regex@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-8.0.0.tgz#e818fd69ce5ccfcb404594f842963bf53164cc37"
@@ -4134,8 +4157,16 @@ streamsearch@^1.1.0:
   resolved "https://registry.yarnpkg.com/streamsearch/-/streamsearch-1.1.0.tgz#404dd1e2247ca94af554e841a8ef0eaa238da764"
   integrity sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==
 
-"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0:
-  name string-width-cjs
+"string-width-cjs@npm:string-width@^4.2.0":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
+  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
+  dependencies:
+    emoji-regex "^8.0.0"
+    is-fullwidth-code-point "^3.0.0"
+    strip-ansi "^6.0.1"
+
+string-width@^4.1.0:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -4206,7 +4237,14 @@ string_decoder@~1.1.1:
   dependencies:
     safe-buffer "~5.1.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
+  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
+  dependencies:
+    ansi-regex "^5.0.1"
+
+strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==

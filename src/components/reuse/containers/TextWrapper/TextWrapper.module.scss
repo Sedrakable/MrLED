@@ -1,0 +1,59 @@
+@import "../../../../styles/mixins.scss";
+
+@mixin vars() {
+  --grad: hsl(from var(--dark-burgundy) h s l / 0.4) 0%,
+    hsl(from var(--dark-burgundy) h s l / 0.1) 50%;
+
+  @media (min-width: $tablet) {
+  }
+
+  @media (min-width: $laptop) {
+    --heading-padding-top: var(--pad-2);
+  }
+
+  @media (min-width: $desktop) {
+    --heading-padding-top: 0;
+  }
+}
+
+.wrapper {
+  border-radius: var(--border-radius);
+  box-shadow: var(--drop-shadow);
+  position: relative;
+}
+
+.version1 {
+  background: linear-gradient(
+    120deg,
+    var(--cream-white) 0,
+    hsl(from var(--light-burgundy) h s l / 0.3) 70%
+  );
+}
+
+.version2 {
+  background: var(--light-burgundy);
+  > * {
+    z-index: 1;
+  }
+  // h3 {
+  //   padding-top: var(--heading-padding-top);
+  // }
+  overflow: hidden;
+  .backgroundImage {
+    z-index: 0;
+    position: absolute !important;
+    width: calc(100% * 2 / 5) !important;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    &:after {
+      content: "";
+      @include absoluteFill;
+      background: linear-gradient(
+        88deg,
+        hsl(from var(--light-burgundy) h s l / 0.2) 0%,
+        var(--light-burgundy) 100%
+      );
+    }
+  }
+}

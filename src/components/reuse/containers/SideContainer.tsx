@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./SideContainer.module.scss";
 import cn from "classnames";
-import { Heading } from "../../reuse/Heading";
-import { Paragraph } from "../../reuse/Paragraph";
-import { Button } from "../../reuse/Button";
-import FlexDiv from "../../reuse/FlexDiv";
+import { Heading } from "../Heading";
+import { Paragraph } from "../Paragraph";
+import { Button } from "../Button";
+import FlexDiv from "../FlexDiv";
 import { ICta } from "../../../data.d";
 
 export interface SideContainerProps {

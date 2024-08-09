@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import styles from "./Block.module.scss";
-import FlexDiv from "../../reuse/FlexDiv";
+import FlexDiv from "../../FlexDiv";
 import Image from "next/image";
 import cn from "classnames";
 
@@ -19,10 +19,10 @@ export const Block: React.FC<PropsWithChildren<BlockProps>> = ({
 }) => {
   return (
     <FlexDiv
-      flex={{ direction: "column" }}
+      flex={{ direction: "column", y: "flex-start" }}
       className={cn(styles.block, styles[variant])}
       padding={{
-        horizontal: variant === "full-width" ? [0] : [6, 9, 11, 12],
+        horizontal: variant === "full-width" ? [0] : [6, 8, 11, 12],
         top: variant === "full-width" ? [10, 10, 10, 11] : [9, 9, 9, 10],
         bottom: variant === "full-width" ? [10, 10, 10, 11] : [7, 9, 9, 10],
       }}
@@ -30,7 +30,7 @@ export const Block: React.FC<PropsWithChildren<BlockProps>> = ({
       as="article"
     >
       <FlexDiv
-        flex={{ direction: "column" }}
+        flex={{ direction: "column", y: "flex-start" }}
         className={cn(styles.content)}
         gapArray={variant === "full-width" ? [11, 10, 11, 12] : [9, 9, 9, 10]}
         width100

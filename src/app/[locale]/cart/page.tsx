@@ -28,25 +28,25 @@ const getCartPageData = async (locale: LangType) => {
   return cartPageData;
 };
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: LangType };
-}): Promise<Metadata> {
-  const cartPageData = await getCartPageData(locale);
-  const { metaTitle, metaDesc, metaKeywords } = cartPageData.meta;
-  const path = LocalPaths.CONTACT;
-  const crawl = true;
+// export async function generateMetadata({
+//   params: { locale },
+// }: {
+//   params: { locale: LangType };
+// }): Promise<Metadata> {
+//   const cartPageData = await getCartPageData(locale);
+//   const { metaTitle, metaDesc, metaKeywords } = cartPageData.meta;
+//   const path = LocalPaths.CONTACT;
+//   const crawl = true;
 
-  return setMetadata({
-    locale,
-    metaTitle,
-    metaDesc,
-    metaKeywords,
-    path,
-    crawl,
-  });
-}
+//   return setMetadata({
+//     locale,
+//     metaTitle,
+//     metaDesc,
+//     metaKeywords,
+//     path,
+//     crawl,
+//   });
+// }
 
 export default async function Cart({
   params: { locale },

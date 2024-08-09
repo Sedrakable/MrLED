@@ -1,4 +1,4 @@
-import { IForm, ISeo, LocalPaths } from "@/data.d";
+import { ISeo, LocalPaths } from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
 import { LangType } from "@/i18n";
 import { Metadata } from "next";
@@ -6,7 +6,7 @@ import { setMetadata } from "@/components/SEO";
 import { contactPageQuery } from "@/app/api/generateSanityQueries";
 import dynamic from "next/dynamic";
 
-export interface ContactPageProps extends IForm {
+export interface ContactPageProps {
   meta: ISeo;
 }
 
@@ -31,25 +31,25 @@ const getContactPageData = async (locale: LangType) => {
   return contactPageData;
 };
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: LangType };
-}): Promise<Metadata> {
-  const contactPageData = await getContactPageData(locale);
-  const { metaTitle, metaDesc, metaKeywords } = contactPageData.meta;
-  const path = LocalPaths.CONTACT;
-  const crawl = true;
+// export async function generateMetadata({
+//   params: { locale },
+// }: {
+//   params: { locale: LangType };
+// }): Promise<Metadata> {
+//   const contactPageData = await getContactPageData(locale);
+//   const { metaTitle, metaDesc, metaKeywords } = contactPageData.meta;
+//   const path = LocalPaths.CONTACT;
+//   const crawl = true;
 
-  return setMetadata({
-    locale,
-    metaTitle,
-    metaDesc,
-    metaKeywords,
-    path,
-    crawl,
-  });
-}
+//   return setMetadata({
+//     locale,
+//     metaTitle,
+//     metaDesc,
+//     metaKeywords,
+//     path,
+//     crawl,
+//   });
+// }
 
 export default async function Contact({
   params: { locale },

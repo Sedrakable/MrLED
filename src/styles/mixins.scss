@@ -60,3 +60,40 @@
     @include sizing($desk);
   }
 }
+
+@mixin dropDown() {
+  background: var(--cream-white);
+  width: 100vw;
+  position: relative;
+  box-sizing: content-box !important;
+
+  @media (min-width: $laptop) {
+    width: fit-content;
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%);
+    border-radius: var(--pad-3);
+    box-shadow: var(--light-shadow);
+  }
+  a {
+    width: 100%;
+  }
+  .selected {
+    background: var(--light-burgundy-30);
+    border-top: 1px solid var(--light-burgundy);
+    border-bottom: 1px solid var(--light-burgundy);
+  }
+  .tab {
+    &:hover {
+      background: var(--white);
+      p {
+        color: var(--burgundy);
+      }
+    }
+    p {
+      text-wrap: nowrap;
+    }
+  }
+}

@@ -28,25 +28,25 @@ const getBlogPageData = async (locale: LangType) => {
   return blogPageData;
 };
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: LangType };
-}): Promise<Metadata> {
-  const blogPageData: BlogPageProps = await getBlogPageData(locale);
-  const { metaTitle, metaDesc, metaKeywords } = blogPageData.meta;
-  const path = LocalPaths.BLOG;
-  const crawl = true;
+// export async function generateMetadata({
+//   params: { locale },
+// }: {
+//   params: { locale: LangType };
+// }): Promise<Metadata> {
+//   const blogPageData: BlogPageProps = await getBlogPageData(locale);
+//   const { metaTitle, metaDesc, metaKeywords } = blogPageData.meta;
+//   const path = LocalPaths.BLOG;
+//   const crawl = true;
 
-  return setMetadata({
-    locale,
-    metaTitle,
-    metaDesc,
-    metaKeywords,
-    path,
-    crawl,
-  });
-}
+//   return setMetadata({
+//     locale,
+//     metaTitle,
+//     metaDesc,
+//     metaKeywords,
+//     path,
+//     crawl,
+//   });
+// }
 
 export default async function BlogPage({
   params: { locale },
@@ -54,5 +54,7 @@ export default async function BlogPage({
   params: { locale: LangType };
 }) {
   const blogPageData: BlogPageProps = await getBlogPageData(locale);
-  return blogPageData && <Blog {...blogPageData.blog} />;
+  return <>Blog Page</>;
+
+  // return blogPageData && <Blog {...blogPageData.blog} />;
 }

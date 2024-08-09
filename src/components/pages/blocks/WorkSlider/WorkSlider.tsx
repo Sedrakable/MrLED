@@ -2,7 +2,7 @@
 import React, { PropsWithChildren } from "react";
 import styles from "./WorkSlider.module.scss";
 
-import { Splider, SpliderProps } from "../../containers/Splider";
+import { Splider, SpliderProps } from "../../../reuse/containers/Splider";
 import FlexDiv from "../../../reuse/FlexDiv";
 import { IWork, IWorkBlock, LocalPaths } from "../../../../data.d";
 import { getTranslations } from "../../../../helpers/langUtils";

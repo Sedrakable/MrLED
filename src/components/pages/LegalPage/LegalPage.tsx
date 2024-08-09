@@ -3,7 +3,7 @@ import FlexDiv from "@/components/reuse/FlexDiv";
 import { Heading } from "@/components/reuse/Heading";
 import { Paragraph } from "@/components/reuse/Paragraph";
 import { ILegalPage } from "@/data.d";
-import { Block } from "../containers/Block";
+import { Block } from "../../reuse/containers/Block/Block";
 
 export const LegalPageComp: React.FC<ILegalPage> = ({ title, data }) => {
   return (

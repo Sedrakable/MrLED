@@ -2,7 +2,10 @@
 import React from "react";
 import styles from "./Features.module.scss";
 import cn from "classnames";
-import { BlockVariantType, Block } from "@/components/pages/containers/Block";
+import {
+  BlockVariantType,
+  Block,
+} from "@/components/reuse/containers/Block/Block";
 import FlexDiv from "@/components/reuse/FlexDiv";
 import { Heading } from "@/components/reuse/Heading";
 import { Paragraph } from "@/components/reuse/Paragraph";

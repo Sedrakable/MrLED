@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./Values.module.scss";
 import FlexDiv from "../../../reuse/FlexDiv";
 import { Heading } from "../../../reuse/Heading";
-import { Block } from "../../containers/Block";
+import { Block } from "../../../reuse/containers/Block/Block";
 import { Paragraph } from "../../../reuse/Paragraph";
 import { IValue, IValues } from "../../../../data.d";
 import { getTranslations } from "../../../../helpers/langUtils";

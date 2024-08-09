@@ -19,7 +19,7 @@ export const Socials: React.FC<ISocials> = ({ title, links }) => {
             true && (
               <IconButton
                 key={key}
-                href={link?.link}
+                href={link?.link?.join()}
                 iconProps={{
                   icon: link.text as IconType,
                   size: "regular",

@@ -12,9 +12,9 @@ import "@splidejs/react-splide/css/skyblue";
 
 import { SideContainer, SideContainerProps } from "./SideContainer";
 import cn from "classnames";
-import FlexDiv from "../../reuse/FlexDiv";
-import { Icon } from "../../reuse/Icon";
-import { ICustomImage, SanityImage } from "../../reuse/SanityImage/SanityImage";
+import FlexDiv from "../FlexDiv";
+import { Icon } from "../Icon";
+import { ICustomImage, SanityImage } from "../SanityImage/SanityImage";
 import { useWindowResize } from "../../../helpers/useWindowResize";
 import { shuffleArray } from "../../../helpers/functions";
 

@@ -23,70 +23,62 @@ export const homePageQuery = (locale: LangType): string => {
         meta,
         homeHero->,
         services[]->,
+        works[]->{
+          path,
+          reserve,
+          hero{
+            title,
+            backgroundImage,
+          },
+        },
+        history->,
+        reviews,
+        bigCTA->
       }`;
 };
 
-// export const homePageQuery = (locale: LangType): string => {
-//   return `*[_type == 'homePage' && lang == '${locale}'][0] {
-//         meta,
-//         hero{
-//           ...,
-//           quote->,
-//         },
-//         services-> {
-//           services[]->{
-//             path,
-//             title,
-//             features->{
-//               features[]->{
-//                 title,
-//                 customImage,
-//               }
-//             },
-//             processes,
-//             price
-//           },
-//         },
-//         values->,
-//         about->,
-//         work->{
-//           works[]->{
-//             slug,
-//             thumbnailImage,
-//             customImages,
-//             title,
-//             desc,
-//             primaryLink,
-//           },
-//         },
+// export const carouselQuery = (workType: string | undefined): string => {
+//   return `*[_type == 'work' ${
+//     workType && "&& workType == '" + workType + "'"
+//   }] {
+//         projects[]
 //       }`;
 // };
+
+export const carouselQuery = (workType: string | undefined): string => {
+  return `*[_type == 'work'] {
+        projects[]
+      }`;
+};
+
+export const portoflioPageQuery = (locale: LangType): string => {
+  return `*[_type == 'portfolioPage' && lang == '${locale}'][0] {
+        meta,
+        hero,
+        works[]->{
+          path,
+          reserve,
+          hero{
+            title,
+            backgroundImage,
+          },
+        },
+        history->,
+      }`;
+};
 
 export const tattooServicePageQuery = (locale: LangType): string => {
   return `*[_type == 'tattooServicePage' && lang == '${locale}'][0] {
     meta,
-    hero{
-      ...,
-      quote->,
-    },
+    hero,
   }`;
 };
 
-export const aboutPageQuery = (locale: LangType): string => {
-  return `*[_type == 'aboutPage' && lang == '${locale}'][0] {
+export const workPageQuery = (path: string): string => {
+  return `*[_type == 'workPage' && path == '/${path}'][0]{
     meta,
-    about->,
-    values->,
-    work->{
-      works[]->,
-    },
-  }`;
-};
-
-export const workPageQuery = (slug: string): string => {
-  return `*[_type == 'work' && slug.current == '${slug}'][0]{
-    ...,
-    meta,
+    hero,
+    work->,
   }`;
 };
 

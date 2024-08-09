@@ -9,6 +9,7 @@ export interface FancyTextProps extends IFancyText {
   flexHorizontal?: CSSProperties["justifyContent"];
   reverse?: boolean;
   overflowText?: boolean;
+  blocker?: boolean;
 }
 export const FancyText: React.FC<FancyTextProps> = ({
   part1,
@@ -16,6 +17,7 @@ export const FancyText: React.FC<FancyTextProps> = ({
   flexHorizontal = "flex-start",
   reverse,
   overflowText = false,
+  blocker = true,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerHeight, setContainerHeight] = useState<number | undefined>(
@@ -63,6 +65,7 @@ export const FancyText: React.FC<FancyTextProps> = ({
       className={cn(styles.title, {
         [styles.overflowing]: isOverflowing,
         [styles.reverse]: reverse,
+        [styles.blocker]: blocker,
       })}
       width100
       customStyle={{

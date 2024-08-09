@@ -1,14 +1,14 @@
 import { Translations } from "./langTypes";
 
 export const enTranslations: Translations = {
-  blockTitles: {
+  titles: {
     services: "Services",
     values: "Values",
     process: "Process",
     features: "Features",
     inspired: "Inspired",
-    aboutMe: "About Me",
-    work: "Work",
+    history: "History",
+    work: "My Work",
     contact: "Contact",
     reviews: "Reviews",
     blog: "Blog",
@@ -44,6 +44,45 @@ export const enTranslations: Translations = {
     testTattoo: "Test Tattoo",
   },
   other: {
-    startAt: "Starting at",
+    reserve: "Reserve",
+  },
+  select: {
+    sort: "Sort",
+    filter: "Filter",
+    dateSort: {
+      newest: "Newest",
+      oldest: "Oldest",
+    },
+    year: "Year",
+    bodyParts: "Body Parts",
+    bodyPartsOptions: {
+      hand: "Hand",
+      arm: "Arm",
+      foot: "Foot",
+      leg: "Leg",
+      back: "Back",
+      chest: "Chest",
+      face: "Face",
+    },
+    flashStyles: "Style",
+    flashStylesOptions: {
+      animal: "Animal",
+      character: "Character",
+      floral: "Floral",
+      mandala: "Mandala",
+      ornamental: "Ornamental",
+      other: "Other",
+    },
+    flashStatus: "Status",
+    flashStatusOptions: {
+      reserved: "Reserved",
+      unReserved: "Unreserved",
+    },
+    hennaColors: "Color",
+    hennaColorsOptions: {
+      henna: "Henna",
+      hennagua: "Hennagua",
+      jagua: "Jagua",
+    },
   },
 };

@@ -18,7 +18,7 @@ export interface ITrippleCtas {
 }
 export interface ICta {
   text: string;
-  link?: string;
+  link?: string[];
 }
 
 export interface ISlug {
@@ -81,30 +81,28 @@ export interface IValue {
   desc: string;
 }
 
-export interface IAboutContent {
-  customImage: ICustomImage;
-  name?: string;
-  title1: string;
-  desc1: string;
-  title2?: string;
-  desc2?: string;
-  cta?: boolean;
+export interface IHistory {
+  text: string;
+}
+export interface IReviews {
+  reviews: IReview[];
 }
 
-export interface IAbout {
-  content: IAboutContent;
+export interface IReview {
+  name: string;
+  message: string;
 }
 
-export interface IWorkBlock {
-  works: IWork[];
-}
+// export interface IWorkBlock {
+//   works: IWork[];
+// }
 
 export interface IBlog {
   articles: IArticle[];
 }
 
 export interface IArticle {
-  path: string;
+  path: LocalPaths;
   customImage: ICustomImage;
   title: string;
   desc: string;
@@ -114,15 +112,72 @@ export interface IArticle {
 }
 
 export interface IWork {
-  slug: ISlug;
-  thumbnailImage: ICustomImage;
-  customImages: ICustomImage[];
+  type: string;
+  projects: IProjects;
+}
+
+export type IProjects = ITattoo[] | IFlash[] | ICanvas[] | IHenna[];
+
+export type IProject = ITattoo | IFlash | ICanvas | IHenna;
+
+export interface IFlash {
+  image: ICustomImage;
   title: string;
-  desc: string;
-  primaryLink: ICta;
-  secondaryLinks?: ICta[];
-  behanceProjectId?: string;
-  kickstarterProjectlink?: string;
+  reserved: boolean;
+  style: IFlashStyle;
+  year: number;
+}
+
+export interface ITattoo {
+  image: ICustomImage;
+  bodyPart: IBodyPart;
+  year: number;
+}
+
+export interface IHenna {
+  image: ICustomImage;
+  hennaColor: IHennaColor;
+  year: number;
+}
+
+export interface ICanvas {
+  image: ICustomImage;
+  year: number;
+}
+
+export const bodyPartsArray = [
+  "hand",
+  "arm",
+  "foot",
+  "leg",
+  "back",
+  "chest",
+  "face",
+] as const;
+export type IBodyPart = typeof bodyPartsArray[number];
+
+export const dateSortArray = ["newest", "oldest"] as const;
+export type IDateSort = typeof dateSortArray[number];
+
+export const hennaColorArray = ["jagua", "henna", "hennagua"] as const;
+export type IHennaColor = typeof hennaColorArray[number];
+
+export const flashStyleArray = [
+  "ornamental",
+  "floral",
+  "mandala",
+  "animal",
+  "character",
+  "other",
+] as const;
+export type IFlashStyle = typeof flashStyleArray[number];
+
+export const flashStatusArray = ["reserved", "unReserved"] as const;
+export type IFlashStatus = typeof flashStatusArray[number];
+
+export interface IBigCTA {
+  title: string;
+  backgroundImage: ICustomImage;
 }
 
 export interface INavLink {
@@ -165,7 +220,7 @@ export interface INotFound {
 
 /* eslint-disable */
 export enum LocalPaths {
-  HOME = "/home",
+  HOME = "/",
   SERVICE = "/service",
   TEST_TATTOO = "/test-tattoo",
   COURSE = "/course",

@@ -1,14 +1,14 @@
 import { Translations } from "./langTypes";
 
 export const frTranslations: Translations = {
-  blockTitles: {
+  titles: {
     services: "Services",
     values: "Valeurs",
     process: "Processus",
     features: "Fonctionnalités",
     inspired: "Inspiré",
-    aboutMe: "À propos de moi",
-    work: "Travail",
+    history: "Histoire",
+    work: "Mon Travail",
     contact: "Contact",
     reviews: "Avis",
     blog: "Blog",
@@ -30,7 +30,7 @@ export const frTranslations: Translations = {
   nav: {
     home: "Accueil",
     services: "Services",
-    tattoo: "Tatouage",
+    tattoo: "Tattoo",
     henna: "Henna",
     testTattoo: "Test Tatouage",
     courses: "Cours",
@@ -44,6 +44,48 @@ export const frTranslations: Translations = {
     blog: "Blog",
   },
   other: {
-    startAt: "À partir de",
+    reserve: "Réserver",
+  },
+  select: {
+    sort: "Trier",
+    filter: "Filtrer",
+    dateSort: {
+      newest: "Récent",
+      oldest: "Ancien",
+    },
+
+    year: "Anne",
+    bodyParts: "Parties du Corps",
+    bodyPartsOptions: {
+      hand: "Main",
+      arm: "Bras",
+      foot: "Pied",
+      leg: "Jambe",
+      back: "Dos",
+      chest: "Poitrine",
+      face: "Visage",
+    },
+
+    flashStyles: "Styles",
+    flashStylesOptions: {
+      ornamental: "Ornamental",
+      floral: "Floral",
+      mandala: "Mandala",
+      animal: "Animal",
+      character: "Personnage",
+      other: "Autre",
+    },
+
+    flashStatus: "Statut",
+    flashStatusOptions: {
+      reserved: "Réservé",
+      notReserved: "Non Réservé",
+    },
+    hennaColors: "Couleurs",
+    hennaColorsOptions: {
+      henna: "Henné",
+      hennagua: "Hennagua",
+      jagua: "Jagua",
+    },
   },
 };

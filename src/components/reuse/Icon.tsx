@@ -10,6 +10,13 @@ import Bulb from "@/assets/vector/Bulb.svg";
 import Layout from "@/assets/vector/Layout.svg";
 import Package from "@/assets/vector/Package.svg";
 import Internet from "@/assets/vector/Internet.svg";
+import Star from "@/assets/vector/Star.svg";
+
+import Filter from "@/assets/vector/Filter.svg";
+import Sort from "@/assets/vector/Sort.svg";
+import Plus from "@/assets/vector/Plus.svg";
+import Minus from "@/assets/vector/Minus.svg";
+import Check from "@/assets/vector/Check.svg";
 
 import Instagram from "@/assets/vector/Instagram.svg";
 import Tiktik from "@/assets/vector/TikTok.svg";
@@ -29,6 +36,12 @@ const icons: {
   layout: <Layout />,
   package: <Package />,
   internet: <Internet />,
+  star: <Star />,
+  filter: <Filter />,
+  sort: <Sort />,
+  plus: <Plus />,
+  minus: <Minus />,
+  check: <Check />,
 };
 
 export const IconTypeArray = Object.keys(icons) as Array<keyof typeof icons>;

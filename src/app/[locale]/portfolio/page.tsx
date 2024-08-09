@@ -1,74 +1,66 @@
-import { getAllWorkImages } from "@/helpers/functions";
-
-import { IAbout, IValues, IWorkBlock, IWork, ISeo, LocalPaths } from "@/data.d";
+import { ISeo, LocalPaths, IHero, IHistory, IWork } from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
 import { LangType } from "@/i18n";
 import { Metadata } from "next";
 import { setMetadata } from "@/components/SEO";
-import { aboutPageQuery } from "@/app/api/generateSanityQueries";
 import dynamic from "next/dynamic";
+import { WorkPageProps } from "./[slug]/page";
+import { portoflioPageQuery } from "@/app/api/generateSanityQueries";
+import { Carousel } from "@/components/reuse/containers/Carousel/Carousel";
+import { getCarouselData } from "../page";
 
-export interface AboutPageProps {
+export interface PortfolioPageProps {
   meta: ISeo;
-  about: IAbout;
-  values: IValues;
-  work: IWorkBlock;
+  hero: IHero;
+  works: WorkPageProps[];
+  history: IHistory;
 }
-
-const ImageGrid = dynamic(
+const Block = dynamic(
   () =>
-    import("@/components/pages/blocks/ImageGrid/ImageGrid").then(
-      (module) => module.ImageGrid
-    ),
-  {
-    ssr: false,
-  }
-);
-const WorkBlock = dynamic(
-  () =>
-    import("@/components/pages/blocks/WorkBlock/WorkBlock").then(
-      (module) => module.WorkBlock
+    import("@/components/reuse/containers/Block/Block").then(
+      (module) => module.Block
     ),
   {
     ssr: false,
   }
 );
 
-const About = dynamic(
+const Hero = dynamic(
+  () => import("@/components/reuse/Hero/Hero").then((module) => module.Hero),
+  {
+    ssr: false,
+  }
+);
+
+const History = dynamic(
   () =>
-    import("@/components/pages/blocks/About/About").then(
-      (module) => module.About
+    import("@/components/pages/blocks/History/History").then(
+      (module) => module.History
     ),
   {
     ssr: false,
   }
 );
 
-const Values = dynamic(
+const Works = dynamic(
   () =>
-    import("@/components/pages/home/Values/Values").then(
-      (module) => module.Values
-    ),
-  {
-    ssr: false,
-  }
-);
-const Inspired = dynamic(
-  () =>
-    import("@/components/pages/blocks/Inspired/Inspired").then(
-      (module) => module.Inspired
+    import("@/components/pages/blocks/Works/Works").then(
+      (module) => module.Works
     ),
   {
     ssr: false,
   }
 );
 
-const getAboutPageData = async (locale: LangType) => {
-  const type = "aboutPage";
-  const aboutQuery = aboutPageQuery(locale);
+const getPortoflioPageData = async (locale: LangType) => {
+  const type = "PortoflioPage";
+  const PortoflioQuery = portoflioPageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const aboutPageData: AboutPageProps = await useFetchPage(aboutQuery, type);
-  return aboutPageData;
+  const PortoflioPageData: PortfolioPageProps = await useFetchPage(
+    PortoflioQuery,
+    type
+  );
+  return PortoflioPageData;
 };
 
 export async function generateMetadata({
@@ -76,9 +68,9 @@ export async function generateMetadata({
 }: {
   params: { locale: LangType };
 }): Promise<Metadata> {
-  const aboutPageData = await getAboutPageData(locale);
-  const { metaTitle, metaDesc, metaKeywords } = aboutPageData.meta;
-  const path = LocalPaths.ABOUT;
+  const PortoflioPageData = await getPortoflioPageData(locale);
+  const { metaTitle, metaDesc, metaKeywords } = PortoflioPageData.meta;
+  const path = LocalPaths.PORTFOLIO;
   const crawl = true;
 
   return setMetadata({
@@ -91,22 +83,30 @@ export async function generateMetadata({
   });
 }
 
-export default async function AboutPage({
+export default async function PortoflioPage({
   params: { locale },
 }: {
   params: { locale: LangType };
 }) {
-  const aboutPageData = await getAboutPageData(locale);
-  const workImages = getAllWorkImages(aboutPageData?.work?.works as IWork[]);
+  const portoflioPageData = await getPortoflioPageData(locale);
+  const carouselData: IWork[] = await getCarouselData();
 
   return (
-    aboutPageData && (
+    portoflioPageData && (
       <>
-        <About {...aboutPageData.about} />
-        <WorkBlock {...aboutPageData.work} />
-        <Values {...aboutPageData.values} />
-        <ImageGrid customImages={workImages} maxImages={24} randomize />
-        <Inspired />
+        {portoflioPageData?.hero && (
+          <Hero {...portoflioPageData?.hero} version={2} />
+        )}
+
+        <Block variant="default">
+          {portoflioPageData?.works && (
+            <Works worksData={portoflioPageData?.works} />
+          )}
+          {portoflioPageData?.history && (
+            <History {...portoflioPageData.history} />
+          )}
+        </Block>
+        {carouselData && <Carousel data={carouselData} />}
       </>
     )
   );
