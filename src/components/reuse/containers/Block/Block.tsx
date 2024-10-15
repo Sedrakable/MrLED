@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React, { CSSProperties, PropsWithChildren } from "react";
 import styles from "./Block.module.scss";
 import FlexDiv from "../../FlexDiv";
 import Image from "next/image";
@@ -11,9 +11,11 @@ export type BlockVariantType = typeof BlockVariants[number];
 interface BlockProps {
   variant: BlockVariantType;
   illustrations?: boolean;
+  customStyle?: CSSProperties;
 }
 export const Block: React.FC<PropsWithChildren<BlockProps>> = ({
   variant = "default",
+  customStyle,
   illustrations,
   children,
 }) => {
@@ -28,6 +30,7 @@ export const Block: React.FC<PropsWithChildren<BlockProps>> = ({
       }}
       width100
       as="article"
+      style={customStyle}
     >
       <FlexDiv
         flex={{ direction: "column", y: "flex-start" }}

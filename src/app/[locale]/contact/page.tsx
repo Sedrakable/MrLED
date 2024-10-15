@@ -3,22 +3,38 @@ import { useFetchPage } from "@/app/api/useFetchPage";
 import { LangType } from "@/i18n";
 import { Metadata } from "next";
 import { setMetadata } from "@/components/SEO";
-import { contactPageQuery } from "@/app/api/generateSanityQueries";
+import {
+  contactPageQuery,
+  pricePlansQuery,
+} from "@/app/api/generateSanityQueries";
 import dynamic from "next/dynamic";
+import { getTranslations } from "@/helpers/langUtils";
+import {
+  Collapsible,
+  CollapsibleProps,
+} from "@/components/reuse/Collapsible/Collapsible";
+import { Block } from "@/components/reuse/containers/Block/Block";
+
+import {
+  Notification,
+  NotificationProps,
+} from "@/components/pages/blocks/Notification/Notification";
+import { getFormData } from "@/components/reuse/Form/getFormData";
+import { FormTitleProps } from "@/components/reuse/Form/Form";
+import {
+  Contact,
+  ContactProps,
+} from "@/components/pages/blocks/Contact/Contact";
+import { ServicesAndPlans } from "@/components/reuse/Form/ContactForm/ContactForm";
+import { PricePlanProps } from "@/components/pages/blocks/PricePlans/PricePlans";
+import { OptionType } from "@/components/reuse/Form/Select";
+import { ClientLogger } from "@/helpers/clientLogger";
 
 export interface ContactPageProps {
   meta: ISeo;
+  notification?: NotificationProps;
+  collapsible?: CollapsibleProps;
 }
-
-const ContactBlock = dynamic(
-  () =>
-    import("@/components/pages/contact page/ContactBlock").then(
-      (module) => module.ContactBlock
-    ),
-  {
-    ssr: false,
-  }
-);
 
 const getContactPageData = async (locale: LangType) => {
   const type = "contactPage";
@@ -29,6 +45,14 @@ const getContactPageData = async (locale: LangType) => {
     type
   );
   return contactPageData;
+};
+
+const getPlanData = async (pageType: string, locale: LangType) => {
+  const type = "plans";
+  const planQuery = pricePlansQuery(pageType, locale);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const planData: any = await useFetchPage(planQuery, type);
+  return planData;
 };
 
 // export async function generateMetadata({
@@ -51,11 +75,82 @@ const getContactPageData = async (locale: LangType) => {
 //   });
 // }
 
-export default async function Contact({
+export default async function ContactPage({
   params: { locale },
 }: {
   params: { locale: LangType };
 }) {
-  const contactPageData: ContactPageProps = await getContactPageData(locale);
-  return contactPageData && <ContactBlock {...contactPageData} />;
+  const trans = getTranslations(locale);
+  const data = await getContactPageData(locale);
+  const formData: FormTitleProps = await getFormData("contact", locale);
+
+  const getPlansForService = async (
+    pageType: string
+  ): Promise<OptionType[]> => {
+    const servicePlans = await getPlanData(pageType, locale);
+    if (servicePlans.pricePlans1 && servicePlans.pricePlans2) {
+      const pricePlans1 = servicePlans.pricePlans1.map((plan) => ({
+        label: plan.title,
+        value: plan.title,
+      }));
+      const pricePlans2 = servicePlans.pricePlans2.map((plan) => ({
+        label: plan.title,
+        value: plan.title,
+      }));
+      return [...pricePlans1, ...pricePlans2];
+    } else {
+      return servicePlans.pricePlans.map((plan) => ({
+        label: plan.title,
+        value: plan.title,
+      }));
+    }
+  };
+
+  const tattooServicePagePlans = await getPlansForService("tattooServicePage");
+  const testTattooServicePagePlans = await getPlansForService(
+    "testTattooServicePage"
+  );
+  const hennaServicePagePlans = await getPlansForService("hennaServicePage");
+  const inPersonCoursePagePlans = await getPlansForService(
+    "inPersonCoursePage"
+  );
+
+  const servicesAndPlans: ServicesAndPlans[] = [
+    {
+      service: { label: trans.nav.tattoo, value: LocalPaths.TATTOO },
+      plans: tattooServicePagePlans,
+    },
+    {
+      service: { label: trans.nav.testTattoo, value: LocalPaths.TEST_TATTOO },
+      plans: testTattooServicePagePlans,
+    },
+    {
+      service: { label: trans.nav.henna, value: LocalPaths.HENNA },
+      plans: hennaServicePagePlans,
+    },
+    {
+      service: {
+        label: `${trans.nav.courses}: ${trans.nav.inPerson}`,
+        value: LocalPaths.IN_PERSON,
+      },
+      plans: inPersonCoursePagePlans,
+    },
+  ];
+
+  const contactData: ContactProps = {
+    form: {
+      ...formData,
+      servicesAndPlans: servicesAndPlans,
+    },
+  };
+  return (
+    <Block variant="default">
+      {data?.notification && <Notification {...data.notification} />}
+      {formData && <Contact {...contactData} />}
+      <ClientLogger
+        slug={contactData.form.servicesAndPlans[0].plans[0].value}
+      />
+      {data?.collapsible && <Collapsible {...data.collapsible} />}
+    </Block>
+  );
 }

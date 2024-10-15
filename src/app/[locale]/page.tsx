@@ -3,9 +3,7 @@ import {
   ISeo,
   IHomeHero,
   IDisplay,
-  IHistory,
   IReview,
-  IBigCTA,
   IWork,
 } from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
@@ -13,47 +11,23 @@ import { LangType } from "@/i18n";
 import { Metadata } from "next";
 import { setMetadata } from "@/components/SEO";
 import dynamic from "next/dynamic";
-import { carouselQuery, homePageQuery } from "@/app/api/generateSanityQueries";
+import { homePageQuery } from "@/app/api/generateSanityQueries";
 import { WorkPageProps } from "./portfolio/[slug]/page";
+import { getCarouselData } from "@/components/reuse/Carousel/getCarouselData";
+import { BigCTAProps } from "@/components/pages/blocks/BigCTA/BigCTA";
+import { Services } from "@/components/pages/home/Services/Services";
+import { Reviews } from "@/components/pages/blocks/Reviews/Reviews";
+import { Works } from "@/components/pages/blocks/Works/Works";
+import { Block } from "@/components/reuse/containers/Block/Block";
+import { Hero } from "@/components/reuse/Hero/Hero";
+import {
+  History,
+  HistoryProps,
+} from "@/components/pages/blocks/History/History";
 
-const Hero = dynamic(
-  () => import("@/components/reuse/Hero/Hero").then((module) => module.Hero),
-  {
-    ssr: false,
-  }
-);
-
-const Block = dynamic(
-  () =>
-    import("@/components/reuse/containers/Block/Block").then(
-      (module) => module.Block
-    ),
-  {
-    ssr: false,
-  }
-);
-
-const Works = dynamic(
-  () =>
-    import("@/components/pages/blocks/Works/Works").then(
-      (module) => module.Works
-    ),
-  {
-    ssr: false,
-  }
-);
-const Services = dynamic(
-  () =>
-    import("@/components/pages/home/Services/Services").then(
-      (module) => module.Services
-    ),
-  {
-    ssr: false,
-  }
-);
 const Carousel = dynamic(
   () =>
-    import("@/components/reuse/containers/Carousel/Carousel").then(
+    import("@/components/reuse/Carousel/Carousel").then(
       (module) => module.Carousel
     ),
   {
@@ -61,28 +35,10 @@ const Carousel = dynamic(
   }
 );
 
-const Reviews = dynamic(
-  () =>
-    import("@/components/pages/blocks/Reviews/Reviews").then(
-      (module) => module.Reviews
-    ),
-  {
-    ssr: false,
-  }
-);
 const BigCTA = dynamic(
   () =>
     import("@/components/pages/blocks/BigCTA/BigCTA").then(
       (module) => module.BigCTA
-    ),
-  {
-    ssr: false,
-  }
-);
-const History = dynamic(
-  () =>
-    import("@/components/pages/blocks/History/History").then(
-      (module) => module.History
     ),
   {
     ssr: false,
@@ -94,9 +50,9 @@ export interface HomePageProps {
   homeHero: IHomeHero;
   services: IDisplay[];
   works: WorkPageProps[];
-  history: IHistory;
+  history: HistoryProps;
   reviews: IReview[];
-  bigCTA: IBigCTA;
+  bigCTA: BigCTAProps;
 }
 
 export const getHomePageData = async (locale: LangType) => {
@@ -105,14 +61,6 @@ export const getHomePageData = async (locale: LangType) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const homePageData: HomePageProps = await useFetchPage(homeQuery, type);
   return homePageData;
-};
-
-export const getCarouselData = async () => {
-  const type = "carousel";
-  const carouselQueryData = carouselQuery(undefined);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const carouselData: IWork[] = await useFetchPage(carouselQueryData, type);
-  return carouselData;
 };
 
 export async function generateMetadata({
@@ -160,19 +108,6 @@ export default async function HomePage({
         {homePageData?.reviews && <Reviews reviews={homePageData.reviews} />}
         {homePageData?.bigCTA && <BigCTA {...homePageData?.bigCTA} />}
       </Block>
-
-      {/* <div
-        style={{
-          height: "500px",
-          width: "100vw",
-          background: "red",
-        }}
-      ></div> */}
-      {/* <WorkSlider {...homePageData?.work} />
-      
-      <Values {...homePageData.values} />
-      <About content={{ ...homePageData?.about?.content, cta: true }} />
-      <Inspired /> */}
     </>
   );
 }

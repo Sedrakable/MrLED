@@ -1,0 +1,71 @@
+@import "../../../styles/mixins.scss";
+
+@mixin vars() {
+  --aspect-ratio: 4/3;
+  @media (min-width: $tablet) {
+  }
+
+  @media (min-width: $laptop) {
+    --aspect-ratio: 16/9;
+  }
+
+  @media (min-width: $desktop) {
+  }
+}
+
+.container {
+  @include vars;
+  .video {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    aspect-ratio: var(--aspect-ratio);
+    box-shadow: var(--light-shadow);
+    width: 100%;
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .thumbnailContainer {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+
+      .thumbnail {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+        &::after {
+          content: "";
+          @include absoluteFill;
+          background: hsl(from var(--burgundy) h s l / 0.25);
+        }
+      }
+
+      .playButton {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  @media (min-width: $laptop) {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    > * {
+      &:first-child {
+        grid-column: span 1 !important;
+        height: 100%;
+      }
+    }
+    .video {
+      grid-column: span 2;
+      width: 100%;
+    }
+  }
+}

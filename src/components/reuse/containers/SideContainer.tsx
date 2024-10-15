@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./SideContainer.module.scss";
 import cn from "classnames";
 import { Heading } from "../Heading";
-import { Paragraph } from "../Paragraph";
+import { Paragraph } from "../Paragraph/Paragraph";
 import { Button } from "../Button";
 import FlexDiv from "../FlexDiv";
 import { ICta } from "../../../data.d";

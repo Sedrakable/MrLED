@@ -18,19 +18,59 @@
     --columns: 4;
   }
 }
+
+.image {
+  aspect-ratio: 4/5;
+  box-shadow: var(--light-shadow);
+  border-radius: var(--border-radius);
+  position: relative !important;
+  overflow: hidden;
+}
+
+.modalImage {
+  width: 100% !important;
+  @media (min-width: $laptop) {
+    width: 50vw !important;
+  }
+}
+
+.flashModalContainer {
+  @media (min-width: $laptop) {
+    flex-direction: row !important;
+    .modalImage {
+      margin-bottom: var(--pad-9);
+      top: 0;
+      position: sticky !important;
+    }
+  }
+}
+
+.canvasModalContainer {
+  @media (min-width: $laptop) {
+    width: 50vw !important;
+  }
+  .cartButtonWrapper {
+    position: relative;
+  }
+  .top {
+    row-gap: var(--pad-3) !important;
+  }
+}
+
 .wrapper {
   @include vars;
   display: grid !important;
   grid-template-columns: repeat(var(--columns), 1fr);
   row-gap: var(--row-gap) !important;
+
   .container {
-    .image {
-      aspect-ratio: 4/5;
-      box-shadow: var(--light-shadow);
-      border-radius: var(--border-radius);
-      position: relative !important;
-      overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.02);
     }
+
     &.flash {
       .image {
         background: var(--cream-white);
@@ -81,6 +121,6 @@
 
 .navButtons {
   .title {
-    line-height: 0.9em !important;
+    margin-top: var(--pad-3);
   }
 }

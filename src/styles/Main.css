@@ -3,6 +3,7 @@ body {
   overflow-x: hidden;
   width: 100%;
   background-size: cover;
+  background: var(--cream-white);
 }
 
 cite {
@@ -58,7 +59,7 @@ p {
   overflow: hidden;
 }
 
-input,
+/* input,
 textarea {
   @include fontParagraph();
 
@@ -75,7 +76,7 @@ textarea {
     outline: none;
     border: 2px solid var(--burgundy);
   }
-}
+} */
 
 textarea {
   min-height: var(--pad-9);

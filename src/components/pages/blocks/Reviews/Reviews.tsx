@@ -5,7 +5,7 @@ import FlexDiv from "../../../reuse/FlexDiv";
 import { IReview, IReviews } from "../../../../data.d";
 
 import { TextWrapper } from "../../../reuse/containers/TextWrapper/TextWrapper";
-import { Paragraph } from "@/components/reuse/Paragraph";
+import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { getTranslations } from "@/helpers/langUtils";
 import { LangType } from "@/i18n";
 import { useLocale } from "next-intl";

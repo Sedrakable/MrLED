@@ -1,37 +1,17 @@
 import { workPageQuery } from "@/app/api/generateSanityQueries";
 import { useFetchPage } from "@/app/api/useFetchPage";
+import { Projects } from "@/components/pages/blocks/Projects/Projects";
 import { Works } from "@/components/pages/blocks/Works/Works";
 import { Block } from "@/components/reuse/containers/Block/Block";
+import { FormTitleProps } from "@/components/reuse/Form/Form";
+import { getFormData } from "@/components/reuse/Form/getFormData";
+import { Hero } from "@/components/reuse/Hero/Hero";
 import { setMetadata } from "@/components/SEO";
-import { IHero, ISeo, IWork, LocalPaths } from "@/data.d";
+import { IHero, ISeo, IWork, LocalPaths, ProjectType } from "@/data.d";
 import { ClientLogger } from "@/helpers/clientLogger";
 import { LangType } from "@/i18n";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
-
-const Hero = dynamic(
-  () => import("@/components/reuse/Hero/Hero").then((module) => module.Hero),
-  {
-    ssr: false,
-  }
-);
-
-// const Modal = dynamic(
-//   () => import("@/components/reuse/Modal").then((module) => module.Modal),
-//   {
-//     ssr: false,
-//   }
-// );
-
-const Projects = dynamic(
-  () =>
-    import("@/components/pages/blocks/Projects/Projects").then(
-      (module) => module.Projects
-    ),
-  {
-    ssr: false,
-  }
-);
 
 export interface WorkPageProps {
   meta: ISeo;
@@ -75,19 +55,27 @@ export async function generateMetadata({
 }
 
 export default async function WorkPage({
-  params: { slug },
+  params: { locale, slug },
 }: {
-  params: { slug: string };
+  params: { locale: LangType; slug: string };
 }) {
   const workPageData: WorkPageProps = await getWorkPageData(slug);
-  // console.log("workPageData", workPageData);
+  const formData: FormTitleProps = await getFormData(
+    slug as ProjectType,
+    locale
+  );
+
   return (
     workPageData.work && (
       <>
         <Hero {...workPageData.hero} version={3} />
         {/* <ClientLogger slug={slug} /> */}
         <Block variant="default">
-          <Projects projects={workPageData.work.projects} type={slug} />
+          <Projects
+            projects={workPageData.work.projects}
+            type={slug as ProjectType}
+            formData={formData}
+          />
         </Block>
       </>
     )

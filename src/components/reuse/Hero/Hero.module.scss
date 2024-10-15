@@ -67,7 +67,7 @@
     --title-line-height: 330px;
     --title-font-size: 360px;
     --profile-image-width-1: 1200px;
-    --profile-image-width-2: 1200px;
+    --profile-image-width-2: 1400px;
     --profile-image-bottom: -450px;
     --profile-image-right: -5vw;
     --wordmark-image-width: 500px;
@@ -83,7 +83,7 @@
     background-color: transparent;
   }
   .content {
-    .subTitle1 {
+    .subTitle {
       padding-top: 0;
     }
 
@@ -120,7 +120,7 @@
   @include flexColumn(flex-start, flex-start);
 
   position: relative;
-  width: 100%;
+  width: 100vw;
   box-sizing: border-box;
   min-height: var(--hero-min-height);
   background-color: var(--cream-white);
@@ -223,7 +223,7 @@
       }
     }
 
-    .subTitle1 {
+    .subTitle {
       z-index: 1;
       padding-top: var(--pad-4);
     }
@@ -262,7 +262,7 @@
       line-height: var(--title-line-height) !important;
     }
   }
-  .subTitle1 {
+  .subTitle {
     width: calc(var(--subtitle1-column-span) / 7 * 100%);
   }
   .textWrapper {
@@ -330,22 +330,23 @@
       .backgroundImage {
         right: 0;
         left: unset !important;
+        background: var(--burgundy);
+
         img {
           inset: 0 !important;
           top: 50% !important;
-
+          height: 100% !important;
           transform: translateY(-50%) !important;
         }
         &::after {
-          width: 100vw;
-          left: -100px;
+          width: 100% !important;
+          left: 0 !important;
           background: radial-gradient(
               100% 150% at 100% 10%,
-              hsl(from var(--light-burgundy) h s l / 0) 33.3%,
-              hsl(from var(--light-burgundy) h s l / 1) 85%,
+              hsl(from var(--cream-white) h s l / 0) 0%,
               hsl(from var(--cream-white) h s l / 1) 100%
             ),
-            hsl(from var(--burgundy) h s l / 60%);
+            hsl(from var(--burgundy) h s l / 20%);
         }
       }
 
@@ -357,7 +358,7 @@
     }
   }
   @media (min-width: $laptop) {
-    .subTitle1 {
+    .subTitle {
       width: calc(var(--subtitle1-column-span) / 7 * 100%);
     }
     .textWrapper {
@@ -427,7 +428,6 @@
         img {
           inset: 0 !important;
           top: 50% !important;
-
           transform: translateY(-50%) !important;
         }
         &::after {

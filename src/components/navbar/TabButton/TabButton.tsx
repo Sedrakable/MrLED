@@ -8,7 +8,7 @@ import { DropDown } from "../Dropdown/DropDown";
 import { ICta } from "../../../data.d";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Paragraph } from "@/components/reuse/Paragraph";
+import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { useWindowResize } from "@/helpers/useWindowResize";
 
 export interface TabButtonProps {

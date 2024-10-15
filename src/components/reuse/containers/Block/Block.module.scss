@@ -19,7 +19,7 @@
   overflow-y: visible;
   flex: 1;
   .content {
-    z-index: 2;
+    z-index: auto; // This is important
   }
 }
 

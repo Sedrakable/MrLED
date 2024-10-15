@@ -8,7 +8,7 @@ import {
 } from "@/components/reuse/containers/Block/Block";
 import FlexDiv from "@/components/reuse/FlexDiv";
 import { Heading } from "@/components/reuse/Heading";
-import { Paragraph } from "@/components/reuse/Paragraph";
+import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { SanityImage } from "@/components/reuse/SanityImage/SanityImage";
 import { IFeature, IFeatures } from "@/data.d";
 import { useWindowResize } from "@/helpers/useWindowResize";

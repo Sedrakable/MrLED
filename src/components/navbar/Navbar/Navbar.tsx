@@ -63,6 +63,7 @@ const links = (trans: Translations): (INavLink | ICta)[] => {
   ];
 };
 
+//TO DO: put this in Sanity, at least the links
 export const socialsIcons = (
   <Socials
     links={[

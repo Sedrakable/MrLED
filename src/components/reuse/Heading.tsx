@@ -20,7 +20,8 @@ export type ColorType =
   | "light-burgundy"
   | "burgundy"
   | "dark-burgundy"
-  | "darkest-burgundy";
+  | "darkest-burgundy"
+  | "error";
 
 export const HeadingLevelArray = ["1", "2", "3", "4", "5", "6"] as const;
 
@@ -52,6 +53,7 @@ export interface HeadingProps {
   capitalise?: boolean;
   clickable?: boolean;
   className?: string;
+  width100?: boolean;
 }
 
 export const Heading: React.FC<HeadingProps> = ({
@@ -63,6 +65,7 @@ export const Heading: React.FC<HeadingProps> = ({
   paddingBottomArray,
   color = "white",
   upperCase = true,
+  width100,
   clickable,
   className,
 }) => {
@@ -91,6 +94,7 @@ export const Heading: React.FC<HeadingProps> = ({
         color: `var(--${color})`,
         textAlign,
         paddingBottom: spacingNum && `var(--pad-${spacingNum})`,
+        width: width100 ? "100%" : undefined,
       }}
     >
       {finalString}

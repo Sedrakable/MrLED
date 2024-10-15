@@ -1,0 +1,56 @@
+@import "../../../../styles/mixins.scss";
+
+@mixin vars() {
+  --min-height-textarea: 200px;
+  --max-height-textarea: 400px;
+  @media (min-width: $tablet) {
+    --min-height-textarea: 100px;
+    --max-height-textarea: 300px;
+  }
+
+  @media (min-width: $laptop) {
+    --min-height-textarea: 150px;
+    --max-height-textarea: 350px;
+  }
+
+  @media (min-width: $desktop) {
+  }
+}
+
+.input,
+.textarea {
+  font-size: var(--paragraph-regular);
+  line-height: 1.25em;
+  font-weight: 400;
+  color: var(--burgundy);
+  padding: 15px 16px 13px 16px;
+  text-decoration: none !important;
+  box-sizing: border-box;
+
+  width: 100%;
+  border: none;
+  border-radius: var(--border-radius-small);
+  box-shadow: var(--drop-shadow);
+  &::placeholder {
+    color: var(--burgundy);
+    opacity: 0.5;
+  }
+  &:focus-visible {
+    outline: 2px solid var(--light-burgundy);
+    box-shadow: inset var(--light-shadow);
+  }
+
+  &:is(:-webkit-autofill, :autofill) {
+    -webkit-box-shadow: 0 0 0 1000px var(--white) inset !important;
+    box-shadow: 0 0 0 1000px var(--white) inset !important;
+
+    color: var(--burgundy) !important;
+    -webkit-text-fill-color: var(--burgundy) !important;
+  }
+}
+.textarea {
+  min-height: var(--min-height-textarea); /* Minimum height */
+  max-height: var(--max-height-textarea); /* Optional: Max height */
+  overflow-y: hidden; /* Prevent scrollbars */
+  resize: none; /* Disable manual resizing */
+}

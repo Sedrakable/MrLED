@@ -7,11 +7,9 @@
   }
 
   @media (min-width: $laptop) {
-    --scrollbar-width: 10px;
   }
 
   @media (min-width: $desktop) {
-    --scrollbar-width: 10px;
   }
 }
 
@@ -22,9 +20,11 @@
 }
 
 ::-webkit-scrollbar-thumb {
+  @include vars;
   background: var(--light-burgundy);
+  border-radius: calc(var(--scrollbar-width) / 2);
 }
 
 ::-webkit-scrollbar-track {
-  background-color: var(--darkest-burgundy);
+  background-color: inherit;
 }

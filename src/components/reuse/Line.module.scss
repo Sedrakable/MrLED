@@ -1,9 +1,13 @@
 @import "../../styles/mixins.scss";
 
-.line {
-  content: "";
+.vertical {
+  min-height: 100%;
+
+  min-width: 2px;
+  position: relative;
+}
+
+.horizontal {
   width: 100%;
   height: 2px;
-  background-color: var(--cream-white);
-  opacity: 0.5;
 }

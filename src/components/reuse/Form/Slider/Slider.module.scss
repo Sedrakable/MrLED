@@ -1,0 +1,84 @@
+@import "../../../../styles/mixins.scss";
+
+@mixin vars() {
+  @media (min-width: $tablet) {
+  }
+  @media (min-width: $laptop) {
+  }
+  @media (min-width: $desktop) {
+  }
+}
+.value,
+.marker {
+  width: auto !important;
+}
+
+.sliderWrapper {
+  position: relative;
+
+  .sliderContainer {
+    position: relative;
+    width: 100%;
+    height: var(--pad-4);
+    .valueContainer {
+      position: absolute;
+      transform: translateX(-50%); // Center the value above the thumb
+      top: -30px; // Adjust based on your design, move it above the slider
+      font-weight: bold;
+    }
+  }
+  .marker {
+    position: absolute;
+    transform: translateY(calc(-50% + var(--pad-6)));
+
+    &:first-child {
+      left: 5px;
+    }
+    &:last-child {
+      right: 0;
+    }
+  }
+}
+
+.slider {
+  @include flex(center, center);
+  width: 100%;
+  appearance: none; // Reset default styling for cross-browser consistency
+
+  background-color: transparent;
+
+  /* Styling for the slider */
+  &::-webkit-slider-runnable-track {
+    background-color: var(--light-burgundy); // Background color of the track
+    height: var(--pad-3);
+    border-radius: calc(var(--pad-3) / 2);
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--burgundy); // Change the thumb color
+    width: var(--pad-4);
+    height: var(--pad-4);
+    transform: translateY(calc(-0.5 * var(--pad-3)));
+    border-radius: 50%; // Make it round
+    cursor: pointer;
+  }
+
+  &:focus::-webkit-slider-thumb {
+    background-color: var(--dark-burgundy); // Change the thumb color on focus
+  }
+
+  /* For other browsers like Firefox */
+  &::-moz-range-thumb {
+    background-color: var(--burgundy);
+    width: var(--pad-4);
+    height: var(--pad-4);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  &.invalid {
+    border-color: var(--error); // Style if invalid
+  }
+}

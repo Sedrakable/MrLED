@@ -1,4 +1,4 @@
-import WorkModal from "./page";
+import Product from "./page";
 
 export default function ModalLayout({
   children,
@@ -9,7 +9,7 @@ export default function ModalLayout({
 }) {
   return (
     <div>
-      <WorkModal params={{ slug }} />
+      <Product params={{ slug }} />
       {children}
     </div>
   );

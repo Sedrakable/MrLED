@@ -3,7 +3,6 @@
 @mixin vars() {
   --service-height: fit-content;
   --image-width: 1;
-  --special-pink: #f4669a;
 
   @media (min-width: $tablet) {
     --service-height: 400px;
@@ -40,15 +39,18 @@
     aspect-ratio: 3/4;
     overflow: clip;
     overflow-x: visible;
+    background: hsl(from var(--special-pink) h s l / 0.25);
+    img {
+      mix-blend-mode: luminosity !important;
+    }
     &::after {
       content: "";
       @include absoluteFill;
       background: radial-gradient(
-          100% 100% at 90% 0%,
-          hsl(from var(--cream-white) h s l / 0.2) 50%,
-          var(--cream-white) 95%
-        ),
-        hsl(from var(--special-pink) h s l / 0.25);
+        100% 100% at 90% 0%,
+        hsl(from var(--cream-white) h s l / 0.2) 25%,
+        var(--cream-white) 95%
+      );
     }
   }
   .content {
@@ -71,11 +73,10 @@
       height: 100%;
       &::after {
         background: radial-gradient(
-            100% 250% at 95% 0%,
-            hsl(from var(--cream-white) h s l / 0.2) 50%,
-            var(--cream-white) 95%
-          ),
-          hsl(from var(--special-pink) h s l / 0.25);
+          100% 250% at 95% 0%,
+          hsl(from var(--cream-white) h s l / 0.2) 25%,
+          var(--cream-white) 95%
+        );
       }
     }
     .content {

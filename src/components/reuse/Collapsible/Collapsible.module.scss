@@ -1,0 +1,31 @@
+@import "../../../styles/mixins.scss";
+
+.questionToggle {
+  @include flex(space-between, center);
+  width: 100%;
+  gap: var(--pad-3);
+}
+
+.answer {
+  p {
+    font-style: italic;
+  }
+}
+
+.questionToggle:hover .plus {
+  transform: rotate(90deg);
+}
+
+.plus {
+  transition: transform var(--transition-time) ease;
+  animation: rotateIcon var(--transition-time) ease;
+}
+
+@keyframes rotateIcon {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
+  }
+}

@@ -1,0 +1,98 @@
+@import "../../../../styles/mixins.scss";
+
+@mixin vars() {
+  --columns: 1;
+  --product-tab-img-size: 100px;
+  --wrap: wrap;
+  @media (min-width: $tablet) {
+    --columns: 2;
+    --wrap: nowrap;
+  }
+
+  @media (min-width: $laptop) {
+    --columns: 3;
+    --product-tab-img-size: 100px;
+  }
+
+  @media (min-width: $desktop) {
+    --columns: 4;
+    --product-tab-img-size: 128px;
+  }
+}
+
+.wrapper {
+  @include vars;
+  display: grid !important;
+  grid-template-columns: repeat(var(--columns), 1fr);
+}
+
+.product {
+  .image {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1;
+    border-radius: var(--border-radius);
+    box-shadow: var(--light-shadow);
+  }
+}
+
+.textWrapper {
+  p {
+    width: auto !important;
+  }
+}
+
+.productModal {
+  @media (min-width: $laptop) {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  > * {
+    &:first-child {
+      grid-column: span 2;
+    }
+  }
+  .image {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1;
+    border-radius: var(--border-radius);
+    box-shadow: var(--light-shadow);
+  }
+
+  .info {
+    grid-column: span 3;
+
+    .cartButtonWrapper {
+      position: relative;
+    }
+  }
+}
+
+.productTab {
+  @include vars;
+  flex-wrap: var(--wrap) !important;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  @media (min-width: $laptop) {
+    justify-content: space-between;
+  }
+  .left {
+    .image {
+      height: var(--product-tab-img-size) !important;
+      min-width: var(--product-tab-img-size) !important;
+      width: var(--product-tab-img-size) !important;
+      border-radius: var(--border-radius);
+    }
+    .text {
+      p {
+        width: 100% !important;
+        text-wrap: wrap;
+      }
+    }
+  }
+  .right {
+    row-gap: var(--pad-4) !important;
+  }
+}

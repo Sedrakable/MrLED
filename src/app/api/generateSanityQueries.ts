@@ -37,21 +37,13 @@ export const homePageQuery = (locale: LangType): string => {
       }`;
 };
 
-// export const carouselQuery = (workType: string | undefined): string => {
-//   return `*[_type == 'work' ${
-//     workType && "&& workType == '" + workType + "'"
-//   }] {
-//         projects[]
-//       }`;
-// };
-
 export const carouselQuery = (workType: string | undefined): string => {
-  return `*[_type == 'work'] {
-        projects[]
-      }`;
+  return `*[_type == 'work' ${workType ? `&& workType == '${workType}'` : ""}] {
+    projects[]
+  }`;
 };
 
-export const portoflioPageQuery = (locale: LangType): string => {
+export const portfolioPageQuery = (locale: LangType): string => {
   return `*[_type == 'portfolioPage' && lang == '${locale}'][0] {
         meta,
         hero,
@@ -71,6 +63,66 @@ export const tattooServicePageQuery = (locale: LangType): string => {
   return `*[_type == 'tattooServicePage' && lang == '${locale}'][0] {
     meta,
     hero,
+    tarifText,
+    pricePlans[],
+    multiDescriptions[],
+    collapsible,
+  }`;
+};
+
+export const hennaServicePageQuery = (locale: LangType): string => {
+  return `*[_type == 'hennaServicePage' && lang == '${locale}'][0] {
+    meta,
+    hero,
+    tarifText,
+    pricePlans[],
+    multiDescriptions[],
+  }`;
+};
+
+export const testTattooServicePageQuery = (locale: LangType): string => {
+  return `*[_type == 'testTattooServicePage' && lang == '${locale}'][0] {
+    meta,
+    hero,
+    display,
+    desc,
+    pricePlans[],
+    bigCTA->,
+  }`;
+};
+
+export const inPersonCoursePageQuery = (locale: LangType): string => {
+  return `*[_type == 'inPersonCoursePage' && lang == '${locale}'][0] {
+    meta,
+    hero,
+    infoText,
+    multiDescriptions[],
+    image,
+    pricePlans1[],
+    experienceText,
+    pricePlans2[],
+    bigCTA->
+  }`;
+};
+
+export const onlineCoursePageQuery = (locale: LangType): string => {
+  return `*[_type == 'onlineCoursePage' && lang == '${locale}'][0] {
+    meta,
+    hero,
+    desc,
+    pricePlan,
+    video {
+      videoFile {
+        asset->{
+          url,
+          mimeType
+        }
+      },
+      externalVideo,
+      caption,
+      thumbnail,
+    },
+    features[],
   }`;
 };
 
@@ -80,6 +132,39 @@ export const workPageQuery = (path: string): string => {
     hero,
     work->,
   }`;
+};
+
+export const cartPageQuery = (locale: LangType): string => {
+  return `*[_type == 'cartPage' && lang == '${locale}'][0]{
+    meta,
+    hero,
+    collapsible,
+  }`;
+};
+
+export const formQuery = (slug: string, locale: LangType): string => {
+  return `*[_type == '${slug}Form' && lang == '${locale}'][0]`;
+};
+
+// export const flashFormQuery = (locale: LangType): string => {
+//   return `*[_type == 'flashForm' && lang == '${locale}'][0]{
+//     title,
+//     subTitle,
+//   }`;
+// };
+
+export const boutiquePageQuery = (locale: LangType): string => {
+  return `*[_type == 'boutiquePage' && lang == '${locale}'][0] {
+        meta,
+        hero,
+        displays[]->,
+        desc,
+        products[]->,
+      }`;
+};
+
+export const productQuery = (path: string): string => {
+  return `*[_type == 'product' && path == '${path}'][0]`;
 };
 
 export const blogPageQuery = (locale: LangType): string => {
@@ -107,7 +192,16 @@ export const articlePageQuery = (locale: LangType, slug: string): string => {
 export const contactPageQuery = (locale: LangType): string => {
   return `*[_type == 'contactPage' && lang == '${locale}'][0] {
     meta,
-    desc,
+    notification,
+    collapsible,
+  }`;
+};
+
+export const pricePlansQuery = (pageType: string, locale: LangType): string => {
+  return `*[_type == '${pageType}' && lang == '${locale}'][0] {
+    pricePlans[],
+    pricePlans1[],
+    pricePlans2[],
   }`;
 };
 

@@ -1,19 +1,20 @@
-import { ISeo, LocalPaths, IHero, IHistory, IWork } from "@/data.d";
+import { ISeo, LocalPaths, IHero, IWork } from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
 import { LangType } from "@/i18n";
 import { Metadata } from "next";
 import { setMetadata } from "@/components/SEO";
 import dynamic from "next/dynamic";
 import { WorkPageProps } from "./[slug]/page";
-import { portoflioPageQuery } from "@/app/api/generateSanityQueries";
-import { Carousel } from "@/components/reuse/containers/Carousel/Carousel";
-import { getCarouselData } from "../page";
+import { portfolioPageQuery } from "@/app/api/generateSanityQueries";
+import { HistoryProps } from "@/components/pages/blocks/History/History";
+import { getCarouselData } from "@/components/reuse/Carousel/getCarouselData";
+import { Carousel } from "@/components/reuse/Carousel/Carousel";
 
 export interface PortfolioPageProps {
   meta: ISeo;
   hero: IHero;
   works: WorkPageProps[];
-  history: IHistory;
+  history: HistoryProps;
 }
 const Block = dynamic(
   () =>
@@ -52,15 +53,15 @@ const Works = dynamic(
   }
 );
 
-const getPortoflioPageData = async (locale: LangType) => {
-  const type = "PortoflioPage";
-  const PortoflioQuery = portoflioPageQuery(locale);
+const getPortfolioPageData = async (locale: LangType) => {
+  const type = "PortfolioPage";
+  const PortfolioQuery = portfolioPageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const PortoflioPageData: PortfolioPageProps = await useFetchPage(
-    PortoflioQuery,
+  const PortfolioPageData: PortfolioPageProps = await useFetchPage(
+    PortfolioQuery,
     type
   );
-  return PortoflioPageData;
+  return PortfolioPageData;
 };
 
 export async function generateMetadata({
@@ -68,8 +69,8 @@ export async function generateMetadata({
 }: {
   params: { locale: LangType };
 }): Promise<Metadata> {
-  const PortoflioPageData = await getPortoflioPageData(locale);
-  const { metaTitle, metaDesc, metaKeywords } = PortoflioPageData.meta;
+  const portfolioPageData = await getPortfolioPageData(locale);
+  const { metaTitle, metaDesc, metaKeywords } = portfolioPageData.meta;
   const path = LocalPaths.PORTFOLIO;
   const crawl = true;
 
@@ -83,27 +84,27 @@ export async function generateMetadata({
   });
 }
 
-export default async function PortoflioPage({
+export default async function PortfolioPage({
   params: { locale },
 }: {
   params: { locale: LangType };
 }) {
-  const portoflioPageData = await getPortoflioPageData(locale);
+  const portfolioPageData = await getPortfolioPageData(locale);
   const carouselData: IWork[] = await getCarouselData();
 
   return (
-    portoflioPageData && (
+    portfolioPageData && (
       <>
-        {portoflioPageData?.hero && (
-          <Hero {...portoflioPageData?.hero} version={2} />
+        {portfolioPageData?.hero && (
+          <Hero {...portfolioPageData?.hero} version={2} />
         )}
 
         <Block variant="default">
-          {portoflioPageData?.works && (
-            <Works worksData={portoflioPageData?.works} />
+          {portfolioPageData?.works && (
+            <Works worksData={portfolioPageData?.works} />
           )}
-          {portoflioPageData?.history && (
-            <History {...portoflioPageData.history} />
+          {portfolioPageData?.history && (
+            <History {...portfolioPageData.history} />
           )}
         </Block>
         {carouselData && <Carousel data={carouselData} />}

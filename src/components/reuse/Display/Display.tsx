@@ -10,7 +10,7 @@ import { useWindowResize } from "@/helpers/useWindowResize";
 import { Button } from "../Button";
 import { FancyText } from "../FancyText/FancyText";
 import { Heading } from "../Heading";
-import { Paragraph } from "../Paragraph";
+import { Paragraph } from "../Paragraph/Paragraph";
 import { SanityImage } from "../SanityImage/SanityImage";
 
 export type VersionType = "service";
@@ -70,7 +70,7 @@ export const Display: React.FC<HeroProps> = ({
       <SanityImage
         image={backgroundImage?.image}
         alt={backgroundImage?.alt}
-        figureClassName={cn(styles.image)}
+        figureclassname={cn(styles.image)}
         quality={60}
       />
       <FlexDiv

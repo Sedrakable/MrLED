@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./Hero.module.scss";
 import cn from "classnames";
-import { Paragraph } from "../Paragraph";
+import { Paragraph } from "../Paragraph/Paragraph";
 import { IHomeHero } from "../../../data.d";
 import FlexDiv from "../FlexDiv";
 import AdehnnaWordmark from "@/assets/vector/AdhennaWordmark.svg";
@@ -158,12 +158,12 @@ export const Hero: React.FC<HeroProps> = ({
           fetchPriority="high"
           rel="preload"
           sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw"
-          figureClassName={cn(styles.image, styles.backgroundImage)}
+          figureclassname={cn(styles.image, styles.backgroundImage)}
           quality={imageQuality[version]}
         />
 
         <FlexDiv
-          padding={{ left: [0, 0, 10, 11] }}
+          padding={{ left: [0, 0, 10, 11], right: [0, 0, 4, 5] }}
           customStyle={{ zIndex: 1 }}
           className={styles.title}
           width100
@@ -192,7 +192,7 @@ export const Hero: React.FC<HeroProps> = ({
             fetchPriority="high"
             rel="preload"
             sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw"
-            figureClassName={cn(styles.image, styles.foregroundImage)}
+            figureclassname={cn(styles.image, styles.foregroundImage)}
             quality={90}
           />
         )}

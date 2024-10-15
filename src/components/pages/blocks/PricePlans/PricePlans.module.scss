@@ -1,0 +1,134 @@
+@import "../../../../styles/mixins.scss";
+
+@mixin vars() {
+  --version-2-columns: 1;
+  @media (min-width: $tablet) {
+    --version-2-columns: 2;
+  }
+
+  @media (min-width: $laptop) {
+  }
+
+  @media (min-width: $desktop) {
+    --version-2-columns: 4;
+  }
+}
+
+@mixin grid-span($columns: 6) {
+  grid-column: span $columns;
+}
+
+@mixin hori-container() {
+  flex-direction: row !important;
+  .image {
+    height: 100% !important;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    aspect-ratio: unset !important;
+    min-width: calc(1 / 3 * 100) !important;
+  }
+}
+
+@mixin hori-container-reverse() {
+  flex-direction: row-reverse !important;
+  .image {
+    height: 100% !important;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    aspect-ratio: unset !important;
+    min-width: calc(1 / 3 * 100) !important;
+  }
+}
+
+@mixin vert-container() {
+  flex-direction: column !important;
+
+  .image {
+    height: auto !important;
+    width: 100% !important;
+    aspect-ratio: 16/9 !important;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+  }
+}
+
+.wrapper {
+  display: grid !important;
+  align-items: stretch !important;
+}
+
+.version1 {
+  grid-template-columns: repeat(6, 1fr); // Mobile (default)
+  .container {
+    @include grid-span(); // Default span for all containers
+    @include vert-container();
+    // Tablet
+    @media (min-width: $tablet) {
+      &:nth-child(1),
+      &:nth-child(2) {
+        @include grid-span(3);
+        @include vert-container();
+      }
+      &:nth-child(n + 3) {
+        @include grid-span(6);
+        @include hori-container();
+        &:nth-child(even) {
+          @include hori-container-reverse();
+        }
+      }
+    }
+
+    // Desktop
+    @media (min-width: $laptop) {
+      &:nth-child(1),
+      &:nth-child(2) {
+        @include grid-span(3);
+        @include hori-container();
+      }
+      &:nth-child(n + 3) {
+        @include grid-span(2);
+        @include vert-container();
+        &:nth-child(even) {
+          @include vert-container();
+        }
+      }
+    }
+  }
+}
+
+.version2 {
+  @include vars;
+  grid-template-columns: repeat(var(--version-2-columns), 1fr);
+}
+.container {
+  box-shadow: var(--light-shadow);
+  border-radius: var(--border-radius);
+  position: relative;
+  background: radial-gradient(
+    134% 140% at 100% 100%,
+    var(--dark-burgundy) 0%,
+    var(--burgundy) 34%
+  );
+  overflow: hidden;
+
+  .image {
+    position: relative !important;
+  }
+
+  .priceWrapper {
+    padding: 8px 16px 2px;
+    background: var(--cream-white);
+    border-radius: var(--border-radius-small);
+  }
+
+  .features {
+    .feature {
+      &:before {
+        content: "• ";
+      }
+    }
+  }
+}
+
+.container:has(:not(.image)) {
+  .info {
+    padding-top: var(--pad-5) !important;
+  }
+}

@@ -34,7 +34,6 @@ export const FancyText: React.FC<FancyTextProps> = ({
           0
         );
         const isOverflowing = childrenWidth > containerWidth;
-
         setIsOverflowing(isOverflowing && overflowText);
 
         if (isOverflowing && overflowText) {

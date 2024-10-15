@@ -1,0 +1,9 @@
+@import "./mixins.scss";
+
+.jaguaWrapper {
+  --burgundy: var(--jagua) !important;
+  --light-burgundy: var(--light-jagua) !important;
+  --dark-burgundy: var(--dark-jagua) !important;
+  --special-pink: var(--special-jagua) !important;
+  // Add any other color variables you want to change for the Hero
+}

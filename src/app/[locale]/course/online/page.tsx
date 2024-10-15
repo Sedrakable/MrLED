@@ -1,11 +1,107 @@
-import {} from "@/data.d";
+// Next.js and React imports
+import { Metadata } from "next";
+
+// API and data fetching
+import { onlineCoursePageQuery } from "@/app/api/generateSanityQueries";
+import { useFetchPage } from "@/app/api/useFetchPage";
+
+// Components, Types and interfaces
+import { Hero } from "@/components/reuse/Hero/Hero";
+import { Block } from "@/components/reuse/containers/Block/Block";
+
+// Types and interfaces
+import { IDisplay, IHero, ISeo, LocalPaths } from "@/data.d";
 import { LangType } from "@/i18n";
 
-export default async function ServicePage({
-  params: { locale, slug },
+// Utilities
+import { setMetadata } from "@/components/SEO";
+import { TextWrapper } from "@/components/reuse/containers/TextWrapper/TextWrapper";
+import { PortableTextContent } from "@/components/reuse/Paragraph/PortableTextContent";
+import { Services } from "@/components/pages/home/Services/Services";
+import {
+  VideoAndPrice,
+  VideoAndPriceProps,
+} from "@/components/reuse/Video/Video";
+
+export interface OnlineCoursePageProps extends VideoAndPriceProps {
+  meta: ISeo;
+  hero: IHero;
+  desc: any;
+  features: IDisplay[];
+}
+
+export const getOnlineCoursePageData = async (locale: LangType) => {
+  const type = "onlineCoursePage";
+  const onlineCourseQuery = onlineCoursePageQuery(locale);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const onlineCoursePageData: OnlineCoursePageProps = await useFetchPage(
+    onlineCourseQuery,
+    type
+  );
+  return onlineCoursePageData;
+};
+
+export async function generateMetadata({
+  params: { locale },
 }: {
-  params: { locale: LangType; slug: string };
+  params: { locale: LangType };
+}): Promise<Metadata> {
+  const onlineCoursePageData: OnlineCoursePageProps = await getOnlineCoursePageData(
+    locale
+  );
+  const { metaTitle, metaDesc, metaKeywords } =
+    onlineCoursePageData?.meta || {};
+  const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
+  const crawl = true;
+
+  return setMetadata({
+    locale,
+    metaTitle,
+    metaDesc,
+    metaKeywords,
+    path,
+    crawl,
+  });
+}
+
+export default async function OnlineCoursePage({
+  params: { locale },
+}: {
+  params: { locale: LangType };
 }) {
-  // const servicePageData = await getServicePageData(locale, slug);
-  return <>Online</>;
+  const onlineCoursePageData = await getOnlineCoursePageData(locale);
+
+  return (
+    onlineCoursePageData && (
+      <>
+        {onlineCoursePageData?.hero && (
+          <Hero {...onlineCoursePageData?.hero} version={2} />
+        )}
+
+        <Block variant="default">
+          {/* <ClientLogger slug={}/> */}
+          {onlineCoursePageData.desc && (
+            <TextWrapper version={3}>
+              <PortableTextContent
+                value={onlineCoursePageData.desc}
+                color="dark-burgundy"
+                textAlign="center"
+              />
+            </TextWrapper>
+          )}
+          {onlineCoursePageData.pricePlan && onlineCoursePageData.video && (
+            <VideoAndPrice
+              pricePlan={onlineCoursePageData.pricePlan}
+              video={onlineCoursePageData.video}
+            />
+          )}
+        </Block>
+        {onlineCoursePageData?.features && (
+          <Block variant="full-width">
+            <Services services={onlineCoursePageData.features} />
+          </Block>
+        )}
+      </>
+    )
+  );
 }

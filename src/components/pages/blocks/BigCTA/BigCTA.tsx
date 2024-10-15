@@ -1,15 +1,21 @@
 "use client";
 import React from "react";
 import { Heading } from "../../../reuse/Heading";
-import { IBigCTA, LocalPaths } from "../../../../data.d";
+import { LocalPaths } from "../../../../data.d";
 import { Button } from "../../../reuse/Button";
 import { getTranslations } from "../../../../helpers/langUtils";
 import { useLocale } from "next-intl";
 import { LangType } from "@/i18n";
 import { TextWrapper } from "../../../reuse/containers/TextWrapper/TextWrapper";
 import FlexDiv from "@/components/reuse/FlexDiv";
+import { ICustomImage } from "@/components/reuse/SanityImage/SanityImage";
 
-export const BigCTA: React.FC<IBigCTA> = ({ title, backgroundImage }) => {
+export interface BigCTAProps {
+  title: string;
+  backgroundImage: ICustomImage;
+}
+
+export const BigCTA: React.FC<BigCTAProps> = ({ title, backgroundImage }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
 

@@ -13,7 +13,7 @@ import { getTranslations } from "../../../../helpers/langUtils";
 import { useLocale } from "next-intl";
 import { LangType } from "@/i18n";
 import Link from "next/link";
-import { Paragraph } from "@/components/reuse/Paragraph";
+import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { useWindowResize } from "@/helpers/useWindowResize";
 import { TitleWrapper } from "../../../reuse/containers/TitleWrapper/TitleWrapper";
 import { WorkPageProps } from "@/app/[locale]/portfolio/[slug]/page";
@@ -39,7 +39,7 @@ const Work: FC<WorkProps> = ({ backgroundImage, title, path, reserve }) => {
       <SanityImage
         image={backgroundImage?.image}
         alt={backgroundImage?.alt}
-        figureClassName={cn(styles.image)}
+        figureclassname={cn(styles.image)}
         quality={50}
       />
 

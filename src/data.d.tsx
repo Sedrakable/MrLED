@@ -1,5 +1,7 @@
 // @ts-ignore
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { ICustomImage } from "./components/reuse/SanityImage/SanityImage";
+import { CollapsibleProps } from "./components/reuse/Collapsible/Collapsible";
 
 export interface IFancyText {
   part1: string;
@@ -19,6 +21,11 @@ export interface ITrippleCtas {
 export interface ICta {
   text: string;
   link?: string[];
+}
+
+export interface IExternalLink {
+  text: string;
+  link: string;
 }
 
 export interface ISlug {
@@ -45,6 +52,18 @@ export interface IServices {
 
 export interface IDisplay extends IHero {
   // date?: string;
+}
+
+export interface IVideo {
+  videoFile: {
+    asset: {
+      url: string;
+      mimeType: string;
+    };
+  };
+  externalVideo?: string;
+  caption?: string;
+  thumbnail: ICustomImage;
 }
 
 export interface IQuote {
@@ -81,9 +100,6 @@ export interface IValue {
   desc: string;
 }
 
-export interface IHistory {
-  text: string;
-}
 export interface IReviews {
   reviews: IReview[];
 }
@@ -111,8 +127,10 @@ export interface IArticle {
   content: IBlock[];
 }
 
+export type ProjectType = "tattoo" | "flash" | "toiles" | "henna";
+
 export interface IWork {
-  type: string;
+  type: ProjectType;
   projects: IProjects;
 }
 
@@ -121,10 +139,10 @@ export type IProjects = ITattoo[] | IFlash[] | ICanvas[] | IHenna[];
 export type IProject = ITattoo | IFlash | ICanvas | IHenna;
 
 export interface IFlash {
-  image: ICustomImage;
   title: string;
-  reserved: boolean;
   style: IFlashStyle;
+  reserved: boolean;
+  image: ICustomImage;
   year: number;
 }
 
@@ -141,6 +159,9 @@ export interface IHenna {
 }
 
 export interface ICanvas {
+  title: string;
+  price: string;
+  reserved: boolean;
   image: ICustomImage;
   year: number;
 }
@@ -175,9 +196,20 @@ export type IFlashStyle = typeof flashStyleArray[number];
 export const flashStatusArray = ["reserved", "unReserved"] as const;
 export type IFlashStatus = typeof flashStatusArray[number];
 
-export interface IBigCTA {
+export interface IProduct {
+  path: string;
+  images?: ICustomImage[];
   title: string;
-  backgroundImage: ICustomImage;
+  price: string;
+  desc?: string;
+  quantityDesc?: string;
+  type: "canvas" | "boutique";
+  collapsible?: CollapsibleProps;
+}
+
+export interface ICartProduct {
+  product: IProduct;
+  quantity: number;
 }
 
 export interface INavLink {
@@ -230,7 +262,7 @@ export enum LocalPaths {
   HENNA = "/henna",
   TATTOO = "/tattoo",
   FLASH = "/flash",
-  TOILES = "/toiles",
+  CONVAS = "/canvas",
   BOUTIQUE = "/boutique",
   BLOG = "/blog",
   CART = "/cart",

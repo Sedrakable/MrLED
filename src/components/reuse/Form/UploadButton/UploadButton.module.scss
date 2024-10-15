@@ -1,0 +1,53 @@
+@import "../../../../styles/mixins.scss";
+@mixin vars() {
+  --icon-height: 32px;
+
+  @media (min-width: $tablet) {
+    --icon-height: 48px;
+  }
+
+  @media (min-width: $laptop) {
+  }
+
+  @media (min-width: $desktop) {
+    --icon-height: 64px;
+  }
+}
+
+.uploadButton {
+  @include vars;
+
+  background: var(--light-burgundy-30);
+  border-radius: var(--border-radius-large);
+  cursor: pointer;
+  box-shadow: var(--drop-shadow);
+  border: 2px solid var(--burgundy);
+  transition: all var(--transition-time) ease;
+
+  .icon {
+    height: var(--icon-height);
+  }
+
+  &:hover,
+  &.dragActive,
+  &.uploaded {
+    background-color: var(--burgundy);
+    * {
+      color: var(--white) !important;
+      fill: var(--white) !important;
+    }
+  }
+
+  &.uploaded {
+    width: auto !important;
+    border-radius: var(--border-radius);
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  aspect-ratio: 1;
+  height: 200px !important;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}

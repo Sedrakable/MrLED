@@ -3,17 +3,20 @@ import React from "react";
 import styles from "./History.module.scss";
 import FlexDiv from "../../../reuse/FlexDiv";
 import AdehnnaRoundLogo from "@/assets/vector/AdhennaRoundLogo.svg";
-import { IHistory } from "../../../../data.d";
 
 import { useWindowResize } from "../../../../helpers/useWindowResize";
 import { TextWrapper } from "../../../reuse/containers/TextWrapper/TextWrapper";
-import { Paragraph } from "@/components/reuse/Paragraph";
+import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { getTranslations } from "@/helpers/langUtils";
 import { LangType } from "@/i18n";
 import { useLocale } from "next-intl";
 import { TitleWrapper } from "../../../reuse/containers/TitleWrapper/TitleWrapper";
 
-export const History: React.FC<IHistory> = ({ text }) => {
+export interface HistoryProps {
+  text: string;
+}
+
+export const History: React.FC<HistoryProps> = ({ text }) => {
   const { isMobileOrTablet, isMobile } = useWindowResize();
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);

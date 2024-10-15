@@ -12,11 +12,15 @@ import Package from "@/assets/vector/Package.svg";
 import Internet from "@/assets/vector/Internet.svg";
 import Star from "@/assets/vector/Star.svg";
 
+import Play from "@/assets/vector/Play.svg";
+import Upload from "@/assets/vector/Upload.svg";
+
 import Filter from "@/assets/vector/Filter.svg";
 import Sort from "@/assets/vector/Sort.svg";
 import Plus from "@/assets/vector/Plus.svg";
 import Minus from "@/assets/vector/Minus.svg";
 import Check from "@/assets/vector/Check.svg";
+import Trash from "@/assets/vector/Trash.svg";
 
 import Instagram from "@/assets/vector/Instagram.svg";
 import Tiktik from "@/assets/vector/TikTok.svg";
@@ -42,6 +46,9 @@ const icons: {
   plus: <Plus />,
   minus: <Minus />,
   check: <Check />,
+  trash: <Trash />,
+  play: <Play />,
+  upload: <Upload />,
 };
 
 export const IconTypeArray = Object.keys(icons) as Array<keyof typeof icons>;

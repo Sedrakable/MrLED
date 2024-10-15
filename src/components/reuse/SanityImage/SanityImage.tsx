@@ -6,7 +6,7 @@ export interface ICustomImage extends Omit<ImageProps, "src"> {
   alt: string;
   image: SanityImageSource;
   width?: number;
-  figureClassName?: string;
+  figureclassname?: string;
   quality?: number;
 }
 
@@ -14,7 +14,7 @@ export const SanityImage: React.FC<ICustomImage> = (props) => {
   const { quality = 30 } = props;
   return (
     <figure
-      className={props.figureClassName}
+      className={props.figureclassname}
       style={{
         position: "relative",
         width: "100%", // Ensure the container fills its parent width

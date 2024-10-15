@@ -100,7 +100,7 @@ export const Sidebar: React.FC<{
               <Button
                 variant="extra"
                 path={`/${locale}${LocalPaths.CART}`}
-                icon="cart"
+                iconProps={{ icon: "cart" }}
               />
 
               <Button
