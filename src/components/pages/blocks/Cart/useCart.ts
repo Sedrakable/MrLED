@@ -17,15 +17,15 @@ export const useCart = () => {
       (item) => item.product.path === product.path
     );
 
-    // For canvas products, we don't allow duplicates or quantity increases
-    if (product.type === "canvas") {
+    // For toiles products, we don't allow duplicates or quantity increases
+    if (product.type === "toiles") {
       // If the product already exists, don't add it again
       if (existingProduct) {
         // Optionally, you could show a message here that the item is already in cart
         return;
       }
 
-      // Add the canvas product with a quantity of 1, regardless of requested quantity
+      // Add the toiles product with a quantity of 1, regardless of requested quantity
       setToLocalStorage(CART_STORAGE_KEY, [
         ...cartProducts,
         { product, quantity: 1 },
@@ -33,7 +33,7 @@ export const useCart = () => {
       return;
     }
 
-    // Handle non-canvas products as before
+    // Handle non-toiles products as before
     if (existingProduct) {
       const updatedCartProducts = cartProducts.map((item) =>
         item.product.path === product.path

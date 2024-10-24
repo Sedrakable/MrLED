@@ -7,11 +7,16 @@ import { Icon, IconProps } from "./Icon";
 import { Paragraph } from "./Paragraph/Paragraph";
 import { useWindowResize } from "@/helpers/useWindowResize";
 
+interface ButtonIconProps extends IconProps {
+  side?: "left" | "right";
+}
+
 export interface ButtonProps {
   variant: "primary" | "transparent" | "white" | "extra";
   small?: boolean;
   fit?: "grow" | "shrink";
-  iconProps?: IconProps;
+  iconProps?: ButtonIconProps;
+  // eslint-disable-next-line no-unused-vars
   onClick?: (() => void) | ((event: MouseEvent) => void);
   path?: string;
   href?: string;
@@ -42,6 +47,7 @@ export const Button: FC<PropsWithChildren<
       if (onClick.length === 0) {
         (onClick as () => void)();
       } else {
+        // eslint-disable-next-line no-unused-vars
         (onClick as (event: React.MouseEvent<HTMLButtonElement>) => void)(
           event
         );
@@ -60,10 +66,12 @@ export const Button: FC<PropsWithChildren<
     </Paragraph>
   );
 
+  const iconElement = iconProps && <Icon {...iconProps} color="burgundy" />;
   const buttonContent = (
     <>
+      {iconProps?.side === "left" && iconElement}
       {children && <ButtonHeading />}
-      {iconProps && <Icon {...iconProps} color="burgundy" />}
+      {(!iconProps?.side || iconProps.side === "right") && iconElement}
     </>
   );
 
@@ -71,6 +79,8 @@ export const Button: FC<PropsWithChildren<
     [styles.small]: small,
     [styles.onlyIcon]: iconProps && !children,
     [styles.withIcon]: iconProps && children,
+    [styles.iconLeft]: iconProps?.side === "left",
+    [styles.iconRight]: !iconProps?.side || iconProps.side === "right",
     [styles.disabled]: disabled,
   });
 

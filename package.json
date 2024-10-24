@@ -63,8 +63,12 @@
     "@types/react": "^18.2.14",
     "@types/react-lazy-load-image-component": "^1.6.3",
     "@types/react-modal": "^3.16.0",
+    "@typescript-eslint/eslint-plugin": "^8.11.0",
+    "@typescript-eslint/parser": "^8.11.0",
     "eslint": "^8.43.0",
     "eslint-config-next": "^14.2.3",
+    "eslint-plugin-typescript": "^0.14.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
     "typescript": "^5.1.6"
   }
 }

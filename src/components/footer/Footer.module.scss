@@ -1,33 +1,21 @@
-@import "../../styles/mixins.scss";
+@import "@/styles/mixins.scss";
 
 @mixin vars() {
-  --top-gap: var(--pad-6);
   --container-gap: var(--pad-5);
-  --logo-width: 80%;
+  --logo-width: var(--pad-11);
   --border-width: 4px;
   @media (min-width: $tablet) {
-    --top-gap: var(--pad-6);
-    --logo-width: 300px;
+    --logo-width: 160px;
   }
 
   @media (min-width: $laptop) {
-    --top-gap: var(--pad-7);
-    --logo-width: 384px;
+    --logo-width: 160px;
   }
 
   @media (min-width: $desktop) {
-    --top-gap: var(--pad-9);
+    --logo-width: 192px;
     --container-gap: var(--pad-6);
   }
-}
-
-.line {
-  background-color: var(--grey);
-  opacity: 0.5;
-  max-width: 2px;
-  min-height: 100%;
-  width: 100%;
-  align-self: stretch;
 }
 
 .footer {
@@ -35,34 +23,74 @@
   @include vars;
 
   width: 100vw;
-  background: var(--darkest-burgundy);
-  border-top: var(--border-width) solid var(--burgundy);
+  background: var(--dark-burgundy);
+  border-top: var(--pad-1) solid var(--light-burgundy-30);
+}
 
-  .container {
-    width: var(--screen-width-large);
-    gap: var(--container-gap);
-    padding-bottom: var(--container-gap);
-    margin: 0 auto;
-    position: relative;
-    .legal {
-      p {
-        text-decoration: underline;
-        // &:hover {
-        //   color: var(--burgundy);
-        // }
-      }
-    }
-    .logo {
-      position: relative;
-      width: var(--logo-width);
-    }
-
-    .links {
+.tabletContainer {
+  min-width: 0;
+  .right {
+    min-width: min-content; /* or use a specific pixel value */
+    width: auto;
+    flex: 1;
+    flex-shrink: 0; /* Prevent shrinking */
+    .content {
       flex: 1;
-      row-gap: var(--pad-2) !important;
-      @media (min-width: $laptop) {
-        justify-content: flex-end !important;
+      width: 100%;
+      .left {
+        flex: 1;
       }
     }
   }
+}
+
+.mobileContainer {
+  .siteMap {
+    justify-content: center !important;
+  }
+}
+
+.logo {
+  width: var(--logo-width);
+  a {
+    width: 100%;
+    svg {
+      fill: var(--light-burgundy);
+    }
+  }
+}
+
+.siteMap {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, 160px);
+  row-gap: var(--pad-6) !important;
+  justify-content: start !important;
+  direction: rtl;
+  min-width: 160px;
+  width: max-content;
+  // justify-items: end;
+  // grid-auto-flow: dense;
+}
+
+.hoursContainer {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.1)
+  );
+  height: fit-content;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--light-burgundy-30);
+  box-shadow: var(--light-shadow);
+
+  .hours {
+    p {
+      width: fit-content !important;
+      text-wrap: nowrap;
+    }
+  }
+}
+
+.legalLinks {
+  row-gap: var(--pad-4) !important;
 }

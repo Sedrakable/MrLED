@@ -4,11 +4,11 @@ import { IconButton } from "../../reuse/IconButton";
 import cn from "classnames";
 import FlexDiv from "../../reuse/FlexDiv";
 import { Button } from "../../reuse/Button";
-import { ICta, INavLink, LocalPaths } from "../../../data.d";
+import { ICta, INavLink, ISocials, LocalPaths } from "../../../data.d";
 import { LangSwitcher } from "../LangSwitcher/LangSwitcher";
 import { atom, useAtom } from "jotai";
 import { getTranslations } from "../../../helpers/langUtils";
-import { LogoLink, dropDown, isCta, socialsIcons } from "../Navbar/Navbar";
+import { LogoLink, dropDown, isCta } from "../Navbar/Navbar";
 import TabButton from "../TabButton/TabButton";
 import { LangType } from "@/i18n";
 import { useLocale } from "next-intl";
@@ -16,10 +16,12 @@ import { Socials } from "@/components/footer/Socials";
 
 export const sidebarData = atom<boolean>(false);
 
-export const Sidebar: React.FC<{
+interface SidebarProps {
   links: (INavLink | ICta)[];
   lang: LangType;
-}> = ({ links, lang }) => {
+  socials: ISocials;
+}
+export const Sidebar: React.FC<SidebarProps> = ({ links, lang, socials }) => {
   const [sidebar, setSidebar] = useAtom(sidebarData);
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
@@ -119,7 +121,7 @@ export const Sidebar: React.FC<{
               padding={{ vertical: [3] }}
             >
               <LangSwitcher onClick={() => setSidebar(false)} />
-              {socialsIcons}
+              <Socials {...socials} />
             </FlexDiv>
           )}
         </FlexDiv>

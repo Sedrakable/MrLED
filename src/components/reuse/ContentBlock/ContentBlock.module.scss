@@ -1,0 +1,53 @@
+@import "@/styles/mixins.scss";
+
+@mixin vars() {
+  @media (min-width: $tablet) {
+  }
+
+  @media (min-width: $laptop) {
+  }
+
+  @media (min-width: $desktop) {
+  }
+}
+
+.blockquote {
+  border-left: 2px solid var(--light-burgundy);
+  padding-top: 0.2em;
+  padding-left: 0.5em;
+  margin-bottom: var(--pad-3);
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.link {
+  color: var(--special-pink);
+  text-decoration: underline !important;
+
+  &:hover {
+    color: var(--burgundy);
+    text-decoration: none;
+  }
+}
+
+.numberedList {
+  margin-bottom: var(--pad-3);
+  .listItem {
+    list-style: decimal;
+    &.letter {
+      list-style-type: lower-alpha;
+    }
+  }
+}
+
+.bulletedList {
+  margin-bottom: var(--pad-3);
+  .listItem {
+    list-style-type: disc;
+    &.letter {
+      list-style-type: circle;
+    }
+  }
+}

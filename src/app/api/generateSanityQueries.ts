@@ -1,21 +1,11 @@
 import { LangType } from "@/i18n";
 
-export const navbarPageQuery = (locale: LangType): string => {
-  return `*[_type == 'navbar' && lang == '${locale}'][0]`;
+export const socialsQuery = (): string => {
+  return `*[_type == 'socials'][0]`;
 };
 
-export const footerPageQuery = (locale: LangType): string => {
-  return `*[_type == 'footer' && lang == '${locale}'][0]{
-    ...,
-    legals[]->{
-      title,
-      path,
-    },
-    socials->{
-      ...,
-      links[],
-    },
-  }`;
+export const hoursQuery = (): string => {
+  return `*[_type == 'openingHours'][0]`;
 };
 
 export const homePageQuery = (locale: LangType): string => {
@@ -39,7 +29,7 @@ export const homePageQuery = (locale: LangType): string => {
 
 export const carouselQuery = (workType: string | undefined): string => {
   return `*[_type == 'work' ${workType ? `&& workType == '${workType}'` : ""}] {
-    projects[]
+    projects[]->
   }`;
 };
 
@@ -126,11 +116,18 @@ export const onlineCoursePageQuery = (locale: LangType): string => {
   }`;
 };
 
+export const projectPageQuery = (type: string, id: string): string => {
+  return `*[_type == '${type}Project' && slug.current == '${id}'][0]`;
+};
+
 export const workPageQuery = (path: string): string => {
   return `*[_type == 'workPage' && path == '/${path}'][0]{
     meta,
     hero,
-    work->,
+    work->{
+      ...,
+      projects[]->
+    },
   }`;
 };
 
@@ -170,7 +167,7 @@ export const productQuery = (path: string): string => {
 export const blogPageQuery = (locale: LangType): string => {
   return `*[_type == 'blogPage' && lang == '${locale}'][0]{
     meta,
-    blog ->{
+    blog->{
       articles[]->{
         path,
         title,
@@ -179,6 +176,13 @@ export const blogPageQuery = (locale: LangType): string => {
         customImage
       }
     }
+}`;
+};
+
+export const articlesOrderQuery = (locale: LangType): string => {
+  return `*[_type == 'articlePage' && lang == '${locale}']{
+    path,
+    title,
 }`;
 };
 
@@ -206,7 +210,7 @@ export const pricePlansQuery = (pageType: string, locale: LangType): string => {
 };
 
 export const legalPageQuery = (locale: LangType, slug: string): string => {
-  return `*[_type == 'legalPage' && lang == '${locale}' && path == '/${slug}'][0]`;
+  return `*[_type == 'legalPage' && lang == '${locale}' && path == '${slug}'][0]`;
 };
 
 export const notFoundPageQuery = (locale: LangType): string => {

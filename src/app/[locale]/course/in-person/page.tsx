@@ -96,7 +96,7 @@ export default async function InPersonCoursePage({
       <>
         {data?.hero && <Hero {...data?.hero} version={2} />}
 
-        <Block variant="default">
+        <Block variant="default" illustrations>
           {data.infoText && (
             <TitleAndText
               text={data.infoText}

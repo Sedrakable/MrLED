@@ -4,6 +4,8 @@ import {
   IFlashStyle,
   IHennaColor,
   IFlashStatus,
+  ITattooColor,
+  ITattooStatus,
 } from "../data.d";
 
 //TODO: check for unused
@@ -85,14 +87,30 @@ interface Nav {
   online: string;
   portfolio: string;
   flash: string;
-  canvases: string;
+  toiles: string;
   boutique: string;
   contact: string;
   blog: string;
+  cart: string;
+  privacy: string;
+  terms: string;
+  other: string;
 }
 
 interface Other {
   reserve: string;
+}
+
+interface Hours {
+  title: string;
+  to: string;
+  monday: string;
+  tuesday: string;
+  wednesday: string;
+  thursday: string;
+  friday: string;
+  saturday: string;
+  sunday: string;
 }
 
 interface Cart {
@@ -104,6 +122,16 @@ interface Cart {
 type BodyPartsRecord = {
   // eslint-disable-next-line no-unused-vars
   [K in IBodyPart]: string;
+};
+
+type TattooColorRecord = {
+  // eslint-disable-next-line no-unused-vars
+  [K in ITattooColor]: string;
+};
+
+type TattooStatusRecord = {
+  // eslint-disable-next-line no-unused-vars
+  [K in ITattooStatus]: string;
 };
 
 type FlashStyleRecord = {
@@ -134,6 +162,10 @@ interface Select {
   year: string;
   bodyParts: string;
   bodyPartsOptions: BodyPartsRecord;
+  tattooColor: string;
+  tattooColorOptions: TattooColorRecord;
+  tattooStatus: string;
+  tattooStatusOptions: TattooStatusRecord;
   flashStyles: string;
   flashStylesOptions: FlashStyleRecord;
   flashStatus: string;
@@ -147,6 +179,7 @@ export interface Translations {
   titles: Titles;
   form: Form;
   nav: Nav;
+  hours: Hours;
   select: Select;
   cart: Cart;
   other: Other;

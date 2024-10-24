@@ -7,6 +7,7 @@ import {
   ICustomImage,
   SanityImage,
 } from "@/components/reuse/SanityImage/SanityImage";
+import { Star } from "../../Star/Star";
 
 export type SizeType = "small" | "big";
 
@@ -27,18 +28,8 @@ export const TextWrapper: FC<TextWrapperProps> = ({
     <FlexDiv
       width100
       padding={{
-        vertical:
-          version == 3
-            ? variant === "big"
-              ? [6, 6, 6, 7]
-              : [4, 4, 4, 5]
-            : [5, 6, 6, 6],
-        horizontal:
-          version == 3
-            ? variant === "big"
-              ? [4, 7, 7, 8]
-              : [3, 4, 4, 4]
-            : [6, 8, 8, 9],
+        vertical: variant === "big" ? [6, 6, 6, 7] : [4, 4, 4, 5],
+        horizontal: variant === "big" ? [4, 7, 7, 8] : [4, 6, 6, 7],
       }}
       className={cn(styles.wrapper, styles[`version${version}`])}
     >
@@ -53,6 +44,23 @@ export const TextWrapper: FC<TextWrapperProps> = ({
           figureclassname={styles.backgroundImage}
           quality={30}
         />
+      )}
+      {version === 1 && (
+        <>
+          <div className={styles.starWrapper1}>
+            <Star />
+          </div>
+
+          <div className={styles.starWrapper2}>
+            <Star />
+          </div>
+        </>
+      )}
+
+      {version === 2 && (
+        <div className={styles.starWrapper3}>
+          <Star />
+        </div>
       )}
       {children}
     </FlexDiv>

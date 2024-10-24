@@ -1,4 +1,4 @@
-@import "../../styles/mixins.scss";
+@import "@/styles/mixins.scss";
 
 .modal {
   width: auto;
@@ -19,11 +19,13 @@
   }
   &.image {
     width: 100%;
+    pointer-events: none;
     @media (min-width: $laptop) {
       max-width: 50vw;
     }
     .modalContainer {
       > * {
+        pointer-events: auto;
         border-radius: var(--border-radius-large);
         box-shadow: var(--light-shadow);
       }

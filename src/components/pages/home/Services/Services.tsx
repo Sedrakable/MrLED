@@ -1,10 +1,13 @@
 "use client";
 import React from "react";
-import { IDisplay, IServices } from "../../../../data.d";
-import { Display } from "@/components/reuse/Display/Display";
+import { Display, DisplayProps } from "@/components/reuse/Display/Display";
 
-export const Services: React.FC<IServices> = ({ services }) => {
-  return services?.map((service: IDisplay, key) => {
+export interface ServicesProps {
+  services: DisplayProps[];
+}
+
+export const Services: React.FC<ServicesProps> = ({ services }) => {
+  return services?.map((service: DisplayProps, key) => {
     return (
       <Display
         {...service}

@@ -6,12 +6,13 @@ import { TextWrapper } from "@/components/reuse/containers/TextWrapper/TextWrapp
 import { Hero } from "@/components/reuse/Hero/Hero";
 import { PortableTextContent } from "@/components/reuse/Paragraph/PortableTextContent";
 import { setMetadata } from "@/components/SEO";
-import { IDisplay, IHero, IProduct, ISeo, IWork, LocalPaths } from "@/data.d";
+import { IHero, IProduct, ISeo, IWork, LocalPaths } from "@/data.d";
 import { LangType } from "@/i18n";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { boutiquePageQuery } from "@/app/api/generateSanityQueries";
 import { ProductGrid } from "@/components/pages/blocks/Products/Products";
+import { DisplayProps } from "@/components/reuse/Display/Display";
 
 const Carousel = dynamic(
   () =>
@@ -26,7 +27,7 @@ const Carousel = dynamic(
 export interface BoutiquePageProps {
   meta: ISeo;
   hero: IHero;
-  displays: IDisplay[];
+  displays: DisplayProps[];
   desc: any;
   products: IProduct[];
 }

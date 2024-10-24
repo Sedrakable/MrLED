@@ -1,13 +1,8 @@
 import { productQuery } from "@/app/api/generateSanityQueries";
 import { useFetchPage } from "@/app/api/useFetchPage";
 import { ProductModal } from "@/components/pages/blocks/Products/ProductModal";
-
-import { setMetadata } from "@/components/SEO";
-import { IProduct, ISeo, IWork, LocalPaths } from "@/data.d";
-import { LangType } from "@/i18n";
-import { Metadata } from "next";
+import { IProduct } from "@/data.d";
 import dynamic from "next/dynamic";
-import { usePathname, useRouter } from "next/navigation";
 
 const Modal = dynamic(
   () => import("@/components/reuse/Modal").then((module) => module.Modal),

@@ -68,6 +68,7 @@
   --paragraph-small: 12px;
 
   --navbar-height: 100px;
+  --content-bottom-padding: var(--pad-9);
   --screen-width-large: calc(100vw - var(--pad-6));
 
   @media (min-width: $tablet) {
@@ -75,6 +76,7 @@
   }
 
   @media (min-width: $laptop) {
+    --content-bottom-padding: var(--pad-10);
     --screen-width-large: calc(100vw - var(--pad-11));
   }
 

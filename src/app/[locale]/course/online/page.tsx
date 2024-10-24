@@ -10,7 +10,7 @@ import { Hero } from "@/components/reuse/Hero/Hero";
 import { Block } from "@/components/reuse/containers/Block/Block";
 
 // Types and interfaces
-import { IDisplay, IHero, ISeo, LocalPaths } from "@/data.d";
+import { IHero, ISeo, LocalPaths } from "@/data.d";
 import { LangType } from "@/i18n";
 
 // Utilities
@@ -22,12 +22,13 @@ import {
   VideoAndPrice,
   VideoAndPriceProps,
 } from "@/components/reuse/Video/Video";
+import { DisplayProps } from "@/components/reuse/Display/Display";
 
 export interface OnlineCoursePageProps extends VideoAndPriceProps {
   meta: ISeo;
   hero: IHero;
   desc: any;
-  features: IDisplay[];
+  features: DisplayProps[];
 }
 
 export const getOnlineCoursePageData = async (locale: LangType) => {
@@ -78,7 +79,7 @@ export default async function OnlineCoursePage({
           <Hero {...onlineCoursePageData?.hero} version={2} />
         )}
 
-        <Block variant="default">
+        <Block variant="default" illustrations>
           {/* <ClientLogger slug={}/> */}
           {onlineCoursePageData.desc && (
             <TextWrapper version={3}>
@@ -97,7 +98,7 @@ export default async function OnlineCoursePage({
           )}
         </Block>
         {onlineCoursePageData?.features && (
-          <Block variant="full-width">
+          <Block variant="full-width" illustrations>
             <Services services={onlineCoursePageData.features} />
           </Block>
         )}

@@ -56,7 +56,7 @@
     &.transparent {
       background: hsl(from var(--cream-white) h s l / 0.45);
       border: var(--pad-1, 2px) solid var(--burgundy, #853d57);
-      // backdrop-filter: var(--blur);
+      backdrop-filter: blur(var(--pad-1));
       padding: 6px;
       &:hover {
         background: var(--burgundy);
@@ -114,12 +114,24 @@
 
     &.withIcon {
       gap: var(--pad-3);
-      > * {
-        &:first-child {
-          padding-right: 0px;
+      &.iconRight {
+        > * {
+          &:first-child {
+            padding-right: 0px;
+          }
+          &:last-child {
+            padding-right: var(--pad-1);
+          }
         }
-        &:last-child {
-          padding-right: var(--pad-1);
+      }
+      &.iconLeft {
+        > * {
+          &:first-child {
+            padding-left: 0px;
+          }
+          &:last-child {
+            padding-left: var(--pad-1);
+          }
         }
       }
     }

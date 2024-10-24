@@ -1,5 +1,5 @@
 import { ICustomImage } from "@/components/reuse/SanityImage/SanityImage";
-import { IWork } from "@/data.d";
+import { IProject, IWork } from "@/data.d";
 
 export const getRandomItemFromArray = (arr: any[]) => {
   if (!Array.isArray(arr) || arr.length === 0) {
@@ -17,4 +17,18 @@ export const shuffleArray = (array: any[]) => {
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
+};
+
+export const getImagesFromWorks = (data: IWork[]): ICustomImage[] => {
+  if (!Array.isArray(data) || data.length === 0) {
+    return [];
+  }
+  return data.flatMap((work) =>
+    (Array.isArray(work.projects) ? work.projects : [])
+      .map(
+        (project: IProject) =>
+          project?.image && ("image" in project ? project.image : null)
+      )
+      .filter((image): image is ICustomImage => image !== null)
+  );
 };

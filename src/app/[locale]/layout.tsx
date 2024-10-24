@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
@@ -8,50 +7,56 @@ import "@/styles/Main.css";
 import "@/styles/ScrollBar.scss";
 import "@/styles/index.scss";
 import { NextIntlClientProvider } from "next-intl";
-import { IFooter, INavBar, LocalPaths } from "@/data.d";
+import { IOpeningHours, ISocials } from "@/data.d";
 import { useFetchPage } from "../api/useFetchPage";
 import { LangType } from "@/i18n";
-import { setMetadata } from "@/components/SEO";
 import dynamic from "next/dynamic";
-import { navbarPageQuery, footerPageQuery } from "../api/generateSanityQueries";
-import { getHomePageData } from "./page";
+import { hoursQuery, socialsQuery } from "../api/generateSanityQueries";
+import { Navbar } from "@/components/navbar/Navbar/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// const Footer = dynamic(
-//   () => import("@/components/footer/Footer").then((module) => module.Footer),
-//   {
-//     ssr: false,
-//   }
-// );
-
-const Navbar = dynamic(
-  () =>
-    import("@/components/navbar/Navbar/Navbar").then((module) => module.Navbar),
+const Footer = dynamic(
+  () => import("@/components/footer/Footer").then((module) => module.Footer),
   {
     ssr: false,
   }
 );
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: LangType };
-}): Promise<Metadata> {
-  const homePageData = await getHomePageData(locale);
-  const { metaTitle, metaDesc, metaKeywords } = homePageData.meta;
-  const path = LocalPaths.HOME;
-  const crawl = true;
+const getHoursData = async () => {
+  const type = "hours";
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const hoursPageData: IOpeningHours = await useFetchPage(hoursQuery(), type);
+  return hoursPageData;
+};
 
-  return setMetadata({
-    locale,
-    metaTitle,
-    metaDesc,
-    metaKeywords,
-    path,
-    crawl,
-  });
-}
+//I need to get socials data the same way as the hours data
+const getSocialsData = async () => {
+  const type = "socials";
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const socialsPageData: ISocials = await useFetchPage(socialsQuery(), type);
+  return socialsPageData;
+};
+
+// export async function generateMetadata({
+//   params: { locale },
+// }: {
+//   params: { locale: LangType };
+// }): Promise<Metadata> {
+//   const homePageData = await getHomePageData(locale);
+//   const { metaTitle, metaDesc, metaKeywords } = homePageData.meta;
+//   const path = LocalPaths.HOME;
+//   const crawl = true;
+
+//   return setMetadata({
+//     locale,
+//     metaTitle,
+//     metaDesc,
+//     metaKeywords,
+//     path,
+//     crawl,
+//   });
+// }
 
 export default async function LocaleLayout({
   children,
@@ -60,12 +65,8 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: LangType };
 }>) {
-  // const navType = "navbar";
-  const footerType = "footer";
-  // const navbarQuery = navbarPageQuery(locale);
-  const footerQuery = footerPageQuery(locale);
-  // const navbarData: INavBar = await useFetchPage(navbarQuery, navType);
-  const footerData: IFooter = await useFetchPage(footerQuery, footerType);
+  const socialsData: ISocials = await getSocialsData();
+  const hoursData: IOpeningHours = await getHoursData();
   return (
     <html lang={locale}>
       <NextIntlClientProvider locale={locale}>
@@ -106,14 +107,9 @@ export default async function LocaleLayout({
         <body className={inter.className}>
           <div id="root">
             <div className={styles.app}>
-              <Navbar />
+              <Navbar socials={socialsData} />
               <div className={styles.page}>{children}</div>
-              {/* <Footer
-                legals={footerData?.legals}
-                trademark={footerData?.trademark}
-                links={navbarData?.links}
-                socials={{ links: footerData?.socials?.links }}
-              /> */}
+              <Footer socials={socialsData} openingHours={hoursData} />
             </div>
           </div>
         </body>

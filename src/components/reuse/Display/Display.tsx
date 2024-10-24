@@ -5,7 +5,7 @@ import FlexDiv from "../../reuse/FlexDiv";
 import cn from "classnames";
 import { useLocale } from "next-intl";
 import { LangType } from "@/i18n";
-import { IDisplay } from "@/data.d";
+import { IFancyText, IHero } from "@/data.d";
 import { useWindowResize } from "@/helpers/useWindowResize";
 import { Button } from "../Button";
 import { FancyText } from "../FancyText/FancyText";
@@ -13,14 +13,16 @@ import { Heading } from "../Heading";
 import { Paragraph } from "../Paragraph/Paragraph";
 import { SanityImage } from "../SanityImage/SanityImage";
 
-export type VersionType = "service";
+export type VersionType = "service" | "article";
 
-interface HeroProps extends IDisplay {
+export interface DisplayProps extends Omit<IHero, "title"> {
+  date?: string;
+  title?: IFancyText;
   version: VersionType;
   reverse?: boolean;
 }
 
-export const Display: React.FC<HeroProps> = ({
+export const Display: React.FC<DisplayProps> = ({
   backgroundImage,
   title,
   subTitle,
@@ -28,6 +30,7 @@ export const Display: React.FC<HeroProps> = ({
   ctas,
   version,
   reverse,
+  date,
 }) => {
   const { isMobile } = useWindowResize();
   const locale = useLocale() as LangType;
@@ -61,7 +64,7 @@ export const Display: React.FC<HeroProps> = ({
 
   return (
     <FlexDiv
-      className={cn(styles.display, styles["version" + version], {
+      className={cn(styles.display, styles[version], {
         [styles.reverse]: reverse,
       })}
       flex={{ direction: "column", y: "flex-start" }}
@@ -84,17 +87,28 @@ export const Display: React.FC<HeroProps> = ({
         padding={{ horizontal: [6, 9, 11, 12], bottom: [6, 7, 7, 8] }}
         gapArray={[2]}
       >
-        <FancyText
-          {...title}
-          reverse={reverse}
-          overflowText
-          flexHorizontal={reverse ? "flex-end" : "flex-start"}
-          blocker={!isMobile}
-        />
+        {date && (
+          <Paragraph
+            level="big"
+            color="dark-burgundy"
+            textAlign={reverse ? "right" : "left"}
+          >
+            {date}
+          </Paragraph>
+        )}
+        {title && (
+          <FancyText
+            {...title}
+            reverse={reverse}
+            overflowText
+            flexHorizontal={reverse ? "flex-end" : "flex-start"}
+            blocker={!isMobile}
+          />
+        )}
         {subTitle && (
           <Heading
-            as="h3"
-            level="5"
+            as="h2"
+            level={version === "article" ? "4" : "5"}
             color="burgundy"
             weight={500}
             className={styles.subTitle}

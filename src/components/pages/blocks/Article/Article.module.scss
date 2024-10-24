@@ -1,0 +1,63 @@
+@import "@/styles/mixins.scss";
+
+@mixin vars() {
+  --ratio: 1;
+  @media (min-width: $tablet) {
+    --ratio: 1;
+  }
+  @media (min-width: $laptop) {
+    --ratio: 4/3;
+  }
+}
+
+.article {
+  @include vars;
+
+  background-color: var(--cream-white);
+
+  .heading {
+    row-gap: var(--pad-6);
+    @media (min-width: $tablet) {
+      flex-direction: row !important;
+      position: relative;
+      > *:last-child {
+        margin-left: calc(var(--pad-5) * -1);
+        transform: translateY(var(--pad-5));
+      }
+    }
+    @media (min-width: $laptop) {
+      &::after {
+        content: "";
+        height: 100%;
+        width: 100%;
+      }
+      > *:last-child {
+        margin: 0;
+        top: var(--random-translate-y);
+        position: absolute;
+        right: 0;
+        width: 55% !important;
+      }
+      // align-items: stretch !important;
+    }
+    margin-bottom: var(--pad-4);
+    .imgWrapper {
+      width: 100%;
+      height: auto;
+      position: relative;
+
+      figure {
+        aspect-ratio: var(--ratio);
+
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--light-shadow);
+      }
+      p {
+        position: absolute;
+        bottom: -1.5em;
+        font-style: italic;
+      }
+    }
+  }
+}

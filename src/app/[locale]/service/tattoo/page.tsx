@@ -31,6 +31,11 @@ import { LangType } from "@/i18n";
 import { setMetadata } from "@/components/SEO";
 import { getTranslations } from "@/helpers/langUtils";
 import { TitleAndText } from "@/components/reuse/TitleAndText/TitleAndText";
+import { getImagesFromWorks, shuffleArray } from "@/helpers/functions";
+import { getFormData } from "@/components/reuse/Form/getFormData";
+import { FormTitleProps } from "@/components/reuse/Form/Form";
+import { Approx, ApproxProps } from "@/components/pages/blocks/Approx/Approx";
+import { ClientLogger } from "@/helpers/clientLogger";
 
 // Dynamically imported components
 const Carousel = dynamic(
@@ -92,13 +97,28 @@ export default async function TattooServicePage({
   const tattooServicePageData = await getTattooServicePageData(locale);
   const carouselData: IWork[] = await getCarouselData("tattoo");
   const translations = getTranslations(locale);
+  const formData: FormTitleProps = await getFormData("approx", locale);
 
+  const images = shuffleArray(getImagesFromWorks(carouselData));
+  const approxData: ApproxProps = {
+    form: {
+      ...formData,
+    },
+    images: {
+      img1: images[0],
+      img2: images[1],
+      img3: images[2],
+    },
+  };
   return (
     tattooServicePageData && (
       <>
-        <Hero {...tattooServicePageData?.hero} version={2} />
+        {tattooServicePageData?.hero && (
+          <Hero {...tattooServicePageData?.hero} version={2} />
+        )}
 
-        <Block variant="default">
+        <Block variant="default" illustrations>
+          <ClientLogger slug={carouselData[0].projects[0].slug} />
           {tattooServicePageData.tarifText && (
             <TitleAndText
               title={translations.titles.tarif}
@@ -111,12 +131,14 @@ export default async function TattooServicePage({
           {tattooServicePageData.multiDescriptions && (
             <MultiDescription descs={tattooServicePageData.multiDescriptions} />
           )}
+          {formData && <Approx {...approxData} />}
         </Block>
         {carouselData && (
           <Carousel
             data={carouselData}
             cta={{
               text: translations.buttons.view + " " + translations.nav.tattoo,
+              link: [LocalPaths.PORTFOLIO, LocalPaths.TATTOO],
             }}
           />
         )}

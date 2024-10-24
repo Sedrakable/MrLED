@@ -19,14 +19,14 @@ import {
 import { BigCTAProps } from "@/components/pages/blocks/BigCTA/BigCTA";
 
 // Types and interfaces
-import { IDisplay, IHero, ISeo, LocalPaths } from "@/data.d";
+import { IHero, ISeo, LocalPaths } from "@/data.d";
 import { LangType } from "@/i18n";
 
 // Utilities
 import { setMetadata } from "@/components/SEO";
 import { TextWrapper } from "@/components/reuse/containers/TextWrapper/TextWrapper";
 import { PortableTextContent } from "@/components/reuse/Paragraph/PortableTextContent";
-import { Display } from "@/components/reuse/Display/Display";
+import { Display, DisplayProps } from "@/components/reuse/Display/Display";
 
 // Dynamically imported components
 const BigCTA = dynamic(
@@ -42,7 +42,7 @@ const BigCTA = dynamic(
 export interface TestTattooServicePageProps {
   meta: ISeo;
   hero: IHero;
-  display: IDisplay;
+  display: DisplayProps;
   desc: any;
   pricePlans: PricePlanProps[];
   bigCTA: BigCTAProps;
@@ -105,7 +105,7 @@ export default async function TestTattooServicePage({
           </div>
         )}
 
-        <Block variant="default">
+        <Block variant="default" illustrations>
           <div className={styles.jaguaWrapper}>
             {testTattooServicePageData.desc && (
               <TextWrapper version={3}>

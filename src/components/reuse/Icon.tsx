@@ -6,10 +6,7 @@ import Burger from "@/assets/vector/Burger.svg";
 import Close from "@/assets/vector/X.svg";
 import Cart from "@/assets/vector/Cart.svg";
 import Arrow from "@/assets/vector/Arrow.svg";
-import Bulb from "@/assets/vector/Bulb.svg";
 import Layout from "@/assets/vector/Layout.svg";
-import Package from "@/assets/vector/Package.svg";
-import Internet from "@/assets/vector/Internet.svg";
 import Star from "@/assets/vector/Star.svg";
 
 import Play from "@/assets/vector/Play.svg";
@@ -36,10 +33,7 @@ const icons: {
   close: <Close />,
   cart: <Cart />,
   arrow: <Arrow />,
-  bulb: <Bulb />,
   layout: <Layout />,
-  package: <Package />,
-  internet: <Internet />,
   star: <Star />,
   filter: <Filter />,
   sort: <Sort />,

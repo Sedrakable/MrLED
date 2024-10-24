@@ -7,12 +7,17 @@ import {
   ContactForm,
   ContactFormProps,
 } from "@/components/reuse/Form/ContactForm/ContactForm";
+import {
+  FloatingImages,
+  FloatingImageWrapper,
+} from "@/components/reuse/Form/FloatingImageWrapper/FloatingImageWrapper";
 
 export interface ContactProps {
   form: ContactFormProps;
+  images: FloatingImages;
 }
 
-export const Contact: FC<ContactProps> = ({ form }) => {
+export const Contact: FC<ContactProps> = ({ form, images }) => {
   return (
     <FlexDiv
       gapArray={[7, 7, 7, 8]}
@@ -20,7 +25,9 @@ export const Contact: FC<ContactProps> = ({ form }) => {
       className={cn(styles.container)}
       flex={{ direction: "column" }}
     >
-      <ContactForm {...form} />
+      <FloatingImageWrapper images={images}>
+        <ContactForm {...form} />
+      </FloatingImageWrapper>
     </FlexDiv>
   );
 };

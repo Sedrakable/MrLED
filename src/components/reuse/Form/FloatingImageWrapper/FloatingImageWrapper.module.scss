@@ -1,0 +1,47 @@
+@import "@/styles/mixins.scss";
+
+@mixin vars() {
+  --image-width: 240px;
+  @media (min-width: $tablet) {
+  }
+  @media (min-width: $laptop) {
+  }
+  @media (min-width: $desktop) {
+    --image-width: 320px;
+  }
+}
+
+.wrapper {
+  @include vars;
+  @media (min-width: $laptop) {
+    display: grid !important;
+    grid-template-columns: 1fr calc(var(--image-width) * 1.8);
+  }
+  position: relative;
+
+  .rightSide {
+    figure {
+      width: 100% !important;
+      height: var(--image-width) !important;
+      display: flex !important;
+      margin: calc(-1 * var(--pad-6)) 0;
+      justify-content: flex-start;
+      overflow: visible !important;
+
+      img {
+        border-radius: var(--border-radius);
+        box-shadow: var(--drop-shadow);
+        height: 100% !important;
+        width: auto !important;
+        aspect-ratio: 1;
+        position: relative !important;
+      }
+      &:first-child {
+        justify-content: center;
+      }
+      &:last-child {
+        justify-content: flex-end;
+      }
+    }
+  }
+}

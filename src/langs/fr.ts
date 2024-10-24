@@ -77,10 +77,25 @@ export const frTranslations: Translations = {
     inPerson: "En personne",
     portfolio: "Portfolio",
     flash: "Flash",
-    canvases: "Toiles",
+    toiles: "Toiles",
     boutique: "Boutique",
     contact: "Rendez-vous",
     blog: "Blog",
+    cart: "Panier",
+    privacy: "Politique de confidentialité",
+    terms: "Conditions d'utilisation",
+    other: "Autre",
+  },
+  hours: {
+    title: "Heures d’ouverture",
+    to: "à",
+    monday: "Lundi",
+    tuesday: "Mardi",
+    wednesday: "Mercredi",
+    thursday: "Jeudi",
+    friday: "Vendredi",
+    saturday: "Samedi",
+    sunday: "Dimanche",
   },
   other: {
     reserve: "Réserver",
@@ -110,7 +125,16 @@ export const frTranslations: Translations = {
       chest: "Poitrine",
       face: "Visage",
     },
-
+    tattooColor: "Couleur",
+    tattooColorOptions: {
+      black: "Noir + Gris",
+      brown: "Brun",
+    },
+    tattooStatus: "Statut",
+    tattooStatusOptions: {
+      healed: "Guéri",
+      unhealed: "Non Guéri",
+    },
     flashStyles: "Styles",
     flashStylesOptions: {
       ornamental: "Ornamental",
@@ -125,6 +149,7 @@ export const frTranslations: Translations = {
     flashStatusOptions: {
       reserved: "Réservé",
       unReserved: "Non Réservé",
+      repeatable: "Répétable",
     },
     hennaColors: "Couleurs",
     hennaColorsOptions: {

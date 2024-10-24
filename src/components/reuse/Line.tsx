@@ -4,7 +4,7 @@ import cn from "classnames";
 import { ColorType } from "./Heading";
 
 interface LineProps {
-  color?: ColorType;
+  color?: ColorType | "light-burgundy-30";
   rotation: "horizontal" | "vertical";
 }
 export const Line: React.FC<LineProps> = ({ color = "white", rotation }) => {

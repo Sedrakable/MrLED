@@ -1,10 +1,8 @@
 import { blogPageQuery } from "@/app/api/generateSanityQueries";
 import { useFetchPage } from "@/app/api/useFetchPage";
-import { setMetadata } from "@/components/SEO";
 
-import { IBlog, ISeo, LocalPaths } from "@/data.d";
+import { IBlog, ISeo } from "@/data.d";
 import { LangType } from "@/i18n";
-import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import React from "react";
 
@@ -20,7 +18,7 @@ export interface BlogPageProps {
   blog: IBlog;
 }
 
-const getBlogPageData = async (locale: LangType) => {
+export const getBlogPageData = async (locale: LangType) => {
   const type = "blogPage";
   const blogQuery = blogPageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -54,7 +52,6 @@ export default async function BlogPage({
   params: { locale: LangType };
 }) {
   const blogPageData: BlogPageProps = await getBlogPageData(locale);
-  return <>Blog Page</>;
 
-  // return blogPageData && <Blog {...blogPageData.blog} />;
+  return <>{blogPageData && <Blog {...blogPageData.blog} />}</>;
 }

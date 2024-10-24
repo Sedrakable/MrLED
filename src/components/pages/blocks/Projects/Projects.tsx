@@ -3,7 +3,14 @@ import React, { FC, useState } from "react";
 import styles from "./Projects.module.scss";
 import cn from "classnames";
 import FlexDiv from "../../../reuse/FlexDiv";
-import { ICanvas, IFlash, IProject, IWork, ProjectType } from "@/data.d";
+import {
+  ICanvas,
+  IFlash,
+  IProject,
+  IWork,
+  LocalPaths,
+  ProjectType,
+} from "@/data.d";
 import { SanityImage } from "../../../reuse/SanityImage/SanityImage";
 import { getTranslations } from "@/helpers/langUtils";
 import { LangType } from "@/i18n";
@@ -11,31 +18,25 @@ import { useLocale } from "next-intl";
 import { Heading } from "@/components/reuse/Heading";
 import Line from "@/assets/vector/Line.svg";
 
-import { Modal } from "@/components/reuse/Modal";
+import { Modal, ModalProps } from "@/components/reuse/Modal";
 import { FormTitleProps } from "@/components/reuse/Form/Form";
 import { FlashModal } from "./FlashModal";
 import { ProjectModal } from "./ProjectModal";
 import { ProjectNavigation } from "./ProjectNavigation";
-import { ProjectFilters } from "./ProjectFilters";
-import { useProjectFilters } from "./useProjectFilters";
-import { CanvasModal } from "./CanvasModal";
+import { ProjectFilters } from "../../../reuse/Form/CustomFilters/ProjectFilters";
+import { useProjectFilters } from "../../../reuse/Form/CustomFilters/useProjectFilters";
+import Infini from "@/assets/vector/Inifini.svg";
+
+import Link from "next/link";
+import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 
 interface ProjectProps {
   project: IProject;
   // eslint-disable-next-line no-unused-vars
-  onProjectClick: (project: IProject) => void;
   type: ProjectType;
 }
 
-export const Project: FC<ProjectProps> = ({
-  project,
-  type,
-  onProjectClick,
-}) => {
-  const handleClick = () => {
-    onProjectClick(project);
-  };
-
+export const Project: FC<ProjectProps> = ({ project, type }) => {
   const renderProjectText = () => {
     if (type === "flash") {
       const flashProject = project as IFlash;
@@ -51,11 +52,31 @@ export const Project: FC<ProjectProps> = ({
           >
             {flashProject.title}
           </Heading>
+          <Paragraph
+            level="big"
+            color="burgundy"
+            weight={400}
+            textAlign="center"
+          >
+            {`\u00A0x\u00A0`}
+          </Paragraph>
+          {flashProject.repeatable ? (
+            <Infini className={styles.infini} />
+          ) : (
+            <Paragraph
+              level="big"
+              color="burgundy"
+              weight={400}
+              textAlign="center"
+            >
+              1
+            </Paragraph>
+          )}
           {flashProject.reserved && <Line className={styles.line} />}
         </>
       );
     } else {
-      const canvasProject = project as ICanvas;
+      const toilesProject = project as ICanvas;
       return (
         <>
           <Heading
@@ -66,9 +87,9 @@ export const Project: FC<ProjectProps> = ({
             textAlign="center"
             className={styles.title}
           >
-            {canvasProject.title}
+            {toilesProject.title}
           </Heading>
-          {canvasProject.reserved ? (
+          {toilesProject.reserved ? (
             <Line className={styles.line} />
           ) : (
             <Heading
@@ -79,7 +100,7 @@ export const Project: FC<ProjectProps> = ({
               textAlign="center"
               className={styles.price}
             >
-              {`\u00A0• $${canvasProject.price}`}
+              {`\u00A0• $${toilesProject.price}`}
             </Heading>
           )}
         </>
@@ -92,7 +113,6 @@ export const Project: FC<ProjectProps> = ({
       flex={{ direction: "column", y: "flex-start" }}
       height100
       width100
-      onClick={handleClick}
       gapArray={[3, 4, 4, 5]}
     >
       <SanityImage
@@ -102,92 +122,52 @@ export const Project: FC<ProjectProps> = ({
         quality={50}
       />
 
-      <FlexDiv className={styles.text}>{renderProjectText()}</FlexDiv>
+      {(type === "flash" || type === "toiles") && (
+        <FlexDiv className={styles.text}>{renderProjectText()}</FlexDiv>
+      )}
     </FlexDiv>
   );
 };
 
-interface ProjectsProps extends IWork {
-  formData?: FormTitleProps;
-}
-
-export const Projects: React.FC<ProjectsProps> = ({
-  projects,
-  type,
-  formData,
-}) => {
+export const Projects: React.FC<IWork> = ({ projects, workType }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
-
-  const [selectedProject, setSelectedProject] = useState<IProject | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleProjectClick = (project: IProject) => {
-    setSelectedProject(project);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedProject(null);
-  };
 
   const {
     filteredProjects,
     filterHandlers,
     filterOptions,
     sortOptions,
-  } = useProjectFilters(projects, type, translations);
+  } = useProjectFilters(projects, workType, translations);
 
   return (
     <FlexDiv
-      gapArray={[4, 4, 4, 4]}
+      gapArray={[4]}
       width100
       flex={{ direction: "column", x: "flex-start", y: "flex-start" }}
     >
       <ProjectFilters
-        type={type}
+        type={workType}
         filterOptions={filterOptions}
-        onFilterChange={filterHandlers}
+        filterHandlers={filterHandlers}
         translations={translations}
         sortOptions={sortOptions}
       />
-      <FlexDiv gapArray={[4, 3, 4, 5]} width100 className={cn(styles.wrapper)}>
+      <FlexDiv gapArray={[4, 4, 4, 5]} width100 className={cn(styles.wrapper)}>
         {filteredProjects.map((project: IProject, index: number) => {
           return (
-            <Project
+            <Link
+              href={`/${locale}/${
+                LocalPaths.PORTFOLIO
+              }/${workType}/${project?.slug?.current?.toLowerCase()}`}
               key={index}
-              type={type}
-              project={project}
-              onProjectClick={handleProjectClick}
-            />
+            >
+              <Project type={workType} project={project} />
+            </Link>
           );
         })}
       </FlexDiv>
       <ProjectNavigation locale={locale} translations={translations} />
-      {isModalOpen && selectedProject && (
-        <Modal
-          onClose={handleCloseModal}
-          version={
-            (type === "flash" || type === "toiles") &&
-            !(selectedProject as IFlash | ICanvas).reserved
-              ? "default"
-              : "image"
-          }
-        >
-          {type === "flash" && !(selectedProject as IFlash).reserved ? (
-            <FlashModal
-              project={selectedProject as IFlash}
-              flashes={projects as IFlash[]}
-              formData={formData}
-            />
-          ) : type === "toiles" && !(selectedProject as ICanvas).reserved ? (
-            <CanvasModal project={selectedProject as ICanvas} />
-          ) : (
-            <ProjectModal project={selectedProject} />
-          )}
-        </Modal>
-      )}
     </FlexDiv>
   );
 };

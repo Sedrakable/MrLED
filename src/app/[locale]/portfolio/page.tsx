@@ -4,11 +4,14 @@ import { LangType } from "@/i18n";
 import { Metadata } from "next";
 import { setMetadata } from "@/components/SEO";
 import dynamic from "next/dynamic";
-import { WorkPageProps } from "./[slug]/page";
+import { WorkPageProps } from "./[projectType]/page";
 import { portfolioPageQuery } from "@/app/api/generateSanityQueries";
 import { HistoryProps } from "@/components/pages/blocks/History/History";
 import { getCarouselData } from "@/components/reuse/Carousel/getCarouselData";
-import { Carousel } from "@/components/reuse/Carousel/Carousel";
+import { History } from "@/components/pages/blocks/History/History";
+import { Block } from "@/components/reuse/containers/Block/Block";
+import { Works } from "@/components/pages/blocks/Works/Works";
+import { Hero } from "@/components/reuse/Hero/Hero";
 
 export interface PortfolioPageProps {
   meta: ISeo;
@@ -16,37 +19,10 @@ export interface PortfolioPageProps {
   works: WorkPageProps[];
   history: HistoryProps;
 }
-const Block = dynamic(
+const Carousel = dynamic(
   () =>
-    import("@/components/reuse/containers/Block/Block").then(
-      (module) => module.Block
-    ),
-  {
-    ssr: false,
-  }
-);
-
-const Hero = dynamic(
-  () => import("@/components/reuse/Hero/Hero").then((module) => module.Hero),
-  {
-    ssr: false,
-  }
-);
-
-const History = dynamic(
-  () =>
-    import("@/components/pages/blocks/History/History").then(
-      (module) => module.History
-    ),
-  {
-    ssr: false,
-  }
-);
-
-const Works = dynamic(
-  () =>
-    import("@/components/pages/blocks/Works/Works").then(
-      (module) => module.Works
+    import("@/components/reuse/Carousel/Carousel").then(
+      (module) => module.Carousel
     ),
   {
     ssr: false,
@@ -99,7 +75,7 @@ export default async function PortfolioPage({
           <Hero {...portfolioPageData?.hero} version={2} />
         )}
 
-        <Block variant="default">
+        <Block variant="default" illustrations>
           {portfolioPageData?.works && (
             <Works worksData={portfolioPageData?.works} />
           )}

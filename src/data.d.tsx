@@ -46,12 +46,9 @@ export interface IHero {
   ctas?: ITrippleCtas;
 }
 
-export interface IServices {
-  services: IDisplay[];
-}
-
-export interface IDisplay extends IHero {
-  // date?: string;
+export interface IFilter {
+  value: string;
+  label: string;
 }
 
 export interface IVideo {
@@ -123,14 +120,13 @@ export interface IArticle {
   title: string;
   desc: string;
   date: string;
-  facebookLink?: string;
   content: IBlock[];
 }
 
 export type ProjectType = "tattoo" | "flash" | "toiles" | "henna";
 
 export interface IWork {
-  type: ProjectType;
+  workType: ProjectType;
   projects: IProjects;
 }
 
@@ -138,32 +134,32 @@ export type IProjects = ITattoo[] | IFlash[] | ICanvas[] | IHenna[];
 
 export type IProject = ITattoo | IFlash | ICanvas | IHenna;
 
-export interface IFlash {
+interface IBaseProject {
+  slug: ISlug;
+  image: ICustomImage;
+  year: number;
+}
+export interface IFlash extends IBaseProject {
   title: string;
   style: IFlashStyle;
   reserved: boolean;
-  image: ICustomImage;
-  year: number;
+  repeatable: boolean;
 }
 
-export interface ITattoo {
-  image: ICustomImage;
+export interface ITattoo extends IBaseProject {
   bodyPart: IBodyPart;
-  year: number;
+  tattooColor: ITattooColor;
+  tattooStatus: ITattooStatus;
 }
 
-export interface IHenna {
-  image: ICustomImage;
+export interface IHenna extends IBaseProject {
   hennaColor: IHennaColor;
-  year: number;
 }
 
-export interface ICanvas {
+export interface ICanvas extends IBaseProject {
   title: string;
   price: string;
   reserved: boolean;
-  image: ICustomImage;
-  year: number;
 }
 
 export const bodyPartsArray = [
@@ -183,6 +179,12 @@ export type IDateSort = typeof dateSortArray[number];
 export const hennaColorArray = ["jagua", "henna", "hennagua"] as const;
 export type IHennaColor = typeof hennaColorArray[number];
 
+export const tattooColorArray = ["black", "brown"] as const;
+export type ITattooColor = typeof tattooColorArray[number];
+
+export const tattooStatusArray = ["healed", "unhealed"] as const;
+export type ITattooStatus = typeof tattooStatusArray[number];
+
 export const flashStyleArray = [
   "ornamental",
   "floral",
@@ -193,7 +195,11 @@ export const flashStyleArray = [
 ] as const;
 export type IFlashStyle = typeof flashStyleArray[number];
 
-export const flashStatusArray = ["reserved", "unReserved"] as const;
+export const flashStatusArray = [
+  "reserved",
+  "unReserved",
+  "repeatable",
+] as const;
 export type IFlashStatus = typeof flashStatusArray[number];
 
 export interface IProduct {
@@ -203,7 +209,7 @@ export interface IProduct {
   price: string;
   desc?: string;
   quantityDesc?: string;
-  type: "canvas" | "boutique";
+  type: "toiles" | "boutique";
   collapsible?: CollapsibleProps;
 }
 
@@ -218,18 +224,12 @@ export interface INavLink {
   ctaArray: ICta[];
 }
 
-export interface INavBar {
-  links: (INavLink | ICta)[];
-}
-
-export interface ISocials {
-  title?: string;
-  links: ICta[];
-}
-
 export interface IBlock {
   _key: string;
   _type: string;
+  level: number;
+  listItem?: string;
+  markDefs: { _key: string; _type: string; href: string }[];
   style: "h1" | "h2" | "h3" | "h4" | "h5" | "normal" | "blockquote";
   children: { _key: string; _type: string; marks: string[]; text: string }[];
 }
@@ -239,10 +239,26 @@ export interface ILegalPage {
   title: string;
   data: IBlock[];
 }
-export interface IFooter {
-  legals: { title: string; path: string }[];
-  trademark: string;
-  socials: ISocials;
+
+export interface IHour {
+  dayOfweek:
+    | "monday"
+    | "tuesday"
+    | "wednesday"
+    | "thursday"
+    | "friday"
+    | "saturday"
+    | "sunday";
+  startTime: string;
+  endTime: string;
+}
+
+export interface IOpeningHours {
+  hours: IHour[];
+}
+
+export interface ISocials {
+  links: IExternalLink[];
 }
 
 export interface INotFound {
@@ -262,11 +278,13 @@ export enum LocalPaths {
   HENNA = "/henna",
   TATTOO = "/tattoo",
   FLASH = "/flash",
-  CONVAS = "/canvas",
+  TOILES = "/toiles",
   BOUTIQUE = "/boutique",
   BLOG = "/blog",
   CART = "/cart",
   CONTACT = "/contact",
   LEGAL = "/legal",
+  TERMS = "/terms-and-conditions",
+  PRIVACY = "/privacy-policy",
 }
 /* eslint-enable */

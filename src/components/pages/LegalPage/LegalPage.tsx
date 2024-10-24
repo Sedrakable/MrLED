@@ -1,44 +1,24 @@
+"use client";
 import React from "react";
-import FlexDiv from "@/components/reuse/FlexDiv";
-import { Heading } from "@/components/reuse/Heading";
-import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { ILegalPage } from "@/data.d";
 import { Block } from "../../reuse/containers/Block/Block";
+import { contentBlocks } from "@/components/reuse/ContentBlock/ContentBlock";
+import { TitleWrapper } from "@/components/reuse/containers/TitleWrapper/TitleWrapper";
+import FlexDiv from "@/components/reuse/FlexDiv";
 
 export const LegalPageComp: React.FC<ILegalPage> = ({ title, data }) => {
+  console.log(data);
   return (
-    <Block title={title} variant="dark">
-      <FlexDiv flex={{ direction: "column", x: "flex-start" }}>
-        {data?.map((block) => {
-          return (
-            <div key={block._key}>
-              {block.children?.map((child) =>
-                child.marks[0] === "strong" ? (
-                  <Heading
-                    font="Seto"
-                    key={child._key}
-                    as="h5"
-                    level="5"
-                    color="yellow"
-                    paddingBottomArray={[1, 2, 2, 3]}
-                  >
-                    {child.text}
-                  </Heading>
-                ) : (
-                  <Paragraph
-                    key={child._key}
-                    level="regular"
-                    color="white"
-                    paddingBottomArray={[2, 3, 3, 4]}
-                  >
-                    {child.text}
-                  </Paragraph>
-                )
-              )}
-            </div>
-          );
-        })}
-      </FlexDiv>
+    <Block variant="default" illustrations>
+      <TitleWrapper title={title}>
+        <FlexDiv
+          flex={{ direction: "column", x: "flex-start" }}
+          width100
+          as="section"
+        >
+          {data && contentBlocks({ blocks: data })}
+        </FlexDiv>
+      </TitleWrapper>
     </Block>
   );
 };

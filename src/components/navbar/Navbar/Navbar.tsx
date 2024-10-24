@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import styles from "./Navbar.module.scss";
 import TabButton from "../TabButton/TabButton";
 import { useWindowResize } from "../../../helpers/useWindowResize";
@@ -8,7 +8,13 @@ import cn from "classnames";
 import FlexDiv from "../../reuse/FlexDiv";
 import Logo from "@/assets/vector/EyeLogo.svg";
 import { Button } from "../../reuse/Button";
-import { ICta, INavLink, LocalPaths } from "../../../data.d";
+import {
+  ICta,
+  IExternalLink,
+  INavLink,
+  ISocials,
+  LocalPaths,
+} from "../../../data.d";
 import { LangSwitcher } from "../LangSwitcher/LangSwitcher";
 import { useAtom } from "jotai";
 import { getTranslations } from "../../../helpers/langUtils";
@@ -39,11 +45,11 @@ const links = (trans: Translations): (INavLink | ICta)[] => {
       link: LocalPaths.SERVICE,
       ctaArray: [
         { text: trans.nav.tattoo, link: [LocalPaths.TATTOO] },
+        { text: trans.nav.henna, link: [LocalPaths.HENNA] },
         {
           text: trans.nav.testTattoo,
           link: [LocalPaths.TEST_TATTOO],
         },
-        { text: trans.nav.henna, link: [LocalPaths.HENNA] },
       ],
     } as INavLink,
     {
@@ -63,18 +69,10 @@ const links = (trans: Translations): (INavLink | ICta)[] => {
   ];
 };
 
-//TO DO: put this in Sanity, at least the links
-export const socialsIcons = (
-  <Socials
-    links={[
-      { text: "instagram", link: ["www.instagram.com"] },
-      { text: "facebook", link: ["www.facebook.com"] },
-      { text: "tiktok", link: ["www.tiktok.com"] },
-    ]}
-  />
-);
-
-export const Navbar = () => {
+interface NavbarProps {
+  socials: ISocials;
+}
+export const Navbar: FC<NavbarProps> = ({ socials }) => {
   const { isMobile, isMobileOrTablet } = useWindowResize();
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
@@ -155,7 +153,7 @@ export const Navbar = () => {
               </li>
 
               {!isMobile && <LangSwitcher />}
-              {!isMobileOrTablet && socialsIcons}
+              {!isMobileOrTablet && <Socials {...socials} />}
             </FlexDiv>
 
             {isMobileOrTablet && (
@@ -169,7 +167,7 @@ export const Navbar = () => {
         </FlexDiv>
       </nav>
       {isMobileOrTablet && sidebar && (
-        <Sidebar links={links(translations)} lang={locale} />
+        <Sidebar links={links(translations)} lang={locale} socials={socials} />
       )}
     </>
   );

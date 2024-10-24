@@ -1,10 +1,7 @@
-import { ISeo, LocalPaths } from "@/data.d";
+import { ISeo } from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
 import { LangType } from "@/i18n";
-import { Metadata } from "next";
-import { setMetadata } from "@/components/SEO";
 import { cartPageQuery } from "@/app/api/generateSanityQueries";
-import dynamic from "next/dynamic";
 import {
   Collapsible,
   CollapsibleProps,
@@ -58,7 +55,7 @@ export default async function CartPage({
   const formData: CartProps = await getFormData("cart", locale);
 
   return (
-    <Block variant="default">
+    <Block variant="default" illustrations>
       <TitleWrapper title={translations.titles.cart}>
         <Cart {...formData} />
       </TitleWrapper>

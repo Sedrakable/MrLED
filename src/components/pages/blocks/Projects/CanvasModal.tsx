@@ -29,14 +29,14 @@ export const CanvasModal: FC<CanvasModalProps> = ({ project }) => {
   const { addToCart, checkCartAlert } = useCart();
 
   const onAddToCart = () => {
-    const canvasAsProduct: IProduct = {
+    const toilesAsProduct: IProduct = {
       path: project.image.alt,
       title: project.title,
       images: [project.image],
       price: project.price,
-      type: "canvas",
+      type: "toiles",
     };
-    addToCart(canvasAsProduct, 1);
+    addToCart(toilesAsProduct, 1);
     setMessage(translations.cart.itemAddedToCart);
   };
 
@@ -45,7 +45,7 @@ export const CanvasModal: FC<CanvasModalProps> = ({ project }) => {
       gapArray={[4]}
       flex={{ direction: "column" }}
       width100
-      className={styles.canvasModalContainer}
+      className={styles.toilesModalContainer}
       padding={{ top: [5, 6, 2, 0] }}
     >
       <FlexDiv

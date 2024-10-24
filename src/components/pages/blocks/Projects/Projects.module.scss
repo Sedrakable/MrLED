@@ -1,21 +1,23 @@
-@import "../../../../styles/mixins.scss";
+@import "@/styles/mixins.scss";
 
 @mixin vars() {
   --columns: 1;
   --grad: hsl(from var(--dark-burgundy) h s l / 0.4) 0%,
     hsl(from var(--dark-burgundy) h s l / 0.1) 50%;
-  --row-gap: var(--pad-9);
+  --row-gap: var(--pad-6);
   @media (min-width: $tablet) {
     --columns: 2;
-    --row-gap: var(--pad-7);
+    --row-gap: var(--pad-4);
   }
 
   @media (min-width: $laptop) {
     --columns: 3;
+    --row-gap: var(--pad-5);
   }
 
   @media (min-width: $desktop) {
     --columns: 4;
+    --row-gap: var(--pad-6);
   }
 }
 
@@ -45,7 +47,7 @@
   }
 }
 
-.canvasModalContainer {
+.toilesModalContainer {
   @media (min-width: $laptop) {
     width: 50vw !important;
   }
@@ -61,7 +63,7 @@
   @include vars;
   display: grid !important;
   grid-template-columns: repeat(var(--columns), 1fr);
-  row-gap: var(--row-gap) !important;
+  // row-gap: var(--row-gap) !important;
 
   .container {
     cursor: pointer;
@@ -107,15 +109,15 @@
           fill: var(--burgundy);
         }
       }
+      p {
+        width: auto !important;
+      }
+      .infini {
+        height: 1em;
+        fill: var(--burgundy);
+        margin-bottom: 0.3em;
+      }
     }
-  }
-}
-
-.selectWrapper {
-  display: grid !important;
-  grid-template-columns: repeat(2, 1fr);
-  @media (min-width: $tablet) {
-    display: flex !important;
   }
 }
 

@@ -1,13 +1,10 @@
-import { ISeo, LocalPaths } from "@/data.d";
+import { ISeo, IWork, LocalPaths } from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
 import { LangType } from "@/i18n";
-import { Metadata } from "next";
-import { setMetadata } from "@/components/SEO";
 import {
   contactPageQuery,
   pricePlansQuery,
 } from "@/app/api/generateSanityQueries";
-import dynamic from "next/dynamic";
 import { getTranslations } from "@/helpers/langUtils";
 import {
   Collapsible,
@@ -26,9 +23,9 @@ import {
   ContactProps,
 } from "@/components/pages/blocks/Contact/Contact";
 import { ServicesAndPlans } from "@/components/reuse/Form/ContactForm/ContactForm";
-import { PricePlanProps } from "@/components/pages/blocks/PricePlans/PricePlans";
 import { OptionType } from "@/components/reuse/Form/Select";
-import { ClientLogger } from "@/helpers/clientLogger";
+import { getCarouselData } from "@/components/reuse/Carousel/getCarouselData";
+import { getImagesFromWorks, shuffleArray } from "@/helpers/functions";
 
 export interface ContactPageProps {
   meta: ISeo;
@@ -114,6 +111,8 @@ export default async function ContactPage({
   const inPersonCoursePagePlans = await getPlansForService(
     "inPersonCoursePage"
   );
+  const carouselData: IWork[] = await getCarouselData();
+  const images = shuffleArray(getImagesFromWorks(carouselData));
 
   const servicesAndPlans: ServicesAndPlans[] = [
     {
@@ -142,14 +141,17 @@ export default async function ContactPage({
       ...formData,
       servicesAndPlans: servicesAndPlans,
     },
+    images: {
+      img1: images[0],
+      img2: images[1],
+      img3: images[2],
+    },
   };
+
   return (
-    <Block variant="default">
+    <Block variant="default" illustrations>
       {data?.notification && <Notification {...data.notification} />}
       {formData && <Contact {...contactData} />}
-      <ClientLogger
-        slug={contactData.form.servicesAndPlans[0].plans[0].value}
-      />
       {data?.collapsible && <Collapsible {...data.collapsible} />}
     </Block>
   );

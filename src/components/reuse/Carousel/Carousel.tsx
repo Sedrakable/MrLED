@@ -9,11 +9,12 @@ import cn from "classnames";
 
 import { ICustomImage, SanityImage } from "../SanityImage/SanityImage";
 import { ICta, IProject, IWork } from "@/data.d";
-import { shuffleArray } from "@/helpers/functions";
+import { getImagesFromWorks, shuffleArray } from "@/helpers/functions";
 import FlexDiv from "../FlexDiv";
 import { Button } from "../Button";
 import { useLocale } from "next-intl";
 import { LangType } from "@/i18n";
+import { Block } from "../containers/Block/Block";
 
 const OPTIONS: EmblaOptionsType = { dragFree: true, loop: true };
 
@@ -61,11 +62,8 @@ export const Carousel: FC<ICarouselProps> = ({ data, cta }) => {
       console.error("Data is not an array:", data);
       return [];
     }
-    const allImages = data.flatMap((work) =>
-      (Array.isArray(work.projects) ? work.projects : [])
-        .map((project: IProject) => ("image" in project ? project.image : null))
-        .filter((image): image is ICustomImage => image !== null)
-    );
+
+    const allImages = getImagesFromWorks(data);
 
     // Randomize the order of images
     return shuffleArray(allImages);
@@ -74,7 +72,11 @@ export const Carousel: FC<ICarouselProps> = ({ data, cta }) => {
   if (!images.length) return null;
 
   return (
-    <FlexDiv flex={{ direction: "column", x: "center" }} width100>
+    <FlexDiv
+      flex={{ direction: "column", x: "center" }}
+      width100
+      padding={{ top: [10, 10, 10, 11] }}
+    >
       <div className={styles.embla} ref={emblaRef}>
         <div className={styles.embla__container}>
           {images.map((image, index) => (

@@ -11,7 +11,7 @@ interface TitleWrapperProps {
 export const TitleWrapper: FC<TitleWrapperProps> = ({ children, title }) => {
   return (
     <FlexDiv
-      gapArray={[6, 6, 7, 8]}
+      gapArray={[4, 4, 5, 6]}
       flex={{ direction: "column", y: "flex-start" }}
       width100
     >

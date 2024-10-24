@@ -16,7 +16,7 @@ import Link from "next/link";
 import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { useWindowResize } from "@/helpers/useWindowResize";
 import { TitleWrapper } from "../../../reuse/containers/TitleWrapper/TitleWrapper";
-import { WorkPageProps } from "@/app/[locale]/portfolio/[slug]/page";
+import { WorkPageProps } from "@/app/[locale]/portfolio/[projectType]/page";
 
 export interface WorkProps {
   backgroundImage: ICustomImage;

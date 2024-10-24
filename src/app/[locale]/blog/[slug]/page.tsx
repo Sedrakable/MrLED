@@ -8,10 +8,10 @@ import { setMetadata } from "@/components/SEO";
 import dynamic from "next/dynamic";
 import { articlePageQuery } from "@/app/api/generateSanityQueries";
 
-const ArticlePageComp = dynamic(
+const Article = dynamic(
   () =>
-    import("@/components/pages/ArticlePage/ArticlePage").then(
-      (module) => module.ArticlePageComp
+    import("@/components/pages/blocks/Article/Article").then(
+      (module) => module.Article
     ),
   {
     ssr: false,
@@ -64,5 +64,5 @@ export default async function ArticlePage({
 }) {
   const articleData: ArticlePageProps = await getArticlePageData(locale, slug);
 
-  return articleData && <ArticlePageComp {...articleData} />;
+  return articleData && <Article {...articleData} />;
 }

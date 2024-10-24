@@ -27,6 +27,10 @@ import { LangType } from "@/i18n";
 // Utilities
 import { setMetadata } from "@/components/SEO";
 import { getTranslations } from "@/helpers/langUtils";
+import { Approx, ApproxProps } from "@/components/pages/blocks/Approx/Approx";
+import { shuffleArray, getImagesFromWorks } from "@/helpers/functions";
+import { FormTitleProps } from "@/components/reuse/Form/Form";
+import { getFormData } from "@/components/reuse/Form/getFormData";
 
 // Dynamically imported components
 const Carousel = dynamic(
@@ -84,16 +88,30 @@ export default async function HennaServicePage({
 }: {
   params: { locale: LangType };
 }) {
+  const translations = getTranslations(locale);
+
   const hennaServicePageData = await getHennaServicePageData(locale);
   const carouselData: IWork[] = await getCarouselData("henna");
-  const translations = getTranslations(locale);
+  const formData: FormTitleProps = await getFormData("approx", locale);
+
+  const images = shuffleArray(getImagesFromWorks(carouselData));
+  const approxData: ApproxProps = {
+    form: {
+      ...formData,
+    },
+    images: {
+      img1: images[0],
+      img2: images[1],
+      img3: images[2],
+    },
+  };
 
   return (
     hennaServicePageData && (
       <>
         <Hero {...hennaServicePageData?.hero} version={2} />
 
-        <Block variant="default">
+        <Block variant="default" illustrations>
           {hennaServicePageData.tarifText && (
             <TitleAndText
               text={hennaServicePageData.tarifText}
@@ -106,6 +124,7 @@ export default async function HennaServicePage({
           {hennaServicePageData.multiDescriptions && (
             <MultiDescription descs={hennaServicePageData.multiDescriptions} />
           )}
+          {formData && <Approx {...approxData} />}
         </Block>
         {carouselData && (
           <Carousel

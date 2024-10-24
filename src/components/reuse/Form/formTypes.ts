@@ -32,6 +32,13 @@ export interface ContactFormData extends BaseFormData {
   upload: string;
 }
 
+export interface ApproxFormData extends BaseFormData {
+  info: string;
+  width: string;
+  length: string;
+  upload: string;
+}
+
 export interface FormErrorData {
   [key: string]: boolean;
 }

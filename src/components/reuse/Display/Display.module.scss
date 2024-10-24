@@ -1,27 +1,32 @@
-@import "../../../styles/mixins.scss";
+@import "@/styles/mixins.scss";
 
 @mixin vars() {
   --service-height: fit-content;
-  --image-width: 1;
-
+  --article-height: fit-content;
+  --service-image-width: 1;
+  --article-image-width: 1;
   @media (min-width: $tablet) {
     --service-height: 400px;
+    --article-height: 500px;
     --subtitle-column-span: 5;
     --desc-column-span: 4;
-    --image-width: 3/5;
+    --service-image-width: 3/5;
+    --article-image-width: 3/5;
     --top-blocker-width: calc(100% - 350px);
   }
 
   @media (min-width: $laptop) {
     --subtitle-column-span: 5;
     --desc-column-span: 4;
-    --image-width: 2/3;
+    --service-image-width: 2/3;
+    --article-image-width: 1/2;
     --top-blocker-width: 100%;
     --top-blocker-width: calc(100% - 620px);
   }
 
   @media (min-width: $desktop) {
     --service-height: 500px;
+    --article-height: 600px;
     --desc-column-span: 3;
     --top-blocker-width: 100%;
     --top-blocker-width: calc(100% - 620px);
@@ -66,7 +71,7 @@
 
   @media (min-width: $tablet) {
     .image {
-      width: calc(var(--image-width) * 100vw) !important;
+      width: calc(var(--service-image-width) * 100vw) !important;
       position: absolute !important;
       inset: 0;
       left: auto;
@@ -111,6 +116,15 @@
     }
     .content {
       margin-top: 0;
+    }
+  }
+}
+
+.article {
+  min-height: var(--article-height);
+  @media (min-width: $tablet) {
+    .image {
+      width: calc(var(--article-image-width) * 100vw) !important;
     }
   }
 }
