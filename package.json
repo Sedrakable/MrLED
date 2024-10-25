@@ -31,7 +31,8 @@
     "nodemailer": "^6.9.14",
     "react": "18.3.1",
     "react-dom": "^18.3.1",
-    "sass": "^1.75.0"
+    "sass": "^1.75.0",
+    "sass-migrator": "^2.2.1"
   },
   "scripts": {
     "dev": "next dev",
@@ -55,13 +56,8 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.22.11",
-    "@babel/plugin-syntax-flow": "^7.22.5",
-    "@babel/plugin-transform-private-property-in-object": "^7.21.11",
-    "@babel/plugin-transform-react-jsx": "^7.22.5",
     "@next/eslint-plugin-next": "^15.0.1",
     "@svgr/webpack": "^8.1.0",
-    "@testing-library/dom": "^10.4.0",
     "@types/node": "^22.7.9",
     "@types/node-sass": "^4.11.3",
     "@types/react": "^18.2.14",

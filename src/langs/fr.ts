@@ -2,13 +2,8 @@ import { Translations } from "./langTypes";
 
 export const frTranslations: Translations = {
   titles: {
-    services: "Services",
-    values: "Valeurs",
-    process: "Processus",
-    features: "Fonctionnalités",
     history: "Histoire",
     work: "Mon Travail",
-    contact: "Contact",
     reviews: "Avis",
     blog: "Blog",
     tarif: "Tarif",
@@ -17,10 +12,7 @@ export const frTranslations: Translations = {
     cart: "Panier",
   },
   buttons: {
-    workWithMe: "Travail avec moi",
     view: "Voir",
-    contact: "Contact",
-    send: "Envoyer",
     addToCart: "Ajouter au panier",
     submit: "Soumettre",
   },

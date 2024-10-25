@@ -2,13 +2,8 @@ import { Translations } from "./langTypes";
 
 export const enTranslations: Translations = {
   titles: {
-    services: "Services",
-    values: "Values",
-    process: "Process",
-    features: "Features",
     history: "History",
     work: "My Work",
-    contact: "Contact",
     reviews: "Reviews",
     blog: "Blog",
     tarif: "Tarif",
@@ -17,10 +12,7 @@ export const enTranslations: Translations = {
     cart: "Cart",
   },
   buttons: {
-    workWithMe: "Work with me",
     view: "View",
-    contact: "Contact",
-    send: "Send",
     addToCart: "Add to cart",
     submit: "Submit",
   },

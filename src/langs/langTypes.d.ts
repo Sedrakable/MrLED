@@ -8,15 +8,9 @@ import {
   ITattooStatus,
 } from "../data.d";
 
-//TODO: check for unused
 interface Titles {
-  services: string;
-  values: string;
-  process: string;
-  features: string;
   history: string;
   work: string;
-  contact: string;
   reviews: string;
   blog: string;
   tarif: string;
@@ -26,10 +20,7 @@ interface Titles {
 }
 
 interface Buttons {
-  workWithMe: string;
   view: string;
-  contact: string;
-  send: string;
   submit: string;
   addToCart: string;
 }

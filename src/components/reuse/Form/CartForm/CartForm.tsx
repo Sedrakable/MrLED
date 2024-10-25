@@ -46,8 +46,8 @@ export const CartForm: FC<CartFormProps> = ({
   const [errors, setErrors] = useState<FormErrorData>({});
   const [submit, setSubmit] = useState<string | false>(false);
 
-  const deliveryOptions = deliveryMethods.map((method, index) => ({
-    value: `method-${index}`,
+  const deliveryOptions = deliveryMethods.map((method) => ({
+    value: method,
     label: method,
   }));
   const [states, setStates] = useState<OptionType[]>([]);
@@ -111,10 +111,8 @@ export const CartForm: FC<CartFormProps> = ({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ formData, cart }),
+        body: JSON.stringify({ formData, cart, locale }),
       });
-
-      const data = await response.json();
 
       if (response.ok) {
         setSubmit(translations.form.general.emailSent);

@@ -61,33 +61,30 @@ export default async function ProjectPage({
   );
 
   return (
-    selectedProject && (
-      <Modal
-        version={
-          (projectType === "flash" || projectType === "toiles") &&
-          !(selectedProject as IFlash | ICanvas).reserved
-            ? "default"
-            : "image"
-        }
-      >
-        <ClientLogger slug={selectedProject.image.alt} />
-        {projectType === "flash" && !(selectedProject as IFlash).reserved ? (
-          workPageData &&
-          formData && (
-            <FlashModal
-              project={selectedProject as IFlash}
-              flashes={workPageData.work.projects as IFlash[]}
-              formData={formData}
-            />
-          )
-        ) : projectType === "toiles" &&
-          !(selectedProject as ICanvas).reserved ? (
-          <CanvasModal project={selectedProject as ICanvas} />
-        ) : (
-          <ProjectModal project={selectedProject} />
-        )}
-      </Modal>
-    )
+    <Modal
+      version={
+        (projectType === "flash" || projectType === "toiles") &&
+        !(selectedProject as IFlash | ICanvas).reserved
+          ? "default"
+          : "image"
+      }
+    >
+      <ClientLogger slug={projectType} />
+      {projectType === "flash" && !(selectedProject as IFlash).reserved ? (
+        workPageData &&
+        formData && (
+          <FlashModal
+            project={selectedProject as IFlash}
+            flashes={workPageData.work.projects as IFlash[]}
+            formData={formData}
+          />
+        )
+      ) : projectType === "toiles" && !(selectedProject as ICanvas).reserved ? (
+        <CanvasModal project={selectedProject as ICanvas} />
+      ) : (
+        <ProjectModal project={selectedProject} />
+      )}
+    </Modal>
     // <Modal>
     //
     // </Modal>
