@@ -13,7 +13,7 @@ import {
 } from "@/data.d";
 import { SanityImage } from "../../../reuse/SanityImage/SanityImage";
 import { getTranslations } from "@/helpers/langUtils";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { useLocale } from "next-intl";
 import { Heading } from "@/components/reuse/Heading";
 import Line from "@/assets/vector/Line.svg";

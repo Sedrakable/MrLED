@@ -9,7 +9,7 @@ import { SanityImage } from "@/components/reuse/SanityImage/SanityImage";
 import { ArticleNavigation } from "./ArticleNavigation/ArticleNavigation";
 import { getFromLocalStorage, setToLocalStorage } from "@/helpers/localStorage";
 import { useState, useCallback, use, useEffect } from "react";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { articlesOrderQuery } from "@/app/api/generateSanityQueries";
 import { useFetchPage } from "@/app/api/useFetchPage";
 import { useLocale } from "next-intl";

@@ -11,7 +11,7 @@ import { Button } from "../Button";
 import { SanityImage } from "../SanityImage/SanityImage";
 import { useWindowResize } from "../../../helpers/useWindowResize";
 import { useLocale } from "next-intl";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Heading } from "../Heading";
 import { FancyText } from "../FancyText/FancyText";
 import fishes from "/public/photos/Fishes.jpeg";

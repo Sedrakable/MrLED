@@ -9,17 +9,10 @@ import { FlashModal } from "@/components/pages/blocks/Projects/FlashModal";
 import { ProjectModal } from "@/components/pages/blocks/Projects/ProjectModal";
 import { ICanvas, IFlash, IProduct, IProject, ProjectType } from "@/data.d";
 import { ClientLogger } from "@/helpers/clientLogger";
-import dynamic from "next/dynamic";
 import { getWorkPageData, WorkPageProps } from "../page";
 import { getFormData } from "@/components/reuse/Form/getFormData";
 import { FormTitleProps } from "@/components/reuse/Form/Form";
-
-const Modal = dynamic(
-  () => import("@/components/reuse/Modal").then((module) => module.Modal),
-  {
-    ssr: false,
-  }
-);
+import { Modal } from "@/components/reuse/Modal";
 
 const getProjectData = async (type: string, id: string) => {
   const getProjectQuery = projectPageQuery(type, id);
@@ -52,10 +45,11 @@ const getProjectData = async (type: string, id: string) => {
 // }
 
 export default async function ProjectPage({
-  params: { projectId, projectType, locale },
+  params,
 }: {
-  params: { projectId: string; projectType: string; locale };
+  params: Promise<{ projectId: string; projectType: string; locale }>;
 }) {
+  const { projectId, projectType, locale } = await params;
   const workPageData: WorkPageProps = await getWorkPageData(projectType);
   const formData: FormTitleProps = await getFormData(
     projectType as ProjectType,

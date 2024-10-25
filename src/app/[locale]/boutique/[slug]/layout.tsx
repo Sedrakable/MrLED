@@ -9,7 +9,7 @@ export default function ModalLayout({
 }) {
   return (
     <div>
-      <Product params={{ slug }} />
+      <Product params={Promise.resolve({ slug })} />
       {children}
     </div>
   );

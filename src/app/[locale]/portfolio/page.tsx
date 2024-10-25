@@ -1,9 +1,8 @@
 import { ISeo, LocalPaths, IHero, IWork } from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Metadata } from "next";
 import { setMetadata } from "@/components/SEO";
-import dynamic from "next/dynamic";
 import { WorkPageProps } from "./[projectType]/page";
 import { portfolioPageQuery } from "@/app/api/generateSanityQueries";
 import { HistoryProps } from "@/components/pages/blocks/History/History";
@@ -12,6 +11,7 @@ import { History } from "@/components/pages/blocks/History/History";
 import { Block } from "@/components/reuse/containers/Block/Block";
 import { Works } from "@/components/pages/blocks/Works/Works";
 import { Hero } from "@/components/reuse/Hero/Hero";
+import { Carousel } from "@/components/reuse/Carousel/Carousel";
 
 export interface PortfolioPageProps {
   meta: ISeo;
@@ -19,15 +19,6 @@ export interface PortfolioPageProps {
   works: WorkPageProps[];
   history: HistoryProps;
 }
-const Carousel = dynamic(
-  () =>
-    import("@/components/reuse/Carousel/Carousel").then(
-      (module) => module.Carousel
-    ),
-  {
-    ssr: false,
-  }
-);
 
 const getPortfolioPageData = async (locale: LangType) => {
   const type = "PortfolioPage";
@@ -41,10 +32,11 @@ const getPortfolioPageData = async (locale: LangType) => {
 };
 
 export async function generateMetadata({
-  params: { locale },
+  params,
 }: {
-  params: { locale: LangType };
+  params: Promise<{ locale: LangType }>;
 }): Promise<Metadata> {
+  const { locale } = await params; // Await the params
   const portfolioPageData = await getPortfolioPageData(locale);
   const { metaTitle, metaDesc, metaKeywords } = portfolioPageData.meta;
   const path = LocalPaths.PORTFOLIO;
@@ -61,10 +53,11 @@ export async function generateMetadata({
 }
 
 export default async function PortfolioPage({
-  params: { locale },
+  params,
 }: {
-  params: { locale: LangType };
+  params: Promise<{ locale: LangType }>;
 }) {
+  const { locale } = await params; // Await the params
   const portfolioPageData = await getPortfolioPageData(locale);
   const carouselData: IWork[] = await getCarouselData();
 

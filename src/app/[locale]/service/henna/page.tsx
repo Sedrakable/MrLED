@@ -1,6 +1,5 @@
 // Next.js and React imports
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
 
 // API and data fetching
 import { hennaServicePageQuery } from "@/app/api/generateSanityQueries";
@@ -22,7 +21,7 @@ import {
 
 // Types and interfaces
 import { IHero, ISeo, IWork, LocalPaths } from "@/data.d";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 
 // Utilities
 import { setMetadata } from "@/components/SEO";
@@ -31,15 +30,7 @@ import { Approx, ApproxProps } from "@/components/pages/blocks/Approx/Approx";
 import { shuffleArray, getImagesFromWorks } from "@/helpers/functions";
 import { FormTitleProps } from "@/components/reuse/Form/Form";
 import { getFormData } from "@/components/reuse/Form/getFormData";
-
-// Dynamically imported components
-const Carousel = dynamic(
-  () =>
-    import("@/components/reuse/Carousel/Carousel").then(
-      (module) => module.Carousel
-    ),
-  { ssr: false }
-);
+import { Carousel } from "@/components/reuse/Carousel/Carousel";
 
 export interface HennaServicePageProps {
   meta: ISeo;
@@ -60,34 +51,36 @@ export const getHennaServicePageData = async (locale: LangType) => {
   return hennaServicePageData;
 };
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: LangType };
-}): Promise<Metadata> {
-  const hennaServicePageData: HennaServicePageProps = await getHennaServicePageData(
-    locale
-  );
-  const { metaTitle, metaDesc, metaKeywords } =
-    hennaServicePageData?.meta || {};
-  const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
-  const crawl = true;
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<{ locale: LangType }>;
+// }): Promise<Metadata> {
+//   const { locale } = await params; // Await the params
+//   const hennaServicePageData: HennaServicePageProps = await getHennaServicePageData(
+//     locale
+//   );
+//   const { metaTitle, metaDesc, metaKeywords } =
+//     hennaServicePageData?.meta || {};
+//   const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
+//   const crawl = true;
 
-  return setMetadata({
-    locale,
-    metaTitle,
-    metaDesc,
-    metaKeywords,
-    path,
-    crawl,
-  });
-}
+//   return setMetadata({
+//     locale,
+//     metaTitle,
+//     metaDesc,
+//     metaKeywords,
+//     path,
+//     crawl,
+//   });
+// }
 
 export default async function HennaServicePage({
-  params: { locale },
+  params,
 }: {
-  params: { locale: LangType };
+  params: Promise<{ locale: LangType }>;
 }) {
+  const { locale } = await params; // Await the params
   const translations = getTranslations(locale);
 
   const hennaServicePageData = await getHennaServicePageData(locale);

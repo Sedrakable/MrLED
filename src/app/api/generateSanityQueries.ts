@@ -1,4 +1,4 @@
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 
 export const socialsQuery = (): string => {
   return `*[_type == 'socials'][0]`;

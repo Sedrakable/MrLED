@@ -5,7 +5,7 @@ import FlexDiv from "../FlexDiv";
 import { Paragraph } from "../Paragraph/Paragraph";
 import { Icon } from "../Icon";
 import { getTranslations } from "@/helpers/langUtils";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { useLocale } from "next-intl";
 
 export interface OptionType {

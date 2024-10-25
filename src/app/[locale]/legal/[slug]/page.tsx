@@ -1,7 +1,7 @@
 import React from "react";
 import { ILegalPage } from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { legalPageQuery } from "@/app/api/generateSanityQueries";
 import dynamic from "next/dynamic";
 import { LegalPageComp } from "@/components/pages/LegalPage/LegalPage";

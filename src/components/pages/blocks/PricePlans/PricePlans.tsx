@@ -11,7 +11,7 @@ import {
 } from "../../../reuse/SanityImage/SanityImage";
 import { getTranslations } from "../../../../helpers/langUtils";
 import { useLocale } from "next-intl";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { useWindowResize } from "@/helpers/useWindowResize";
 import { TitleWrapper } from "../../../reuse/containers/TitleWrapper/TitleWrapper";

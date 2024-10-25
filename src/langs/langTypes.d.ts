@@ -117,6 +117,8 @@ interface Cart {
   itemAddedToCart: string;
   itemsAddedToCart: string;
   checkCartAlert: string;
+  noItemsInCart: string;
+  total: string;
 }
 
 type BodyPartsRecord = {

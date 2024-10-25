@@ -4,7 +4,7 @@ import styles from "./Display.module.scss";
 import FlexDiv from "../../reuse/FlexDiv";
 import cn from "classnames";
 import { useLocale } from "next-intl";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { IFancyText, IHero } from "@/data.d";
 import { useWindowResize } from "@/helpers/useWindowResize";
 import { Button } from "../Button";

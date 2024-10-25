@@ -7,7 +7,7 @@ import { Heading } from "../../../reuse/Heading";
 import { Button } from "../../../reuse/Button";
 import { getTranslations } from "../../../../helpers/langUtils";
 import { useLocale } from "next-intl";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 
 export const ServicesGrid: React.FC<{ services: IService[] }> = ({
   services,

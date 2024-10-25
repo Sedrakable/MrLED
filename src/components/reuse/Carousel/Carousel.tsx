@@ -13,7 +13,7 @@ import { getImagesFromWorks, shuffleArray } from "@/helpers/functions";
 import FlexDiv from "../FlexDiv";
 import { Button } from "../Button";
 import { useLocale } from "next-intl";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Block } from "../containers/Block/Block";
 
 const OPTIONS: EmblaOptionsType = { dragFree: true, loop: true };
@@ -79,16 +79,19 @@ export const Carousel: FC<ICarouselProps> = ({ data, cta }) => {
     >
       <div className={styles.embla} ref={emblaRef}>
         <div className={styles.embla__container}>
-          {images.map((image, index) => (
-            <div className={styles.embla__slide} key={index}>
-              <SanityImage
-                image={image?.image}
-                alt={image?.alt}
-                figureclassname={cn(styles.image)}
-                quality={50}
-              />
-            </div>
-          ))}
+          {images.map(
+            (image, index) =>
+              image?.image && (
+                <div className={styles.embla__slide} key={index}>
+                  <SanityImage
+                    image={image?.image}
+                    alt={image?.alt}
+                    figureclassname={cn(styles.image)}
+                    quality={50}
+                  />
+                </div>
+              )
+          )}
         </div>
       </div>
       {cta && (

@@ -104,6 +104,8 @@ export const enTranslations: Translations = {
     itemsAddedToCart: "items have been added to cart",
     itemAddedToCart: "item has been added to cart",
     checkCartAlert: "Check Cart",
+    total: "Total",
+    noItemsInCart: "No items in cart. Please check Boutique",
   },
   select: {
     sort: "Sort",

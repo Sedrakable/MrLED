@@ -6,7 +6,7 @@ import { Block } from "../../../reuse/containers/Block/Block";
 import { TitleWrapper } from "@/components/reuse/containers/TitleWrapper/TitleWrapper";
 import { useLocale } from "next-intl";
 import { getTranslations } from "@/helpers/langUtils";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Display } from "@/components/reuse/Display/Display";
 import Link from "next/link";
 import { useArticleFilters } from "../../../reuse/Form/CustomFilters/useArticleFilters";

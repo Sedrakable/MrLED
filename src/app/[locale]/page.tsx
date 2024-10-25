@@ -1,13 +1,13 @@
 import { LocalPaths, ISeo, IHomeHero, IReview, IWork } from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Metadata } from "next";
 import { setMetadata } from "@/components/SEO";
 import dynamic from "next/dynamic";
 import { homePageQuery } from "@/app/api/generateSanityQueries";
 import { WorkPageProps } from "./portfolio/[projectType]/page";
 import { getCarouselData } from "@/components/reuse/Carousel/getCarouselData";
-import { BigCTAProps } from "@/components/pages/blocks/BigCTA/BigCTA";
+import { BigCTA, BigCTAProps } from "@/components/pages/blocks/BigCTA/BigCTA";
 import { Services } from "@/components/pages/home/Services/Services";
 import { Reviews } from "@/components/pages/blocks/Reviews/Reviews";
 import { Works } from "@/components/pages/blocks/Works/Works";
@@ -18,26 +18,7 @@ import {
   HistoryProps,
 } from "@/components/pages/blocks/History/History";
 import { DisplayProps } from "@/components/reuse/Display/Display";
-
-const Carousel = dynamic(
-  () =>
-    import("@/components/reuse/Carousel/Carousel").then(
-      (module) => module.Carousel
-    ),
-  {
-    ssr: false,
-  }
-);
-
-const BigCTA = dynamic(
-  () =>
-    import("@/components/pages/blocks/BigCTA/BigCTA").then(
-      (module) => module.BigCTA
-    ),
-  {
-    ssr: false,
-  }
-);
+import { Carousel } from "@/components/reuse/Carousel/Carousel";
 
 export interface HomePageProps {
   meta: ISeo;
@@ -57,31 +38,33 @@ export const getHomePageData = async (locale: LangType) => {
   return homePageData;
 };
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: LangType };
-}): Promise<Metadata> {
-  const homePageData = await getHomePageData(locale);
-  const { metaTitle, metaDesc, metaKeywords } = homePageData.meta;
-  const path = LocalPaths.HOME;
-  const crawl = true;
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<{ locale: LangType }>;
+// }): Promise<Metadata> {
+//   const { locale } = await params; // Await the params
+//   const homePageData = await getHomePageData(locale);
+//   const { metaTitle, metaDesc, metaKeywords } = homePageData.meta;
+//   const path = LocalPaths.HOME;
+//   const crawl = true;
 
-  return setMetadata({
-    locale,
-    metaTitle,
-    metaDesc,
-    metaKeywords,
-    path,
-    crawl,
-  });
-}
+//   return setMetadata({
+//     locale,
+//     metaTitle,
+//     metaDesc,
+//     metaKeywords,
+//     path,
+//     crawl,
+//   });
+// }
 
 export default async function HomePage({
-  params: { locale },
+  params,
 }: {
-  params: { locale: LangType };
+  params: Promise<{ locale: LangType }>;
 }) {
+  const { locale } = await params; // Await the params
   const homePageData = await getHomePageData(locale);
   const carouselData: IWork[] = await getCarouselData();
 

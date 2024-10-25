@@ -8,7 +8,7 @@ import { Paragraph } from "../../../reuse/Paragraph/Paragraph";
 import { IValue, IValues } from "../../../../data.d";
 import { getTranslations } from "../../../../helpers/langUtils";
 import { useLocale } from "next-intl";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 
 const Value: React.FC<IValue & { number: string }> = ({
   number,

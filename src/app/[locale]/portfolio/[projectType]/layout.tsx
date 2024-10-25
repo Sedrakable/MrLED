@@ -1,4 +1,4 @@
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import FlexDiv from "@/components/reuse/FlexDiv";
 import WorkPage from "./page";
 
@@ -13,7 +13,7 @@ export default function WorkLayout({
 }) {
   return (
     <FlexDiv flex={{ direction: "column" }} width100 height100>
-      <WorkPage params={{ locale, projectType }} />
+      <WorkPage params={Promise.resolve({ locale, projectType })} />
       {children}
     </FlexDiv>
   );

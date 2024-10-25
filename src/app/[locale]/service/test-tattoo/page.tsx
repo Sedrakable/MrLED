@@ -1,6 +1,5 @@
 // Next.js and React imports
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
 
 // Styling
 import styles from "@/styles/jagua.module.scss";
@@ -16,28 +15,17 @@ import {
   PricePlans,
   PricePlanProps,
 } from "@/components/pages/blocks/PricePlans/PricePlans";
-import { BigCTAProps } from "@/components/pages/blocks/BigCTA/BigCTA";
+import { BigCTA, BigCTAProps } from "@/components/pages/blocks/BigCTA/BigCTA";
 
 // Types and interfaces
 import { IHero, ISeo, LocalPaths } from "@/data.d";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 
 // Utilities
 import { setMetadata } from "@/components/SEO";
 import { TextWrapper } from "@/components/reuse/containers/TextWrapper/TextWrapper";
 import { PortableTextContent } from "@/components/reuse/Paragraph/PortableTextContent";
 import { Display, DisplayProps } from "@/components/reuse/Display/Display";
-
-// Dynamically imported components
-const BigCTA = dynamic(
-  () =>
-    import("@/components/pages/blocks/BigCTA/BigCTA").then(
-      (module) => module.BigCTA
-    ),
-  {
-    ssr: false,
-  }
-);
 
 export interface TestTattooServicePageProps {
   meta: ISeo;
@@ -59,34 +47,36 @@ export const getTestTattooServicePageData = async (locale: LangType) => {
   return testTattooServicePageData;
 };
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: LangType };
-}): Promise<Metadata> {
-  const testTattooServicePageData: TestTattooServicePageProps = await getTestTattooServicePageData(
-    locale
-  );
-  const { metaTitle, metaDesc, metaKeywords } =
-    testTattooServicePageData?.meta || {};
-  const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
-  const crawl = true;
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<{ locale: LangType }>;
+// }): Promise<Metadata> {
+//   const { locale } = await params; // Await the params
+//   const testTattooServicePageData: TestTattooServicePageProps = await getTestTattooServicePageData(
+//     locale
+//   );
+//   const { metaTitle, metaDesc, metaKeywords } =
+//     testTattooServicePageData?.meta || {};
+//   const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
+//   const crawl = true;
 
-  return setMetadata({
-    locale,
-    metaTitle,
-    metaDesc,
-    metaKeywords,
-    path,
-    crawl,
-  });
-}
+//   return setMetadata({
+//     locale,
+//     metaTitle,
+//     metaDesc,
+//     metaKeywords,
+//     path,
+//     crawl,
+//   });
+// }
 
 export default async function TestTattooServicePage({
-  params: { locale },
+  params,
 }: {
-  params: { locale: LangType };
+  params: Promise<{ locale: LangType }>;
 }) {
+  const { locale } = await params; // Await the params
   const testTattooServicePageData = await getTestTattooServicePageData(locale);
 
   return (

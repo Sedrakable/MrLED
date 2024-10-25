@@ -1,18 +1,11 @@
 import { blogPageQuery } from "@/app/api/generateSanityQueries";
 import { useFetchPage } from "@/app/api/useFetchPage";
+import { Blog } from "@/components/pages/blocks/Blog/Blog";
 
 import { IBlog, ISeo } from "@/data.d";
-import { LangType } from "@/i18n";
-import dynamic from "next/dynamic";
+import { LangType } from "@/i18n/request";
 import React from "react";
 
-const Blog = dynamic(
-  () =>
-    import("@/components/pages/blocks/Blog/Blog").then((module) => module.Blog),
-  {
-    ssr: false,
-  }
-);
 export interface BlogPageProps {
   meta: ISeo;
   blog: IBlog;
@@ -27,9 +20,9 @@ export const getBlogPageData = async (locale: LangType) => {
 };
 
 // export async function generateMetadata({
-//   params: { locale },
+//    params,
 // }: {
-//   params: { locale: LangType };
+//   params: Promise<{ locale: LangType }>;
 // }): Promise<Metadata> {
 //   const blogPageData: BlogPageProps = await getBlogPageData(locale);
 //   const { metaTitle, metaDesc, metaKeywords } = blogPageData.meta;
@@ -47,10 +40,11 @@ export const getBlogPageData = async (locale: LangType) => {
 // }
 
 export default async function BlogPage({
-  params: { locale },
+  params,
 }: {
-  params: { locale: LangType };
+  params: Promise<{ locale: LangType }>;
 }) {
+  const { locale } = await params; // Await the params
   const blogPageData: BlogPageProps = await getBlogPageData(locale);
 
   return <>{blogPageData && <Blog {...blogPageData.blog} />}</>;

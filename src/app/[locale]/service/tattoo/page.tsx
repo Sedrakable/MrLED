@@ -1,6 +1,5 @@
 // Next.js and React imports
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
 
 // API and data fetching
 import { tattooServicePageQuery } from "@/app/api/generateSanityQueries";
@@ -25,7 +24,7 @@ import {
 
 // Types and interfaces
 import { IHero, ISeo, IWork, LocalPaths } from "@/data.d";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 
 // Utilities
 import { setMetadata } from "@/components/SEO";
@@ -36,15 +35,7 @@ import { getFormData } from "@/components/reuse/Form/getFormData";
 import { FormTitleProps } from "@/components/reuse/Form/Form";
 import { Approx, ApproxProps } from "@/components/pages/blocks/Approx/Approx";
 import { ClientLogger } from "@/helpers/clientLogger";
-
-// Dynamically imported components
-const Carousel = dynamic(
-  () =>
-    import("@/components/reuse/Carousel/Carousel").then(
-      (module) => module.Carousel
-    ),
-  { ssr: false }
-);
+import { Carousel } from "@/components/reuse/Carousel/Carousel";
 
 export interface TattooServicePageProps {
   meta: ISeo;
@@ -66,34 +57,36 @@ export const getTattooServicePageData = async (locale: LangType) => {
   return tattooServicePageData;
 };
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: LangType };
-}): Promise<Metadata> {
-  const tattooServicePageData: TattooServicePageProps = await getTattooServicePageData(
-    locale
-  );
-  const { metaTitle, metaDesc, metaKeywords } =
-    tattooServicePageData?.meta || {};
-  const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
-  const crawl = true;
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<{ locale: LangType }>;
+// }): Promise<Metadata> {
+//   const { locale } = await params; // Await the params
+//   const tattooServicePageData: TattooServicePageProps = await getTattooServicePageData(
+//     locale
+//   );
+//   const { metaTitle, metaDesc, metaKeywords } =
+//     tattooServicePageData?.meta || {};
+//   const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
+//   const crawl = true;
 
-  return setMetadata({
-    locale,
-    metaTitle,
-    metaDesc,
-    metaKeywords,
-    path,
-    crawl,
-  });
-}
+//   return setMetadata({
+//     locale,
+//     metaTitle,
+//     metaDesc,
+//     metaKeywords,
+//     path,
+//     crawl,
+//   });
+// }
 
 export default async function TattooServicePage({
-  params: { locale },
+  params,
 }: {
-  params: { locale: LangType };
+  params: Promise<{ locale: LangType }>;
 }) {
+  const { locale } = await params; // Await the params
   const tattooServicePageData = await getTattooServicePageData(locale);
   const carouselData: IWork[] = await getCarouselData("tattoo");
   const translations = getTranslations(locale);

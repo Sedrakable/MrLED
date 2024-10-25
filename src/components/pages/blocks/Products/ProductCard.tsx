@@ -6,7 +6,7 @@ import { useLocale } from "next-intl";
 import cn from "classnames";
 import styles from "./Products.module.scss";
 import { IProduct, LocalPaths } from "@/data.d";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Heading } from "@/components/reuse/Heading";
 import { Button } from "@/components/reuse/Button";
 

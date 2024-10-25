@@ -1,6 +1,6 @@
 import { ISeo, IWork, LocalPaths } from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import {
   contactPageQuery,
   pricePlansQuery,
@@ -53,9 +53,9 @@ const getPlanData = async (pageType: string, locale: LangType) => {
 };
 
 // export async function generateMetadata({
-//   params: { locale },
+//    params,
 // }: {
-//   params: { locale: LangType };
+//   params: Promise<{ locale: LangType }>;
 // }): Promise<Metadata> {
 //   const contactPageData = await getContactPageData(locale);
 //   const { metaTitle, metaDesc, metaKeywords } = contactPageData.meta;
@@ -73,10 +73,11 @@ const getPlanData = async (pageType: string, locale: LangType) => {
 // }
 
 export default async function ContactPage({
-  params: { locale },
+  params,
 }: {
-  params: { locale: LangType };
+  params: Promise<{ locale: LangType }>;
 }) {
+  const { locale } = await params; // Await the params
   const trans = getTranslations(locale);
   const data = await getContactPageData(locale);
   const formData: FormTitleProps = await getFormData("contact", locale);

@@ -3,7 +3,7 @@ import { useLocale } from "next-intl";
 import { Input, TextArea } from "@/components/reuse/Form/Input/Input";
 import { Select } from "../Select";
 import { getTranslations } from "@/helpers/langUtils";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import styles from "../Form.module.scss";
 import FlexDiv from "../../FlexDiv";
 import {

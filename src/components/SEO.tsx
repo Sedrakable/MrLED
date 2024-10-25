@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import dynamic from "next/dynamic";
 import { ISeo } from "@/data.d";
 
@@ -9,9 +9,8 @@ interface SEOProps extends ISeo {
   crawl?: boolean;
 }
 // Dynamic import for the BreadcrumbJsonLd component
-const DynamicBreadcrumbJsonLd = dynamic(
-  () => import("next-seo").then((mod) => mod.BreadcrumbJsonLd),
-  { ssr: false }
+const DynamicBreadcrumbJsonLd = dynamic(() =>
+  import("next-seo").then((mod) => mod.BreadcrumbJsonLd)
 );
 export const setMetadata = ({
   locale,

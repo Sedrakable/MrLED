@@ -7,22 +7,12 @@ import { Hero } from "@/components/reuse/Hero/Hero";
 import { PortableTextContent } from "@/components/reuse/Paragraph/PortableTextContent";
 import { setMetadata } from "@/components/SEO";
 import { IHero, IProduct, ISeo, IWork, LocalPaths } from "@/data.d";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { boutiquePageQuery } from "@/app/api/generateSanityQueries";
 import { ProductGrid } from "@/components/pages/blocks/Products/Products";
 import { DisplayProps } from "@/components/reuse/Display/Display";
-
-const Carousel = dynamic(
-  () =>
-    import("@/components/reuse/Carousel/Carousel").then(
-      (module) => module.Carousel
-    ),
-  {
-    ssr: false,
-  }
-);
+import { Carousel } from "@/components/reuse/Carousel/Carousel";
 
 export interface BoutiquePageProps {
   meta: ISeo;
@@ -43,31 +33,33 @@ export const getBoutiquePageData = async (locale: LangType) => {
   return boutiquePageData;
 };
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: LangType };
-}): Promise<Metadata> {
-  const boutiquePageData: BoutiquePageProps = await getBoutiquePageData(locale);
-  const { metaTitle, metaDesc, metaKeywords } = boutiquePageData?.meta || {};
-  const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
-  const crawl = true;
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<{ locale: LangType }>;
+// }): Promise<Metadata> {
+//   const { locale } = await params; // Await the params
+//   const boutiquePageData: BoutiquePageProps = await getBoutiquePageData(locale);
+//   const { metaTitle, metaDesc, metaKeywords } = boutiquePageData?.meta || {};
+//   const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
+//   const crawl = true;
 
-  return setMetadata({
-    locale,
-    metaTitle,
-    metaDesc,
-    metaKeywords,
-    path,
-    crawl,
-  });
-}
+//   return setMetadata({
+//     locale,
+//     metaTitle,
+//     metaDesc,
+//     metaKeywords,
+//     path,
+//     crawl,
+//   });
+// }
 
 export default async function BoutiquePage({
-  params: { locale },
+  params,
 }: {
-  params: { locale: LangType };
+  params: Promise<{ locale: LangType }>;
 }) {
+  const { locale } = await params; // Await the params
   const boutiquePageData = await getBoutiquePageData(locale);
   const carouselData: IWork[] = await getCarouselData();
 

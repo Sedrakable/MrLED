@@ -4,7 +4,7 @@ import { Heading } from "@/components/reuse/Heading";
 import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { Button } from "../reuse/Button";
 import { getTranslations } from "@/helpers/langUtils";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { INotFound, LocalPaths } from "@/data.d";
 import { Block } from "../reuse/containers/Block/Block";
 

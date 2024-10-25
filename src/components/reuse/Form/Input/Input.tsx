@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 
 import styles from "./Input.module.scss";
 import cn from "classnames";
-import { OptionType } from "../Select";
 import { josefin } from "../../Heading";
 import { InputWrapper, InputWrapperProps } from "../InputWrapper/InputWrapper";
 

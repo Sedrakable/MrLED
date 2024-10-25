@@ -11,7 +11,7 @@ import { Alert } from "@/components/reuse/Alert/Alert";
 import { Button } from "@/components/reuse/Button";
 
 import { getTranslations } from "@/helpers/langUtils";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { useLocale } from "next-intl";
 import { useCart } from "../Cart/useCart";
 import { Heading } from "@/components/reuse/Heading";

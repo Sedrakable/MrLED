@@ -6,7 +6,7 @@ import FlexDiv from "../../../reuse/FlexDiv";
 import { Heading } from "../../../reuse/Heading";
 import { ICartProduct, LocalPaths } from "../../../../data.d";
 import { useLocale } from "next-intl";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Button } from "@/components/reuse/Button";
 import { getTranslations } from "@/helpers/langUtils";
 import { getFromLocalStorage, setToLocalStorage } from "@/helpers/localStorage";
@@ -51,9 +51,8 @@ export const Cart: FC<CartProps> = (props) => {
 
   return cart.length === 0 ? (
     <FlexDiv flex={{ direction: "column" }} gapArray={[4]}>
-      {/* TODO:add translations */}
       <Heading as="h3" level="5" color="burgundy" textAlign="center">
-        No items in the cart. Go to the Boutique!
+        {translations.cart.noItemsInCart}
       </Heading>
       <Button variant="primary" path={`/${locale}${LocalPaths.BOUTIQUE}`}>
         {translations.nav.boutique}
@@ -89,7 +88,7 @@ export const Cart: FC<CartProps> = (props) => {
           flex={{ x: "flex-end" }}
         >
           <Paragraph level="big" color="burgundy">
-            {/* TODO  */}Total:
+            {translations.cart.total}
           </Paragraph>
           <Paragraph level="big" color="dark-burgundy">
             {roundedPrice}

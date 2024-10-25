@@ -3,7 +3,7 @@ import styles from "./UploadButton.module.scss";
 import { Paragraph } from "../../Paragraph/Paragraph";
 import { useLocale } from "next-intl";
 import { getTranslations } from "@/helpers/langUtils";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Icon } from "../../Icon";
 import FlexDiv from "../../FlexDiv";
 import Image from "next/image";

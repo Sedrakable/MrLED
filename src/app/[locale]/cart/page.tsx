@@ -1,6 +1,6 @@
 import { ISeo } from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { cartPageQuery } from "@/app/api/generateSanityQueries";
 import {
   Collapsible,
@@ -26,9 +26,9 @@ const getCartPageData = async (locale: LangType) => {
 };
 
 // export async function generateMetadata({
-//   params: { locale },
+//    params,
 // }: {
-//   params: { locale: LangType };
+//   params: Promise<{ locale: LangType }>;
 // }): Promise<Metadata> {
 //   const cartPageData = await getCartPageData(locale);
 //   const { metaTitle, metaDesc, metaKeywords } = cartPageData.meta;
@@ -46,10 +46,11 @@ const getCartPageData = async (locale: LangType) => {
 // }
 
 export default async function CartPage({
-  params: { locale },
+  params,
 }: {
-  params: { locale: LangType };
+  params: Promise<{ locale: LangType }>;
 }) {
+  const { locale } = await params; // Await the params
   const data = await getCartPageData(locale);
   const translations = getTranslations(locale);
   const formData: CartProps = await getFormData("cart", locale);

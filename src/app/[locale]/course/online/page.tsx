@@ -11,7 +11,7 @@ import { Block } from "@/components/reuse/containers/Block/Block";
 
 // Types and interfaces
 import { IHero, ISeo, LocalPaths } from "@/data.d";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 
 // Utilities
 import { setMetadata } from "@/components/SEO";
@@ -42,34 +42,36 @@ export const getOnlineCoursePageData = async (locale: LangType) => {
   return onlineCoursePageData;
 };
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: LangType };
-}): Promise<Metadata> {
-  const onlineCoursePageData: OnlineCoursePageProps = await getOnlineCoursePageData(
-    locale
-  );
-  const { metaTitle, metaDesc, metaKeywords } =
-    onlineCoursePageData?.meta || {};
-  const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
-  const crawl = true;
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<{ locale: LangType }>;
+// }): Promise<Metadata> {
+//   const { locale } = await params; // Await the params
+//   const onlineCoursePageData: OnlineCoursePageProps = await getOnlineCoursePageData(
+//     locale
+//   );
+//   const { metaTitle, metaDesc, metaKeywords } =
+//     onlineCoursePageData?.meta || {};
+//   const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
+//   const crawl = true;
 
-  return setMetadata({
-    locale,
-    metaTitle,
-    metaDesc,
-    metaKeywords,
-    path,
-    crawl,
-  });
-}
+//   return setMetadata({
+//     locale,
+//     metaTitle,
+//     metaDesc,
+//     metaKeywords,
+//     path,
+//     crawl,
+//   });
+// }
 
 export default async function OnlineCoursePage({
-  params: { locale },
+  params,
 }: {
-  params: { locale: LangType };
+  params: Promise<{ locale: LangType }>;
 }) {
+  const { locale } = await params; // Await the params
   const onlineCoursePageData = await getOnlineCoursePageData(locale);
 
   return (

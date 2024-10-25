@@ -2,21 +2,11 @@ import React from "react";
 
 import { useFetchPage } from "@/app/api/useFetchPage";
 import { IArticle, ISeo, LocalPaths } from "@/data.d";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Metadata } from "next";
 import { setMetadata } from "@/components/SEO";
-import dynamic from "next/dynamic";
 import { articlePageQuery } from "@/app/api/generateSanityQueries";
-
-const Article = dynamic(
-  () =>
-    import("@/components/pages/blocks/Article/Article").then(
-      (module) => module.Article
-    ),
-  {
-    ssr: false,
-  }
-);
+import { Article } from "@/components/pages/blocks/Article/Article";
 
 interface ArticlePageProps extends IArticle {
   meta: ISeo;

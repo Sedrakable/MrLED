@@ -6,7 +6,7 @@ import { Input, TextArea } from "@/components/reuse/Form/Input/Input";
 import FlexDiv from "../../FlexDiv";
 import { getTranslations } from "@/helpers/langUtils";
 import { useLocale } from "next-intl";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { ApproxFormData, FormErrorData } from "../formTypes";
 import {
   FormSubmitButton,

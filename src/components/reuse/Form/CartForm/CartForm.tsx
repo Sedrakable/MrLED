@@ -8,7 +8,7 @@ import { State, City } from "country-state-city";
 import FlexDiv from "../../FlexDiv";
 import { getTranslations } from "@/helpers/langUtils";
 import { useLocale } from "next-intl";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { AddressFormData, FormErrorData } from "../formTypes";
 import { FormSubmitButton, FormTitles, MultiColumn, Step } from "../Form";
 import { CartProps } from "@/components/pages/blocks/Cart/Cart";

@@ -17,7 +17,7 @@ import {
 } from "@/components/reuse/Paragraph/Paragraph";
 import { Pill } from "@/components/reuse/Pill/Pill";
 import { IProduct, LocalPaths } from "@/data.d";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { useCart } from "../Cart/useCart";
 
 export const ProductModal: React.FC<IProduct> = (props) => {

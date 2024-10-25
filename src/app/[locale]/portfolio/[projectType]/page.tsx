@@ -10,7 +10,7 @@ import { Modal } from "@/components/reuse/Modal";
 import { setMetadata } from "@/components/SEO";
 import { IHero, ISeo, IWork, LocalPaths, ProjectType } from "@/data.d";
 import { ClientLogger } from "@/helpers/clientLogger";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { useAtom } from "jotai";
@@ -57,10 +57,11 @@ export const getWorkPageData = async (slug: string) => {
 // }
 
 export default async function WorkPage({
-  params: { locale, projectType },
+  params,
 }: {
-  params: { locale: LangType; projectType: string };
+  params: Promise<{ locale: LangType; projectType: string }>;
 }) {
+  const { projectType } = await params; // Await the params
   const workPageData: WorkPageProps = await getWorkPageData(projectType);
 
   return (

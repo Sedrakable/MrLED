@@ -8,7 +8,7 @@ import { useWindowResize } from "../../../../helpers/useWindowResize";
 import { TextWrapper } from "../../../reuse/containers/TextWrapper/TextWrapper";
 import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { getTranslations } from "@/helpers/langUtils";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { useLocale } from "next-intl";
 import { TitleWrapper } from "../../../reuse/containers/TitleWrapper/TitleWrapper";
 

@@ -9,19 +9,12 @@ import "@/styles/index.scss";
 import { NextIntlClientProvider } from "next-intl";
 import { IOpeningHours, ISocials } from "@/data.d";
 import { useFetchPage } from "../api/useFetchPage";
-import { LangType } from "@/i18n";
-import dynamic from "next/dynamic";
+import { LangType } from "@/i18n/request";
 import { hoursQuery, socialsQuery } from "../api/generateSanityQueries";
 import { Navbar } from "@/components/navbar/Navbar/Navbar";
+import Footer from "@/components/footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
-
-const Footer = dynamic(
-  () => import("@/components/footer/Footer").then((module) => module.Footer),
-  {
-    ssr: false,
-  }
-);
 
 const getHoursData = async () => {
   const type = "hours";
@@ -39,9 +32,9 @@ const getSocialsData = async () => {
 };
 
 // export async function generateMetadata({
-//   params: { locale },
+//    params,
 // }: {
-//   params: { locale: LangType };
+//   params: Promise<{ locale: LangType }>;
 // }): Promise<Metadata> {
 //   const homePageData = await getHomePageData(locale);
 //   const { metaTitle, metaDesc, metaKeywords } = homePageData.meta;
@@ -60,13 +53,15 @@ const getSocialsData = async () => {
 
 export default async function LocaleLayout({
   children,
-  params: { locale },
+  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: LangType };
+  params: Promise<{ locale: LangType }>;
 }>) {
   const socialsData: ISocials = await getSocialsData();
   const hoursData: IOpeningHours = await getHoursData();
+
+  const { locale } = await params; // Await the params
   return (
     <html lang={locale}>
       <NextIntlClientProvider locale={locale}>

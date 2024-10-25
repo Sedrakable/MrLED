@@ -104,6 +104,8 @@ export const frTranslations: Translations = {
     itemsAddedToCart: "articles ont été ajoutés au panier",
     itemAddedToCart: "article ajoute au panier",
     checkCartAlert: "Voir le Panier",
+    noItemsInCart: "Panier vide. Ajoutez des articles pour continuer",
+    total: "Total",
   },
   select: {
     sort: "Trier",

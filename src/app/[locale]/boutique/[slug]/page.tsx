@@ -1,15 +1,8 @@
 import { productQuery } from "@/app/api/generateSanityQueries";
 import { useFetchPage } from "@/app/api/useFetchPage";
 import { ProductModal } from "@/components/pages/blocks/Products/ProductModal";
+import { Modal } from "@/components/reuse/Modal";
 import { IProduct } from "@/data.d";
-import dynamic from "next/dynamic";
-
-const Modal = dynamic(
-  () => import("@/components/reuse/Modal").then((module) => module.Modal),
-  {
-    ssr: false,
-  }
-);
 
 const getProductData = async (slug: string) => {
   const type = "product";
@@ -43,10 +36,11 @@ const getProductData = async (slug: string) => {
 // }
 
 export default async function Product({
-  params: { slug },
+  params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params; // Await the params
   const productData: IProduct = await getProductData(slug);
 
   return (

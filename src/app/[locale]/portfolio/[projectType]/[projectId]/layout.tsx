@@ -1,4 +1,4 @@
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import ProjectPage from "./page";
 
 export default function ModalLayout({
@@ -14,7 +14,9 @@ export default function ModalLayout({
 }) {
   return (
     <div>
-      <ProjectPage params={{ projectType, projectId, locale }} />
+      <ProjectPage
+        params={Promise.resolve({ projectType, projectId, locale })}
+      />
       {children}
     </div>
   );

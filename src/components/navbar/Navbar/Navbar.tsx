@@ -22,7 +22,7 @@ import { Translations } from "@/langs/langTypes";
 import { sidebarData } from "../Sidebar/Sidebar";
 import Link from "next/link";
 import { useLocale } from "next-intl";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import dynamic from "next/dynamic";
 import { Socials } from "@/components/footer/Socials";
 

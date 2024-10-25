@@ -10,7 +10,7 @@ import { atom, useAtom } from "jotai";
 import { getTranslations } from "../../../helpers/langUtils";
 import { LogoLink, dropDown, isCta } from "../Navbar/Navbar";
 import TabButton from "../TabButton/TabButton";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { useLocale } from "next-intl";
 import { Socials } from "@/components/footer/Socials";
 
