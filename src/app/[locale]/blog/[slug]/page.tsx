@@ -48,10 +48,11 @@ export async function generateMetadata({
 }
 
 export default async function ArticlePage({
-  params: { locale, slug },
+  params,
 }: {
-  params: { locale: LangType; slug: string };
+  params: Promise<{ locale: LangType; slug: string }>;
 }) {
+  const { locale, slug } = await params; // Await the params
   const articleData: ArticlePageProps = await getArticlePageData(locale, slug);
 
   return articleData && <Article {...articleData} />;

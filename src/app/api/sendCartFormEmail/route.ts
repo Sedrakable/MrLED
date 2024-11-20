@@ -2,6 +2,7 @@ import { AddressFormData } from "@/components/reuse/Form/formTypes";
 import { ICartProduct } from "@/data.d";
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import routeStyles from "../routeStyle";
 
 // Email translations
 const emailTranslations = {
@@ -17,27 +18,23 @@ const emailTranslations = {
     yourMessage: "Your Message:",
     trackingInfo:
       "We'll send you another email with tracking information once your package is on its way.",
-    questions:
-      "If you have any questions about your order, please don't hesitate to contact our customer service team.",
     regards: "Best regards,",
-    team: "The Team",
+    team: "Alexia - Adhenna Tattoo",
   },
   fr: {
     subject: "🌸Merci pour votre commande ! - Confirmation de commande🌸",
     title: "Merci pour votre commande !",
     greeting: (name: string) => `Cher/Chère ${name},`,
     thankYouMessage: (name: string) =>
-      `Merci d'avoir acheté chez Adhenna ! Je suis ravie de confirmer que j'ai bien reçu votre commande et qu'elle est en cours de traitement. Je m'assurerai que tout soit parfait pour vous.`,
+      `Merci d’avoir précommandé les produits Adhenna Tattoo! Vous recevrez bientôt un courriel avec les détails pour le paiement et la date de livraison. `,
     orderDetails: "Détails de la commande :",
     shippingInfo: "Informations de livraison :",
     deliveryMethod: "Méthode de livraison :",
     yourMessage: "Votre message :",
     trackingInfo:
-      "Nous vous enverrons un autre courriel avec les informations de suivi une fois que votre colis sera en route.",
-    questions:
-      "Si vous avez des questions concernant votre commande, n'hésitez pas à contacter notre service clientèle.",
+      "Surveillez votre boîte de réception (et vos pourriels, au besoin).",
     regards: "Cordialement,",
-    team: "L'équipe",
+    team: "Alexia - Adhenna Tattoo",
   },
 };
 
@@ -47,15 +44,22 @@ const formatCurrency = (amount: number): string => {
 };
 
 // Helper function to calculate order total
-const calculateTotal = (cart: ICartProduct[]): number => {
-  return cart.reduce(
+const calculateTotal = (
+  cart: ICartProduct[],
+  deliveryPrice: number
+): number => {
+  const cartTotal = cart.reduce(
     (total, item) => total + item.quantity * parseFloat(item.product.price),
     0
   );
+  return cartTotal + deliveryPrice;
 };
 
 // Generate the product table HTML
-const generateProductTable = (cart: ICartProduct[]): string => {
+const generateProductTable = (
+  cart: ICartProduct[],
+  deliveryPrice: number
+): string => {
   return `
     <table>
       <tr>
@@ -78,9 +82,14 @@ const generateProductTable = (cart: ICartProduct[]): string => {
       `
         )
         .join("")}
+        <tr>
+          <td colspan="3">Delivery</td>
+          <td>${formatCurrency(deliveryPrice)}</td>
+          
+        </tr>
       <tr class="total">
         <td colspan="3">Total</td>
-        <td>${formatCurrency(calculateTotal(cart))}</td>
+        <td>${formatCurrency(calculateTotal(cart, deliveryPrice))}</td>
       </tr>
     </table>
   `;
@@ -101,6 +110,7 @@ const generateShippingInfo = (formData: AddressFormData): string => {
 const generateClientEmailTemplate = (
   formData: AddressFormData,
   cart: ICartProduct[],
+  deliveryPrice: number,
   locale: "en" | "fr"
 ): string => {
   const t = emailTranslations[locale];
@@ -113,15 +123,9 @@ const generateClientEmailTemplate = (
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>${t.title}</title>
       <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; }
-        h1, h2 { color: #444; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .total { font-weight: bold; }
-        .thank-you { background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0; }
+      ${routeStyles}
       </style>
+
     </head>
     <body>
       <div class="container">
@@ -132,44 +136,44 @@ const generateClientEmailTemplate = (
           <p>${t.thankYouMessage(formData.firstName)}</p>
         </div>
         
-        <h2>${t.orderDetails}</h2>
-        ${generateProductTable(cart)}
-        
-        <h2>${t.shippingInfo}</h2>
-        <p>${generateShippingInfo(formData)}</p>
-        
-        <h2>${t.deliveryMethod}</h2>
-        <p>${formData.delivery}</p>
+        <div class="details-section">  
+          <h2>${t.orderDetails}</h2>
+          ${generateProductTable(cart, deliveryPrice)}
+          
+          <h2>${t.shippingInfo}</h2>
+          <p>${generateShippingInfo(formData)}</p>
+          
+          <h2>${t.deliveryMethod}</h2>
+          <p>${formData.delivery}</p>
 
-        ${
-          formData.message
-            ? `<h2>${t.yourMessage}</h2>
-               <p>${formData.message}</p>`
-            : ""
-        }
-        
-        <p>${t.trackingInfo}</p>
-        
-        <p>${t.questions}</p>
-        
-        <p>${t.regards}<br>${t.team}</p>
+          ${
+            formData.message
+              ? `<h2>${t.yourMessage}</h2>
+                <p>${formData.message}</p>`
+              : ""
+          }
+          <p>${t.trackingInfo}</p>
+        </div>        
+        <span class="detail-label">${t.regards}<br>${t.team}</span>
       </div>
     </body>
     </html>
   `;
 };
-
+interface RequestData {
+  formData: AddressFormData;
+  cart: ICartProduct[];
+  deliveryPrice: number;
+  locale: "en" | "fr";
+}
 export async function POST(request: Request) {
   try {
     const {
       formData,
       cart,
+      deliveryPrice = 0,
       locale = "en",
-    }: {
-      formData: AddressFormData;
-      cart: ICartProduct[];
-      locale: "en" | "fr";
-    } = await request.json();
+    }: RequestData = await request.json();
 
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -185,6 +189,7 @@ export async function POST(request: Request) {
     const clientEmailTemplate = generateClientEmailTemplate(
       formData,
       cart,
+      deliveryPrice,
       locale
     );
 
@@ -197,14 +202,7 @@ export async function POST(request: Request) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>New Order Received</title>
         <style>
-          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-          .container { width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; }
-          h1, h2 { color: #444; }
-          table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-          th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-          th { background-color: #f2f2f2; }
-          .total { font-weight: bold; }
-          .order-info { background-color: #f5f5f5; padding: 15px; margin-bottom: 20px; }
+        ${routeStyles}
         </style>
       </head>
       <body>
@@ -221,7 +219,7 @@ export async function POST(request: Request) {
           </div>
           
           <h2>Order Summary:</h2>
-          ${generateProductTable(cart)}
+          ${generateProductTable(cart, deliveryPrice)}
           
           <h2>Shipping Address:</h2>
           <p>${generateShippingInfo(formData)}</p>

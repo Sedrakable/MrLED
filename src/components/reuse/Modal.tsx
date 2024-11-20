@@ -68,19 +68,19 @@ export const Modal: React.FC<ModalProps> = ({
       >
         <FlexDiv
           className={cn(styles.modalContainer)}
-          padding={{ all: [4, 6, 7, 8] }}
+          padding={{ all: [4, 6, 6, 7] }}
         >
           {children}
         </FlexDiv>
         {version != "image" && (
           <FlexDiv
-            padding={{ all: [2, 3, 3, 4] }}
+            padding={{ all: [3, 3, 3, 4] }}
             className={styles.closeButtonWrapper}
           >
             <Button
               variant="white"
               small
-              iconProps={{ icon: "close" }}
+              iconProps={{ icon: "close", size: "small" }}
               onClick={close}
             />
           </FlexDiv>

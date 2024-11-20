@@ -37,14 +37,29 @@
 }
 
 .flashModalContainer {
+  overflow: hidden;
+  position: relative;
   @media (min-width: $laptop) {
     flex-direction: row !important;
-    .modalImage {
+    .modalImageWrapper {
       margin-bottom: var(--pad-9);
       top: 0;
       position: sticky !important;
+      .modalImage {
+        width: 100% !important;
+      }
     }
   }
+}
+
+.reserverWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  background-color: hsl(from var(--white) h s l / 0.5);
+  backdrop-filter: var(--blur);
+  border-bottom-left-radius: var(--border-radius-large);
 }
 
 .toilesModalContainer {

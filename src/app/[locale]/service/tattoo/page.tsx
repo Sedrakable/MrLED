@@ -87,9 +87,11 @@ export default async function TattooServicePage({
   params: Promise<{ locale: LangType }>;
 }) {
   const { locale } = await params; // Await the params
+  const translations = getTranslations(locale);
+
   const tattooServicePageData = await getTattooServicePageData(locale);
   const carouselData: IWork[] = await getCarouselData("tattoo");
-  const translations = getTranslations(locale);
+
   const formData: FormTitleProps = await getFormData("approx", locale);
 
   const images = shuffleArray(getImagesFromWorks(carouselData));
@@ -102,6 +104,7 @@ export default async function TattooServicePage({
       img2: images[1],
       img3: images[2],
     },
+    plan: "Tattoo Approximatif",
   };
   return (
     tattooServicePageData && (
@@ -111,7 +114,6 @@ export default async function TattooServicePage({
         )}
 
         <Block variant="default" illustrations>
-          <ClientLogger slug={carouselData[0].projects[0].slug} />
           {tattooServicePageData.tarifText && (
             <TitleAndText
               title={translations.titles.tarif}
@@ -124,7 +126,7 @@ export default async function TattooServicePage({
           {tattooServicePageData.multiDescriptions && (
             <MultiDescription descs={tattooServicePageData.multiDescriptions} />
           )}
-          {formData && <Approx {...approxData} />}
+          {approxData && <Approx {...approxData} />}
         </Block>
         {carouselData && (
           <Carousel

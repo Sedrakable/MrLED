@@ -5,10 +5,11 @@ import { usePathname } from "@/navigation";
 import { LangType } from "@/i18n/request";
 import { Navigation } from "@/components/reuse/Naviagation/Navigation";
 import { ICta, LocalPaths } from "@/data.d";
+import { Translations } from "@/langs/langTypes";
 
 interface ProjectNavigationProps {
   locale: LangType;
-  translations: any;
+  translations: Translations;
 }
 
 export const ProjectNavigation: FC<ProjectNavigationProps> = ({
@@ -24,7 +25,7 @@ export const ProjectNavigation: FC<ProjectNavigationProps> = ({
     { text: translations.nav.tattoo, link: [LocalPaths.TATTOO] },
     { text: translations.nav.flash, link: [LocalPaths.FLASH] },
     { text: translations.nav.henna, link: [LocalPaths.HENNA] },
-    { text: translations.nav.toileses, link: [LocalPaths.TOILES] },
+    { text: translations.nav.toiles, link: [LocalPaths.TOILES] },
   ];
 
   const currentPageIndex = pageOrder.findIndex((page) =>

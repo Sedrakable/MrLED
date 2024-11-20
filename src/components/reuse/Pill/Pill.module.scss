@@ -21,6 +21,15 @@
   }
 }
 
+@keyframes rotateIcon {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
+  }
+}
+
 .pill {
   @include vars;
   height: var(--height);
@@ -30,6 +39,12 @@
   max-width: fit-content;
   width: fit-content;
 
+  button {
+    transition: transform var(--transition-time); /* Smooth transition */
+    &:hover {
+      transform: rotate(90deg); /* Rotate on hover */
+    }
+  }
   &.version1 {
     background: var(--white);
     border-radius: calc(var(--height) / 2);
@@ -63,6 +78,14 @@
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
+    }
+
+    &:hover {
+      color: var(--dark-burgundy);
+    }
+
+    &:focus-visible {
+      outline: none;
     }
   }
   /* Styles for the input field to remove the up and down arrows */

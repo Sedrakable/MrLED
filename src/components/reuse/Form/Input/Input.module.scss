@@ -54,3 +54,7 @@
   overflow-y: hidden; /* Prevent scrollbars */
   resize: none; /* Disable manual resizing */
 }
+
+.invalid {
+  outline: 2px solid var(--error);
+}

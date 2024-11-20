@@ -22,6 +22,11 @@ export interface FlashFormData extends BaseFormData {
   additionalComments: string;
 }
 
+export interface EncodedFileType {
+  name: string;
+  type: string;
+  data: string;
+}
 export interface ContactFormData extends BaseFormData {
   service: string;
   plan: string;
@@ -29,14 +34,14 @@ export interface ContactFormData extends BaseFormData {
   info: string;
   width: string;
   length: string;
-  upload: string;
+  uploads: EncodedFileType[];
 }
 
 export interface ApproxFormData extends BaseFormData {
   info: string;
   width: string;
   length: string;
-  upload: string;
+  uploads: EncodedFileType[];
 }
 
 export interface FormErrorData {

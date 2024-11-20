@@ -27,6 +27,7 @@
       margin: calc(-1 * var(--pad-6)) 0;
       justify-content: flex-start;
       overflow: visible !important;
+      pointer-events: none;
 
       img {
         border-radius: var(--border-radius);
@@ -35,6 +36,11 @@
         width: auto !important;
         aspect-ratio: 1;
         position: relative !important;
+        transition: var(--transition-time);
+        pointer-events: auto;
+        &:hover {
+          transform: scale(1.1);
+        }
       }
       &:first-child {
         justify-content: center;

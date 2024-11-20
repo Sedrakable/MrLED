@@ -33,7 +33,7 @@ export const DropDown: React.FC<DropDownProps> = ({
       <FlexDiv
         flex={{ direction: "column", x: "flex-start" }}
         padding={{ vertical: [0, 0, 3, 3] }}
-        className={styles.dropdown}
+        className={cn(styles.dropdown)}
         ref={dropdownRef}
         as="ul"
       >

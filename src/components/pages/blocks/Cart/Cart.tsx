@@ -4,7 +4,7 @@ import styles from "./Cart.module.scss";
 import cn from "classnames";
 import FlexDiv from "../../../reuse/FlexDiv";
 import { Heading } from "../../../reuse/Heading";
-import { ICartProduct, LocalPaths } from "../../../../data.d";
+import { ICartProduct, IDeliveryMethod, LocalPaths } from "../../../../data.d";
 import { useLocale } from "next-intl";
 import { LangType } from "@/i18n/request";
 import { Button } from "@/components/reuse/Button";
@@ -20,7 +20,7 @@ import { CART_STORAGE_KEY } from "./useCart";
 import { ProductTab } from "../Products/ProductTab";
 
 export interface CartProps {
-  deliveryMethods: string[];
+  deliveryMethods: IDeliveryMethod[];
   title: string;
   subTitle?: string;
 }

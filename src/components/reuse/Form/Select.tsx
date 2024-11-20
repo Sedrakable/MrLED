@@ -7,6 +7,7 @@ import { Icon } from "../Icon";
 import { getTranslations } from "@/helpers/langUtils";
 import { LangType } from "@/i18n/request";
 import { useLocale } from "next-intl";
+import { InputWrapper } from "./InputWrapper/InputWrapper";
 
 export interface OptionType {
   value: string;
@@ -180,35 +181,31 @@ export const Select: React.FC<SelectProps> = ({
       aria-haspopup="listbox"
       aria-controls="select-dropdown"
     >
-      {label && (
-        <Paragraph
-          level="regular"
-          color={isInvalid ? "error" : "burgundy"}
-          className={styles.label}
+      <InputWrapper label={label!} required={required} isInvalid={isInvalid}>
+        <FlexDiv
+          className={cn(styles.select, styles.original, {
+            [styles.invalid]: isInvalid,
+          })}
+          onClick={handleToggle}
+          flex={{ x: "space-between" }}
+          gapArray={[5]}
         >
-          {label} {required && <span className={styles.required}>*</span>}
-        </Paragraph>
-      )}
-      <FlexDiv
-        className={cn(styles.select, styles.original, {
-          [styles.invalid]: isInvalid,
-        })}
-        onClick={handleToggle}
-        flex={{ x: "space-between" }}
-        gapArray={[5]}
-      >
-        <Paragraph level="regular" color="burgundy">
-          {selected !== ""
-            ? options.find((opt) => opt.value === selected)?.label
-            : placeholder || translations.select.select}
-        </Paragraph>
-        <Icon
-          icon="arrow"
-          color="burgundy"
-          size="small"
-          rotate={isOpen ? 180 : undefined}
-        />
-      </FlexDiv>
+          <Paragraph
+            level="regular"
+            color={selected !== "" ? "burgundy" : "light-burgundy"}
+          >
+            {selected !== ""
+              ? options.find((opt) => opt.value === selected)?.label
+              : placeholder || translations.select.select}
+          </Paragraph>
+          <Icon
+            icon="arrow"
+            color="burgundy"
+            size="small"
+            rotate={isOpen ? 180 : undefined}
+          />
+        </FlexDiv>
+      </InputWrapper>
       {isOpen && !disabled && (
         <FlexDiv
           flex={{ direction: "column", x: "flex-start", y: "flex-start" }}

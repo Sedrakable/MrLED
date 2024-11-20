@@ -1,30 +1,10 @@
 @import "@/styles/mixins.scss";
 
-@mixin vars() {
-  --heading-font-size: 42px;
-  --paragraph-font-size: 30px;
-  --top-span: 3px;
-  @media (min-width: $tablet) {
-    --heading-font-size: 64px;
-    --top-span: 5px;
-  }
-
-  @media (min-width: $laptop) {
-    --paragraph-font-size: 32px;
-  }
-
-  @media (min-width: $desktop) {
-    --paragraph-font-size: 40px;
-    --top-span: 8px;
-    --heading-font-size: 90px;
-  }
-}
-
 .title {
-  .part1,
-  .part2 {
-    margin-top: 0.01em;
-  }
+  // .part1,
+  // .part2 {
+  //   margin-top: 0.01em;
+  // }
   .part2 {
     text-shadow: var(--text-shadow);
     position: relative;
@@ -53,8 +33,10 @@
 
 .overflowing {
   position: relative;
-  overflow: hidden;
 
+  @media (min-width: $tablet) {
+    overflow: hidden;
+  }
   .part2.rightAligned {
     &::after {
       content: none !important;

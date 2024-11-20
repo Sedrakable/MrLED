@@ -152,7 +152,7 @@ export const Navbar: FC<NavbarProps> = ({ socials }) => {
                 </Button>
               </li>
 
-              {!isMobile && <LangSwitcher />}
+              {/* {!isMobile && <LangSwitcher />} */}
               {!isMobileOrTablet && <Socials {...socials} />}
             </FlexDiv>
 

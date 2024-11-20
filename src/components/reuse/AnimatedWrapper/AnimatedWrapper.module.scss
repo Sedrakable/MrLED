@@ -1,0 +1,70 @@
+@import "@/styles/mixins.scss";
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.wrapper {
+  opacity: 0;
+  visibility: hidden;
+  width: inherit;
+  min-width: inherit;
+  height: inherit;
+  min-height: inherit;
+  display: inherit;
+
+  &.slideInLeft,
+  &.slideInRight,
+  &.popIn {
+    animation-fill-mode: forwards;
+    visibility: visible;
+    animation-duration: 1s; // Adjust as needed
+    animation-timing-function: ease-out;
+  }
+
+  &.popIn {
+    animation-duration: 0.5s; // Adjust as needed
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &.slideInLeft {
+    animation-name: slideInLeft;
+  }
+
+  &.slideInRight {
+    animation-name: slideInRight;
+  }
+
+  &.popIn {
+    animation-name: popIn;
+  }
+}

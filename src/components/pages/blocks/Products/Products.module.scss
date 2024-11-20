@@ -33,6 +33,13 @@
     aspect-ratio: 1;
     border-radius: var(--border-radius);
     box-shadow: var(--light-shadow);
+
+    img {
+      transition: var(--transition-time);
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
   }
 }
 

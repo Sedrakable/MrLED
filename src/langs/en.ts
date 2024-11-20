@@ -126,7 +126,6 @@ export const enTranslations: Translations = {
     tattooStatus: "Status",
     tattooStatusOptions: {
       healed: "Healed",
-      unhealed: "Unhealed",
     },
     flashStyles: "Style",
     flashStylesOptions: {

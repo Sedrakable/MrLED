@@ -12,6 +12,7 @@ import { FancyText } from "../FancyText/FancyText";
 import { Heading } from "../Heading";
 import { Paragraph } from "../Paragraph/Paragraph";
 import { SanityImage } from "../SanityImage/SanityImage";
+import { AnimatedWrapper } from "../AnimatedWrapper/AnimatedWrapper";
 
 export type VersionType = "service" | "article";
 
@@ -63,70 +64,72 @@ export const Display: React.FC<DisplayProps> = ({
     );
 
   return (
-    <FlexDiv
-      className={cn(styles.display, styles[version], {
-        [styles.reverse]: reverse,
-      })}
-      flex={{ direction: "column", y: "flex-start" }}
-      width100
-    >
-      <SanityImage
-        image={backgroundImage?.image}
-        alt={backgroundImage?.alt}
-        figureclassname={cn(styles.image)}
-        quality={60}
-      />
+    <AnimatedWrapper from={reverse ? "left" : "right"}>
       <FlexDiv
-        className={styles.content}
-        flex={{
-          direction: "column",
-          x: reverse ? "flex-end" : "flex-start",
-          y: "stretch",
-        }}
+        className={cn(styles.display, styles[version], {
+          [styles.reverse]: reverse,
+        })}
+        flex={{ direction: "column", y: "flex-start" }}
         width100
-        padding={{ horizontal: [6, 9, 11, 12], bottom: [6, 7, 7, 8] }}
-        gapArray={[2]}
       >
-        {date && (
-          <Paragraph
-            level="big"
-            color="dark-burgundy"
-            textAlign={reverse ? "right" : "left"}
-          >
-            {date}
-          </Paragraph>
-        )}
-        {title && (
-          <FancyText
-            {...title}
-            reverse={reverse}
-            overflowText
-            flexHorizontal={reverse ? "flex-end" : "flex-start"}
-            blocker={!isMobile}
-          />
-        )}
-        {subTitle && (
-          <Heading
-            as="h2"
-            level={version === "article" ? "4" : "5"}
-            color="burgundy"
-            weight={500}
-            className={styles.subTitle}
-            textAlign={reverse ? "right" : "left"}
-          >
-            {subTitle}
-          </Heading>
-        )}
-        <Paragraph
-          level="regular"
-          color="darkest-burgundy"
-          className={styles.desc}
-          textAlign={reverse ? "right" : "left"}
+        <SanityImage
+          image={backgroundImage?.image}
+          alt={backgroundImage?.alt}
+          figureclassname={cn(styles.image)}
+          quality={100}
+        />
+        <FlexDiv
+          className={styles.content}
+          flex={{
+            direction: "column",
+            x: reverse ? "flex-end" : "flex-start",
+            y: "stretch",
+          }}
+          width100
+          padding={{ horizontal: [6, 9, 11, 12], bottom: [6, 7, 7, 8] }}
+          gapArray={[2]}
         >
-          {desc}
-        </Paragraph>
-        <CTAs />
+          {date && (
+            <Paragraph
+              level="big"
+              color="dark-burgundy"
+              textAlign={reverse ? "right" : "left"}
+            >
+              {date}
+            </Paragraph>
+          )}
+          {title && (
+            <FancyText
+              {...title}
+              reverse={reverse}
+              overflowText
+              flexHorizontal={reverse ? "flex-end" : "flex-start"}
+              blocker={!isMobile}
+            />
+          )}
+          {subTitle && (
+            <Heading
+              as="h2"
+              level={version === "article" ? "4" : "5"}
+              color="burgundy"
+              weight={500}
+              className={styles.subTitle}
+              textAlign={reverse ? "right" : "left"}
+            >
+              {subTitle}
+            </Heading>
+          )}
+          <Paragraph
+            level="regular"
+            color="darkest-burgundy"
+            className={styles.desc}
+            textAlign={reverse ? "right" : "left"}
+          >
+            {desc}
+          </Paragraph>
+          <CTAs />
+        </FlexDiv>
       </FlexDiv>
-    </FlexDiv>
+    </AnimatedWrapper>
   );
 };

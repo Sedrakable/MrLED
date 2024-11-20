@@ -48,9 +48,9 @@ export const ProjectFilters: FC<IProjectFiltersProps> = ({
             placeholder={translations.select.tattooColor || "Select Tattoo"}
           />
           <Filter
-            options={filterOptions.tattooStatusFilterOptions!}
-            onChange={filterHandlers.handleTattooStatusFilterChange!}
-            placeholder={translations.select.tattooStatus || "Select Status"}
+            options={filterOptions.tattooOtherFilterOptions!}
+            onChange={filterHandlers.handleTattooOtherFilterChange!}
+            placeholder={translations.select.tattooOther || "Select Other"}
           />
         </>
       )}

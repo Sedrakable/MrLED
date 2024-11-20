@@ -25,14 +25,7 @@ const DecorativeImage: React.FC<DecorativeImageProps> = ({
     className={cn(styles.decorativeImage, styles[position])}
     style={{ [position]: 0, top: `${topOffset}px`, pointerEvents: "none" }}
   >
-    <Image
-      src={src}
-      alt="Decorative image"
-      layout="responsive"
-      width={120}
-      height={120}
-      objectFit="cover"
-    />
+    <Image src={src} alt="Decorative image" />
   </div>
 );
 

@@ -34,13 +34,11 @@ export const useArticleFilters = (
   const sortOptions = [...dateSortOptions];
 
   const handleYearFilterChange = (selected: string[]) => {
-    console.log("Selected years:", selected);
     setSelectedYears(selected);
   };
 
   const handleSortChange = (selected: string) => {
     const sortValue = selected as "newest" | "oldest";
-    console.log("Selected sort option:", sortValue);
     setSortOrder(sortValue);
   };
 

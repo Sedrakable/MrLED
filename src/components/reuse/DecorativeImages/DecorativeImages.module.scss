@@ -8,6 +8,7 @@
     mix-blend-mode: luminosity;
     width: var(--illustration-width) !important;
     opacity: var(--illu-opacity);
+    object-fit: cover;
   }
 
   &.left {

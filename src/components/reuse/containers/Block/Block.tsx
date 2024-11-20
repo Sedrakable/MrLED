@@ -16,6 +16,7 @@ import {
   DecorativeImages,
   ImagePositions,
 } from "../../DecorativeImages/DecorativeImages";
+import { useParallaxScroll } from "@/helpers/useParallaxScroll";
 
 export const BlockVariants = ["default", "full-width"] as const;
 export type BlockVariantType = typeof BlockVariants[number];
@@ -37,6 +38,8 @@ export const Block: React.FC<BlockProps> = ({
   const contentRef = useRef<HTMLDivElement>(null);
   const blockRef = useRef<HTMLDivElement>(null);
   const [cssLoaded, setCssLoaded] = useState(false);
+  // Use our custom hook
+  const scrollProgress = useParallaxScroll(blockRef);
 
   useEffect(() => {
     const observer = new MutationObserver(() => {
@@ -106,7 +109,14 @@ export const Block: React.FC<BlockProps> = ({
       width100
       as="article"
     >
-      <div className={styles.decorations}>
+      <div
+        className={styles.decorations}
+        style={
+          {
+            "--scroll-progress": scrollProgress,
+          } as React.CSSProperties
+        }
+      >
         <div className={styles.illustrations}>
           {illustrations && imagePositions && (
             <DecorativeImages positions={imagePositions} />

@@ -1,40 +1,46 @@
-import React, { FC, useState } from "react";
+import React, { FC, ReactNode, useState } from "react";
+
+import { useRouter, usePathname } from "@/navigation";
 import { useLocale } from "next-intl";
 import { Input, TextArea } from "@/components/reuse/Form/Input/Input";
-import { Select } from "../Select";
 import { getTranslations } from "@/helpers/langUtils";
 import { LangType } from "@/i18n/request";
 import styles from "../Form.module.scss";
-import FlexDiv from "../../FlexDiv";
 import {
   Step,
   MultiColumn,
   FormSubmitButton,
   FormTitles,
   FormTitleProps,
+  FormSubmitMessage,
+  FormSteps,
 } from "../Form";
 import { FlashFormData, FormErrorData } from "../formTypes";
-import { OptionType } from "../Select";
 
 export interface FlashFormProps {
-  flashOptions: OptionType[];
   flashFormData?: FormTitleProps;
   selectedFlash: string;
 }
 
 export const FlashForm: FC<FlashFormProps> = ({
-  flashOptions,
   flashFormData,
   selectedFlash,
 }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
 
+  const pathname = usePathname();
+  // If you need the full URL (including origin)
+  const currentUrl =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/${locale}${pathname}`
+      : pathname;
+
   const [formData, setFormData] = useState<FlashFormData>({
     firstName: "",
     lastName: "",
     email: "",
-    selectedFlash: "",
+    selectedFlash,
     bodyPosition: "",
     availabilities: "",
     additionalComments: "",
@@ -42,18 +48,12 @@ export const FlashForm: FC<FlashFormProps> = ({
 
   const [errors, setErrors] = useState<FormErrorData>({});
   const [submit, setSubmit] = useState<string | false>(false);
+  const [loading, setLoading] = useState(false); // New loading state
 
   const handleInputChange = (field: keyof FlashFormData) => (value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors((prevErrors) => ({ ...prevErrors, [field]: false }));
-    }
-  };
-
-  const handleFlashChange = (selected: string) => {
-    setFormData((prev) => ({ ...prev, selectedFlash: selected }));
-    if (errors.selectedFlash) {
-      setErrors((prev) => ({ ...prev, selectedFlash: false }));
     }
   };
 
@@ -82,17 +82,15 @@ export const FlashForm: FC<FlashFormProps> = ({
     e.preventDefault();
     if (!validateForm()) return;
 
-    // TODO API request
+    setLoading(true);
     try {
-      const response = await fetch("/api/sendFlashRequest", {
+      const response = await fetch("/api/sendFlashFormEmail", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ formData, currentUrl }),
       });
-
-      const data = await response.json();
 
       if (response.ok) {
         setSubmit(translations.form.general.emailSent);
@@ -106,106 +104,87 @@ export const FlashForm: FC<FlashFormProps> = ({
       console.error("Error:", error);
       setSubmit(translations.form.general.emailNotSent);
       // Add error handling
+    } finally {
+      setLoading(false); // Set loading to false after submission
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      {flashFormData && (
-        <FormTitles
-          title={flashFormData?.title}
-          subTitle={flashFormData?.subTitle}
-        />
-      )}
-
-      <FlexDiv
-        gapArray={[5, 5, 5, 5]}
-        width100
-        flex={{ direction: "column", x: "stretch", y: "flex-start" }}
-      >
-        <Step number={1}>
-          <MultiColumn>
-            <Input
-              label={translations.form.general.firstName}
-              onChange={handleInputChange("firstName")}
-              required
-              value={formData.firstName}
-              type="text"
-              isInvalid={errors.firstName}
-              placeholder={translations.form.general.firstNamePlaceholder}
-            />
-            <Input
-              label={translations.form.general.lastName}
-              onChange={handleInputChange("lastName")}
-              required
-              value={formData.lastName}
-              type="text"
-              isInvalid={errors.lastName}
-              placeholder={translations.form.general.lastNamePlaceholder}
-            />
-          </MultiColumn>
-        </Step>
-
-        <Step number={2}>
-          <Input
-            label={translations.form.general.email}
-            type="email"
-            value={formData.email}
-            onChange={handleInputChange("email")}
-            required
-            isInvalid={errors.email}
-            placeholder={translations.form.general.emailPlaceholder}
-          />
-        </Step>
-
-        <Step number={3}>
-          <Select
-            label={translations.form.flash.selectedFlash}
-            options={flashOptions}
-            onChange={handleFlashChange}
-            defaultValue={selectedFlash}
-            required
-            isInvalid={errors.selectedFlash}
-          />
-        </Step>
-
-        <Step number={4}>
-          <TextArea
-            label={translations.form.flash.bodyPosition}
-            value={formData.bodyPosition}
-            onChange={handleInputChange("bodyPosition")}
-            required
-            isInvalid={errors.bodyPosition}
-            placeholder={translations.form.flash.bodyPositionPlaceholder}
-          />
-        </Step>
-
-        <Step number={5}>
-          <TextArea
-            label={translations.form.general.availabilities}
-            value={formData.availabilities}
-            onChange={handleInputChange("availabilities")}
-            required
-            isInvalid={errors.availabilities}
-            placeholder={translations.form.general.availabilitiesPlaceholder}
-          />
-        </Step>
-
-        <Step number={6}>
-          <TextArea
-            label={translations.form.general.additionalInfo}
-            value={formData.additionalComments}
-            onChange={handleInputChange("additionalComments")}
-            placeholder={translations.form.general.additionalInfo}
-          />
-        </Step>
-      </FlexDiv>
-
-      <FormSubmitButton
-        isValid={Object.keys(errors).length === 0}
-        translations={translations}
-        submitText={submit}
+  const Steps: ReactNode[] = [
+    <MultiColumn>
+      <Input
+        label={translations.form.general.firstName}
+        onChange={handleInputChange("firstName")}
+        required
+        value={formData.firstName}
+        type="text"
+        isInvalid={errors.firstName}
+        placeholder={translations.form.general.firstNamePlaceholder}
       />
-    </form>
+      <Input
+        label={translations.form.general.lastName}
+        onChange={handleInputChange("lastName")}
+        required
+        value={formData.lastName}
+        type="text"
+        isInvalid={errors.lastName}
+        placeholder={translations.form.general.lastNamePlaceholder}
+      />
+    </MultiColumn>,
+    <Input
+      label={translations.form.general.email}
+      type="email"
+      value={formData.email}
+      onChange={handleInputChange("email")}
+      required
+      isInvalid={errors.email}
+      placeholder={translations.form.general.emailPlaceholder}
+    />,
+    <TextArea
+      label={translations.form.flash.bodyPosition}
+      value={formData.bodyPosition}
+      onChange={handleInputChange("bodyPosition")}
+      required
+      isInvalid={errors.bodyPosition}
+      placeholder={translations.form.flash.bodyPositionPlaceholder}
+    />,
+    <TextArea
+      label={translations.form.general.availabilities}
+      value={formData.availabilities}
+      onChange={handleInputChange("availabilities")}
+      required
+      isInvalid={errors.availabilities}
+      placeholder={translations.form.general.availabilitiesPlaceholder}
+    />,
+    <TextArea
+      label={translations.form.general.additionalInfo}
+      value={formData.additionalComments}
+      onChange={handleInputChange("additionalComments")}
+      placeholder={translations.form.general.additionalInfo}
+    />,
+  ];
+  return (
+    <div>
+      {submit === translations.form.general.emailSent ? (
+        <FormSubmitMessage locale={locale} translations={translations} />
+      ) : (
+        <form onSubmit={handleSubmit} className={styles.form}>
+          {flashFormData && (
+            <FormTitles
+              title={flashFormData?.title}
+              subTitle={flashFormData?.subTitle}
+            />
+          )}
+
+          <FormSteps steps={Steps} />
+
+          <FormSubmitButton
+            isValid={Object.keys(errors).length === 0}
+            translations={translations}
+            submitText={submit}
+            loading={loading}
+          />
+        </form>
+      )}
+    </div>
   );
 };

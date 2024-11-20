@@ -1,5 +1,73 @@
 @import "@/styles/mixins.scss";
 
 .dropdown {
-  @include dropDown;
+  background: var(--cream-white);
+  width: 100vw;
+  position: relative;
+  box-sizing: content-box !important;
+  opacity: 0; // Initially hidden
+  visibility: hidden;
+
+  animation: slideInMobile 0.4s ease forwards; // Slide-in effect
+
+  @media (min-width: $laptop) {
+    width: fit-content;
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%);
+    border-radius: var(--pad-3);
+    box-shadow: var(--light-shadow);
+    // Apply the animation when the dropdown is rendered
+
+    animation: slideIn 0.4s ease forwards; // Slide-in effect
+  }
+
+  a {
+    width: 100%;
+  }
+  .selected {
+    background: var(--light-burgundy-30);
+    border-top: 1px solid var(--light-burgundy);
+    border-bottom: 1px solid var(--light-burgundy);
+  }
+  .tab {
+    &:hover {
+      background: var(--white);
+      p {
+        color: var(--burgundy);
+      }
+    }
+    p {
+      text-wrap: nowrap;
+    }
+  }
+}
+
+// Define the animation
+@keyframes slideIn {
+  0% {
+    transform: translateY(20px);
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(100%);
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@keyframes slideInMobile {
+  0% {
+    transform: translateX(-100%);
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+  }
 }

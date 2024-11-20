@@ -76,7 +76,7 @@ export const Pill: FC<PropsWithChildren<PillProps>> = ({
     <FlexDiv
       className={cn(styles.pill, styles[`version${version}`])}
       padding={{ horizontal: [4], vertical: [2] }}
-      gapArray={[4, 4, 3, 4]}
+      gapArray={[4, 4, 4, 4]}
     >
       <button
         className={cn(styles.minus, {

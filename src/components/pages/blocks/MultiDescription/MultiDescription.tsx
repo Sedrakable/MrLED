@@ -6,16 +6,20 @@ import { TextWrapper } from "../../../reuse/containers/TextWrapper/TextWrapper";
 import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { Heading } from "@/components/reuse/Heading";
 import { useWindowResize } from "@/helpers/useWindowResize";
+import { ICta } from "@/data.d";
+import { Button } from "@/components/reuse/Button";
 
 export interface DescriptionProps {
   title: string;
   desc: string;
   textAlign?: CSSProperties["textAlign"];
+  cta?: ICta;
 }
 export const Description: React.FC<DescriptionProps> = ({
   title,
   desc,
   textAlign,
+  cta,
 }) => {
   return (
     <FlexDiv flex={{ direction: "column" }} gapArray={[3, 3, 3, 4]} width100>
@@ -29,9 +33,19 @@ export const Description: React.FC<DescriptionProps> = ({
       >
         {title}
       </Heading>
-      <Paragraph level="regular" color="darkest-burgundy" textAlign={textAlign}>
+      <Paragraph
+        level="regular"
+        color="darkest-burgundy"
+        textAlign={textAlign}
+        paddingBottomArray={[3]}
+      >
         {desc}
       </Paragraph>
+      {cta && (
+        <Button variant="primary" path={cta?.link?.join("/")}>
+          {cta?.text}
+        </Button>
+      )}
     </FlexDiv>
   );
 };

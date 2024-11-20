@@ -1,5 +1,5 @@
 "use client";
-import React, { FC } from "react";
+import React, { CSSProperties, FC, useEffect, useRef, useState } from "react";
 import styles from "./PricePlans.module.scss";
 import cn from "classnames";
 import FlexDiv from "../../../reuse/FlexDiv";
@@ -16,6 +16,7 @@ import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { useWindowResize } from "@/helpers/useWindowResize";
 import { TitleWrapper } from "../../../reuse/containers/TitleWrapper/TitleWrapper";
 import { Button } from "@/components/reuse/Button";
+import { AnimatedWrapper } from "@/components/reuse/AnimatedWrapper/AnimatedWrapper";
 
 export interface PricePlanProps {
   image?: ICustomImage;
@@ -38,102 +39,140 @@ export const PricePlan: FC<PricePlanProps> = ({
 }) => {
   const locale = useLocale() as LangType;
   const { isMobileOrTablet } = useWindowResize();
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [flexDirection, setFlexDirection] = useState<
+    CSSProperties["flexDirection"]
+  >("column");
+
+  useEffect(() => {
+    const updateFlexDirection = () => {
+      if (!isMobileOrTablet && containerRef.current) {
+        const { offsetWidth, offsetHeight } = containerRef.current;
+        setFlexDirection(offsetWidth / offsetHeight < 4 / 5 ? "column" : "row");
+      }
+    };
+
+    window.addEventListener("resize", updateFlexDirection);
+    updateFlexDirection();
+
+    return () => {
+      window.removeEventListener("resize", updateFlexDirection);
+    };
+  }, []);
+
   return (
-    <FlexDiv
-      flex={{ direction: "column", x: "flex-start", y: "flex-start" }}
-      className={styles.container}
-      aria-label={title}
+    <AnimatedWrapper
+      from="inside"
+      ref={containerRef}
+      className={styles.animatedContainer}
     >
-      {image && (
-        <SanityImage
-          image={image?.image}
-          alt={image?.alt}
-          figureclassname={cn(styles.image)}
-          quality={50}
-        />
-      )}
-
       <FlexDiv
-        flex={{ direction: "column", x: "flex-start", y: "flex-start" }}
-        className={styles.info}
-        gapArray={[3, 3, 3, 3]}
-        padding={{ all: [4, 5, 5, 6], top: [3, 4, 4, 5] }}
-        width100
+        flex={{ x: "flex-start", y: "flex-start" }}
+        aria-label={title}
+        ref={containerRef}
+        className={cn(styles.container, {
+          [styles.staticColumn]: flexDirection == "column",
+        })}
       >
-        <Heading
-          as="h4"
-          level="5"
-          color="cream-white"
-          weight={500}
-          className={styles.title}
+        {image && (
+          <SanityImage
+            image={image?.image}
+            alt={image?.alt}
+            figureclassname={cn(styles.image)}
+            quality={50}
+          />
+        )}
+
+        <FlexDiv
+          flex={{ direction: "column", x: "flex-start", y: "flex-start" }}
+          className={styles.info}
+          gapArray={[3, 3, 3, 3]}
+          padding={{
+            all: [4, 5, 5, 6],
+            vertical: image ? [4, 4, 5, 6] : [3, 4, 4, 5],
+          }}
+          width100
         >
-          {title}
-        </Heading>
-        <span className={styles.priceWrapper}>
-          <Paragraph
-            level="big"
-            color="burgundy"
+          <Heading
+            as="h4"
+            level={image ? "5" : "6"}
+            color={image ? "cream-white" : "burgundy"}
             weight={500}
-            className={styles.price}
+            className={styles.title}
           >
-            ${price}
-          </Paragraph>
-        </span>
-        {desc && (
-          <Paragraph
-            level="small"
-            color="cream-white"
-            weight={400}
-            className={styles.desc}
-          >
-            {desc}
-          </Paragraph>
-        )}
-
-        {features && (
+            {title}
+          </Heading>
           <FlexDiv
-            className={styles.features}
-            flex={{ direction: "column", x: "flex-start", y: "flex-start" }}
-            gapArray={[2]}
-            padding={{ bottom: [2] }}
+            className={styles.priceWrapper}
+            padding={{ vertical: [3], horizontal: [4] }}
           >
-            {features.map((feature, key) => {
-              return (
-                <Paragraph
-                  key={key}
-                  level="regular"
-                  color="cream-white"
-                  weight={400}
-                  className={styles.feature}
-                >
-                  {feature}
-                </Paragraph>
-              );
-            })}
+            <Paragraph
+              level="regular"
+              color={image ? "burgundy" : "dark-burgundy"}
+              weight={500}
+              className={styles.price}
+            >
+              {price}
+            </Paragraph>
           </FlexDiv>
-        )}
+          {desc && (
+            <Paragraph
+              level="small"
+              color={image ? "cream-white" : "burgundy"}
+              weight={400}
+              className={styles.desc}
+              textAlign="justify"
+            >
+              {desc}
+            </Paragraph>
+          )}
 
-        {cta && (
-          <Button
-            variant="extra"
-            path={`/${locale}${cta?.link?.join("")}`}
-            fit={isMobileOrTablet ? "grow" : undefined}
-          >
-            {cta.text}
-          </Button>
-        )}
-        {externalLink && (
-          <Button
-            variant="extra"
-            href={externalLink.link}
-            fit={isMobileOrTablet ? "grow" : undefined}
-            target="_blank"
-          >
-            {externalLink.text}
-          </Button>
-        )}
+          {features && (
+            <FlexDiv
+              className={styles.features}
+              flex={{ direction: "column", x: "flex-start", y: "flex-start" }}
+              gapArray={[2]}
+              padding={{ bottom: [2] }}
+            >
+              {features.map((feature, key) => {
+                return (
+                  <Paragraph
+                    key={key}
+                    level="regular"
+                    color="cream-white"
+                    weight={400}
+                    className={styles.feature}
+                  >
+                    {feature}
+                  </Paragraph>
+                );
+              })}
+            </FlexDiv>
+          )}
+
+          {cta && (
+            <Button
+              variant="extra"
+              path={`/${locale}${cta?.link?.join("")}`}
+              fit={isMobileOrTablet ? "grow" : undefined}
+            >
+              {cta.text}
+            </Button>
+          )}
+          {externalLink && (
+            <Button
+              variant="extra"
+              href={externalLink.link}
+              fit={isMobileOrTablet ? "grow" : undefined}
+              target="_blank"
+            >
+              {externalLink.text}
+            </Button>
+          )}
+        </FlexDiv>
       </FlexDiv>
-    </FlexDiv>
+    </AnimatedWrapper>
   );
 };
 
@@ -153,6 +192,7 @@ export const PricePlans: React.FC<PricePlansProps> = ({
         gapArray={[6, 4, 5, 6]}
         width100
         className={cn(styles.wrapper, styles[`version${version}`])}
+        wrap
       >
         {data.map((pricePlan) => {
           return <PricePlan key={pricePlan.title} {...pricePlan} />;

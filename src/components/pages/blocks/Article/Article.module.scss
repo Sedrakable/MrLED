@@ -13,8 +13,6 @@
 .article {
   @include vars;
 
-  background-color: var(--cream-white);
-
   .heading {
     row-gap: var(--pad-6);
     @media (min-width: $tablet) {

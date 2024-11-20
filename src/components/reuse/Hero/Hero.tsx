@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import styles from "./Hero.module.scss";
 import cn from "classnames";
 import { Paragraph } from "../Paragraph/Paragraph";
@@ -15,6 +15,8 @@ import { LangType } from "@/i18n/request";
 import { Heading } from "../Heading";
 import { FancyText } from "../FancyText/FancyText";
 import fishes from "/public/photos/Fishes.jpeg";
+import { AnimatedWrapper } from "../AnimatedWrapper/AnimatedWrapper";
+import { useParallaxScroll } from "@/helpers/useParallaxScroll";
 
 export type VersionType = 1 | 2 | 3;
 
@@ -40,6 +42,9 @@ export const Hero: React.FC<HeroProps> = ({
 }) => {
   const { isMobile, isTablet, isMobileOrTablet } = useWindowResize();
   const locale = useLocale() as LangType;
+
+  const heroRef = useRef<HTMLDivElement>(null);
+  const scrollProgress = useParallaxScroll(heroRef);
 
   const vertical =
     (version === 1 && isMobileOrTablet) || (version === 2 && isMobile);
@@ -86,7 +91,12 @@ export const Hero: React.FC<HeroProps> = ({
       padding={{
         horizontal: version === 2 ? [6, 0, 11, 12] : [6, 9, 11, 12],
         bottom: [6, 7, 7, 8],
-        top: version === 3 ? [0, 0, 0, 0] : [7, 5, 0, 0],
+        top:
+          version === 3
+            ? [0, 0, 0, 0]
+            : version === 2
+            ? [2, 5, 0, 0]
+            : [7, 5, 0, 0],
       }}
       className={styles.main}
       gapArray={[5, 4, 4, 5]}
@@ -132,9 +142,19 @@ export const Hero: React.FC<HeroProps> = ({
   );
 
   return (
-    <header className={cn(styles.hero, styles["version" + version])}>
+    <header
+      className={cn(styles.hero, styles["version" + version])}
+      ref={heroRef}
+    >
       {!vertical && version !== 3 && (
-        <div className={styles.illustration}>
+        <div
+          className={styles.illustration}
+          style={
+            {
+              "--scroll-progress": scrollProgress,
+            } as React.CSSProperties
+          }
+        >
           <Image src={fishes.src} alt="fishes" width={800} height={1200} />
         </div>
       )}
@@ -169,18 +189,24 @@ export const Hero: React.FC<HeroProps> = ({
           width100
           flex={{ x: "flex-start" }}
         >
-          {version === 3 ? (
-            <Heading as="h1" level={isTablet ? "1" : "2"}>
-              {title.part1}
-            </Heading>
-          ) : (
-            <FancyText
-              {...title}
-              reverse={vertical}
-              overflowText={version == 2}
-            />
-          )}
+          <AnimatedWrapper
+            from={version === 3 ? "inside" : "left"}
+            className={styles.titleAnim}
+          >
+            {version === 3 ? (
+              <Heading as="h1" level={isTablet ? "1" : "2"}>
+                {title.part1}
+              </Heading>
+            ) : (
+              <FancyText
+                {...title}
+                reverse={vertical}
+                overflowText={version == 2}
+              />
+            )}
+          </AnimatedWrapper>
         </FlexDiv>
+
         {vertical && <SubTitle />}
         {!vertical && <MainContent />}
         {version !== 3 && <AdehnnaWordmark className={styles.wordMark} />}
@@ -194,6 +220,11 @@ export const Hero: React.FC<HeroProps> = ({
             sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw"
             figureclassname={cn(styles.image, styles.foregroundImage)}
             quality={90}
+            style={
+              {
+                "--scroll-progress": scrollProgress,
+              } as React.CSSProperties
+            }
           />
         )}
       </FlexDiv>

@@ -149,7 +149,8 @@ export interface IFlash extends IBaseProject {
 export interface ITattoo extends IBaseProject {
   bodyPart: IBodyPart;
   tattooColor: ITattooColor;
-  tattooStatus: ITattooStatus;
+  tattooHealed: boolean;
+  tattooCoverUp: boolean;
 }
 
 export interface IHenna extends IBaseProject {
@@ -182,8 +183,8 @@ export type IHennaColor = typeof hennaColorArray[number];
 export const tattooColorArray = ["black", "brown"] as const;
 export type ITattooColor = typeof tattooColorArray[number];
 
-export const tattooStatusArray = ["healed", "unhealed"] as const;
-export type ITattooStatus = typeof tattooStatusArray[number];
+export const tattooOtherArray = ["healed", "cover-up"] as const;
+export type ITattooOther = typeof tattooOtherArray[number];
 
 export const flashStyleArray = [
   "ornamental",
@@ -218,6 +219,10 @@ export interface ICartProduct {
   quantity: number;
 }
 
+export interface IDeliveryMethod {
+  method: string;
+  price: number;
+}
 export interface INavLink {
   text: string;
   link: string;
@@ -286,5 +291,6 @@ export enum LocalPaths {
   LEGAL = "/legal",
   TERMS = "/terms-and-conditions",
   PRIVACY = "/privacy-policy",
+  POLICIES = "/policies",
 }
 /* eslint-enable */

@@ -97,6 +97,7 @@ export default async function HennaServicePage({
       img2: images[1],
       img3: images[2],
     },
+    plan: "Henna Approximatif",
   };
 
   return (
@@ -117,7 +118,7 @@ export default async function HennaServicePage({
           {hennaServicePageData.multiDescriptions && (
             <MultiDescription descs={hennaServicePageData.multiDescriptions} />
           )}
-          {formData && <Approx {...approxData} />}
+          {approxData && <Approx {...approxData} />}
         </Block>
         {carouselData && (
           <Carousel

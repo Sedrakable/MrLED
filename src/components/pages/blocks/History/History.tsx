@@ -11,6 +11,7 @@ import { getTranslations } from "@/helpers/langUtils";
 import { LangType } from "@/i18n/request";
 import { useLocale } from "next-intl";
 import { TitleWrapper } from "../../../reuse/containers/TitleWrapper/TitleWrapper";
+import { AnimatedWrapper } from "@/components/reuse/AnimatedWrapper/AnimatedWrapper";
 
 export interface HistoryProps {
   text: string;
@@ -30,6 +31,7 @@ export const History: React.FC<HistoryProps> = ({ text }) => {
         wrap
       >
         <AdehnnaRoundLogo className={styles.logo} />
+
         <TextWrapper>
           <Paragraph
             level={isMobile ? "regular" : "big"}

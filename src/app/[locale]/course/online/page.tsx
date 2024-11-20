@@ -82,7 +82,6 @@ export default async function OnlineCoursePage({
         )}
 
         <Block variant="default" illustrations>
-          {/* <ClientLogger slug={}/> */}
           {onlineCoursePageData.desc && (
             <TextWrapper version={3}>
               <PortableTextContent

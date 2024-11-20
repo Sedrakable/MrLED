@@ -20,15 +20,15 @@ import {
   IFilter,
   ITattooColor,
   tattooColorArray,
-  ITattooStatus,
-  tattooStatusArray,
+  ITattooOther,
+  tattooOtherArray,
 } from "@/data.d";
 import { Translations } from "@/langs/langTypes";
 
 export interface IFilterOptions {
   yearFilterOptions: IFilter[];
   tattooColorFilterOptions?: IFilter[];
-  tattooStatusFilterOptions?: IFilter[];
+  tattooOtherFilterOptions?: IFilter[];
   bodyPartFilterOptions?: IFilter[];
   flashStyleFilterOptions?: IFilter[];
   flashStatusFilterOptions?: IFilter[];
@@ -38,7 +38,7 @@ export interface IFilterOptions {
 export interface IFilterChangeHandlers {
   handleYearFilterChange: (selected: string[]) => void;
   handleTattooColorFilterChange?: (selected: ITattooColor[]) => void;
-  handleTattooStatusFilterChange?: (selected: ITattooStatus[]) => void;
+  handleTattooOtherFilterChange?: (selected: ITattooOther[]) => void;
   handleBodyPartFilterChange?: (selected: IBodyPart[]) => void;
   handleFlashStyleFilterChange?: (selected: IFlashStyle[]) => void;
   handleFlashStatusFilterChange?: (selected: IFlashStatus[]) => void;
@@ -64,8 +64,8 @@ export const useProjectFilters = (
     ITattooColor[]
   >([]);
 
-  const [selectedTattooStatus, setSelectedTattooStatus] = useState<
-    ITattooStatus[]
+  const [selectedTattooOther, setSelectedTattooOther] = useState<
+    ITattooOther[]
   >([]);
 
   const [selectedYears, setSelectedYears] = useState<string[]>([]);
@@ -106,11 +106,10 @@ export const useProjectFilters = (
     })
   );
 
-  const tattooStatusFilterOptions: IFilter[] = tattooStatusArray.map(
-    (tattooStatus) => ({
-      value: tattooStatus,
-      label:
-        translations.select.tattooStatusOptions[tattooStatus] || tattooStatus,
+  const tattooOtherFilterOptions: IFilter[] = tattooOtherArray.map(
+    (tattooOther) => ({
+      value: tattooOther,
+      label: translations.select.tattooOtherOptions[tattooOther] || tattooOther,
     })
   );
 
@@ -139,43 +138,35 @@ export const useProjectFilters = (
   const sortOptions = [...dateSortOptions];
 
   const handleBodyPartFilterChange = (selected: IBodyPart[]) => {
-    console.log("Selected body parts:", selected);
     setSelectedBodyParts(selected);
   };
 
   const handleTattooColorFilterChange = (selected: ITattooColor[]) => {
-    console.log("Selected tattoo colors:", selected);
     setSelectedTattooColor(selected);
   };
 
-  const handleTattooStatusFilterChange = (selected: ITattooStatus[]) => {
-    console.log("Selected tattoo statuses:", selected);
-    setSelectedTattooStatus(selected);
+  const handleTattooOtherFilterChange = (selected: ITattooOther[]) => {
+    setSelectedTattooOther(selected);
   };
 
   const handleYearFilterChange = (selected: string[]) => {
-    console.log("Selected years:", selected);
     setSelectedYears(selected);
   };
 
   const handleFlashStyleFilterChange = (selected: IFlashStyle[]) => {
-    console.log("Selected flash styles:", selected);
     setSelectedFlashStyles(selected);
   };
 
   const handleFlashStatusFilterChange = (selected: IFlashStatus[]) => {
-    console.log("Selected flash styles:", selected);
     setSelectedFlashStatus(selected);
   };
 
   const handleHennaColorFilterChange = (selected: IHennaColor[]) => {
-    console.log("Selected henna colors:", selected);
     setSelectedHennaColors(selected);
   };
 
   const handleSortChange = (selected: string) => {
     const sortValue = selected as "newest" | "oldest";
-    console.log("Selected sort option:", sortValue);
     setSortOrder(sortValue);
   };
 
@@ -200,11 +191,22 @@ export const useProjectFilters = (
       );
     }
 
-    if (type === "tattoo" && selectedTattooStatus.length > 0) {
-      result = result.filter((project: ITattoo) =>
-        selectedTattooStatus.includes(project.tattooStatus)
-      );
+    //Fix after Here
+    if (type === "tattoo" && selectedTattooOther.length > 0) {
+      result = result.filter((project: ITattoo) => {
+        return selectedTattooOther.some((option) => {
+          switch (option) {
+            case "cover-up":
+              return project.tattooCoverUp;
+            case "healed":
+              return project.tattooHealed;
+            default:
+              return false;
+          }
+        });
+      });
     }
+    //Fix before Here
 
     if (type === "flash" && selectedFlashStyles.length > 0) {
       result = result.filter((project: IFlash) =>
@@ -239,7 +241,7 @@ export const useProjectFilters = (
     projects,
     selectedBodyParts,
     selectedTattooColor,
-    selectedTattooStatus,
+    selectedTattooOther,
     selectedYears,
     selectedFlashStyles,
     selectedFlashStatus,
@@ -253,7 +255,7 @@ export const useProjectFilters = (
     filterHandlers: {
       handleBodyPartFilterChange,
       handleTattooColorFilterChange,
-      handleTattooStatusFilterChange,
+      handleTattooOtherFilterChange,
       handleYearFilterChange,
       handleFlashStatusFilterChange,
       handleFlashStyleFilterChange,
@@ -263,7 +265,7 @@ export const useProjectFilters = (
     filterOptions: {
       yearFilterOptions,
       tattooColorFilterOptions,
-      tattooStatusFilterOptions,
+      tattooOtherFilterOptions,
       bodyPartFilterOptions,
       hennaColorFilterOptions,
       flashStyleFilterOptions,

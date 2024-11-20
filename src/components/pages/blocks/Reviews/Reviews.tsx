@@ -12,6 +12,7 @@ import { useLocale } from "next-intl";
 import { TitleWrapper } from "../../../reuse/containers/TitleWrapper/TitleWrapper";
 import { Heading } from "@/components/reuse/Heading";
 import { Icon } from "@/components/reuse/Icon";
+import { AnimatedWrapper } from "@/components/reuse/AnimatedWrapper/AnimatedWrapper";
 
 export const Review: React.FC<IReview> = ({ name, message }) => {
   return (
@@ -41,17 +42,19 @@ export const Reviews: React.FC<IReviews> = ({ reviews }) => {
   const translations = getTranslations(locale);
   return (
     <TitleWrapper title={translations.titles.reviews}>
-      <TextWrapper>
-        <FlexDiv gapArray={[7, 6, 6, 6]} className={styles.reviews} wrap>
-          {reviews.map((review) => (
-            <Review
-              key={review.name}
-              name={review.name}
-              message={review.message}
-            />
-          ))}
-        </FlexDiv>
-      </TextWrapper>
+      <AnimatedWrapper from="inside">
+        <TextWrapper>
+          <FlexDiv gapArray={[7, 6, 6, 6]} className={styles.reviews} wrap>
+            {reviews.map((review) => (
+              <Review
+                key={review.name}
+                name={review.name}
+                message={review.message}
+              />
+            ))}
+          </FlexDiv>
+        </TextWrapper>
+      </AnimatedWrapper>
     </TitleWrapper>
   );
 };

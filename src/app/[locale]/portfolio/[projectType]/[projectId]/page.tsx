@@ -59,7 +59,7 @@ export default async function ProjectPage({
     projectType,
     projectId
   );
-
+  console.log("selectedProject", selectedProject);
   return (
     <Modal
       version={
@@ -69,15 +69,11 @@ export default async function ProjectPage({
           : "image"
       }
     >
-      <ClientLogger slug={projectType} />
-      {projectType === "flash" && !(selectedProject as IFlash).reserved ? (
+      <ClientLogger slug={selectedProject} />
+      {projectType === "flash" ? (
         workPageData &&
         formData && (
-          <FlashModal
-            project={selectedProject as IFlash}
-            flashes={workPageData.work.projects as IFlash[]}
-            formData={formData}
-          />
+          <FlashModal project={selectedProject as IFlash} formData={formData} />
         )
       ) : projectType === "toiles" && !(selectedProject as ICanvas).reserved ? (
         <CanvasModal project={selectedProject as ICanvas} />

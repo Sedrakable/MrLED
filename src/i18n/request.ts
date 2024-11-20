@@ -1,4 +1,5 @@
-export const langs = ["en", "fr"] as const;
+export const langs = ["fr"] as const;
+// export const langs = ["en", "fr"] as const;
 export type LangType = typeof langs[number];
 
 import { getRequestConfig } from "next-intl/server";

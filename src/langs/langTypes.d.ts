@@ -84,12 +84,15 @@ interface Nav {
   blog: string;
   cart: string;
   privacy: string;
+  policies: string;
   terms: string;
   other: string;
 }
 
 interface Other {
   reserve: string;
+  repeatable: string;
+  notAvailable: string;
 }
 
 interface Hours {
@@ -122,9 +125,9 @@ type TattooColorRecord = {
   [K in ITattooColor]: string;
 };
 
-type TattooStatusRecord = {
+type TattooOtherRecord = {
   // eslint-disable-next-line no-unused-vars
-  [K in ITattooStatus]: string;
+  [K in ITattooOther]: string;
 };
 
 type FlashStyleRecord = {
@@ -157,8 +160,8 @@ interface Select {
   bodyPartsOptions: BodyPartsRecord;
   tattooColor: string;
   tattooColorOptions: TattooColorRecord;
-  tattooStatus: string;
-  tattooStatusOptions: TattooStatusRecord;
+  tattooOther: string;
+  tattooOtherOptions: TattooOtherRecord;
   flashStyles: string;
   flashStylesOptions: FlashStyleRecord;
   flashStatus: string;

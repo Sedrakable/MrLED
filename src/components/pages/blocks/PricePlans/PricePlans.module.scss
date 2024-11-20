@@ -49,6 +49,9 @@
   }
 }
 
+.staticColumn {
+  @include vert-container();
+}
 .wrapper {
   display: grid !important;
   align-items: stretch !important;
@@ -56,21 +59,30 @@
 
 .version1 {
   grid-template-columns: repeat(6, 1fr); // Mobile (default)
-  .container {
+
+  .animatedContainer {
     @include grid-span(); // Default span for all containers
-    @include vert-container();
-    // Tablet
+    .container {
+      @include vert-container();
+    }
+
     @media (min-width: $tablet) {
       &:nth-child(1),
       &:nth-child(2) {
         @include grid-span(3);
-        @include vert-container();
+        .container {
+          @include vert-container();
+        }
       }
       &:nth-child(n + 3) {
         @include grid-span(6);
-        @include hori-container();
+        .container {
+          @include hori-container();
+        }
         &:nth-child(even) {
-          @include hori-container-reverse();
+          .container {
+            @include hori-container-reverse();
+          }
         }
       }
     }
@@ -80,13 +92,19 @@
       &:nth-child(1),
       &:nth-child(2) {
         @include grid-span(3);
-        @include hori-container();
+        .container {
+          @include hori-container();
+        }
       }
       &:nth-child(n + 3) {
         @include grid-span(2);
-        @include vert-container();
-        &:nth-child(even) {
+        .container {
           @include vert-container();
+        }
+        &:nth-child(even) {
+          .container {
+            @include vert-container();
+          }
         }
       }
     }
@@ -97,6 +115,7 @@
   @include vars;
   grid-template-columns: repeat(var(--version-2-columns), 1fr);
 }
+
 .container {
   box-shadow: var(--light-shadow);
   border-radius: var(--border-radius);
@@ -110,10 +129,11 @@
 
   .image {
     position: relative !important;
+    height: 100%;
   }
 
   .priceWrapper {
-    padding: 8px 16px 2px;
+    padding-bottom: 6px !important;
     background: var(--cream-white);
     border-radius: var(--border-radius-small);
   }
@@ -127,8 +147,19 @@
   }
 }
 
-.container:has(:not(.image)) {
+.container:not(:has(.image)) {
+  box-shadow: var(--drop-shadow);
+  background: linear-gradient(
+    120deg,
+    transparent 0,
+    hsl(from var(--light-burgundy) h s l / 0.3) 70%
+  );
+  backdrop-filter: blur(var(--pad-2));
   .info {
     padding-top: var(--pad-5) !important;
+
+    .priceWrapper {
+      background-color: var(--light-burgundy-30);
+    }
   }
 }

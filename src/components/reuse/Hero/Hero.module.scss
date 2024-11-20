@@ -4,6 +4,7 @@
   --main-color: var(--cream-white);
   --hero-min-height: fit-content;
   --hero-height-1: 540px;
+  --hero-height-2: 540px;
   --hero-height-3: fit-content;
   --bg-img-width-3: 100vw;
   --subtitle1-column-span: 4;
@@ -13,7 +14,7 @@
   --title-line-height: 0.9em;
   --title-font-size: 140px;
   --profile-image-width-1: 600px;
-  --profile-image-width-2: 400px;
+  --profile-image-width-2: 100%;
   --profile-image-bottom: -260px;
   --profile-image-right: -160px;
   --wordmark-image-width: 200px;
@@ -52,9 +53,9 @@
     // --hero-height-3: 320px;
     --title-line-height: var(--heading-h1-line);
     --title-font-size: var(--heading-h1);
-    --profile-image-width-1: 900px;
+    --profile-image-width-1: 950px;
     --profile-image-width-2: 900px;
-    --profile-image-bottom: -300px;
+    --profile-image-bottom: -350px;
     --profile-image-right: -120px;
     --wordmark-image-bottom: 280px;
     --wordmark-image-right: -30px;
@@ -139,11 +140,14 @@
     left: 0;
     bottom: 0;
     background: var(--cream-white);
-
+    transition: transform 0.5s ease-out;
+    will-change: transform;
     img {
       mix-blend-mode: luminosity;
       width: var(--illustration-width);
       opacity: 0.5;
+
+      overflow: hidden;
     }
 
     &::after {
@@ -181,6 +185,7 @@
       overflow: hidden !important;
       display: flex;
       align-items: flex-start;
+
       img {
         bottom: var(--profile-image-bottom) !important;
         top: unset !important;
@@ -205,9 +210,9 @@
         content: "";
         @include absoluteFill;
         background: radial-gradient(
-            90% 135% at 62% 0%,
+            150% 125% at 100% 0%,
             hsl(from var(--cream-white) h s l / 0) 25%,
-            var(--light-burgundy) 50%,
+            hsl(from var(--cream-white) h s l / 0.75) 50%,
             hsl(from var(--cream-white) h s l / 1) 75%
           ),
           hsl(from var(--burgundy) h s l / 60%);
@@ -217,6 +222,12 @@
       z-index: 2;
       left: var(--profile-image-right);
       right: unset;
+
+      img {
+        transform: translateY(calc(var(--scroll-progress) * -100px)) !important;
+        transition: transform 0.3s ease-out;
+        will-change: transform;
+      }
       &::after {
         content: "";
         @include absoluteFill;
@@ -250,7 +261,10 @@
     width: var(--profile-image-width-1) !important;
   }
   .illustration {
-    transform: translate(-50%, 25%);
+    transform: translate(
+      -50%,
+      calc(25% + calc(var(--scroll-progress) * -200px))
+    );
   }
   .backgroundImage {
     img {
@@ -304,17 +318,31 @@
 
 .version2 {
   .illustration {
-    transform: translate(-50%, 40%);
+    transform: translate(
+      -50%,
+      calc(40% + calc(var(--scroll-progress) * -200px))
+    );
   }
 
   .content {
     height: var(--hero-height-2);
+    min-height: 125vw;
     .image {
       width: var(--profile-image-width-2) !important;
       background: var(--cream-white);
       img {
         mix-blend-mode: luminosity !important;
+        top: 0 !important;
+        left: 0 !important;
+        height: 100% !important;
       }
+    }
+    .title {
+      width: 125% !important;
+    }
+    .subTitle {
+      width: 75%;
+      mix-blend-mode: multiply !important;
     }
     .wordMark {
       width: calc(var(--wordmark-image-width) * (3 / 4));
@@ -328,10 +356,16 @@
     }
   }
 
+  .main {
+    padding-top: 0;
+  }
+
   @media (min-width: $tablet) {
     @include switchToHorizontal;
     height: var(--hero-height-2);
+
     .content {
+      min-height: auto !important;
       .backgroundImage {
         right: 0;
         left: unset !important;
@@ -359,6 +393,8 @@
         position: relative !important;
         transform: none !important;
         left: 0 !important;
+
+        width: 100% !important;
       }
     }
   }
@@ -410,6 +446,10 @@
         hsl(from var(--light-burgundy) h s l / 0) 21.01%
       );
       backdrop-filter: blur(var(--pad-1));
+    }
+    .titleAnim {
+      @include flex;
+      width: 100% !important;
     }
     .title {
       justify-content: center !important;

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, FC } from "react";
+import React, { PropsWithChildren, FC, ReactNode } from "react";
 
 import styles from "./Form.module.scss";
 import { Button } from "@/components/reuse/Button";
@@ -9,6 +9,8 @@ import { useWindowResize } from "@/helpers/useWindowResize";
 import { StepProps } from "./formTypes";
 import { Paragraph } from "../Paragraph/Paragraph";
 import { Translations } from "@/langs/langTypes";
+import { LangType } from "@/i18n/request";
+import { LocalPaths } from "@/data.d";
 
 export interface FormTitleProps {
   title: string;
@@ -75,11 +77,12 @@ export const FormSubmitButton: FC<{
   isValid: boolean;
   submitText: string | false;
   translations: Translations;
-}> = ({ isValid, translations, submitText }) => {
+  loading: boolean;
+}> = ({ isValid, translations, submitText, loading = true }) => {
   const { isMobile } = useWindowResize();
 
   return (
-    <div className={styles.submitWrapper}>
+    <FlexDiv className={styles.submitWrapper} gapArray={[2]}>
       <Button type="submit" variant="primary">
         {translations.buttons.submit}
       </Button>
@@ -91,6 +94,47 @@ export const FormSubmitButton: FC<{
       {submitText && (
         <Alert arrow={isMobile ? "bottom" : "left"}>{submitText}</Alert>
       )}
-    </div>
+      {loading && <div className={styles.spinner} />}
+    </FlexDiv>
+  );
+};
+
+export const FormSteps: FC<{
+  steps: ReactNode[];
+}> = ({ steps }) => {
+  return (
+    <FlexDiv
+      gapArray={[5, 5, 5, 5]}
+      width100
+      flex={{ direction: "column", x: "stretch", y: "flex-start" }}
+    >
+      {steps.map((step, index) => (
+        <Step key={index} number={index + 1}>
+          {step}
+        </Step>
+      ))}
+    </FlexDiv>
+  );
+};
+
+export const FormSubmitMessage: FC<{
+  locale: LangType;
+  translations: Translations;
+}> = ({ locale, translations }) => {
+  return (
+    <FlexDiv flex={{ direction: "column" }}>
+      <Heading
+        as="h3"
+        level="4"
+        color="burgundy"
+        weight={500}
+        textAlign="center"
+      >
+        {translations.form.general.emailSent}
+      </Heading>{" "}
+      <Button variant="transparent" path={`/${locale}${LocalPaths.HOME}`}>
+        {translations.nav.home}
+      </Button>
+    </FlexDiv>
   );
 };

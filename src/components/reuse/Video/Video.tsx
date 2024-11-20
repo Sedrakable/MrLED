@@ -22,8 +22,6 @@ export const Video: React.FC<IVideo> = ({
     setIsPlaying(true);
   };
 
-  console.log(videoFile.asset.mimeType);
-
   if (videoFile) {
     return (
       <div className={styles.video}>

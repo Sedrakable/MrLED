@@ -81,42 +81,38 @@ export default async function TestTattooServicePage({
 
   return (
     testTattooServicePageData && (
-      <>
+      <div className={styles.jaguaWrapper}>
         <Hero {...testTattooServicePageData?.hero} version={2} />
 
         {testTattooServicePageData.display && (
-          <div className={styles.jaguaWrapper}>
-            <Block variant="full-width">
-              <Display
-                {...testTattooServicePageData?.display}
-                version="service"
-              />
-            </Block>
-          </div>
+          <Block variant="full-width">
+            <Display
+              {...testTattooServicePageData?.display}
+              version="service"
+            />
+          </Block>
         )}
 
         <Block variant="default" illustrations>
-          <div className={styles.jaguaWrapper}>
-            {testTattooServicePageData.desc && (
-              <TextWrapper version={3}>
-                <PortableTextContent
-                  value={testTattooServicePageData.desc}
-                  color="dark-burgundy"
-                  textAlign="center"
-                />
-              </TextWrapper>
-            )}
-          </div>
-          <div className={styles.jaguaWrapper}>
-            {testTattooServicePageData.pricePlans && (
-              <PricePlans data={testTattooServicePageData.pricePlans} />
-            )}
-          </div>
+          {testTattooServicePageData.desc && (
+            <TextWrapper version={3}>
+              <PortableTextContent
+                value={testTattooServicePageData.desc}
+                color="dark-burgundy"
+                textAlign="center"
+              />
+            </TextWrapper>
+          )}
+
+          {testTattooServicePageData.pricePlans && (
+            <PricePlans data={testTattooServicePageData.pricePlans} />
+          )}
+
           {testTattooServicePageData?.bigCTA && (
             <BigCTA {...testTattooServicePageData?.bigCTA} />
           )}
         </Block>
-      </>
+      </div>
     )
   );
 }

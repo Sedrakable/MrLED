@@ -33,7 +33,7 @@ export const frTranslations: Translations = {
       info: "Informations pertinentes",
       infoPlaceholder: "Description du projet",
       referanceImage: "Image de référence",
-      upload: "Télécharger une image",
+      upload: "Télécharger des images",
     },
     cart: {
       province: "Province",
@@ -75,6 +75,7 @@ export const frTranslations: Translations = {
     blog: "Blog",
     cart: "Panier",
     privacy: "Politique de confidentialité",
+    policies: "Politiques",
     terms: "Conditions d'utilisation",
     other: "Autre",
   },
@@ -91,6 +92,8 @@ export const frTranslations: Translations = {
   },
   other: {
     reserve: "Réserver",
+    repeatable: "Répétable",
+    notAvailable: "Non disponible",
   },
   cart: {
     itemsAddedToCart: "articles ont été ajoutés au panier",
@@ -124,10 +127,10 @@ export const frTranslations: Translations = {
       black: "Noir + Gris",
       brown: "Brun",
     },
-    tattooStatus: "Statut",
-    tattooStatusOptions: {
+    tattooOther: "Autre",
+    tattooOtherOptions: {
       healed: "Guéri",
-      unhealed: "Non Guéri",
+      "cover-up": "Cover-up",
     },
     flashStyles: "Styles",
     flashStylesOptions: {

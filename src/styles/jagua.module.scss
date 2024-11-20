@@ -5,5 +5,9 @@
   --light-burgundy: var(--light-jagua) !important;
   --dark-burgundy: var(--dark-jagua) !important;
   --special-pink: var(--special-jagua) !important;
+  width: 100%;
+  path {
+    fill: var(--jagua) !important;
+  }
   // Add any other color variables you want to change for the Hero
 }

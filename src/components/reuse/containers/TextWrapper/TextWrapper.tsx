@@ -8,6 +8,7 @@ import {
   SanityImage,
 } from "@/components/reuse/SanityImage/SanityImage";
 import { Star } from "../../Star/Star";
+import { AnimatedWrapper } from "../../AnimatedWrapper/AnimatedWrapper";
 
 export type SizeType = "small" | "big";
 
@@ -25,44 +26,46 @@ export const TextWrapper: FC<TextWrapperProps> = ({
   variant,
 }) => {
   return (
-    <FlexDiv
-      width100
-      padding={{
-        vertical: variant === "big" ? [6, 6, 6, 7] : [4, 4, 4, 5],
-        horizontal: variant === "big" ? [4, 7, 7, 8] : [4, 6, 6, 7],
-      }}
-      className={cn(styles.wrapper, styles[`version${version}`])}
-    >
-      {backgroundImage && version == 2 && (
-        <SanityImage
-          image={backgroundImage?.image}
-          alt={backgroundImage?.alt}
-          loading="eager"
-          fetchPriority="high"
-          rel="preload"
-          sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw"
-          figureclassname={styles.backgroundImage}
-          quality={30}
-        />
-      )}
-      {version === 1 && (
-        <>
-          <div className={styles.starWrapper1}>
+    <AnimatedWrapper from="inside">
+      <FlexDiv
+        width100
+        padding={{
+          vertical: variant === "big" ? [6, 6, 6, 7] : [4, 4, 4, 5],
+          horizontal: variant === "big" ? [4, 7, 7, 8] : [4, 6, 6, 7],
+        }}
+        className={cn(styles.wrapper, styles[`version${version}`])}
+      >
+        {backgroundImage && version == 2 && (
+          <SanityImage
+            image={backgroundImage?.image}
+            alt={backgroundImage?.alt}
+            loading="eager"
+            fetchPriority="high"
+            rel="preload"
+            sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw"
+            figureclassname={styles.backgroundImage}
+            quality={30}
+          />
+        )}
+        {version === 1 && (
+          <>
+            <div className={styles.starWrapper1}>
+              <Star />
+            </div>
+
+            <div className={styles.starWrapper2}>
+              <Star />
+            </div>
+          </>
+        )}
+
+        {version === 2 && (
+          <div className={styles.starWrapper3}>
             <Star />
           </div>
-
-          <div className={styles.starWrapper2}>
-            <Star />
-          </div>
-        </>
-      )}
-
-      {version === 2 && (
-        <div className={styles.starWrapper3}>
-          <Star />
-        </div>
-      )}
-      {children}
-    </FlexDiv>
+        )}
+        {children}
+      </FlexDiv>
+    </AnimatedWrapper>
   );
 };

@@ -120,7 +120,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, lang, socials }) => {
               width100
               padding={{ vertical: [3] }}
             >
-              <LangSwitcher onClick={() => setSidebar(false)} />
+              {/* <LangSwitcher onClick={() => setSidebar(false)} /> */}
               <Socials {...socials} />
             </FlexDiv>
           )}

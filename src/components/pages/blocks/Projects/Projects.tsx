@@ -18,17 +18,11 @@ import { useLocale } from "next-intl";
 import { Heading } from "@/components/reuse/Heading";
 import Line from "@/assets/vector/Line.svg";
 
-import { Modal, ModalProps } from "@/components/reuse/Modal";
-import { FormTitleProps } from "@/components/reuse/Form/Form";
-import { FlashModal } from "./FlashModal";
-import { ProjectModal } from "./ProjectModal";
 import { ProjectNavigation } from "./ProjectNavigation";
 import { ProjectFilters } from "../../../reuse/Form/CustomFilters/ProjectFilters";
 import { useProjectFilters } from "../../../reuse/Form/CustomFilters/useProjectFilters";
-import Infini from "@/assets/vector/Inifini.svg";
 
 import Link from "next/link";
-import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 
 interface ProjectProps {
   project: IProject;
@@ -52,7 +46,7 @@ export const Project: FC<ProjectProps> = ({ project, type }) => {
           >
             {flashProject.title}
           </Heading>
-          <Paragraph
+          {/* <Paragraph
             level="big"
             color="burgundy"
             weight={400}
@@ -71,7 +65,7 @@ export const Project: FC<ProjectProps> = ({ project, type }) => {
             >
               1
             </Paragraph>
-          )}
+          )} */}
           {flashProject.reserved && <Line className={styles.line} />}
         </>
       );

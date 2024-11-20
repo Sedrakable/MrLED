@@ -7,6 +7,7 @@ import FlexDiv from "../../reuse/FlexDiv";
 import { ICta } from "../../../data.d";
 import { Heading } from "@/components/reuse/Heading";
 import { Button } from "@/components/reuse/Button";
+import { Paragraph } from "../Paragraph/Paragraph";
 
 interface NavigationProps {
   prevPage: ICta;
@@ -34,28 +35,26 @@ export const Navigation: FC<NavigationProps> = ({
           iconProps={{ icon: "arrow", rotate: 90, size: "regular" }}
           path={getButtonPath(prevPage)}
         />
-        <Heading
-          as="h4"
-          level="6"
+        <Paragraph
+          level="big"
           weight={400}
           color="burgundy"
           textAlign="center"
           className={styles.title}
         >
           {prevPage.text}
-        </Heading>
+        </Paragraph>
       </FlexDiv>
       <FlexDiv gapArray={[3, 3, 3, 4]} flex={{ y: "center" }}>
-        <Heading
-          as="h4"
-          level="6"
+        <Paragraph
+          level="big"
           weight={400}
           color="burgundy"
           textAlign="center"
           className={styles.title}
         >
           {nextPage.text}
-        </Heading>
+        </Paragraph>
         <Button
           variant="extra"
           iconProps={{ icon: "arrow", rotate: 270, size: "regular" }}

@@ -7,7 +7,6 @@ import { TitleWrapper } from "@/components/reuse/containers/TitleWrapper/TitleWr
 import FlexDiv from "@/components/reuse/FlexDiv";
 
 export const LegalPageComp: React.FC<ILegalPage> = ({ title, data }) => {
-  console.log(data);
   return (
     <Block variant="default" illustrations>
       <TitleWrapper title={title}>

@@ -12,12 +12,15 @@ interface ProjectModalProps {
 }
 
 export const ProjectModal: FC<ProjectModalProps> = ({ project }) => {
+  console.log(project);
   return (
-    <SanityImage
-      image={project?.image.image}
-      alt={project?.image.alt}
-      figureclassname={cn(styles.modalImage, styles.image)}
-      quality={100}
-    />
+    project?.image && (
+      <SanityImage
+        image={project?.image.image}
+        alt={project?.image.alt}
+        figureclassname={cn(styles.modalImage, styles.image)}
+        quality={100}
+      />
+    )
   );
 };

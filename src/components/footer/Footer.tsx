@@ -18,6 +18,10 @@ import { useWindowResize } from "@/helpers/useWindowResize";
 const legalLinks = (trans: Translations): (INavLink | ICta)[] => {
   return [
     {
+      text: trans.nav.policies,
+      link: [LocalPaths.LEGAL, LocalPaths.POLICIES],
+    } as ICta,
+    {
       text: trans.nav.privacy,
       link: [LocalPaths.LEGAL, LocalPaths.PRIVACY],
     } as ICta,

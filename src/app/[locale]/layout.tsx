@@ -71,6 +71,7 @@ export default async function LocaleLayout({
             name="facebook-domain-verification"
             content="z6nna7jlyl6ehzowkxc3qp1oha3wb6"
           />
+          <meta name="enviroment" content={process.env.NODE_ENV} />
           <Script
             id="facebook-pixel"
             strategy="afterInteractive"

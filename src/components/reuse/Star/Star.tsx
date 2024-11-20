@@ -27,6 +27,7 @@ export const Star: React.FC = () => {
     horizontal: false,
     vertical: false,
   });
+  const [animationDelay, setAnimationDelay] = useState<string>("");
 
   useEffect(() => {
     const loadRandomStar = async () => {
@@ -47,6 +48,10 @@ export const Star: React.FC = () => {
         vertical: Math.random() > 0.5,
       };
 
+      // Generate a random delay between 0s and 5s
+      const randomDelay = Math.random() * 5; // random value in seconds
+      setAnimationDelay(`${randomDelay}s`);
+
       setStarComponent(() => ImportedStar);
       setFlipState(randomFlip);
     };
@@ -63,6 +68,7 @@ export const Star: React.FC = () => {
         transform: `scale(${flipState.horizontal ? -1 : 1}, ${
           flipState.vertical ? -1 : 1
         })`,
+        animationDelay: animationDelay,
       }}
     />
   );

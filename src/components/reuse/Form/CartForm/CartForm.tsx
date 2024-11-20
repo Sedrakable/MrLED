@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, useEffect, FC, ReactNode } from "react";
 
 import styles from "../Form.module.scss";
 import { Input, TextArea } from "@/components/reuse/Form/Input/Input";
@@ -10,9 +10,16 @@ import { getTranslations } from "@/helpers/langUtils";
 import { useLocale } from "next-intl";
 import { LangType } from "@/i18n/request";
 import { AddressFormData, FormErrorData } from "../formTypes";
-import { FormSubmitButton, FormTitles, MultiColumn, Step } from "../Form";
+import {
+  FormSteps,
+  FormSubmitButton,
+  FormSubmitMessage,
+  FormTitles,
+  MultiColumn,
+  Step,
+} from "../Form";
 import { CartProps } from "@/components/pages/blocks/Cart/Cart";
-import { ICartProduct } from "@/data.d";
+import { ICartProduct, IDeliveryMethod } from "@/data.d";
 
 export interface CartFormProps extends CartProps {
   cart: ICartProduct[];
@@ -45,13 +52,22 @@ export const CartForm: FC<CartFormProps> = ({
 
   const [errors, setErrors] = useState<FormErrorData>({});
   const [submit, setSubmit] = useState<string | false>(false);
+  const [loading, setLoading] = useState(false); // New loading state
 
-  const deliveryOptions = deliveryMethods.map((method) => ({
-    value: method,
-    label: method,
-  }));
+  const methodToString = (method: IDeliveryMethod) => {
+    return `${method.method}${
+      method.price && method.price > 0 ? ` (${method.price} $)` : ""
+    }`;
+  };
+  const deliveryOptions: OptionType[] = deliveryMethods.map(
+    (method: IDeliveryMethod) => ({
+      value: methodToString(method),
+      label: methodToString(method),
+    })
+  );
   const [states, setStates] = useState<OptionType[]>([]);
   const [cities, setCities] = useState<OptionType[]>([]);
+  const [deliveryPrice, setDeliveryPrice] = useState<number>(0);
 
   useEffect(() => {
     setStates(
@@ -94,6 +110,11 @@ export const CartForm: FC<CartFormProps> = ({
   };
 
   const handleDeliveryChange = (selected: string) => {
+    setDeliveryPrice(
+      deliveryMethods.find((method) => methodToString(method) === selected)
+        ?.price || 0
+    );
+
     setFormData((prev) => ({ ...prev, delivery: selected }));
     if (errors.delivery) {
       setErrors((prev) => ({ ...prev, delivery: false }));
@@ -105,25 +126,29 @@ export const CartForm: FC<CartFormProps> = ({
 
     if (!validateForm()) return;
 
+    setLoading(true);
     try {
-      const response = await fetch("/api/sendEmail", {
+      const response = await fetch("/api/sendCartFormEmail", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ formData, cart, locale }),
+        body: JSON.stringify({ formData, cart, deliveryPrice, locale }),
       });
 
       if (response.ok) {
         setSubmit(translations.form.general.emailSent);
         // Add success handling (e.g., show success message, reset form)
       } else {
-        console.error("Failed to send flash request", response);
+        console.error("Failed to send request", response);
         setSubmit(translations.form.general.emailNotSent);
         // Add error handling (e.g., show error message)
       }
     } catch (error) {
       console.error("Error:", error);
+      setSubmit(translations.form.general.emailNotSent);
+    } finally {
+      setLoading(false); // Set loading to false after submission
     }
   };
 
@@ -142,111 +167,108 @@ export const CartForm: FC<CartFormProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <FormTitles title={title} subTitle={subTitle} />
-      <FlexDiv
-        gapArray={[5, 5, 5, 5]}
-        width100
-        flex={{ direction: "column", x: "stretch", y: "flex-start" }}
-      >
-        <Step number={1}>
-          <MultiColumn>
-            <Input
-              label={translations.form.general.firstName}
-              type="text"
-              value={formData.firstName}
-              onChange={handleInputChange("firstName")}
-              required
-              isInvalid={errors.firstName}
-              placeholder={translations.form.general.firstNamePlaceholder}
-            />
-            <Input
-              label={translations.form.general.lastName}
-              type="text"
-              value={formData.lastName}
-              onChange={handleInputChange("lastName")}
-              required
-              isInvalid={errors.lastName}
-              placeholder={translations.form.general.lastNamePlaceholder}
-            />
-          </MultiColumn>
-        </Step>
-        <Step number={2}>
-          <Input
-            label={translations.form.general.email}
-            type="email"
-            value={formData.email}
-            onChange={handleInputChange("email")}
-            required
-            isInvalid={errors.email}
-            placeholder={translations.form.general.emailPlaceholder}
-          />
-        </Step>
-        <Step number={3}>
-          <MultiColumn>
-            <Select
-              label={translations.form.cart.province}
-              options={states}
-              onChange={handleStateChange}
-              defaultValue={formData.state}
-            />
-            <Select
-              label={translations.form.cart.city}
-              disabled={cities.length === 0}
-              options={cities}
-              onChange={handleCityChange}
-              defaultValue={formData.city}
-              placeholder={translations.form.cart.city}
-            />
-            <Input
-              label={translations.form.cart.postalCode}
-              type="text"
-              value={formData.postalCode}
-              onChange={handleInputChange("postalCode")}
-              required
-              isInvalid={errors.postalCode}
-              placeholder={translations.form.cart.postalCodePlaceholder}
-            />
-          </MultiColumn>
-          <Input
-            label={translations.form.cart.addressLine + " 1"}
-            type="text"
-            value={formData.addressLine1}
-            required
-            isInvalid={errors.addressLine1}
-            onChange={handleInputChange("addressLine1")}
-          />
-          <Input
-            label={translations.form.cart.addressLine + " 2"}
-            type="text"
-            value={formData.addressLine2}
-            onChange={handleInputChange("addressLine2")}
-          />
-        </Step>
-        <Step number={4}>
-          <Select
-            label={translations.form.cart.delivery}
-            options={deliveryOptions}
-            onChange={handleDeliveryChange}
-            required
-            isInvalid={errors.delivery}
-          />
-        </Step>
-        <Step number={5}>
-          <TextArea
-            label={translations.form.general.additionalInfo}
-            value={formData.message}
-            onChange={handleInputChange("message")}
-          />
-        </Step>
-      </FlexDiv>
-
-      <FormSubmitButton
-        submitText={submit}
-        isValid={Object.keys(errors).length === 0}
-        translations={translations}
+  const Steps: ReactNode[] = [
+    <MultiColumn>
+      <Input
+        label={translations.form.general.firstName}
+        type="text"
+        value={formData.firstName}
+        onChange={handleInputChange("firstName")}
+        required
+        isInvalid={errors.firstName}
+        placeholder={translations.form.general.firstNamePlaceholder}
       />
-    </form>
+      <Input
+        label={translations.form.general.lastName}
+        type="text"
+        value={formData.lastName}
+        onChange={handleInputChange("lastName")}
+        required
+        isInvalid={errors.lastName}
+        placeholder={translations.form.general.lastNamePlaceholder}
+      />
+    </MultiColumn>,
+    <Input
+      label={translations.form.general.email}
+      type="email"
+      value={formData.email}
+      onChange={handleInputChange("email")}
+      required
+      isInvalid={errors.email}
+      placeholder={translations.form.general.emailPlaceholder}
+    />,
+    <>
+      {" "}
+      <MultiColumn>
+        <Select
+          label={translations.form.cart.province}
+          options={states}
+          onChange={handleStateChange}
+          defaultValue={formData.state}
+        />
+        <Select
+          label={translations.form.cart.city}
+          disabled={cities.length === 0}
+          options={cities}
+          onChange={handleCityChange}
+          defaultValue={formData.city}
+          placeholder={translations.form.cart.city}
+        />
+        <Input
+          label={translations.form.cart.postalCode}
+          type="text"
+          value={formData.postalCode}
+          onChange={handleInputChange("postalCode")}
+          required
+          isInvalid={errors.postalCode}
+          placeholder={translations.form.cart.postalCodePlaceholder}
+        />
+      </MultiColumn>
+      <Input
+        label={translations.form.cart.addressLine + " 1"}
+        type="text"
+        value={formData.addressLine1}
+        required
+        isInvalid={errors.addressLine1}
+        onChange={handleInputChange("addressLine1")}
+      />
+      <Input
+        label={translations.form.cart.addressLine + " 2"}
+        type="text"
+        value={formData.addressLine2}
+        onChange={handleInputChange("addressLine2")}
+      />
+    </>,
+    <Select
+      label={translations.form.cart.delivery}
+      options={deliveryOptions}
+      onChange={handleDeliveryChange}
+      required
+      isInvalid={errors.delivery}
+    />,
+    <TextArea
+      label={translations.form.general.additionalInfo}
+      value={formData.message}
+      onChange={handleInputChange("message")}
+    />,
+  ];
+
+  return (
+    <div>
+      {submit === translations.form.general.emailSent ? (
+        <FormSubmitMessage locale={locale} translations={translations} />
+      ) : (
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <FormTitles title={title} subTitle={subTitle} />
+          <FormSteps steps={Steps} />
+          <FormSubmitButton
+            submitText={submit}
+            isValid={Object.keys(errors).length === 0}
+            translations={translations}
+            loading={loading}
+          />
+        </form>
+      )}
+    </div>
   );
 };

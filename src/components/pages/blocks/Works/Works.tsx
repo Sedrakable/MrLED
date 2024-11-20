@@ -17,6 +17,7 @@ import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { useWindowResize } from "@/helpers/useWindowResize";
 import { TitleWrapper } from "../../../reuse/containers/TitleWrapper/TitleWrapper";
 import { WorkPageProps } from "@/app/[locale]/portfolio/[projectType]/page";
+import { AnimatedWrapper } from "@/components/reuse/AnimatedWrapper/AnimatedWrapper";
 
 export interface WorkProps {
   backgroundImage: ICustomImage;
@@ -30,45 +31,47 @@ const Work: FC<WorkProps> = ({ backgroundImage, title, path, reserve }) => {
   const translations = getTranslations(locale);
   const { isMobileOrTablet } = useWindowResize();
   return (
-    <Link
-      href={`/${locale}${LocalPaths.PORTFOLIO}${path}`}
-      key={path}
-      className={styles.container}
-      aria-label={title}
-    >
-      <SanityImage
-        image={backgroundImage?.image}
-        alt={backgroundImage?.alt}
-        figureclassname={cn(styles.image)}
-        quality={50}
-      />
+    <AnimatedWrapper from="inside">
+      <Link
+        href={`/${locale}${LocalPaths.PORTFOLIO}${path}`}
+        key={path}
+        className={styles.container}
+        aria-label={title}
+      >
+        <SanityImage
+          image={backgroundImage?.image}
+          alt={backgroundImage?.alt}
+          figureclassname={cn(styles.image)}
+          quality={50}
+        />
 
-      <FlexDiv as="cite" className={styles.text}>
-        <Heading
-          as="h2"
-          level="3"
-          color="cream-white"
-          weight={400}
-          className={styles.title}
-        >
-          {title}
-        </Heading>
-        {reserve && (
-          <FlexDiv
-            padding={{ horizontal: [6], vertical: [3], bottom: [2] }}
-            className={styles.reserve}
+        <FlexDiv as="cite" className={styles.text}>
+          <Heading
+            as="h2"
+            level="3"
+            color="cream-white"
+            weight={400}
+            className={styles.title}
           >
-            <Paragraph
-              level={isMobileOrTablet ? "regular" : "big"}
-              color="burgundy"
-              weight={400}
+            {title}
+          </Heading>
+          {reserve && (
+            <FlexDiv
+              padding={{ horizontal: [6], vertical: [3], bottom: [2] }}
+              className={styles.reserve}
             >
-              {translations.other.reserve}
-            </Paragraph>
-          </FlexDiv>
-        )}
-      </FlexDiv>
-    </Link>
+              <Paragraph
+                level={isMobileOrTablet ? "regular" : "big"}
+                color="burgundy"
+                weight={400}
+              >
+                {translations.other.reserve}
+              </Paragraph>
+            </FlexDiv>
+          )}
+        </FlexDiv>
+      </Link>
+    </AnimatedWrapper>
   );
 };
 
