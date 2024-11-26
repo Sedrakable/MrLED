@@ -123,6 +123,7 @@ export const PricePlan: FC<PricePlanProps> = ({
               weight={400}
               className={styles.desc}
               textAlign="justify"
+              paddingBottomArray={[3]}
             >
               {desc}
             </Paragraph>

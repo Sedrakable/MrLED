@@ -28,8 +28,27 @@
     position: relative;
     overflow: hidden;
 
+    &:hover {
+      .image {
+        img {
+          transform: scale(1.05);
+          transition: 300ms ease;
+        }
+        &::after {
+          transition: 300ms ease;
+          background: transparent;
+        }
+      }
+      .text {
+        transform: scale(3);
+        opacity: 0;
+        transition: transform 1s ease, opacity 300ms ease;
+      }
+    }
+
     .text {
       position: relative;
+      transition: transform 300ms ease, opacity 300ms ease;
       .title {
         text-shadow: 0px 0px 8px rgba(87, 40, 57, 0.75);
         color: var(--white) !important;
@@ -47,10 +66,16 @@
     .image {
       @include absoluteFill;
       position: absolute !important;
+
+      img {
+        transition: 400ms ease;
+      }
+
       &::after {
+        transition: 400ms ease;
         @include absoluteFill;
         content: "";
-        background: hsl(from var(--darkest-burgundy) h s l / 0.2);
+        background: hsl(from var(--darkest-burgundy) h s l / 0.4);
       }
     }
   }

@@ -15,7 +15,7 @@ const AnimatedWrapper = forwardRef<HTMLDivElement, AnimatedWrapperProps>(
   ({ from, children, className }, ref) => {
     const { ref: inViewRef, inView } = useInView({
       triggerOnce: true, // Animation runs only once
-      threshold: 0.2, // Trigger when 20% of the element is visible
+      threshold: 0.1, // Trigger when 10% of the element is visible
     });
 
     return (

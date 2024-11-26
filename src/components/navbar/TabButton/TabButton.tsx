@@ -95,7 +95,7 @@ const TabButton: FC<TabButtonProps> = ({
       {dropdown ? (
         <TabContent />
       ) : (
-        <Link href={path} aria-label={path}>
+        <Link href={path} aria-label={path} style={{ width: "100%" }}>
           <TabContent />
         </Link>
       )}

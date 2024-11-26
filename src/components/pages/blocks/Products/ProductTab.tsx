@@ -75,14 +75,15 @@ export const ProductTab: React.FC<ProductTabProps> = ({
           <Paragraph level="big" color="dark-burgundy" weight={500}>
             {title}
           </Paragraph>
-          <Paragraph
+          {/* <Paragraph
             level="regular"
             color="burgundy"
             weight={400}
             paddingBottomArray={[3]}
+            className={styles.desc}
           >
             {desc}
-          </Paragraph>
+          </Paragraph> */}
           <Paragraph level="regular" weight={500} color="burgundy">
             ${price}
           </Paragraph>

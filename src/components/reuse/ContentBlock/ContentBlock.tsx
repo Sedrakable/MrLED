@@ -81,7 +81,7 @@ const renderNonListBlock = (block: IBlock) => {
       return (
         <Paragraph
           key={block._key}
-          level="regular"
+          level="big"
           color="darkest-burgundy"
           paddingBottomArray={[2, 3, 3, 4]}
         >
@@ -92,7 +92,7 @@ const renderNonListBlock = (block: IBlock) => {
       return (
         <Paragraph
           key={block._key}
-          level="regular"
+          level="big"
           color="burgundy"
           className={styles.blockquote}
         >
@@ -102,10 +102,11 @@ const renderNonListBlock = (block: IBlock) => {
     default:
       return (
         <Heading
+          className={styles.heading}
           key={block._key}
           as={block.style}
           weight={400}
-          level="6"
+          level="3"
           color="burgundy"
           paddingBottomArray={[2]}
         >

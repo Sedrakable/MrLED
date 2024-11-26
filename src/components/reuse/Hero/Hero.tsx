@@ -89,7 +89,7 @@ export const Hero: React.FC<HeroProps> = ({
     <FlexDiv
       flex={{ direction: "column", x: "flex-start", y: "flex-start" }}
       padding={{
-        horizontal: version === 2 ? [6, 0, 11, 12] : [6, 9, 11, 12],
+        horizontal: version === 2 ? [6, 7, 11, 12] : [6, 9, 11, 12],
         bottom: [6, 7, 7, 8],
         top:
           version === 3

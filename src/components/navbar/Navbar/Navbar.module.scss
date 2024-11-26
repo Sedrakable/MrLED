@@ -57,7 +57,7 @@
   z-index: 10;
   transition: 500ms;
   background: var(--cream-white, #fff);
-
+  box-shadow: var(--light-shadow);
   .navbar {
     width: 100%;
     position: relative;

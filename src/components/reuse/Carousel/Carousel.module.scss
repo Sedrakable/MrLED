@@ -28,6 +28,13 @@
   width: fit-content !important;
   border-radius: var(--border-radius);
   box-shadow: var(--light-shadow);
+
+  // pointer-events: auto;
+  transition: 1.2s ease;
+  &:hover {
+    transform: scale(1.05);
+    transition: 300ms ease;
+  }
   img {
     position: relative !important;
     height: 100% !important;

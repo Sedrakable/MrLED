@@ -1,13 +1,14 @@
 @import "@/styles/mixins.scss";
 
 @mixin vars() {
+  --heading-font-size: var(--heading-h6);
+  --heading-line-height: var(--heading-h6-line);
+  --font-size-big: var(--paragraph-regular);
+
   @media (min-width: $tablet) {
-  }
-
-  @media (min-width: $laptop) {
-  }
-
-  @media (min-width: $desktop) {
+    --heading-font-size: var(--heading-h5);
+    --heading-line-height: var(--heading-h5-line);
+    --font-size-big: var(--heading-h6);
   }
 }
 
@@ -23,7 +24,7 @@
 }
 
 .link {
-  color: var(--special-pink);
+  color: var(--burgundy);
   text-decoration: underline !important;
 
   &:hover {
@@ -32,6 +33,17 @@
   }
 }
 
+.heading {
+  @include vars;
+  font-size: var(--heading-font-size) !important;
+  line-height: var(--heading-line-height) !important;
+}
+
+.listItem {
+  @include vars;
+  font-size: var(--font-size-big);
+  line-height: 1.25em;
+}
 .numberedList {
   margin-bottom: var(--pad-3);
   .listItem {

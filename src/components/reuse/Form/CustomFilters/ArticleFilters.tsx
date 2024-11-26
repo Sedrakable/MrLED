@@ -8,18 +8,17 @@ import { Sort } from "@/components/reuse/Form/Sort";
 
 import { Translations } from "@/langs/langTypes";
 import { IFilter } from "@/data.d";
+import {
+  IArticleFilterChangeHandlers,
+  IArticleFilterOptions,
+} from "./useArticleFilters";
 
 export const ArticleFilters: FC<{
-  filterOptions: {
-    yearFilterOptions: IFilter[];
-  };
+  filterOptions: IArticleFilterOptions;
   sortOptions: IFilter[];
-  onFilterChange: {
-    handleYearFilterChange: (selected: string[]) => void;
-    handleSortChange: (selected: string) => void;
-  };
+  filterHandlers: IArticleFilterChangeHandlers;
   translations: Translations;
-}> = ({ filterOptions, onFilterChange, sortOptions, translations }) => {
+}> = ({ filterOptions, filterHandlers, sortOptions, translations }) => {
   return (
     <FlexDiv
       gapArray={[3, 4, 4, 4]}
@@ -29,11 +28,16 @@ export const ArticleFilters: FC<{
     >
       <Filter
         options={filterOptions.yearFilterOptions}
-        onChange={onFilterChange.handleYearFilterChange}
+        onChange={filterHandlers.handleYearFilterChange}
         placeholder={translations.select.year || "Select Year"}
       />
+      <Filter
+        options={filterOptions.typeFilterOptions}
+        onChange={filterHandlers.handleTypeFilterChange}
+        placeholder={translations.select.articleType || "Select Article"}
+      />
 
-      <Sort options={sortOptions} onChange={onFilterChange.handleSortChange} />
+      <Sort options={sortOptions} onChange={filterHandlers.handleSortChange} />
     </FlexDiv>
   );
 };

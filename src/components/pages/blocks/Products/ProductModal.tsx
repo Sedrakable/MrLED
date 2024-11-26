@@ -81,7 +81,7 @@ export const ProductModal: React.FC<IProduct> = (props) => {
             level="regular"
             color="burgundy"
             weight={400}
-            paddingBottomArray={[2]}
+            paddingBottomArray={[3, 4, 4, 5]}
           >
             {desc}
           </Paragraph>

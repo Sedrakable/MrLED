@@ -38,6 +38,7 @@
   position: relative;
   min-height: var(--service-height);
   height: fit-content;
+
   .image {
     z-index: 0;
 
@@ -47,6 +48,7 @@
     background: hsl(from var(--special-pink) h s l / 0.25);
     img {
       mix-blend-mode: luminosity !important;
+      transition: 300ms ease;
     }
     &::after {
       content: "";
@@ -121,6 +123,16 @@
 }
 
 .article {
+  &:hover {
+    .image {
+      transition: 200ms ease;
+      box-shadow: inset 0px 0px 64px 32px var(--burgundy);
+      img {
+        transform: scale(1.1);
+        transition: 200ms ease;
+      }
+    }
+  }
   min-height: var(--article-height);
   @media (min-width: $tablet) {
     .image {

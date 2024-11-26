@@ -20,7 +20,7 @@
   --wordmark-image-width: 200px;
   --wordmark-image-bottom: -40px; //in the case its Bottom
   --wordmark-image-right: 0px; //in the case its Left
-  --wordmark-opacity: 0.85;
+  --wordmark-opacity: 0.65;
   --illustration-width: 500px;
 
   @media (min-width: $tablet) {
@@ -40,7 +40,7 @@
     --wordmark-image-width: 280px;
     --wordmark-image-bottom: 20px; //in the case its Bottom
     --wordmark-image-right: 20px;
-    --wordmark-opacity: 0.75;
+    --wordmark-opacity: 1;
     --illustration-width: 500px;
   }
 
@@ -59,7 +59,7 @@
     --profile-image-right: -120px;
     --wordmark-image-bottom: 280px;
     --wordmark-image-right: -30px;
-    --wordmark-opacity: 0.65;
+    --wordmark-opacity: 1;
     --illustration-width: 600px;
   }
 
@@ -346,8 +346,9 @@
     }
     .wordMark {
       width: calc(var(--wordmark-image-width) * (3 / 4));
-      bottom: 0;
-      right: 0;
+
+      bottom: var(--pad-3);
+      left: var(--pad-3);
     }
     .textWrapper {
       .desc {
@@ -388,7 +389,11 @@
             hsl(from var(--burgundy) h s l / 20%);
         }
       }
-
+      .wordMark {
+        bottom: 0;
+        right: 0;
+        left: unset;
+      }
       .title {
         position: relative !important;
         transform: none !important;

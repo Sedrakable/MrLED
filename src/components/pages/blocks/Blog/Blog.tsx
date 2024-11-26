@@ -1,5 +1,6 @@
 "use client";
 import React, { useCallback, useEffect } from "react";
+import styles from "./Blog.module.scss";
 import FlexDiv from "@/components/reuse/FlexDiv";
 import { IArticle, IBlog, LocalPaths } from "@/data.d";
 import { Block } from "../../../reuse/containers/Block/Block";
@@ -13,9 +14,6 @@ import { useArticleFilters } from "../../../reuse/Form/CustomFilters/useArticleF
 import { ArticleFilters } from "@/components/reuse/Form/CustomFilters/ArticleFilters";
 import { setToLocalStorage } from "@/helpers/localStorage";
 import { ARTICLES_ORDER_STORAGE_KEY } from "../Article/Article";
-import { blogPageQuery } from "@/app/api/generateSanityQueries";
-import { BlogPageProps } from "@/app/[locale]/blog/page";
-import { useFetchPage } from "@/app/api/useFetchPage";
 
 export const filterArticles = async (
   articles: IArticle[],
@@ -50,7 +48,12 @@ export const Blog: React.FC<IBlog> = ({ articles }) => {
 
   return (
     articles && (
-      <Block variant="full-width">
+      <FlexDiv
+        flex={{ direction: "column" }}
+        width100
+        gapArray={[4]}
+        padding={{ top: [7, 7, 8, 9] }}
+      >
         <TitleWrapper title={translations.titles.blog}>
           <FlexDiv width100 flex={{ direction: "column" }} gapArray={[4]}>
             <div
@@ -58,38 +61,36 @@ export const Blog: React.FC<IBlog> = ({ articles }) => {
             >
               <ArticleFilters
                 filterOptions={filterOptions}
-                onFilterChange={filterHandlers}
+                filterHandlers={filterHandlers}
                 translations={translations}
                 sortOptions={sortOptions}
               />
             </div>
-            <FlexDiv
-              width100
-              flex={{ direction: "column" }}
-              gapArray={[10, 10, 11, 12]}
-            >
-              {filteredArticles.map((article, index) => {
-                return (
-                  <Link
-                    href={`/${locale}${LocalPaths.BLOG}/${article.path}`}
-                    aria-label={article.path}
-                    key={index}
-                  >
-                    <Display
-                      backgroundImage={article.customImage}
-                      subTitle={article.title}
-                      desc={article.desc}
-                      version="article"
-                      date={article.date}
-                      reverse={index % 2 === 0}
-                    />
-                  </Link>
-                );
-              })}
-            </FlexDiv>
           </FlexDiv>
         </TitleWrapper>
-      </Block>
+        <Block variant="full-width" illustrations className={styles.block}>
+          {filteredArticles.map((article, index) => {
+            return (
+              <Link
+                href={`/${locale}${LocalPaths.BLOG}/${article.path}`}
+                aria-label={article.path}
+                key={index}
+              >
+                <Display
+                  backgroundImage={article.customImage}
+                  subTitle={article.title}
+                  desc={article.desc}
+                  version="article"
+                  date={`${article.date} | ${
+                    translations.select.articleTypeOptions[article.type]
+                  } `}
+                  reverse={index % 2 === 0}
+                />
+              </Link>
+            );
+          })}
+        </Block>
+      </FlexDiv>
     )
   );
 };

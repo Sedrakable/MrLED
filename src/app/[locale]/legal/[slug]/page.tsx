@@ -7,10 +7,11 @@ import dynamic from "next/dynamic";
 import { LegalPageComp } from "@/components/pages/LegalPage/LegalPage";
 
 export default async function LegalPage({
-  params: { locale, slug },
+  params,
 }: {
-  params: { locale: LangType; slug: string };
+  params: Promise<{ locale: LangType; slug: string }>;
 }) {
+  const { locale, slug } = await params;
   const legalQuery = legalPageQuery(locale, slug);
   const legalPageData: ILegalPage = await useFetchPage(legalQuery, slug);
   return legalPageData && <LegalPageComp {...legalPageData} />;

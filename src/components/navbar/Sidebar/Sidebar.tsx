@@ -94,7 +94,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, lang, socials }) => {
         >
           {tabWrapper(
             <FlexDiv
-              flex={{ direction: "row" }}
+              flex={{ direction: "row", x: "flex-start" }}
               gapArray={[4]}
               width100
               padding={{ vertical: [3] }}

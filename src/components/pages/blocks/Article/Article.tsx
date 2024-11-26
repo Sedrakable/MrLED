@@ -15,10 +15,7 @@ import { useFetchPage } from "@/app/api/useFetchPage";
 import { useLocale } from "next-intl";
 import { Button } from "@/components/reuse/Button";
 import { getTranslations } from "@/helpers/langUtils";
-import {
-  contentBlocks,
-  renderBlocks,
-} from "@/components/reuse/ContentBlock/ContentBlock";
+import { contentBlocks } from "@/components/reuse/ContentBlock/ContentBlock";
 import { TextWrapper } from "@/components/reuse/containers/TextWrapper/TextWrapper";
 
 export const ARTICLES_ORDER_STORAGE_KEY = "articlesOrder";
@@ -35,6 +32,7 @@ export const Article: React.FC<IArticle> = ({
   content,
   date,
   customImage,
+  imageText,
   title,
   desc,
 }) => {
@@ -70,7 +68,7 @@ export const Article: React.FC<IArticle> = ({
   }));
 
   return (
-    <Block variant="default">
+    <Block variant="default" illustrations>
       <FlexDiv
         flex={{ direction: "column", x: "flex-start" }}
         width100
@@ -79,6 +77,7 @@ export const Article: React.FC<IArticle> = ({
         <Button
           variant="extra"
           path={`/${locale}${LocalPaths.BLOG}`}
+          fit="shrink"
           iconProps={{
             icon: "arrow",
             rotate: 90,
@@ -101,9 +100,10 @@ export const Article: React.FC<IArticle> = ({
             {date}
           </Paragraph>
           <Heading
-            level="4"
+            level="3"
             as="h1"
             color="burgundy"
+            weight={400}
             paddingBottomArray={[1, 0]}
           >
             {title}
@@ -115,12 +115,19 @@ export const Article: React.FC<IArticle> = ({
             className={styles.heading}
             padding={{ bottom: [3, 4, 4, 5] }}
           >
-            <div className={styles.imgWrapper}>
+            <FlexDiv
+              width100
+              className={styles.imgWrapper}
+              gapArray={[2]}
+              flex={{ direction: "column" }}
+            >
               <SanityImage {...customImage} />
-              <Paragraph level="small" color="dark-burgundy">
-                {customImage?.alt}
-              </Paragraph>
-            </div>
+              {imageText && (
+                <Paragraph level="small" color="dark-burgundy">
+                  {imageText}
+                </Paragraph>
+              )}
+            </FlexDiv>
             <TextWrapper version={2} variant="small">
               <Paragraph
                 level="regular"

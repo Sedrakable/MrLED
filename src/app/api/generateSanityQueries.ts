@@ -173,6 +173,7 @@ export const blogPageQuery = (locale: LangType): string => {
         title,
         desc,
         date,
+        type,
         customImage
       }
     }
@@ -211,6 +212,12 @@ export const pricePlansQuery = (pageType: string, locale: LangType): string => {
 
 export const legalPageQuery = (locale: LangType, slug: string): string => {
   return `*[_type == 'legalPage' && lang == '${locale}' && path == '${slug}'][0]`;
+};
+
+export const policiesPageQuery = (locale: LangType): string => {
+  return `*[_type == 'policiesPage' && lang == '${locale}'][0]{
+  collapsibles[]->,
+  }`;
 };
 
 export const notFoundPageQuery = (locale: LangType): string => {

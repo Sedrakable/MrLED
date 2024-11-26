@@ -92,12 +92,21 @@
       width: var(--product-tab-img-size) !important;
       border-radius: var(--border-radius);
     }
-    .text {
-      p {
-        width: 100% !important;
-        text-wrap: wrap;
-      }
-    }
+    // .text {
+    //   .desc {
+    //     $number-of-lines: 2;
+    //     width: 100% !important;
+    //     text-wrap: wrap;
+    //     display: -webkit-box; /* Enables the flexbox-based truncation */
+    //     -webkit-box-orient: vertical; /* Sets the box's orientation to vertical */
+    //     overflow: hidden; /* Hides the overflowing text */
+    //     text-overflow: ellipsis; /* Adds the three dots (...) */
+    //     -webkit-line-clamp: $number-of-lines; /* Limits the paragraph to 3 lines */
+    //     max-height: calc(1.25em * $number-of-lines);
+    //     padding-bottom: 0 !important;
+    //     margin-bottom: var(--pad-2);
+    //   }
+    // }
   }
   .right {
     row-gap: var(--pad-4) !important;

@@ -38,12 +38,8 @@
       }
       // align-items: stretch !important;
     }
-    margin-bottom: var(--pad-4);
-    .imgWrapper {
-      width: 100%;
-      height: auto;
-      position: relative;
 
+    .imgWrapper {
       figure {
         aspect-ratio: var(--ratio);
 
@@ -52,8 +48,6 @@
         box-shadow: var(--light-shadow);
       }
       p {
-        position: absolute;
-        bottom: -1.5em;
         font-style: italic;
       }
     }

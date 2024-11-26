@@ -5,7 +5,8 @@ import {
   IHennaColor,
   IFlashStatus,
   ITattooColor,
-  ITattooStatus,
+  IArticleType,
+  ITattooOther,
 } from "../data.d";
 
 interface Titles {
@@ -17,6 +18,7 @@ interface Titles {
   info: string;
   experience: string;
   cart: string;
+  policies: string;
 }
 
 interface Buttons {
@@ -150,6 +152,11 @@ type DateSortRecord = {
   [K in IDateSort]: string;
 };
 
+type ArticleTypeRecord = {
+  // eslint-disable-next-line no-unused-vars
+  [K in IArticleType]: string;
+};
+
 interface Select {
   sort: string;
   select: string;
@@ -168,6 +175,8 @@ interface Select {
   flashStatusOptions: FlashStatusRecord;
   hennaColors: string;
   hennaColorsOptions: HennaColorRecord;
+  articleType: string;
+  articleTypeOptions: ArticleTypeRecord;
 }
 
 export interface Translations {

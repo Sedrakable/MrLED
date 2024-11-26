@@ -10,6 +10,7 @@ export const frTranslations: Translations = {
     info: "Information",
     experience: "Vivre l'expérience",
     cart: "Panier",
+    policies: "Politiques",
   },
   buttons: {
     view: "Voir",
@@ -141,7 +142,6 @@ export const frTranslations: Translations = {
       character: "Personnage",
       other: "Autre",
     },
-
     flashStatus: "Statut",
     flashStatusOptions: {
       reserved: "Réservé",
@@ -153,6 +153,13 @@ export const frTranslations: Translations = {
       henna: "Henné",
       hennagua: "Hennagua",
       jagua: "Jagua",
+    },
+    articleType: "Type",
+    articleTypeOptions: {
+      tattoo: "Tatouage",
+      henna: "Henné",
+      jagua: "Jagua",
+      toile: "Toile",
     },
   },
 };

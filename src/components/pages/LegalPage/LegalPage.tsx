@@ -8,16 +8,14 @@ import FlexDiv from "@/components/reuse/FlexDiv";
 
 export const LegalPageComp: React.FC<ILegalPage> = ({ title, data }) => {
   return (
-    <Block variant="default" illustrations>
-      <TitleWrapper title={title}>
-        <FlexDiv
-          flex={{ direction: "column", x: "flex-start" }}
-          width100
-          as="section"
-        >
-          {data && contentBlocks({ blocks: data })}
-        </FlexDiv>
-      </TitleWrapper>
+    <Block variant="default" illustrations title={title}>
+      <FlexDiv
+        flex={{ direction: "column", x: "flex-start" }}
+        width100
+        as="section"
+      >
+        {data && contentBlocks({ blocks: data })}
+      </FlexDiv>
     </Block>
   );
 };

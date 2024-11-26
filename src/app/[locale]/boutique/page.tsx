@@ -74,7 +74,7 @@ export default async function BoutiquePage({
             <Services services={boutiquePageData.displays} />
           </Block>
         )}
-        <Block variant="default">
+        <Block variant="default" illustrations>
           {boutiquePageData.desc && (
             <TextWrapper version={3}>
               <PortableTextContent

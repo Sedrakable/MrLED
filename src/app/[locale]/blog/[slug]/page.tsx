@@ -24,28 +24,28 @@ const getArticlePageData = async (locale: LangType, slug: string) => {
   return articleData;
 };
 
-export async function generateMetadata({
-  params: { locale, slug },
-}: {
-  params: { locale: LangType; slug: string };
-}): Promise<Metadata> {
-  const articlePageData: ArticlePageProps = await getArticlePageData(
-    locale,
-    slug
-  );
-  const { metaTitle, metaDesc, metaKeywords } = articlePageData.meta;
-  const path = `${LocalPaths.BLOG}/${slug}`;
-  const crawl = true;
+// export async function generateMetadata({
+//   params: { locale, slug },
+// }: {
+//   params: { locale: LangType; slug: string };
+// }): Promise<Metadata> {
+//   const articlePageData: ArticlePageProps = await getArticlePageData(
+//     locale,
+//     slug
+//   );
+//   const { metaTitle, metaDesc, metaKeywords } = articlePageData.meta;
+//   const path = `${LocalPaths.BLOG}/${slug}`;
+//   const crawl = true;
 
-  return setMetadata({
-    locale,
-    metaTitle,
-    metaDesc,
-    metaKeywords,
-    path,
-    crawl,
-  });
-}
+//   return setMetadata({
+//     locale,
+//     metaTitle,
+//     metaDesc,
+//     metaKeywords,
+//     path,
+//     crawl,
+//   });
+// }
 
 export default async function ArticlePage({
   params,

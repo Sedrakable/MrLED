@@ -47,7 +47,7 @@ export const Collapsible: React.FC<CollapsibleProps> = ({
           width100
           gapArray={[4]}
         >
-          {questions.map((q, index) => (
+          {questions?.map((q, index) => (
             <FlexDiv
               key={index}
               width100

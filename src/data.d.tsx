@@ -1,5 +1,4 @@
 // @ts-ignore
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { ICustomImage } from "./components/reuse/SanityImage/SanityImage";
 import { CollapsibleProps } from "./components/reuse/Collapsible/Collapsible";
 
@@ -117,11 +116,16 @@ export interface IBlog {
 export interface IArticle {
   path: LocalPaths;
   customImage: ICustomImage;
+  imageText?: string;
   title: string;
   desc: string;
   date: string;
+  type: IArticleType;
   content: IBlock[];
 }
+
+export const articleTypeArray = ["tattoo", "henna", "jagua", "toile"] as const;
+export type IArticleType = typeof articleTypeArray[number];
 
 export type ProjectType = "tattoo" | "flash" | "toiles" | "henna";
 

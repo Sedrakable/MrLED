@@ -90,7 +90,7 @@ export const ProductCard: React.FC<IProduct> = (props) => {
                   weight={500}
                   className={styles.price}
                 >
-                  ${price}
+                  {price}
                 </Paragraph>
                 {quantityDesc && (
                   <>

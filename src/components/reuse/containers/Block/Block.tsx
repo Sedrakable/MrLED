@@ -17,6 +17,7 @@ import {
   ImagePositions,
 } from "../../DecorativeImages/DecorativeImages";
 import { useParallaxScroll } from "@/helpers/useParallaxScroll";
+import { TitleWrapper } from "../TitleWrapper/TitleWrapper";
 
 export const BlockVariants = ["default", "full-width"] as const;
 export type BlockVariantType = typeof BlockVariants[number];
@@ -25,12 +26,16 @@ interface BlockProps {
   variant?: BlockVariantType;
   illustrations?: boolean;
   children: React.ReactNode;
+  className?: string;
+  title?: string;
 }
 
 export const Block: React.FC<BlockProps> = ({
   variant = "default",
   illustrations = false,
   children,
+  title,
+  className,
 }) => {
   const [imagePositions, setImagePositions] = useState<ImagePositions | null>(
     null
@@ -96,11 +101,22 @@ export const Block: React.FC<BlockProps> = ({
       );
   }, [cssLoaded, illustrations, children]);
 
+  const content = (
+    <FlexDiv
+      ref={contentRef}
+      flex={{ direction: "column", y: "flex-start" }}
+      className={cn(styles.content)}
+      gapArray={variant === "full-width" ? [11, 10, 11, 12] : [9, 9, 9, 10]}
+      width100
+    >
+      {children}
+    </FlexDiv>
+  );
   return (
     <FlexDiv
       ref={blockRef}
       flex={{ direction: "column", y: "flex-start" }}
-      className={cn(styles.block, styles[variant])}
+      className={cn(styles.block, styles[variant], className)}
       padding={{
         horizontal: variant === "full-width" ? [0] : [6, 8, 11, 12],
         top: variant === "full-width" ? [10, 10, 10, 11] : [7, 7, 8, 9],
@@ -142,15 +158,7 @@ export const Block: React.FC<BlockProps> = ({
         </div>
       </div>
 
-      <FlexDiv
-        ref={contentRef}
-        flex={{ direction: "column", y: "flex-start" }}
-        className={cn(styles.content)}
-        gapArray={variant === "full-width" ? [11, 10, 11, 12] : [9, 9, 9, 10]}
-        width100
-      >
-        {children}
-      </FlexDiv>
+      {title ? <TitleWrapper title={title}>{content}</TitleWrapper> : content}
     </FlexDiv>
   );
 };
