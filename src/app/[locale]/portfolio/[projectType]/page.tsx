@@ -1,5 +1,5 @@
 import { workPageQuery } from "@/app/api/generateSanityQueries";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 import { Projects } from "@/components/pages/blocks/Projects/Projects";
 import { Works } from "@/components/pages/blocks/Works/Works";
 import { Block } from "@/components/reuse/containers/Block/Block";
@@ -29,7 +29,7 @@ export const getWorkPageData = async (slug: string) => {
   const workQuery = workPageQuery(slug);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const workData: WorkPageProps = await useFetchPage(
+  const workData: WorkPageProps = await fetchPageData(
     workQuery,
     `${type}-${slug}`
   );

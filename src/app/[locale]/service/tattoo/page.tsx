@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 // API and data fetching
 import { tattooServicePageQuery } from "@/app/api/generateSanityQueries";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 import { getCarouselData } from "@/components/reuse/Carousel/getCarouselData";
 
 // Components, Types and interfaces
@@ -50,7 +50,7 @@ export const getTattooServicePageData = async (locale: LangType) => {
   const type = "tattooServicePage";
   const tattooServiceQuery = tattooServicePageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const tattooServicePageData: TattooServicePageProps = await useFetchPage(
+  const tattooServicePageData: TattooServicePageProps = await fetchPageData(
     tattooServiceQuery,
     type
   );

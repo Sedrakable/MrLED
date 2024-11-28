@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 import { IArticle, ISeo, LocalPaths } from "@/data.d";
 import { LangType } from "@/i18n/request";
 import { Metadata } from "next";
@@ -16,7 +16,7 @@ const getArticlePageData = async (locale: LangType, slug: string) => {
   const type = "articlePage";
   const articleQuery = articlePageQuery(locale, slug);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const articleData: ArticlePageProps = await useFetchPage(
+  const articleData: ArticlePageProps = await fetchPageData(
     articleQuery,
     `${type}-${slug}`
   );

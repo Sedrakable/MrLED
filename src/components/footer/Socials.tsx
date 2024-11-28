@@ -7,13 +7,12 @@ import { ICta, IExternalLink, ISocials } from "../../data.d";
 
 export const Socials: React.FC<ISocials> = ({ links }) => {
   return (
-    <FlexDiv gapArray={[2]} wrap flex={{ x: "flex-start" }}>
-      <FlexDiv gapArray={[5]} wrap flex={{ x: "flex-start" }}>
-        {links?.map((link: IExternalLink, key) => {
-          return (
-            true && (
+    <FlexDiv gapArray={[5]} wrap flex={{ x: "flex-start" }} as="ul">
+      {links?.map((link: IExternalLink, key) => {
+        return (
+          true && (
+            <li key={key}>
               <IconButton
-                key={key}
                 href={link?.link}
                 iconProps={{
                   icon: link.text as IconType,
@@ -23,10 +22,10 @@ export const Socials: React.FC<ISocials> = ({ links }) => {
                 target="_blank"
                 aria-label={link.text}
               />
-            )
-          );
-        })}
-      </FlexDiv>
+            </li>
+          )
+        );
+      })}
     </FlexDiv>
   );
 };

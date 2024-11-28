@@ -1,4 +1,4 @@
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 import { Services } from "@/components/pages/home/Services/Services";
 import { getCarouselData } from "@/components/reuse/Carousel/getCarouselData";
 import { Block } from "@/components/reuse/containers/Block/Block";
@@ -26,7 +26,7 @@ export const getBoutiquePageData = async (locale: LangType) => {
   const type = "boutiquePage";
   const homeQuery = boutiquePageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const boutiquePageData: BoutiquePageProps = await useFetchPage(
+  const boutiquePageData: BoutiquePageProps = await fetchPageData(
     homeQuery,
     type
   );

@@ -24,28 +24,23 @@ export const setMetadata = ({
     title: metaTitle,
     description: metaDesc,
     keywords: metaKeywords,
-    authors: [
-      {
-        name: "Sedrak Nadzharyan",
-        url: "https://www.linkedin.com/in/sedrak-n/",
-      },
-    ],
     robots: {
       index: crawl,
       follow: crawl,
     },
     openGraph: {
-      url: `https://www.setoxarts.com/${locale}${path}`,
+      url: `https://www.adhennatattoo.com/${locale}${path}`,
       type: "website",
       title: metaTitle,
       description: metaDesc,
       locale: locale,
+      siteName: "ADHENNA TATTOO",
       images: [
         {
-          url: "https://i.imgur.com/u9EH6vH.png",
-          width: 1200,
-          height: 630,
-          alt: "Seto X Arts",
+          url: "https://i.imgur.com/XsJPXnO.jpeg",
+          width: 1050,
+          height: 600,
+          alt: "Adhenna Tattoo",
         },
       ],
     },
@@ -75,29 +70,29 @@ export const setMetadata = ({
   return metadata;
 };
 
-export const JsonLD = () => (
-  <DynamicBreadcrumbJsonLd
-    itemListElements={[
-      {
-        position: 1,
-        name: "Home",
-        item: "https://setoxarts.com",
-      },
-      {
-        position: 2,
-        name: "Branding",
-        item: "https://setoxarts.com/en/service/branding",
-      },
-      {
-        position: 3,
-        name: "Web Design",
-        item: "https://setoxarts.com/en/service/web-design",
-      },
-      {
-        position: 4,
-        name: "Contact",
-        item: "https://setoxarts.com/en/contact",
-      },
-    ]}
-  />
-);
+// export const JsonLD = () => (
+//   <DynamicBreadcrumbJsonLd
+//     itemListElements={[
+//       {
+//         position: 1,
+//         name: "Home",
+//         item: "https://setoxarts.com",
+//       },
+//       {
+//         position: 2,
+//         name: "Branding",
+//         item: "https://setoxarts.com/en/service/branding",
+//       },
+//       {
+//         position: 3,
+//         name: "Web Design",
+//         item: "https://setoxarts.com/en/service/web-design",
+//       },
+//       {
+//         position: 4,
+//         name: "Contact",
+//         item: "https://setoxarts.com/en/contact",
+//       },
+//     ]}
+//   />
+// );

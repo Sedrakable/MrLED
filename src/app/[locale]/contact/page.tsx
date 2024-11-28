@@ -1,5 +1,5 @@
 import { ISeo, IWork, LocalPaths } from "@/data.d";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 import { LangType } from "@/i18n/request";
 import {
   contactPageQuery,
@@ -37,7 +37,7 @@ const getContactPageData = async (locale: LangType) => {
   const type = "contactPage";
   const contactQuery = contactPageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const contactPageData: ContactPageProps = await useFetchPage(
+  const contactPageData: ContactPageProps = await fetchPageData(
     contactQuery,
     type
   );
@@ -48,7 +48,7 @@ const getPlanData = async (pageType: string, locale: LangType) => {
   const type = "plans";
   const planQuery = pricePlansQuery(pageType, locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const planData: any = await useFetchPage(planQuery, type);
+  const planData: any = await fetchPageData(planQuery);
   return planData;
 };
 

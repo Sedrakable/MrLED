@@ -15,7 +15,6 @@ import {
   ISocials,
   LocalPaths,
 } from "../../../data.d";
-import { LangSwitcher } from "../LangSwitcher/LangSwitcher";
 import { useAtom } from "jotai";
 import { getTranslations } from "../../../helpers/langUtils";
 import { Translations } from "@/langs/langTypes";
@@ -133,24 +132,22 @@ export const Navbar: FC<NavbarProps> = ({ socials }) => {
               </FlexDiv>
             )}
 
-            <FlexDiv gapArray={[5]} as="ul">
+            <FlexDiv gapArray={[5]}>
               {!isMobile && (
-                <li>
-                  <Button
-                    variant="extra"
-                    path={`/${locale}${LocalPaths.CART}`}
-                    iconProps={{ icon: "cart" }}
-                  />
-                </li>
-              )}
-              <li>
                 <Button
-                  variant="primary"
-                  path={`/${locale}${LocalPaths.CONTACT}`}
-                >
-                  {translations.nav.contact}
-                </Button>
-              </li>
+                  variant="extra"
+                  path={`/${locale}${LocalPaths.CART}`}
+                  iconProps={{ icon: "cart" }}
+                  aria-label={translations.nav.cart}
+                />
+              )}
+
+              <Button
+                variant="primary"
+                path={`/${locale}${LocalPaths.CONTACT}`}
+              >
+                {translations.nav.contact}
+              </Button>
 
               {/* {!isMobile && <LangSwitcher />} */}
               {!isMobileOrTablet && <Socials {...socials} />}

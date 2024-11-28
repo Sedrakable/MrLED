@@ -1,5 +1,5 @@
 import { productQuery } from "@/app/api/generateSanityQueries";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 import { ProductModal } from "@/components/pages/blocks/Products/ProductModal";
 import { Modal } from "@/components/reuse/Modal";
 import { IProduct } from "@/data.d";
@@ -8,7 +8,7 @@ const getProductData = async (slug: string) => {
   const type = "product";
   const getProductQuery = productQuery(slug);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const productData: IProduct = await useFetchPage(
+  const productData: IProduct = await fetchPageData(
     getProductQuery,
     `${type}-${slug}`
   );

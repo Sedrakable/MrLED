@@ -2,7 +2,7 @@ import {
   productQuery,
   projectPageQuery,
 } from "@/app/api/generateSanityQueries";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 import { ProductModal } from "@/components/pages/blocks/Products/ProductModal";
 import { CanvasModal } from "@/components/pages/blocks/Projects/CanvasModal";
 import { FlashModal } from "@/components/pages/blocks/Projects/FlashModal";
@@ -17,7 +17,7 @@ import { Modal } from "@/components/reuse/Modal";
 const getProjectData = async (type: string, id: string) => {
   const getProjectQuery = projectPageQuery(type, id);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const productData: IProject = await useFetchPage(
+  const productData: IProject = await fetchPageData(
     getProjectQuery,
     `${type}-${id}`
   );

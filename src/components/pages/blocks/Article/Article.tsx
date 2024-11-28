@@ -11,7 +11,7 @@ import { getFromLocalStorage, setToLocalStorage } from "@/helpers/localStorage";
 import { useState, useCallback, use, useEffect } from "react";
 import { LangType } from "@/i18n/request";
 import { articlesOrderQuery } from "@/app/api/generateSanityQueries";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 import { useLocale } from "next-intl";
 import { Button } from "@/components/reuse/Button";
 import { getTranslations } from "@/helpers/langUtils";
@@ -24,7 +24,7 @@ export const getArticlesOrderData = async (locale: LangType) => {
   const type = "articleOrder";
   const articleQuery = articlesOrderQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const articlesOrderData: IArticle[] = await useFetchPage(articleQuery, type);
+  const articlesOrderData: IArticle[] = await fetchPageData(articleQuery);
   return articlesOrderData;
 };
 

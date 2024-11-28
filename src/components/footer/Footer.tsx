@@ -77,13 +77,14 @@ const links = (trans: Translations): (INavLink | ICta)[] => {
 };
 
 const LogoWrapper: FC<{ locale: LangType }> = ({ locale }) => {
+  const trans = getTranslations(locale);
   return (
     <FlexDiv
       flex={{ direction: "column", y: "flex-start" }}
       className={styles.logo}
       gapArray={[4]}
     >
-      <Link href={`/${locale}${LocalPaths.HOME}`}>
+      <Link href={`/${locale}${LocalPaths.HOME}`} aria-label={trans.nav.home}>
         <Logo className={styles.logomark} />
       </Link>
       <Paragraph level="small" textAlign="center">
@@ -111,12 +112,12 @@ const SiteMap: FC<{ locale: LangType }> = ({ locale }) => {
         >
           {link.link ? (
             <Link href={`/${locale}${link.link}`}>
-              <Heading level="6" as="h4" weight={400} color="cream-white">
+              <Heading level="6" as="h2" weight={400} color="cream-white">
                 {link.text}
               </Heading>
             </Link>
           ) : (
-            <Heading level="6" as="h4" weight={400} color="cream-white">
+            <Heading level="6" as="h2" weight={400} color="cream-white">
               {link.text}
             </Heading>
           )}
@@ -173,7 +174,7 @@ const Hours: FC<{ trans: Translations; openingHours: IOpeningHours }> = ({
       className={styles.hoursContainer}
       padding={{ horizontal: [4], top: [4], bottom: [3] }}
     >
-      <Heading level="6" as="h4" weight={400} color="cream-white">
+      <Heading level="6" as="h3" weight={400} color="cream-white">
         {trans.hours.title}
       </Heading>
       <FlexDiv

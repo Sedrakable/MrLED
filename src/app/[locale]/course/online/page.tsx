@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 // API and data fetching
 import { onlineCoursePageQuery } from "@/app/api/generateSanityQueries";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 
 // Components, Types and interfaces
 import { Hero } from "@/components/reuse/Hero/Hero";
@@ -35,7 +35,7 @@ export const getOnlineCoursePageData = async (locale: LangType) => {
   const type = "onlineCoursePage";
   const onlineCourseQuery = onlineCoursePageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const onlineCoursePageData: OnlineCoursePageProps = await useFetchPage(
+  const onlineCoursePageData: OnlineCoursePageProps = await fetchPageData(
     onlineCourseQuery,
     type
   );

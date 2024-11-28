@@ -1,9 +1,8 @@
 import { LocalPaths, ISeo, IHomeHero, IReview, IWork } from "@/data.d";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 import { LangType } from "@/i18n/request";
 import { Metadata } from "next";
 import { setMetadata } from "@/components/SEO";
-import dynamic from "next/dynamic";
 import { homePageQuery } from "@/app/api/generateSanityQueries";
 import { WorkPageProps } from "./portfolio/[projectType]/page";
 import { getCarouselData } from "@/components/reuse/Carousel/getCarouselData";
@@ -31,33 +30,32 @@ export interface HomePageProps {
 }
 
 export const getHomePageData = async (locale: LangType) => {
-  const type = "homePage";
   const homeQuery = homePageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const homePageData: HomePageProps = await useFetchPage(homeQuery, type);
+  const homePageData: HomePageProps = await fetchPageData(homeQuery);
   return homePageData;
 };
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: Promise<{ locale: LangType }>;
-// }): Promise<Metadata> {
-//   const { locale } = await params; // Await the params
-//   const homePageData = await getHomePageData(locale);
-//   const { metaTitle, metaDesc, metaKeywords } = homePageData.meta;
-//   const path = LocalPaths.HOME;
-//   const crawl = true;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: LangType }>;
+}): Promise<Metadata> {
+  const { locale } = await params; // Await the params
+  const homePageData = await getHomePageData(locale);
+  const { metaTitle, metaDesc, metaKeywords } = homePageData.meta;
+  const path = LocalPaths.HOME;
+  const crawl = true;
 
-//   return setMetadata({
-//     locale,
-//     metaTitle,
-//     metaDesc,
-//     metaKeywords,
-//     path,
-//     crawl,
-//   });
-// }
+  return setMetadata({
+    locale,
+    metaTitle,
+    metaDesc,
+    metaKeywords,
+    path,
+    crawl,
+  });
+}
 
 export default async function HomePage({
   params,

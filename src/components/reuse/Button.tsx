@@ -94,7 +94,7 @@ export const Button: FC<PropsWithChildren<
           ? "100%"
           : "auto",
     },
-    "aria-label": children as string,
+    "aria-label": children ? (children as string) : props["aria-label"],
   };
 
   if (path) {

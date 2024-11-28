@@ -9,12 +9,12 @@ import cn from "classnames";
 
 import { ICustomImage, SanityImage } from "../SanityImage/SanityImage";
 import { ICta, IProject, IWork } from "@/data.d";
-import { getImagesFromWorks, shuffleArray } from "@/helpers/functions";
+import { getImagesFromWorks } from "@/helpers/functions";
 import FlexDiv from "../FlexDiv";
 import { Button } from "../Button";
 import { useLocale } from "next-intl";
 import { LangType } from "@/i18n/request";
-import { Block } from "../containers/Block/Block";
+import { useShuffleArray } from "@/helpers/useShuffleArray";
 
 const OPTIONS: EmblaOptionsType = { dragFree: true, loop: true };
 
@@ -57,19 +57,13 @@ export const Carousel: FC<ICarouselProps> = ({ data, cta }) => {
     }
   }, [emblaApi, onPointerUp]);
 
-  const images: ICustomImage[] = useMemo(() => {
-    if (!Array.isArray(data)) {
-      console.error("Data is not an array:", data);
-      return [];
-    }
+  // Shuffle images outside useMemo to follow React's rule of hooks
+  const images: ICustomImage[] = getImagesFromWorks(data);
 
-    const allImages = getImagesFromWorks(data);
+  // Use useShuffleArray hook here, directly passing the array
+  const shuffledImages = useShuffleArray(images);
 
-    // Randomize the order of images
-    return shuffleArray(allImages);
-  }, [data]);
-
-  if (!images.length) return null;
+  if (!shuffledImages.length) return null;
 
   return (
     <FlexDiv
@@ -79,7 +73,7 @@ export const Carousel: FC<ICarouselProps> = ({ data, cta }) => {
     >
       <div className={styles.embla} ref={emblaRef}>
         <div className={styles.embla__container}>
-          {images.map(
+          {shuffledImages.map(
             (image, index) =>
               image?.image && (
                 <div className={styles.embla__slide} key={index}>

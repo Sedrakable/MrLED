@@ -6,7 +6,7 @@ import styles from "@/styles/jagua.module.scss";
 
 // API and data fetching
 import { testTattooServicePageQuery } from "@/app/api/generateSanityQueries";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 
 // Components, Types and interfaces
 import { Hero } from "@/components/reuse/Hero/Hero";
@@ -40,7 +40,7 @@ export const getTestTattooServicePageData = async (locale: LangType) => {
   const type = "tattooServicePage";
   const tattooServiceQuery = testTattooServicePageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const testTattooServicePageData: TestTattooServicePageProps = await useFetchPage(
+  const testTattooServicePageData: TestTattooServicePageProps = await fetchPageData(
     tattooServiceQuery,
     type
   );

@@ -1,5 +1,5 @@
 import { blogPageQuery } from "@/app/api/generateSanityQueries";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 import { Blog } from "@/components/pages/blocks/Blog/Blog";
 
 import { IBlog, ISeo } from "@/data.d";
@@ -15,7 +15,7 @@ export const getBlogPageData = async (locale: LangType) => {
   const type = "blogPage";
   const blogQuery = blogPageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const blogPageData: BlogPageProps = await useFetchPage(blogQuery, type);
+  const blogPageData: BlogPageProps = await fetchPageData(blogQuery);
   return blogPageData;
 };
 

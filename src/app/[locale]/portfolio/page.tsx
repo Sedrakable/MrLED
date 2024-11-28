@@ -1,5 +1,5 @@
 import { ISeo, LocalPaths, IHero, IWork } from "@/data.d";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 import { LangType } from "@/i18n/request";
 import { Metadata } from "next";
 import { setMetadata } from "@/components/SEO";
@@ -24,7 +24,7 @@ const getPortfolioPageData = async (locale: LangType) => {
   const type = "PortfolioPage";
   const PortfolioQuery = portfolioPageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const PortfolioPageData: PortfolioPageProps = await useFetchPage(
+  const PortfolioPageData: PortfolioPageProps = await fetchPageData(
     PortfolioQuery,
     type
   );

@@ -1,5 +1,5 @@
 import { ISeo } from "@/data.d";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 import { LangType } from "@/i18n/request";
 import { cartPageQuery } from "@/app/api/generateSanityQueries";
 import {
@@ -21,7 +21,7 @@ const getCartPageData = async (locale: LangType) => {
   const type = "cartPage";
   const cartQuery = cartPageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const cartPageData: CartPageProps = await useFetchPage(cartQuery, type);
+  const cartPageData: CartPageProps = await fetchPageData(cartQuery);
   return cartPageData;
 };
 

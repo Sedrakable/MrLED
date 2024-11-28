@@ -1,5 +1,5 @@
 import React from "react";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 import { LangType } from "@/i18n/request";
 import { policiesPageQuery } from "@/app/api/generateSanityQueries";
 import {
@@ -21,7 +21,7 @@ export default async function Policies({
   const { locale } = await params;
   const trans = getTranslations(locale);
   const policiesQuery = policiesPageQuery(locale);
-  const policiesPageData: PoliciesPageProps = await useFetchPage(
+  const policiesPageData: PoliciesPageProps = await fetchPageData(
     policiesQuery,
     "policiesPage"
   );

@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 // API and data fetching
 import { hennaServicePageQuery } from "@/app/api/generateSanityQueries";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPageData } from "@/app/api/useFetchPage";
 import { getCarouselData } from "@/components/reuse/Carousel/getCarouselData";
 
 // Components, Types and interfaces
@@ -44,7 +44,7 @@ export const getHennaServicePageData = async (locale: LangType) => {
   const type = "hennaServicePage";
   const hennaServiceQuery = hennaServicePageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const hennaServicePageData: HennaServicePageProps = await useFetchPage(
+  const hennaServicePageData: HennaServicePageProps = await fetchPageData(
     hennaServiceQuery,
     type
   );
