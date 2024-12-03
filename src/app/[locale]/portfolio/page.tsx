@@ -21,12 +21,9 @@ export interface PortfolioPageProps {
 }
 
 const getPortfolioPageData = async (locale: LangType) => {
-  const type = "PortfolioPage";
   const PortfolioQuery = portfolioPageQuery(locale);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const PortfolioPageData: PortfolioPageProps = await fetchPageData(
-    PortfolioQuery,
-    type
+    PortfolioQuery
   );
   return PortfolioPageData;
 };

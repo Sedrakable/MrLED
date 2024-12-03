@@ -13,39 +13,35 @@ interface ArticlePageProps extends IArticle {
 }
 
 const getArticlePageData = async (locale: LangType, slug: string) => {
-  const type = "articlePage";
   const articleQuery = articlePageQuery(locale, slug);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const articleData: ArticlePageProps = await fetchPageData(
-    articleQuery,
-    `${type}-${slug}`
-  );
+  const articleData: ArticlePageProps = await fetchPageData(articleQuery);
 
   return articleData;
 };
 
-// export async function generateMetadata({
-//   params: { locale, slug },
-// }: {
-//   params: { locale: LangType; slug: string };
-// }): Promise<Metadata> {
-//   const articlePageData: ArticlePageProps = await getArticlePageData(
-//     locale,
-//     slug
-//   );
-//   const { metaTitle, metaDesc, metaKeywords } = articlePageData.meta;
-//   const path = `${LocalPaths.BLOG}/${slug}`;
-//   const crawl = true;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: LangType; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params; // Await the params
+  const articlePageData: ArticlePageProps = await getArticlePageData(
+    locale,
+    slug
+  );
+  const { metaTitle, metaDesc, metaKeywords } = articlePageData.meta;
+  const path = `${LocalPaths.BLOG}/${slug}`;
+  const crawl = true;
 
-//   return setMetadata({
-//     locale,
-//     metaTitle,
-//     metaDesc,
-//     metaKeywords,
-//     path,
-//     crawl,
-//   });
-// }
+  return setMetadata({
+    locale,
+    metaTitle,
+    metaDesc,
+    metaKeywords,
+    path,
+    crawl,
+  });
+}
 
 export default async function ArticlePage({
   params,

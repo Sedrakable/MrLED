@@ -17,10 +17,7 @@ import { Modal } from "@/components/reuse/Modal";
 const getProjectData = async (type: string, id: string) => {
   const getProjectQuery = projectPageQuery(type, id);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const productData: IProject = await fetchPageData(
-    getProjectQuery,
-    `${type}-${id}`
-  );
+  const productData: IProject = await fetchPageData(getProjectQuery);
 
   return productData;
 };

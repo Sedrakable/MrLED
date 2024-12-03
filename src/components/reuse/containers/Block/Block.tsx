@@ -1,26 +1,28 @@
 "use client";
-import React, {
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styles from "./Block.module.scss";
 import cn from "classnames";
 import FlexDiv from "../../FlexDiv";
-import { Star } from "../../Star/Star";
 import { generateStarPositions } from "../../Star/generateStars";
 import {
   calculateImagePositions,
-  DecorativeImages,
   ImagePositions,
 } from "../../DecorativeImages/DecorativeImages";
 import { useParallaxScroll } from "@/helpers/useParallaxScroll";
 import { TitleWrapper } from "../TitleWrapper/TitleWrapper";
+import { useWindowResize } from "@/helpers/useWindowResize";
+import dynamic from "next/dynamic";
 
 export const BlockVariants = ["default", "full-width"] as const;
 export type BlockVariantType = typeof BlockVariants[number];
+
+const DecorationsLazy = dynamic(
+  () =>
+    import("../Decorations/Decorations").then((module) => module.Decorations),
+  {
+    ssr: false,
+  }
+);
 
 interface BlockProps {
   variant?: BlockVariantType;
@@ -37,16 +39,66 @@ export const Block: React.FC<BlockProps> = ({
   title,
   className,
 }) => {
+  const { isMobile } = useWindowResize();
   const [imagePositions, setImagePositions] = useState<ImagePositions | null>(
     null
   );
+  const [estimatedHeight, setEstimatedHeight] = useState<number | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const blockRef = useRef<HTMLDivElement>(null);
   const [cssLoaded, setCssLoaded] = useState(false);
-  // Use our custom hook
   const scrollProgress = useParallaxScroll(blockRef);
+  const [canRenderDecorations, setCanRenderDecorations] = useState(false);
 
   useEffect(() => {
+    const calculateHeight = () => {
+      if (contentRef.current) {
+        const childrenCount = React.Children.count(children);
+        const itemHeight =
+          contentRef.current.querySelector(":first-child")?.clientHeight || 300;
+        const estimatedTotalHeight = childrenCount * itemHeight;
+
+        setEstimatedHeight(
+          Math.min(estimatedTotalHeight, window.innerHeight * 2)
+        );
+      }
+    };
+
+    calculateHeight();
+    window.addEventListener("resize", calculateHeight);
+    return () => window.removeEventListener("resize", calculateHeight);
+  }, [children]);
+
+  useEffect(() => {
+    // Check if the page has finished loading
+    const checkPageLoad = () => {
+      // Use requestIdleCallback for modern browsers
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(
+          () => {
+            setCanRenderDecorations(true);
+          },
+          { timeout: 2000 }
+        );
+      } else {
+        // Fallback for browsers without requestIdleCallback
+        setTimeout(() => {
+          setCanRenderDecorations(true);
+        }, 2000);
+      }
+    };
+
+    // Check for page load
+    if (document.readyState === "complete") {
+      checkPageLoad();
+    } else {
+      window.addEventListener("load", checkPageLoad);
+      return () => window.removeEventListener("load", checkPageLoad);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
     const observer = new MutationObserver(() => {
       setCssLoaded(true);
       observer.disconnect();
@@ -66,16 +118,10 @@ export const Block: React.FC<BlockProps> = ({
       observer.disconnect();
       clearTimeout(timeoutId);
     };
-  }, []);
-
-  const starPositions = useMemo(() => {
-    if (!blockRef.current) return [];
-    const { clientWidth, clientHeight } = blockRef.current;
-    return generateStarPositions(clientWidth, clientHeight);
-  }, [blockRef.current?.clientWidth, blockRef.current?.clientHeight]);
+  }, [isMobile]);
 
   useLayoutEffect(() => {
-    if (!cssLoaded || !illustrations || !contentRef.current) return;
+    if (isMobile || !cssLoaded || !illustrations || !contentRef.current) return;
 
     const calculateGaps = () => {
       if (!contentRef.current) return;
@@ -99,7 +145,7 @@ export const Block: React.FC<BlockProps> = ({
       window.removeEventListener("resize", () =>
         requestAnimationFrame(calculateGaps)
       );
-  }, [cssLoaded, illustrations, children]);
+  }, [cssLoaded, illustrations, children, isMobile]);
 
   const content = (
     <FlexDiv
@@ -108,10 +154,15 @@ export const Block: React.FC<BlockProps> = ({
       className={cn(styles.content)}
       gapArray={variant === "full-width" ? [11, 10, 11, 12] : [9, 9, 9, 10]}
       width100
+      customStyle={{
+        minHeight: estimatedHeight ? `${estimatedHeight}px` : "auto",
+        transition: "min-height 0.3s ease",
+      }}
     >
       {children}
     </FlexDiv>
   );
+
   return (
     <FlexDiv
       ref={blockRef}
@@ -125,38 +176,18 @@ export const Block: React.FC<BlockProps> = ({
       width100
       as="article"
     >
-      <div
-        className={styles.decorations}
-        style={
-          {
-            "--scroll-progress": scrollProgress,
-          } as React.CSSProperties
-        }
-      >
-        <div className={styles.illustrations}>
-          {illustrations && imagePositions && (
-            <DecorativeImages positions={imagePositions} />
-          )}
-        </div>
-        <div className={styles.stars}>
-          {starPositions.map((pos, index) => (
-            <div
-              key={index}
-              className={styles.starWrapper}
-              style={{
-                position: "absolute",
-                top: `${pos.y}px`,
-                left: `${pos.x}px`,
-                width: `${pos.size}px`,
-                height: `${pos.size}px`,
-                opacity: pos.opacity,
-              }}
-            >
-              <Star />
-            </div>
-          ))}
-        </div>
-      </div>
+      {canRenderDecorations &&
+        !isMobile &&
+        scrollProgress &&
+        imagePositions &&
+        blockRef && (
+          <DecorationsLazy
+            scrollProgress={scrollProgress}
+            illustrations={illustrations}
+            imagePositions={imagePositions}
+            blockRef={blockRef}
+          />
+        )}
 
       {title ? <TitleWrapper title={title}>{content}</TitleWrapper> : content}
     </FlexDiv>

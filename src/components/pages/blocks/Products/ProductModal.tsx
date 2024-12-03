@@ -124,6 +124,7 @@ export const ProductModal: React.FC<IProduct> = (props) => {
               variant="extra"
               iconProps={{ icon: "cart" }}
               path={`/${locale}${LocalPaths.CART}`}
+              aria-label="go to cart"
             />
             {checkCartAlert && (
               <Alert arrow="left">{translations.cart.checkCartAlert}</Alert>

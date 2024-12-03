@@ -22,6 +22,7 @@
 }
 
 .image {
+  width: 100% !important;
   aspect-ratio: 4/5;
   box-shadow: var(--light-shadow);
   border-radius: var(--border-radius);
@@ -78,12 +79,34 @@
   @include vars;
   display: grid !important;
   grid-template-columns: repeat(var(--columns), 1fr);
+
   // row-gap: var(--row-gap) !important;
+
+  .placeholder {
+    width: 100%;
+    aspect-ratio: 4/5; // Matches the project card dimensions
+    background: var(--light-gray);
+    border-radius: var(--radius);
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      background-color: #f0f0f0;
+    }
+    50% {
+      background-color: #e0e0e0;
+    }
+    100% {
+      background-color: #f0f0f0;
+    }
+  }
 
   .container {
     cursor: pointer;
     transition: transform 0.2s ease;
-
+    position: relative;
+    aspect-ratio: 4/5;
     &:hover {
       transform: scale(1.02);
     }

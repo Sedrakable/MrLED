@@ -10,7 +10,7 @@ export interface NotificationProps {
 }
 export const Notification: FC<NotificationProps> = ({ title, desc }) => {
   return (
-    <TextWrapper version={3} variant="big">
+    <TextWrapper version={3} variant="big" animate={false}>
       <FlexDiv flex={{ direction: "column" }} gapArray={[2]}>
         <Heading
           as="h5"

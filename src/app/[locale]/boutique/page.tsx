@@ -23,36 +23,32 @@ export interface BoutiquePageProps {
 }
 
 export const getBoutiquePageData = async (locale: LangType) => {
-  const type = "boutiquePage";
   const homeQuery = boutiquePageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const boutiquePageData: BoutiquePageProps = await fetchPageData(
-    homeQuery,
-    type
-  );
+  const boutiquePageData: BoutiquePageProps = await fetchPageData(homeQuery);
   return boutiquePageData;
 };
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: Promise<{ locale: LangType }>;
-// }): Promise<Metadata> {
-//   const { locale } = await params; // Await the params
-//   const boutiquePageData: BoutiquePageProps = await getBoutiquePageData(locale);
-//   const { metaTitle, metaDesc, metaKeywords } = boutiquePageData?.meta || {};
-//   const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
-//   const crawl = true;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: LangType }>;
+}): Promise<Metadata> {
+  const { locale } = await params; // Await the params
+  const boutiquePageData: BoutiquePageProps = await getBoutiquePageData(locale);
+  const { metaTitle, metaDesc, metaKeywords } = boutiquePageData?.meta || {};
+  const path = LocalPaths.BOUTIQUE;
+  const crawl = true;
 
-//   return setMetadata({
-//     locale,
-//     metaTitle,
-//     metaDesc,
-//     metaKeywords,
-//     path,
-//     crawl,
-//   });
-// }
+  return setMetadata({
+    locale,
+    metaTitle,
+    metaDesc,
+    metaKeywords,
+    path,
+    crawl,
+  });
+}
 
 export default async function BoutiquePage({
   params,

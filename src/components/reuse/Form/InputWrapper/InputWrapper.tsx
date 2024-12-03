@@ -22,6 +22,7 @@ export const InputWrapper: React.FC<PropsWithChildren<InputWrapperProps>> = ({
       className={styles.inputContainer}
       flex={{ direction: "column" }}
       gapArray={[2]}
+      as="label"
     >
       <Paragraph
         level="regular"

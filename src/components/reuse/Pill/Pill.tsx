@@ -83,6 +83,7 @@ export const Pill: FC<PropsWithChildren<PillProps>> = ({
           [styles.disabled]: typeof value === "number" && value === 0,
         })}
         onClick={handleDecrement}
+        aria-label="Decrement"
       >
         <Icon icon="minus" size="small" />
       </button>
@@ -94,8 +95,13 @@ export const Pill: FC<PropsWithChildren<PillProps>> = ({
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
         max={max}
+        aria-label="number of items"
       />
-      <button className={styles.plus} onClick={handleIncrement}>
+      <button
+        className={styles.plus}
+        onClick={handleIncrement}
+        aria-label="Increment"
+      >
         <Icon icon="plus" size="small" />
       </button>
     </FlexDiv>

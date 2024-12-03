@@ -50,39 +50,37 @@ export interface InPersonCoursePageProps {
 }
 
 export const getInPersonCoursePageData = async (locale: LangType) => {
-  const type = "inPersonCoursePage";
   const inPersonCourseQuery = inPersonCoursePageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const inPersonCoursePageData: InPersonCoursePageProps = await fetchPageData(
-    inPersonCourseQuery,
-    type
+    inPersonCourseQuery
   );
   return inPersonCoursePageData;
 };
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: Promise<{ locale: LangType }>;
-// }): Promise<Metadata> {
-//   const { locale } = await params; // Await the params
-//   const inPersonCoursePageData: InPersonCoursePageProps = await getInPersonCoursePageData(
-//     locale
-//   );
-//   const { metaTitle, metaDesc, metaKeywords } =
-//     inPersonCoursePageData?.meta || {};
-//   const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
-//   const crawl = true;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: LangType }>;
+}): Promise<Metadata> {
+  const { locale } = await params; // Await the params
+  const inPersonCoursePageData: InPersonCoursePageProps = await getInPersonCoursePageData(
+    locale
+  );
+  const { metaTitle, metaDesc, metaKeywords } =
+    inPersonCoursePageData?.meta || {};
+  const path = LocalPaths.ONLINE + LocalPaths.IN_PERSON;
+  const crawl = true;
 
-//   return setMetadata({
-//     locale,
-//     metaTitle,
-//     metaDesc,
-//     metaKeywords,
-//     path,
-//     crawl,
-//   });
-// }
+  return setMetadata({
+    locale,
+    metaTitle,
+    metaDesc,
+    metaKeywords,
+    path,
+    crawl,
+  });
+}
 
 export default async function InPersonCoursePage({
   params,

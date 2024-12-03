@@ -49,7 +49,7 @@ export const Slider: React.FC<SliderProps> = ({
         {/* Minimum value marker */}
         <Paragraph
           level="regular"
-          color={isInvalid ? "error" : "light-burgundy"} // Gray color for min/max
+          color={isInvalid ? "error" : "burgundy"} // Gray color for min/max
           className={styles.marker}
         >
           {min}"
@@ -87,7 +87,7 @@ export const Slider: React.FC<SliderProps> = ({
         {/* Maximum value marker */}
         <Paragraph
           level="regular"
-          color={isInvalid ? "error" : "light-burgundy"} // Gray color for min/max
+          color={isInvalid ? "error" : "burgundy"} // Gray color for min/max
           className={styles.marker}
         >
           {max}"

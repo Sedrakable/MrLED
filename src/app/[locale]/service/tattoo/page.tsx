@@ -47,39 +47,37 @@ export interface TattooServicePageProps {
 }
 
 export const getTattooServicePageData = async (locale: LangType) => {
-  const type = "tattooServicePage";
   const tattooServiceQuery = tattooServicePageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const tattooServicePageData: TattooServicePageProps = await fetchPageData(
-    tattooServiceQuery,
-    type
+    tattooServiceQuery
   );
   return tattooServicePageData;
 };
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: Promise<{ locale: LangType }>;
-// }): Promise<Metadata> {
-//   const { locale } = await params; // Await the params
-//   const tattooServicePageData: TattooServicePageProps = await getTattooServicePageData(
-//     locale
-//   );
-//   const { metaTitle, metaDesc, metaKeywords } =
-//     tattooServicePageData?.meta || {};
-//   const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
-//   const crawl = true;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: LangType }>;
+}): Promise<Metadata> {
+  const { locale } = await params; // Await the params
+  const tattooServicePageData: TattooServicePageProps = await getTattooServicePageData(
+    locale
+  );
+  const { metaTitle, metaDesc, metaKeywords } =
+    tattooServicePageData?.meta || {};
+  const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
+  const crawl = true;
 
-//   return setMetadata({
-//     locale,
-//     metaTitle,
-//     metaDesc,
-//     metaKeywords,
-//     path,
-//     crawl,
-//   });
-// }
+  return setMetadata({
+    locale,
+    metaTitle,
+    metaDesc,
+    metaKeywords,
+    path,
+    crawl,
+  });
+}
 
 export default async function TattooServicePage({
   params,

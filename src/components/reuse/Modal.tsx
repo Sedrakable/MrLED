@@ -82,6 +82,7 @@ export const Modal: React.FC<ModalProps> = ({
               small
               iconProps={{ icon: "close", size: "small" }}
               onClick={close}
+              aria-label="Close"
             />
           </FlexDiv>
         )}

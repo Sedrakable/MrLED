@@ -23,6 +23,8 @@ export const FloatingImageWrapper: FC<FloatingImageWrapperProps> = ({
   images,
 }) => {
   const { isMobileOrTablet } = useWindowResize();
+
+  const imagesArray = [images.img1, images.img2, images.img3];
   return (
     <FlexDiv gapArray={[6, 7, 8, 9]} className={styles.wrapper} width100>
       {children}
@@ -32,9 +34,16 @@ export const FloatingImageWrapper: FC<FloatingImageWrapperProps> = ({
           width100
           flex={{ direction: "column" }}
         >
-          <SanityImage {...images.img1} />
-          <SanityImage {...images.img2} />
-          <SanityImage {...images.img3} />
+          {imagesArray.map((image, index) => {
+            return (
+              <SanityImage
+                key={index}
+                {...image}
+                sizes="(max-width: 1680px) 320px, 240px"
+                quality={100}
+              />
+            );
+          })}
         </FlexDiv>
       )}
     </FlexDiv>

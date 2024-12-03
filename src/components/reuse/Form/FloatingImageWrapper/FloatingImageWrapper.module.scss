@@ -32,8 +32,8 @@
       img {
         border-radius: var(--border-radius);
         box-shadow: var(--drop-shadow);
-        height: 100% !important;
-        width: auto !important;
+        height: var(--image-width) !important;
+        width: var(--image-width) !important;
         aspect-ratio: 1;
         position: relative !important;
         transition: var(--transition-time);

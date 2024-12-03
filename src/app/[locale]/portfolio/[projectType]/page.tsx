@@ -24,37 +24,33 @@ export interface WorkPageProps {
 }
 
 export const getWorkPageData = async (slug: string) => {
-  const type = "work";
-
   const workQuery = workPageQuery(slug);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const workData: WorkPageProps = await fetchPageData(
-    workQuery,
-    `${type}-${slug}`
-  );
+  const workData: WorkPageProps = await fetchPageData(workQuery);
 
   return workData;
 };
 
-// export async function generateMetadata({
-//   params: { locale, slug },
-// }: {
-//   params: { locale: LangType; slug: string };
-// }): Promise<Metadata> {
-//   const workPageData: WorkPageProps = await getWorkPageData(slug);
-//   const path = `${LocalPaths.PORTFOLIO}/${slug}`;
-//   const crawl = true;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: LangType; projectType: string }>;
+}): Promise<Metadata> {
+  const { locale, projectType } = await params; // Await the params
+  const portfolioPageData = await getWorkPageData(projectType);
+  const { metaTitle, metaDesc, metaKeywords } = portfolioPageData.meta;
+  const path = `${LocalPaths.PORTFOLIO}/${projectType}`;
+  const crawl = true;
 
-//   return setMetadata({
-//     locale,
-//     metaTitle: workPageData.meta.metaTitle,
-//     metaDesc: workPageData.meta.metaDesc,
-//     metaKeywords: workPageData.meta.metaKeywords,
-//     path,
-//     crawl,
-//   });
-// }
+  return setMetadata({
+    locale,
+    metaTitle,
+    metaDesc,
+    metaKeywords,
+    path,
+    crawl,
+  });
+}
 
 export default async function WorkPage({
   params,

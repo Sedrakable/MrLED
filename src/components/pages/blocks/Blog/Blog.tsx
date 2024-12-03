@@ -15,22 +15,6 @@ import { ArticleFilters } from "@/components/reuse/Form/CustomFilters/ArticleFil
 import { setToLocalStorage } from "@/helpers/localStorage";
 import { ARTICLES_ORDER_STORAGE_KEY } from "../Article/Article";
 
-export const filterArticles = async (
-  articles: IArticle[],
-  locale: LangType
-) => {
-  const translations = getTranslations(locale);
-
-  const {
-    filteredArticles,
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-  } = useArticleFilters(articles, translations);
-
-  setToLocalStorage(ARTICLES_ORDER_STORAGE_KEY, filteredArticles);
-
-  return filteredArticles;
-};
-
 export const Blog: React.FC<IBlog> = ({ articles }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
@@ -53,6 +37,7 @@ export const Blog: React.FC<IBlog> = ({ articles }) => {
         width100
         gapArray={[4]}
         padding={{ top: [7, 7, 8, 9] }}
+        className={styles.blog}
       >
         <TitleWrapper title={translations.titles.blog}>
           <FlexDiv width100 flex={{ direction: "column" }} gapArray={[4]}>

@@ -5,7 +5,6 @@ import styles from "./Navigation.module.scss";
 import cn from "classnames";
 import FlexDiv from "../../reuse/FlexDiv";
 import { ICta } from "../../../data.d";
-import { Heading } from "@/components/reuse/Heading";
 import { Button } from "@/components/reuse/Button";
 import { Paragraph } from "../Paragraph/Paragraph";
 
@@ -32,6 +31,7 @@ export const Navigation: FC<NavigationProps> = ({
       <FlexDiv gapArray={[3, 3, 3, 4]} flex={{ y: "center" }}>
         <Button
           variant="extra"
+          aria-label="previous page"
           iconProps={{ icon: "arrow", rotate: 90, size: "regular" }}
           path={getButtonPath(prevPage)}
         />
@@ -57,6 +57,7 @@ export const Navigation: FC<NavigationProps> = ({
         </Paragraph>
         <Button
           variant="extra"
+          aria-label="next page"
           iconProps={{ icon: "arrow", rotate: 270, size: "regular" }}
           path={getButtonPath(nextPage)}
         />

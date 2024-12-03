@@ -14,7 +14,6 @@ export default function WorkLayout({
 }) {
   return (
     <FlexDiv flex={{ direction: "column" }} width100 height100>
-      <ClientLogger slug={projectType} />
       <WorkPage params={Promise.resolve({ locale, projectType })} />
       {children}
     </FlexDiv>

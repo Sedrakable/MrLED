@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useMemo, useState } from "react";
 import styles from "./Projects.module.scss";
 import cn from "classnames";
 import FlexDiv from "../../../reuse/FlexDiv";
@@ -74,7 +74,7 @@ export const Project: FC<ProjectProps> = ({ project, type }) => {
       return (
         <>
           <Heading
-            as="h3"
+            as="h2"
             level="5"
             color="dark-burgundy"
             weight={300}
@@ -87,7 +87,7 @@ export const Project: FC<ProjectProps> = ({ project, type }) => {
             <Line className={styles.line} />
           ) : (
             <Heading
-              as="h4"
+              as="h3"
               level="6"
               color="burgundy"
               weight={400}
@@ -114,6 +114,7 @@ export const Project: FC<ProjectProps> = ({ project, type }) => {
         alt={project?.image.alt}
         figureclassname={cn(styles.image)}
         quality={50}
+        priority
       />
 
       {(type === "flash" || type === "toiles") && (
@@ -134,6 +135,13 @@ export const Projects: React.FC<IWork> = ({ projects, workType }) => {
     sortOptions,
   } = useProjectFilters(projects, workType, translations);
 
+  // Memoize the projects list to prevent unnecessary re-renders
+  const memoizedProjects: IProject[] | [] = useMemo(() => {
+    return filteredProjects.length > 0
+      ? filteredProjects
+      : Array.from({ length: 9 });
+  }, [filteredProjects]);
+
   return (
     <FlexDiv
       gapArray={[4]}
@@ -148,18 +156,21 @@ export const Projects: React.FC<IWork> = ({ projects, workType }) => {
         sortOptions={sortOptions}
       />
       <FlexDiv gapArray={[4, 4, 4, 5]} width100 className={cn(styles.wrapper)}>
-        {filteredProjects.map((project: IProject, index: number) => {
-          return (
+        {memoizedProjects.map((project, index) =>
+          project.slug ? (
             <Link
               href={`/${locale}/${
                 LocalPaths.PORTFOLIO
               }/${workType}/${project?.slug?.current?.toLowerCase()}`}
-              key={index}
+              key={project.slug?.current || index}
+              className={styles.container}
             >
               <Project type={workType} project={project} />
             </Link>
-          );
-        })}
+          ) : (
+            <div key={`placeholder-${index}`} className={styles.placeholder} />
+          )
+        )}
       </FlexDiv>
       <ProjectNavigation locale={locale} translations={translations} />
     </FlexDiv>

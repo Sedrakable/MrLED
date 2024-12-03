@@ -36,6 +36,7 @@ export const Video: React.FC<IVideo> = ({
             <div className={styles.playButton}>
               <Button
                 variant="extra"
+                aria-label="play button"
                 iconProps={{ icon: "play", size: "regular" }}
               />
             </div>

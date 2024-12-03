@@ -26,6 +26,8 @@ import { ServicesAndPlans } from "@/components/reuse/Form/ContactForm/ContactFor
 import { OptionType } from "@/components/reuse/Form/Select";
 import { getCarouselData } from "@/components/reuse/Carousel/getCarouselData";
 import { getImagesFromWorks, shuffleArray } from "@/helpers/functions";
+import { setMetadata } from "@/components/SEO";
+import { Metadata } from "next";
 
 export interface ContactPageProps {
   meta: ISeo;
@@ -34,43 +36,39 @@ export interface ContactPageProps {
 }
 
 const getContactPageData = async (locale: LangType) => {
-  const type = "contactPage";
   const contactQuery = contactPageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const contactPageData: ContactPageProps = await fetchPageData(
-    contactQuery,
-    type
-  );
+  const contactPageData: ContactPageProps = await fetchPageData(contactQuery);
   return contactPageData;
 };
 
 const getPlanData = async (pageType: string, locale: LangType) => {
-  const type = "plans";
   const planQuery = pricePlansQuery(pageType, locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const planData: any = await fetchPageData(planQuery);
   return planData;
 };
 
-// export async function generateMetadata({
-//    params,
-// }: {
-//   params: Promise<{ locale: LangType }>;
-// }): Promise<Metadata> {
-//   const contactPageData = await getContactPageData(locale);
-//   const { metaTitle, metaDesc, metaKeywords } = contactPageData.meta;
-//   const path = LocalPaths.CONTACT;
-//   const crawl = true;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: LangType }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const contactPageData = await getContactPageData(locale);
+  const { metaTitle, metaDesc, metaKeywords } = contactPageData.meta;
+  const path = LocalPaths.CONTACT;
+  const crawl = true;
 
-//   return setMetadata({
-//     locale,
-//     metaTitle,
-//     metaDesc,
-//     metaKeywords,
-//     path,
-//     crawl,
-//   });
-// }
+  return setMetadata({
+    locale,
+    metaTitle,
+    metaDesc,
+    metaKeywords,
+    path,
+    crawl,
+  });
+}
 
 export default async function ContactPage({
   params,

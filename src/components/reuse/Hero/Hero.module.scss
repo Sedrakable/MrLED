@@ -145,6 +145,8 @@
     img {
       mix-blend-mode: luminosity;
       width: var(--illustration-width);
+      aspect-ratio: 4/5;
+      height: auto;
       opacity: 0.5;
 
       overflow: hidden;
@@ -198,6 +200,7 @@
       overflow-x: visible !important;
       left: 0;
       right: 0;
+      height: auto !important;
 
       // bottom: unset;
       img {
@@ -211,9 +214,9 @@
         @include absoluteFill;
         background: radial-gradient(
             150% 125% at 100% 0%,
-            hsl(from var(--cream-white) h s l / 0) 25%,
-            hsl(from var(--cream-white) h s l / 0.75) 50%,
-            hsl(from var(--cream-white) h s l / 1) 75%
+            hsl(from var(--cream-white) h s l / 0) 35%,
+            hsl(from var(--cream-white) h s l / 0.75) 60%,
+            hsl(from var(--cream-white) h s l / 1) 85%
           ),
           hsl(from var(--burgundy) h s l / 60%);
       }
@@ -418,6 +421,7 @@
 .version3 {
   @include flex(center, flex-start);
   height: var(--hero-height-3);
+  min-height: 240px;
 
   .main {
     background: none !important;

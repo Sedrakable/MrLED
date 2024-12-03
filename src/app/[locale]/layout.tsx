@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Inter } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
+// import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import styles from "./layout.module.scss";
 import "@/styles/Main.css";
@@ -88,7 +88,7 @@ export default async function LocaleLayout({
               </div>
             </div>
           </body>
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ID!} />
+          {/* <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ID!} /> */}
         </NextIntlClientProvider>
       </html>
     )

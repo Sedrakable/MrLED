@@ -23,7 +23,7 @@ export const FormTitles: FC<FormTitleProps> = ({ title, subTitle }) => {
       flex={{ direction: "column", x: "flex-start" }}
       className={styles.formTitles}
     >
-      <Heading as="h5" level="5" color="dark-burgundy" weight={400}>
+      <Heading as="h3" level="5" color="dark-burgundy" weight={400}>
         {title}
       </Heading>
       {subTitle && (

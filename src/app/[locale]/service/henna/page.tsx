@@ -27,7 +27,7 @@ import { LangType } from "@/i18n/request";
 import { setMetadata } from "@/components/SEO";
 import { getTranslations } from "@/helpers/langUtils";
 import { Approx, ApproxProps } from "@/components/pages/blocks/Approx/Approx";
-import { shuffleArray, getImagesFromWorks } from "@/helpers/functions";
+import { getImagesFromWorks, shuffleArray } from "@/helpers/functions";
 import { FormTitleProps } from "@/components/reuse/Form/Form";
 import { getFormData } from "@/components/reuse/Form/getFormData";
 import { Carousel } from "@/components/reuse/Carousel/Carousel";
@@ -41,39 +41,37 @@ export interface HennaServicePageProps {
 }
 
 export const getHennaServicePageData = async (locale: LangType) => {
-  const type = "hennaServicePage";
   const hennaServiceQuery = hennaServicePageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const hennaServicePageData: HennaServicePageProps = await fetchPageData(
-    hennaServiceQuery,
-    type
+    hennaServiceQuery
   );
   return hennaServicePageData;
 };
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: Promise<{ locale: LangType }>;
-// }): Promise<Metadata> {
-//   const { locale } = await params; // Await the params
-//   const hennaServicePageData: HennaServicePageProps = await getHennaServicePageData(
-//     locale
-//   );
-//   const { metaTitle, metaDesc, metaKeywords } =
-//     hennaServicePageData?.meta || {};
-//   const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
-//   const crawl = true;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: LangType }>;
+}): Promise<Metadata> {
+  const { locale } = await params; // Await the params
+  const hennaServicePageData: HennaServicePageProps = await getHennaServicePageData(
+    locale
+  );
+  const { metaTitle, metaDesc, metaKeywords } =
+    hennaServicePageData?.meta || {};
+  const path = LocalPaths.SERVICE + LocalPaths.HENNA;
+  const crawl = true;
 
-//   return setMetadata({
-//     locale,
-//     metaTitle,
-//     metaDesc,
-//     metaKeywords,
-//     path,
-//     crawl,
-//   });
-// }
+  return setMetadata({
+    locale,
+    metaTitle,
+    metaDesc,
+    metaKeywords,
+    path,
+    crawl,
+  });
+}
 
 export default async function HennaServicePage({
   params,

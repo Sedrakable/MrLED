@@ -1,6 +1,26 @@
 @import "@/styles/mixins.scss";
 
+@mixin vars() {
+  --illustration-width: 500px;
+  --illu-opacity: 0.15;
+
+  @media (min-width: $tablet) {
+    --illustration-width: 500px;
+    --illu-opacity: 0.3;
+  }
+
+  @media (min-width: $laptop) {
+    --illustration-width: 600px;
+    --illu-opacity: 0.4;
+  }
+
+  @media (min-width: $desktop) {
+    --illustration-width: 700px;
+  }
+}
+
 .decorativeImage {
+  @include vars;
   position: absolute;
   background: var(--cream-white);
   // z-index: 2;

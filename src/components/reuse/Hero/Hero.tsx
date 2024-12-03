@@ -25,7 +25,7 @@ interface HeroProps extends IHomeHero {
 }
 
 const imageQuality: Record<VersionType, number> = {
-  1: 60,
+  1: 20,
   2: 90,
   3: 80,
 };
@@ -155,7 +155,7 @@ export const Hero: React.FC<HeroProps> = ({
             } as React.CSSProperties
           }
         >
-          <Image src={fishes.src} alt="fishes" width={800} height={1200} />
+          <Image src={fishes.src} alt="fishes" width={800} height={1000} />
         </div>
       )}
       <FlexDiv
@@ -176,8 +176,6 @@ export const Hero: React.FC<HeroProps> = ({
           alt={backgroundImage?.alt}
           loading="eager"
           fetchPriority="high"
-          rel="preload"
-          sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw"
           figureclassname={cn(styles.image, styles.backgroundImage)}
           quality={imageQuality[version]}
         />
@@ -216,8 +214,7 @@ export const Hero: React.FC<HeroProps> = ({
             alt={foregroundImage?.alt}
             loading="eager"
             fetchPriority="high"
-            rel="preload"
-            sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw,33vw"
             figureclassname={cn(styles.image, styles.foregroundImage)}
             quality={90}
             style={

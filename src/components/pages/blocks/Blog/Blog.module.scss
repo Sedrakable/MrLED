@@ -1,5 +1,7 @@
 @import "@/styles/mixins.scss";
 
-.block {
-  padding-top: 0 !important;
+.blog {
+  .block {
+    padding-top: 0 !important;
+  }
 }

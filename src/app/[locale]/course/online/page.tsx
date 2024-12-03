@@ -32,39 +32,37 @@ export interface OnlineCoursePageProps extends VideoAndPriceProps {
 }
 
 export const getOnlineCoursePageData = async (locale: LangType) => {
-  const type = "onlineCoursePage";
   const onlineCourseQuery = onlineCoursePageQuery(locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const onlineCoursePageData: OnlineCoursePageProps = await fetchPageData(
-    onlineCourseQuery,
-    type
+    onlineCourseQuery
   );
   return onlineCoursePageData;
 };
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: Promise<{ locale: LangType }>;
-// }): Promise<Metadata> {
-//   const { locale } = await params; // Await the params
-//   const onlineCoursePageData: OnlineCoursePageProps = await getOnlineCoursePageData(
-//     locale
-//   );
-//   const { metaTitle, metaDesc, metaKeywords } =
-//     onlineCoursePageData?.meta || {};
-//   const path = LocalPaths.SERVICE + LocalPaths.TATTOO;
-//   const crawl = true;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: LangType }>;
+}): Promise<Metadata> {
+  const { locale } = await params; // Await the params
+  const onlineCoursePageData: OnlineCoursePageProps = await getOnlineCoursePageData(
+    locale
+  );
+  const { metaTitle, metaDesc, metaKeywords } =
+    onlineCoursePageData?.meta || {};
+  const path = LocalPaths.COURSE + LocalPaths.ONLINE;
+  const crawl = true;
 
-//   return setMetadata({
-//     locale,
-//     metaTitle,
-//     metaDesc,
-//     metaKeywords,
-//     path,
-//     crawl,
-//   });
-// }
+  return setMetadata({
+    locale,
+    metaTitle,
+    metaDesc,
+    metaKeywords,
+    path,
+    crawl,
+  });
+}
 
 export default async function OnlineCoursePage({
   params,
