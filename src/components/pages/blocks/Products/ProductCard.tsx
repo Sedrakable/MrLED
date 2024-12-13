@@ -64,11 +64,14 @@ export const ProductCard: React.FC<IProduct> = (props) => {
             wrap
           >
             <FlexDiv
-              flex={{ direction: "row", x: "space-between", y: "flex-start" }}
+              flex={{
+                direction: "column",
+                x: "space-between",
+                y: "flex-start",
+              }}
               className={styles.left}
-              gapArray={[3]}
+              gapArray={[1]}
               width100
-              wrap
             >
               <Heading
                 as="h4"
@@ -82,7 +85,7 @@ export const ProductCard: React.FC<IProduct> = (props) => {
               <FlexDiv
                 flex={{ direction: "row", x: "flex-start", y: "flex-start" }}
                 className={styles.textWrapper}
-                gapArray={[3]}
+                gapArray={[2]}
               >
                 <Paragraph
                   level="regular"

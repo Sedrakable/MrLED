@@ -16,6 +16,7 @@ import {
   FormSteps,
 } from "../Form";
 import { FlashFormData, FormErrorData } from "../formTypes";
+import FlexDiv from "../../FlexDiv";
 
 export interface FlashFormProps {
   flashFormData?: FormTitleProps;
@@ -163,7 +164,7 @@ export const FlashForm: FC<FlashFormProps> = ({
     />,
   ];
   return (
-    <div>
+    <FlexDiv width100>
       {submit === translations.form.general.emailSent ? (
         <FormSubmitMessage locale={locale} translations={translations} />
       ) : (
@@ -185,6 +186,6 @@ export const FlashForm: FC<FlashFormProps> = ({
           />
         </form>
       )}
-    </div>
+    </FlexDiv>
   );
 };

@@ -109,13 +109,18 @@ export default async function InPersonCoursePage({
             pricePlans1={data.pricePlans1}
           />
 
-          {data.infoText && (
+          {/* {data.infoText && (
             <TitleAndText
               text={data.infoText}
               title={translations.titles.experience}
             />
+          )} */}
+          {data.pricePlans1 && (
+            <PricePlans
+              data={data.pricePlans2}
+              customTitle={translations.titles.experience}
+            />
           )}
-          {data.pricePlans1 && <PricePlans data={data.pricePlans2} />}
           {data?.bigCTA && <BigCTA {...data?.bigCTA} />}
         </Block>
       </>

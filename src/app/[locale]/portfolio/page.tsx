@@ -67,7 +67,7 @@ export default async function PortfolioPage({
 
         <Block variant="default" illustrations>
           {portfolioPageData?.works && (
-            <Works worksData={portfolioPageData?.works} />
+            <Works worksData={portfolioPageData?.works} title={false} />
           )}
           {portfolioPageData?.history && (
             <History {...portfolioPageData.history} />

@@ -17,6 +17,7 @@ export const TitleAndText: React.FC<TitleAndTextProps> = ({ text, title }) => {
           value={text}
           color="dark-burgundy"
           textAlign="center"
+          level="regular"
         />
       </TextWrapper>
     </TitleWrapper>

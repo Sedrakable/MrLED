@@ -24,7 +24,11 @@ export const Approx: FC<ApproxProps> = ({ form, images, plan }) => {
       className={cn(styles.container)}
       flex={{ direction: "column" }}
     >
-      <FloatingImageWrapper images={images}>
+      <FloatingImageWrapper
+        images={images}
+        title={form.title}
+        subTitle={form.subTitle}
+      >
         <ApproxForm {...form} plan={plan} />
       </FloatingImageWrapper>
     </FlexDiv>

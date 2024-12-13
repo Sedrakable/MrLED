@@ -111,6 +111,7 @@ export const VideoAndPrice: React.FC<VideoAndPriceProps> = ({
       className={styles.container}
       gapArray={[4, 4, 5, 6]}
       flex={{ direction: "column-reverse" }}
+      padding={{ bottom: [4] }}
     >
       {pricePlan && <PricePlan {...pricePlan} />}
       {video && <Video {...video} />}

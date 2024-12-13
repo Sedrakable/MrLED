@@ -13,12 +13,14 @@ import { Heading } from "../Heading";
 import { Paragraph } from "../Paragraph/Paragraph";
 import { SanityImage } from "../SanityImage/SanityImage";
 import { AnimatedWrapper } from "../AnimatedWrapper/AnimatedWrapper";
+import { PortableTextContent } from "../Paragraph/PortableTextContent";
 
 export type VersionType = "service" | "article";
 
-export interface DisplayProps extends Omit<IHero, "title"> {
+export interface DisplayProps extends Omit<IHero, "title" | "desc"> {
   date?: string;
   title?: IFancyText;
+  desc?: any;
   version: VersionType;
   reverse?: boolean;
 }
@@ -119,14 +121,22 @@ export const Display: React.FC<DisplayProps> = ({
               {subTitle}
             </Heading>
           )}
-          <Paragraph
+          <PortableTextContent
+            value={desc}
+            color="darkest-burgundy"
+            textAlign={reverse ? "right" : "left"}
+            className={styles.desc}
+            weight={400}
+            level="regular"
+          />
+          {/* <Paragraph
             level="regular"
             color="darkest-burgundy"
             className={styles.desc}
             textAlign={reverse ? "right" : "left"}
           >
             {desc}
-          </Paragraph>
+          </Paragraph> */}
           <CTAs />
         </FlexDiv>
       </FlexDiv>

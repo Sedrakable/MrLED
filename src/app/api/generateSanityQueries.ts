@@ -56,7 +56,7 @@ export const tattooServicePageQuery = (locale: LangType): string => {
     tarifText,
     pricePlans[],
     multiDescriptions[],
-    collapsible,
+    collapsible->,
   }`;
 };
 
@@ -135,7 +135,7 @@ export const cartPageQuery = (locale: LangType): string => {
   return `*[_type == 'cartPage' && lang == '${locale}'][0]{
     meta,
     hero,
-    collapsible,
+    collapsible->,
   }`;
 };
 
@@ -161,7 +161,10 @@ export const boutiquePageQuery = (locale: LangType): string => {
 };
 
 export const productQuery = (path: string): string => {
-  return `*[_type == 'product' && path == '${path}'][0]`;
+  return `*[_type == 'product' && path == '${path}'][0]{
+  ...,
+  collapsible->,
+  }`;
 };
 
 export const blogPageQuery = (locale: LangType): string => {
@@ -197,8 +200,8 @@ export const articlePageQuery = (locale: LangType, slug: string): string => {
 export const contactPageQuery = (locale: LangType): string => {
   return `*[_type == 'contactPage' && lang == '${locale}'][0] {
     meta,
-    notification,
-    collapsible,
+    hero,
+    collapsible->,
   }`;
 };
 

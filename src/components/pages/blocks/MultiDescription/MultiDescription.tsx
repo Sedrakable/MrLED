@@ -8,10 +8,13 @@ import { Heading } from "@/components/reuse/Heading";
 import { useWindowResize } from "@/helpers/useWindowResize";
 import { ICta } from "@/data.d";
 import { Button } from "@/components/reuse/Button";
+import { useLocale } from "next-intl";
+import { LangType } from "@/i18n/request";
+import { PortableTextContent } from "@/components/reuse/Paragraph/PortableTextContent";
 
 export interface DescriptionProps {
   title: string;
-  desc: string;
+  desc: any;
   textAlign?: CSSProperties["textAlign"];
   cta?: ICta;
 }
@@ -21,6 +24,7 @@ export const Description: React.FC<DescriptionProps> = ({
   textAlign,
   cta,
 }) => {
+  const locale = useLocale() as LangType;
   return (
     <FlexDiv flex={{ direction: "column" }} gapArray={[3, 3, 3, 4]} width100>
       <Heading
@@ -33,16 +37,15 @@ export const Description: React.FC<DescriptionProps> = ({
       >
         {title}
       </Heading>
-      <Paragraph
-        level="regular"
+      <PortableTextContent
+        value={desc}
         color="darkest-burgundy"
         textAlign={textAlign}
-        paddingBottomArray={[3]}
-      >
-        {desc}
-      </Paragraph>
+        weight={400}
+        level="regular"
+      />
       {cta && (
-        <Button variant="primary" path={cta?.link?.join("/")}>
+        <Button variant="primary" path={`/${locale}${cta?.link?.join("")}`}>
           {cta?.text}
         </Button>
       )}

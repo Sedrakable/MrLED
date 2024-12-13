@@ -6,8 +6,9 @@ import {
   SanityImage,
 } from "@/components/reuse/SanityImage/SanityImage";
 import { useWindowResize } from "@/helpers/useWindowResize";
+import { FormTitleProps, FormTitles } from "../Form";
 
-export interface FloatingImageWrapperProps {
+export interface FloatingImageWrapperProps extends FormTitleProps {
   children: React.ReactNode;
   images: FloatingImages;
 }
@@ -19,6 +20,8 @@ export interface FloatingImages {
 }
 
 export const FloatingImageWrapper: FC<FloatingImageWrapperProps> = ({
+  title,
+  subTitle,
   children,
   images,
 }) => {
@@ -26,26 +29,34 @@ export const FloatingImageWrapper: FC<FloatingImageWrapperProps> = ({
 
   const imagesArray = [images.img1, images.img2, images.img3];
   return (
-    <FlexDiv gapArray={[6, 7, 8, 9]} className={styles.wrapper} width100>
-      {children}
-      {!isMobileOrTablet && (
-        <FlexDiv
-          className={styles.rightSide}
-          width100
-          flex={{ direction: "column" }}
-        >
-          {imagesArray.map((image, index) => {
-            return (
-              <SanityImage
-                key={index}
-                {...image}
-                sizes="(max-width: 1680px) 320px, 240px"
-                quality={100}
-              />
-            );
-          })}
-        </FlexDiv>
-      )}
+    <FlexDiv gapArray={[5, 6, 6, 7]} width100 flex={{ direction: "column" }}>
+      <FormTitles title={title} subTitle={subTitle} />
+      <FlexDiv
+        gapArray={[6, 7, 8, 9]}
+        className={styles.wrapper}
+        width100
+        flex={{ y: "flex-start" }}
+      >
+        {children}
+        {!isMobileOrTablet && (
+          <FlexDiv
+            className={styles.rightSide}
+            width100
+            flex={{ direction: "column" }}
+          >
+            {imagesArray.map((image, index) => {
+              return (
+                <SanityImage
+                  key={index}
+                  {...image}
+                  sizes="(max-width: 1680px) 320px, 240px"
+                  quality={100}
+                />
+              );
+            })}
+          </FlexDiv>
+        )}
+      </FlexDiv>
     </FlexDiv>
   );
 };

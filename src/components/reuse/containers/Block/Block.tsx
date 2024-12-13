@@ -43,59 +43,10 @@ export const Block: React.FC<BlockProps> = ({
   const [imagePositions, setImagePositions] = useState<ImagePositions | null>(
     null
   );
-  const [estimatedHeight, setEstimatedHeight] = useState<number | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const blockRef = useRef<HTMLDivElement>(null);
   const [cssLoaded, setCssLoaded] = useState(false);
   const scrollProgress = useParallaxScroll(blockRef);
-  const [canRenderDecorations, setCanRenderDecorations] = useState(false);
-
-  useEffect(() => {
-    const calculateHeight = () => {
-      if (contentRef.current) {
-        const childrenCount = React.Children.count(children);
-        const itemHeight =
-          contentRef.current.querySelector(":first-child")?.clientHeight || 300;
-        const estimatedTotalHeight = childrenCount * itemHeight;
-
-        setEstimatedHeight(
-          Math.min(estimatedTotalHeight, window.innerHeight * 2)
-        );
-      }
-    };
-
-    calculateHeight();
-    window.addEventListener("resize", calculateHeight);
-    return () => window.removeEventListener("resize", calculateHeight);
-  }, [children]);
-
-  useEffect(() => {
-    // Check if the page has finished loading
-    const checkPageLoad = () => {
-      // Use requestIdleCallback for modern browsers
-      if ("requestIdleCallback" in window) {
-        requestIdleCallback(
-          () => {
-            setCanRenderDecorations(true);
-          },
-          { timeout: 2000 }
-        );
-      } else {
-        // Fallback for browsers without requestIdleCallback
-        setTimeout(() => {
-          setCanRenderDecorations(true);
-        }, 2000);
-      }
-    };
-
-    // Check for page load
-    if (document.readyState === "complete") {
-      checkPageLoad();
-    } else {
-      window.addEventListener("load", checkPageLoad);
-      return () => window.removeEventListener("load", checkPageLoad);
-    }
-  }, []);
 
   useEffect(() => {
     if (isMobile) return;
@@ -154,10 +105,6 @@ export const Block: React.FC<BlockProps> = ({
       className={cn(styles.content)}
       gapArray={variant === "full-width" ? [11, 10, 11, 12] : [9, 9, 9, 10]}
       width100
-      customStyle={{
-        minHeight: estimatedHeight ? `${estimatedHeight}px` : "auto",
-        transition: "min-height 0.3s ease",
-      }}
     >
       {children}
     </FlexDiv>
@@ -176,18 +123,14 @@ export const Block: React.FC<BlockProps> = ({
       width100
       as="article"
     >
-      {canRenderDecorations &&
-        !isMobile &&
-        scrollProgress &&
-        imagePositions &&
-        blockRef && (
-          <DecorationsLazy
-            scrollProgress={scrollProgress}
-            illustrations={illustrations}
-            imagePositions={imagePositions}
-            blockRef={blockRef}
-          />
-        )}
+      {!isMobile && scrollProgress && imagePositions && blockRef && (
+        <DecorationsLazy
+          scrollProgress={scrollProgress}
+          illustrations={illustrations}
+          imagePositions={imagePositions}
+          blockRef={blockRef}
+        />
+      )}
 
       {title ? <TitleWrapper title={title}>{content}</TitleWrapper> : content}
     </FlexDiv>

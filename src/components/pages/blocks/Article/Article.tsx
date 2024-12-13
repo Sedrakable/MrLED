@@ -14,6 +14,7 @@ import { getTranslations } from "@/helpers/langUtils";
 import { contentBlocks } from "@/components/reuse/ContentBlock/ContentBlock";
 import { TextWrapper } from "@/components/reuse/containers/TextWrapper/TextWrapper";
 import { useLocalStorage } from "@/helpers/useLocalStorage";
+import { PortableTextContent } from "@/components/reuse/Paragraph/PortableTextContent";
 
 export const ARTICLES_ORDER_STORAGE_KEY = "articlesOrder";
 
@@ -101,14 +102,13 @@ export const Article: React.FC<IArticle> = ({
               )}
             </FlexDiv>
             <TextWrapper version={2} variant="small">
-              <Paragraph
+              <PortableTextContent
+                value={desc}
                 level="regular"
                 color="burgundy"
                 weight={500}
                 textAlign="center"
-              >
-                {desc}
-              </Paragraph>
+              />
             </TextWrapper>
           </FlexDiv>
 

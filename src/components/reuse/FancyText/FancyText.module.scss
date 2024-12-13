@@ -1,10 +1,10 @@
 @import "@/styles/mixins.scss";
 
 .title {
-  // .part1,
-  // .part2 {
-  //   margin-top: 0.01em;
-  // }
+  .part1,
+  .part2 {
+    text-wrap: nowrap;
+  }
   .part2 {
     text-shadow: var(--text-shadow);
     position: relative;

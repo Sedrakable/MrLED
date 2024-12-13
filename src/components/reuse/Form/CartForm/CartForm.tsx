@@ -23,6 +23,7 @@ import { ICartProduct, IDeliveryMethod } from "@/data.d";
 
 export interface CartFormProps extends CartProps {
   cart: ICartProduct[];
+  onDeliveryPriceChange: (price: number) => void; // Add this line
 }
 
 export const CartForm: FC<CartFormProps> = ({
@@ -30,6 +31,7 @@ export const CartForm: FC<CartFormProps> = ({
   deliveryMethods,
   title,
   subTitle,
+  onDeliveryPriceChange,
 }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
@@ -110,10 +112,11 @@ export const CartForm: FC<CartFormProps> = ({
   };
 
   const handleDeliveryChange = (selected: string) => {
-    setDeliveryPrice(
+    const price =
       deliveryMethods.find((method) => methodToString(method) === selected)
-        ?.price || 0
-    );
+        ?.price || 0;
+    setDeliveryPrice(price);
+    onDeliveryPriceChange(price); // Notify parent of new price
 
     setFormData((prev) => ({ ...prev, delivery: selected }));
     if (errors.delivery) {
@@ -254,12 +257,12 @@ export const CartForm: FC<CartFormProps> = ({
   ];
 
   return (
-    <div>
+    <FlexDiv width100>
       {submit === translations.form.general.emailSent ? (
         <FormSubmitMessage locale={locale} translations={translations} />
       ) : (
         <form onSubmit={handleSubmit} className={styles.form}>
-          <FormTitles title={title} subTitle={subTitle} />
+          <FormTitles title={title} subTitle={subTitle} alignText="left" />
           <FormSteps steps={Steps} />
           <FormSubmitButton
             submitText={submit}
@@ -269,6 +272,6 @@ export const CartForm: FC<CartFormProps> = ({
           />
         </form>
       )}
-    </div>
+    </FlexDiv>
   );
 };

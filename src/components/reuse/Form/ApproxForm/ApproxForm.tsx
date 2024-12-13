@@ -212,12 +212,12 @@ export const ApproxForm: FC<ApproxFormProps> = ({ title, subTitle, plan }) => {
   ];
 
   return (
-    <div>
+    <FlexDiv width100>
       {submit === translations.form.general.emailSent ? (
         <FormSubmitMessage locale={locale} translations={translations} />
       ) : (
         <form onSubmit={handleSubmit} className={styles.form}>
-          <FormTitles title={title} subTitle={subTitle} />
+          {/* <FormTitles title={title} subTitle={subTitle} /> */}
           <FormSteps steps={Steps} />
           <FormSubmitButton
             submitText={submit}
@@ -227,6 +227,6 @@ export const ApproxForm: FC<ApproxFormProps> = ({ title, subTitle, plan }) => {
           />
         </form>
       )}
-    </div>
+    </FlexDiv>
   );
 };

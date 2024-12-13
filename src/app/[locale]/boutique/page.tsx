@@ -77,6 +77,7 @@ export default async function BoutiquePage({
                 value={boutiquePageData.desc}
                 color="dark-burgundy"
                 textAlign="center"
+                level="regular"
               />
             </TextWrapper>
           )}

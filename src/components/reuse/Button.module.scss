@@ -39,10 +39,10 @@
 
   .textWrapper {
     @include flex;
-    height: var(--text-height);
+    min-height: var(--text-height);
     padding: 2px var(--button-padding) 0px var(--button-padding);
     box-sizing: border-box;
-    line-height: 0.8em !important;
+    line-height: 1em !important;
   }
   &:not(.disabled) {
     &.primary {
@@ -144,7 +144,7 @@
       min-width: auto !important;
 
       .textWrapper {
-        height: var(--text-height-small) !important;
+        min-height: var(--text-height-small) !important;
       }
     }
   }

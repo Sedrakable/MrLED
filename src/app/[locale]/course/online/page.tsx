@@ -86,6 +86,7 @@ export default async function OnlineCoursePage({
                 value={onlineCoursePageData.desc}
                 color="dark-burgundy"
                 textAlign="center"
+                level="regular"
               />
             </TextWrapper>
           )}

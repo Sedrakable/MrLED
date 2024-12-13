@@ -26,6 +26,7 @@ import { setMetadata } from "@/components/SEO";
 import { TextWrapper } from "@/components/reuse/containers/TextWrapper/TextWrapper";
 import { PortableTextContent } from "@/components/reuse/Paragraph/PortableTextContent";
 import { Display, DisplayProps } from "@/components/reuse/Display/Display";
+import { getTranslations } from "@/helpers/langUtils";
 
 export interface TestTattooServicePageProps {
   meta: ISeo;
@@ -75,6 +76,7 @@ export default async function TestTattooServicePage({
   params: Promise<{ locale: LangType }>;
 }) {
   const { locale } = await params; // Await the params
+  const trans = getTranslations(locale);
   const testTattooServicePageData = await getTestTattooServicePageData(locale);
 
   return (
@@ -91,13 +93,14 @@ export default async function TestTattooServicePage({
           </Block>
         )}
 
-        <Block variant="default" illustrations>
+        <Block variant="default" illustrations title={trans.titles.tarif}>
           {testTattooServicePageData.desc && (
-            <TextWrapper version={3}>
+            <TextWrapper version={3} direction="column">
               <PortableTextContent
                 value={testTattooServicePageData.desc}
                 color="dark-burgundy"
                 textAlign="center"
+                level="regular"
               />
             </TextWrapper>
           )}

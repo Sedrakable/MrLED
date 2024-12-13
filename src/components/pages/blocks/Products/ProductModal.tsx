@@ -87,7 +87,7 @@ export const ProductModal: React.FC<IProduct> = (props) => {
           </Paragraph>
           <FlexDiv className={styles.textWrapper} gapArray={[3]}>
             <Paragraph {...paragraphProps} color="dark-burgundy">
-              ${price}
+              {price}
             </Paragraph>
             {quantityDesc && (
               <>

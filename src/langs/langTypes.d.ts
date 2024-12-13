@@ -19,6 +19,7 @@ interface Titles {
   experience: string;
   cart: string;
   policies: string;
+  services: string;
 }
 
 interface Buttons {
@@ -115,6 +116,9 @@ interface Cart {
   checkCartAlert: string;
   noItemsInCart: string;
   total: string;
+  subtotal: string;
+  taxes: string;
+  shipping: string;
 }
 
 type BodyPartsRecord = {

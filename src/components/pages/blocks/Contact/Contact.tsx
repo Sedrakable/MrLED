@@ -25,7 +25,11 @@ export const Contact: FC<ContactProps> = ({ form, images }) => {
       className={cn(styles.container)}
       flex={{ direction: "column" }}
     >
-      <FloatingImageWrapper images={images}>
+      <FloatingImageWrapper
+        images={images}
+        title={form.title}
+        subTitle={form.subTitle}
+      >
         <ContactForm {...form} />
       </FloatingImageWrapper>
     </FlexDiv>

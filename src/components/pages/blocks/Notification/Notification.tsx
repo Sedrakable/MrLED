@@ -26,6 +26,7 @@ export const Notification: FC<NotificationProps> = ({ title, desc }) => {
             value={desc}
             color="darkest-burgundy"
             textAlign="center"
+            level="regular"
           />
         </div>
       </FlexDiv>

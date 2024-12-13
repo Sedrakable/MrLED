@@ -17,6 +17,7 @@ import { useWindowResize } from "@/helpers/useWindowResize";
 import { TitleWrapper } from "../../../reuse/containers/TitleWrapper/TitleWrapper";
 import { Button } from "@/components/reuse/Button";
 import { AnimatedWrapper } from "@/components/reuse/AnimatedWrapper/AnimatedWrapper";
+import { PortableTextContent } from "@/components/reuse/Paragraph/PortableTextContent";
 
 export interface PricePlanProps {
   image?: ICustomImage;
@@ -117,16 +118,15 @@ export const PricePlan: FC<PricePlanProps> = ({
             </Paragraph>
           </FlexDiv>
           {desc && (
-            <Paragraph
-              level="small"
+            <PortableTextContent
+              value={desc}
+              level="regular"
               color={image ? "cream-white" : "burgundy"}
               weight={400}
               className={styles.desc}
               textAlign="justify"
               paddingBottomArray={[3]}
-            >
-              {desc}
-            </Paragraph>
+            />
           )}
 
           {features && (
@@ -180,15 +180,19 @@ export const PricePlan: FC<PricePlanProps> = ({
 export interface PricePlansProps {
   data: PricePlanProps[];
   version?: 1 | 2;
+  customTitle?: string;
 }
 export const PricePlans: React.FC<PricePlansProps> = ({
   data,
   version = 1,
+  customTitle,
 }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
   return (
-    <TitleWrapper title={translations.titles.work}>
+    <TitleWrapper
+      title={customTitle ? customTitle : translations.titles.services}
+    >
       <FlexDiv
         gapArray={[6, 4, 5, 6]}
         width100

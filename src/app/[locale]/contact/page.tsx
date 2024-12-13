@@ -1,4 +1,4 @@
-import { ISeo, IWork, LocalPaths } from "@/data.d";
+import { IHero, ISeo, IWork, LocalPaths } from "@/data.d";
 import { fetchPageData } from "@/app/api/useFetchPage";
 import { LangType } from "@/i18n/request";
 import {
@@ -28,10 +28,12 @@ import { getCarouselData } from "@/components/reuse/Carousel/getCarouselData";
 import { getImagesFromWorks, shuffleArray } from "@/helpers/functions";
 import { setMetadata } from "@/components/SEO";
 import { Metadata } from "next";
+import { Hero } from "@/components/reuse/Hero/Hero";
 
 export interface ContactPageProps {
   meta: ISeo;
-  notification?: NotificationProps;
+  hero: IHero;
+  // notification?: NotificationProps;
   collapsible?: CollapsibleProps;
 }
 
@@ -77,7 +79,7 @@ export default async function ContactPage({
 }) {
   const { locale } = await params; // Await the params
   const trans = getTranslations(locale);
-  const data = await getContactPageData(locale);
+  const contactPageData = await getContactPageData(locale);
   const formData: FormTitleProps = await getFormData("contact", locale);
 
   const getPlansForService = async (
@@ -148,10 +150,15 @@ export default async function ContactPage({
   };
 
   return (
-    <Block variant="default" illustrations>
-      {data?.notification && <Notification {...data.notification} />}
-      {formData && <Contact {...contactData} />}
-      {data?.collapsible && <Collapsible {...data.collapsible} />}
-    </Block>
+    <>
+      {contactPageData?.hero && <Hero {...contactPageData?.hero} version={2} />}
+      <Block variant="default" illustrations>
+        {/* {data?.notification && <Notification {...data.notification} />} */}
+        {formData && <Contact {...contactData} />}
+        {contactPageData?.collapsible && (
+          <Collapsible {...contactPageData.collapsible} />
+        )}
+      </Block>
+    </>
   );
 }

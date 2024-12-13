@@ -20,9 +20,6 @@ import {
 } from "../Form";
 import { Slider } from "../Slider/Slider";
 import { UploadButton } from "../UploadButton/UploadButton";
-import { Heading } from "../../Heading";
-import { Button } from "../../Button";
-import { LocalPaths } from "@/data.d";
 
 export interface ServicesAndPlans {
   service: OptionType;
@@ -31,11 +28,7 @@ export interface ServicesAndPlans {
 export interface ContactFormProps extends FormTitleProps {
   servicesAndPlans: ServicesAndPlans[];
 }
-export const ContactForm: FC<ContactFormProps> = ({
-  title,
-  subTitle,
-  servicesAndPlans,
-}) => {
+export const ContactForm: FC<ContactFormProps> = ({ servicesAndPlans }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
 
@@ -292,12 +285,11 @@ export const ContactForm: FC<ContactFormProps> = ({
   ];
 
   return (
-    <div>
+    <FlexDiv width100>
       {submit === translations.form.general.emailSent ? (
         <FormSubmitMessage locale={locale} translations={translations} />
       ) : (
         <form onSubmit={handleSubmit} className={styles.form}>
-          <FormTitles title={title} subTitle={subTitle} />
           <FormSteps steps={Steps} />
           <FormSubmitButton
             isValid={Object.keys(errors).length === 0}
@@ -307,6 +299,6 @@ export const ContactForm: FC<ContactFormProps> = ({
           />
         </form>
       )}
-    </div>
+    </FlexDiv>
   );
 };

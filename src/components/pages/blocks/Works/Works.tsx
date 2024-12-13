@@ -75,9 +75,11 @@ const Work: FC<WorkProps> = ({ backgroundImage, title, path, reserve }) => {
   );
 };
 
-export const Works: React.FC<{ worksData: WorkPageProps[] }> = ({
-  worksData,
-}) => {
+export interface WorksProps {
+  title?: boolean;
+  worksData: WorkPageProps[];
+}
+export const Works: React.FC<WorksProps> = ({ worksData, title = true }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
   const works: WorkProps[] = worksData.map((work) => {
@@ -88,13 +90,16 @@ export const Works: React.FC<{ worksData: WorkPageProps[] }> = ({
       reserve: work.reserve,
     };
   });
-  return (
-    <TitleWrapper title={translations.titles.work}>
-      <FlexDiv gapArray={[6, 4, 5, 6]} width100 className={cn(styles.wrapper)}>
-        {works.map((work) => {
-          return <Work key={work.title} {...work} />;
-        })}
-      </FlexDiv>
-    </TitleWrapper>
+  const worksComp = (
+    <FlexDiv gapArray={[6, 4, 5, 6]} width100 className={cn(styles.wrapper)}>
+      {works.map((work) => {
+        return <Work key={work.title} {...work} />;
+      })}
+    </FlexDiv>
+  );
+  return title ? (
+    <TitleWrapper title={translations.titles.work}>{worksComp}</TitleWrapper>
+  ) : (
+    worksComp
   );
 };

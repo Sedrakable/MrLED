@@ -23,9 +23,6 @@
   width: 100%;
   padding-bottom: var(--pad-5);
 
-  .formTitles {
-    padding-left: var(--button-margin-left) !important;
-  }
   button {
     margin-left: var(--button-margin-left);
   }
@@ -35,8 +32,14 @@
     width: 100%;
     @media (min-width: $tablet) {
       width: auto;
+      padding-left: var(--button-margin-left);
     }
   }
+}
+
+.formTitles {
+  @include vars;
+  padding-left: var(--button-margin-left) !important;
 }
 
 .step {

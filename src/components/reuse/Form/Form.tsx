@@ -15,19 +15,38 @@ import { LocalPaths } from "@/data.d";
 export interface FormTitleProps {
   title: string;
   subTitle?: string;
+  alignText?: "left" | "center";
 }
-export const FormTitles: FC<FormTitleProps> = ({ title, subTitle }) => {
+export const FormTitles: FC<FormTitleProps> = ({
+  title,
+  subTitle,
+  alignText = "center",
+}) => {
   return (
     <FlexDiv
       width100
-      flex={{ direction: "column", x: "flex-start" }}
+      flex={{
+        direction: "column",
+        x: alignText == "center" ? "center" : "flex-start",
+      }}
       className={styles.formTitles}
     >
-      <Heading as="h3" level="5" color="dark-burgundy" weight={400}>
+      <Heading
+        as="h3"
+        level="5"
+        color="dark-burgundy"
+        weight={400}
+        textAlign={alignText}
+      >
         {title}
       </Heading>
       {subTitle && (
-        <Paragraph level="regular" color="burgundy" weight={400}>
+        <Paragraph
+          level="regular"
+          color="burgundy"
+          weight={400}
+          textAlign={alignText}
+        >
           {subTitle}
         </Paragraph>
       )}

@@ -39,20 +39,15 @@ const emailTranslations = {
 };
 
 // Helper function to format currency
-const formatCurrency = (amount: number): string => {
-  return `$${amount.toFixed(2)}`;
-};
+const formatCurrency = (num: number) => Math.round(num * 100) / 100;
 
 // Helper function to calculate order total
-const calculateTotal = (
-  cart: ICartProduct[],
-  deliveryPrice: number
-): number => {
+const calculateTotal = (cart: ICartProduct[]): number => {
   const cartTotal = cart.reduce(
     (total, item) => total + item.quantity * parseFloat(item.product.price),
     0
   );
-  return cartTotal + deliveryPrice;
+  return cartTotal;
 };
 
 // Generate the product table HTML
@@ -60,6 +55,10 @@ const generateProductTable = (
   cart: ICartProduct[],
   deliveryPrice: number
 ): string => {
+  const subTotal = calculateTotal(cart);
+  const taxes = (subTotal + deliveryPrice) * 0.15; // Example tax rate, adjust as needed
+  const grandTotal = subTotal + deliveryPrice + taxes;
+
   return `
     <table>
       <tr>
@@ -82,14 +81,21 @@ const generateProductTable = (
       `
         )
         .join("")}
+        <tr class="total">
+          <td colspan="3">Sous-total</td>
+          <td>${formatCurrency(subTotal)} </td>
+        </tr>
         <tr>
           <td colspan="3">Delivery</td>
           <td>${formatCurrency(deliveryPrice)}</td>
-          
+        </tr>
+        <tr>
+          <td colspan="3">Taxes</td>
+          <td>${formatCurrency(taxes)}</td>
         </tr>
       <tr class="total">
         <td colspan="3">Total</td>
-        <td>${formatCurrency(calculateTotal(cart, deliveryPrice))}</td>
+        <td>${formatCurrency(grandTotal)}</td>
       </tr>
     </table>
   `;

@@ -20,11 +20,13 @@
   position: relative;
 
   .rightSide {
+    height: 100%;
+    position: relative;
     figure {
-      width: 100% !important;
+      position: absolute !important;
+      width: var(--image-width) !important;
       height: var(--image-width) !important;
       display: flex !important;
-      margin: calc(-1 * var(--pad-6)) 0;
       justify-content: flex-start;
       overflow: visible !important;
       pointer-events: none;
@@ -32,9 +34,6 @@
       img {
         border-radius: var(--border-radius);
         box-shadow: var(--drop-shadow);
-        height: var(--image-width) !important;
-        width: var(--image-width) !important;
-        aspect-ratio: 1;
         position: relative !important;
         transition: var(--transition-time);
         pointer-events: auto;
@@ -43,10 +42,17 @@
         }
       }
       &:first-child {
-        justify-content: center;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+      }
+      &:nth-child(2) {
+        left: 0;
+        top: calc(var(--image-width) - var(--pad-6));
       }
       &:last-child {
-        justify-content: flex-end;
+        right: 0;
+        top: calc(2 * (var(--image-width) - var(--pad-6)));
       }
     }
   }

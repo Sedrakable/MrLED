@@ -1,45 +1,70 @@
 import React, { CSSProperties } from "react";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
-import { Paragraph } from "./Paragraph";
-import { ColorType } from "../Heading";
+import { Paragraph, ParagraphProps } from "./Paragraph";
+import { ColorType, TextWeightType } from "../Heading";
 
-interface PortableTextContentProps {
+interface PortableTextContentProps extends Omit<ParagraphProps, "children"> {
   value: any;
-  color?: ColorType;
-  textAlign?: CSSProperties["textAlign"];
 }
 
 export const PortableTextContent: React.FC<PortableTextContentProps> = ({
   value,
   color = "burgundy", // default color
   textAlign = "left",
+  weight = 300,
+  level = "regular",
+  className,
 }) => {
+  const quote = (
+    <strong style={{ fontWeight: 500, color: `var(--burgundy)` }}>"</strong>
+  );
   const myComponents: PortableTextComponents = {
     block: {
       normal: ({ children }) => (
         <Paragraph
-          level="regular"
-          weight={300}
+          level={level}
+          weight={weight}
           color={color}
           textAlign={textAlign}
+          className={className}
         >
           {children}
         </Paragraph>
       ),
-      h1: ({ children }) => (
-        <Paragraph level="big" color={color} textAlign={textAlign}>
-          {children}
-        </Paragraph>
-      ),
-      h2: ({ children }) => (
-        <Paragraph level="regular" color={color} textAlign={textAlign}>
-          {children}
+      blockquote: ({ children }) => (
+        <Paragraph
+          level={level}
+          weight={weight}
+          color={color}
+          textAlign={textAlign}
+          className={className}
+        >
+          <em>
+            {quote}
+            {children}
+            {quote}
+          </em>
         </Paragraph>
       ),
     },
     marks: {
+      link: ({ children, value }) => {
+        return (
+          <a
+            style={{
+              fontWeight: weight + 100,
+              color: `var(--burgundy)`,
+              textDecoration: "underline",
+            }}
+            {...value}
+            target="_blank"
+          >
+            {children}
+          </a>
+        );
+      },
       strong: ({ children }) => (
-        <strong style={{ fontWeight: 500, color: `var(--burgundy)` }}>
+        <strong style={{ fontWeight: weight + 200, color: `var(--burgundy)` }}>
           {children}
         </strong>
       ),

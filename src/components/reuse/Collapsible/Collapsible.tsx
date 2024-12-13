@@ -8,6 +8,7 @@ import { Heading } from "../../reuse/Heading";
 import { SizeType, TextWrapper } from "../containers/TextWrapper/TextWrapper";
 import { Paragraph } from "../Paragraph/Paragraph";
 import { Icon } from "../Icon";
+import { PortableTextContent } from "../Paragraph/PortableTextContent";
 
 export interface CollapsibleProps {
   title?: string;
@@ -58,7 +59,7 @@ export const Collapsible: React.FC<CollapsibleProps> = ({
                 onClick={() => toggleQuestion(index)}
               >
                 <Paragraph
-                  level="regular"
+                  level="big"
                   color="darkest-burgundy"
                   textAlign="left"
                 >
@@ -79,9 +80,12 @@ export const Collapsible: React.FC<CollapsibleProps> = ({
                   className={styles.answer}
                   padding={{ top: [3], left: [4], right: [8] }}
                 >
-                  <Paragraph level="small" color="burgundy" weight={500}>
-                    {q.answer}
-                  </Paragraph>
+                  <PortableTextContent
+                    level="regular"
+                    value={q.answer}
+                    color="burgundy"
+                    weight={400}
+                  />
                 </FlexDiv>
               )}
             </FlexDiv>

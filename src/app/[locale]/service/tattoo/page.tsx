@@ -34,7 +34,6 @@ import { getImagesFromWorks, shuffleArray } from "@/helpers/functions";
 import { getFormData } from "@/components/reuse/Form/getFormData";
 import { FormTitleProps } from "@/components/reuse/Form/Form";
 import { Approx, ApproxProps } from "@/components/pages/blocks/Approx/Approx";
-import { ClientLogger } from "@/helpers/clientLogger";
 import { Carousel } from "@/components/reuse/Carousel/Carousel";
 
 export interface TattooServicePageProps {

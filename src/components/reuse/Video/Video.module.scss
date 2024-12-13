@@ -54,18 +54,18 @@
     }
   }
 
-  @media (min-width: $laptop) {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr);
-    > * {
-      &:first-child {
-        grid-column: span 1 !important;
-        height: 100%;
-      }
-    }
-    .video {
-      grid-column: span 2;
-      width: 100%;
-    }
-  }
+  // @media (min-width: $laptop) {
+  //   display: grid !important;
+  //   grid-template-columns: repeat(3, 1fr);
+  //   > * {
+  //     &:first-child {
+  //       grid-column: span 1 !important;
+  //       height: 100%;
+  //     }
+  //   }
+  //   .video {
+  //     grid-column: span 2;
+  //     width: 100%;
+  //   }
+  // }
 }

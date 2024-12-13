@@ -5,10 +5,9 @@
   overflow: clip;
   overflow-y: visible;
   flex: 1;
-  background: var(--cream-white);
   content-visibility: auto;
   contain-intrinsic-size: auto 500px; // Provide an estimated height
-
+  z-index: 1;
   .content {
     z-index: 1;
     position: relative;

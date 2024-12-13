@@ -11,6 +11,7 @@ export const frTranslations: Translations = {
     experience: "Vivre l'expérience",
     cart: "Panier",
     policies: "Politiques",
+    services: "Services",
   },
   buttons: {
     view: "Voir",
@@ -102,6 +103,9 @@ export const frTranslations: Translations = {
     checkCartAlert: "Voir le Panier",
     noItemsInCart: "Panier vide. Ajoutez des articles pour continuer",
     total: "Total",
+    subtotal: "Sous-total",
+    taxes: "Taxes (15%)",
+    shipping: "Livraison",
   },
   select: {
     sort: "Trier",
@@ -112,7 +116,7 @@ export const frTranslations: Translations = {
       oldest: "Ancien",
     },
 
-    year: "Anne",
+    year: "Année ",
     bodyParts: "Parties du Corps",
     bodyPartsOptions: {
       hand: "Main",
@@ -125,7 +129,7 @@ export const frTranslations: Translations = {
     },
     tattooColor: "Couleur",
     tattooColorOptions: {
-      black: "Noir + Gris",
+      black: "Noir & Gris",
       brown: "Brun",
     },
     tattooOther: "Autre",

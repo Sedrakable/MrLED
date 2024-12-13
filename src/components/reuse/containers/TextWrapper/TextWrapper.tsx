@@ -18,6 +18,7 @@ interface TextWrapperProps {
   backgroundImage?: ICustomImage;
   variant?: SizeType;
   animate?: boolean;
+  direction?: "row" | "column";
 }
 
 export const TextWrapper: FC<TextWrapperProps> = ({
@@ -26,6 +27,7 @@ export const TextWrapper: FC<TextWrapperProps> = ({
   backgroundImage,
   variant,
   animate = true,
+  direction = "column",
 }) => {
   const wrapper = (
     <FlexDiv
@@ -34,6 +36,7 @@ export const TextWrapper: FC<TextWrapperProps> = ({
         vertical: variant === "big" ? [6, 6, 6, 7] : [4, 4, 4, 5],
         horizontal: variant === "big" ? [4, 7, 7, 8] : [4, 6, 6, 7],
       }}
+      flex={{ direction }}
       className={cn(styles.wrapper, styles[`version${version}`])}
     >
       {backgroundImage && version == 2 && (
