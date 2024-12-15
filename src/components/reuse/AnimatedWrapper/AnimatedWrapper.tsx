@@ -11,7 +11,7 @@ export interface AnimatedWrapperProps {
   className?: string; // Additional className for styling
 }
 
-const AnimatedWrapper = forwardRef<HTMLDivElement, AnimatedWrapperProps>(
+export const AnimatedWrapper = forwardRef<HTMLDivElement, AnimatedWrapperProps>(
   ({ from, children, className }, ref) => {
     const { ref: inViewRef, inView } = useInView({
       triggerOnce: true, // Animation runs only once
@@ -41,5 +41,3 @@ const AnimatedWrapper = forwardRef<HTMLDivElement, AnimatedWrapperProps>(
 );
 
 AnimatedWrapper.displayName = "AnimatedWrapper"; // Set display name for debugging
-
-export { AnimatedWrapper };

@@ -4,9 +4,11 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: "/",
-      disallow: ["/en/legal/"],
+      allow: "/fr", // Allow crawling only for the French version
+      disallow: [], // No additional disallow rules unless needed
     },
-    sitemap: `${process.env.BASE_NAME}/sitemap.xml`,
+    sitemap: `${
+      process.env.BASE_NAME || "https://adhennatattoo.com"
+    }/sitemap.xml`,
   };
 }

@@ -46,38 +46,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider locale={locale}>
           <head>
             <meta name="theme-color" content="#fec301" />
-            <meta
-              name="facebook-domain-verification"
-              content="z6nna7jlyl6ehzowkxc3qp1oha3wb6"
-            />
             <meta name="enviroment" content={process.env.NODE_ENV} />
-            <Script
-              id="facebook-pixel"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '764726835805460');
-            fbq('track', 'PageView');
-            `,
-              }}
-            />
-            <noscript>
-              <img
-                alt="facebook-pixel"
-                height="1"
-                width="1"
-                style={{ display: "none" }}
-                src="https://www.facebook.com/tr?id=764726835805460&ev=PageView&noscript=1"
-              />
-            </noscript>
           </head>
           <body className={inter.className}>
             <div id="root">

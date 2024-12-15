@@ -48,51 +48,24 @@ export const setMetadata = ({
       card: "summary_large_image",
       title: metaTitle,
       description: metaDesc,
-      site: "@SetoXArts",
+      site: "@AdhennaTattoo",
       images: [
         {
-          url: "https://i.imgur.com/u9EH6vH.png",
+          url: "https://i.imgur.com/XsJPXnO.jpeg",
           width: 1200,
           height: 630,
-          alt: "Seto X Arts",
+          alt: "Adhenna Tattoo",
         },
       ],
     },
     alternates: {
-      canonical: `https://www.setoxarts.com/${locale}${path}`,
+      canonical: `https://www.adhennatatoo.com/${locale}${path}`,
       languages: {
-        en: `https://www.setoxarts.com/en${path}`,
-        fr: `https://www.setoxarts.com/fr${path}`,
+        en: `https://www.adhennatatoo.com/en${path}`,
+        fr: `https://www.adhennatatoo.com/fr${path}`,
       },
     },
   };
 
   return metadata;
 };
-
-// export const JsonLD = () => (
-//   <DynamicBreadcrumbJsonLd
-//     itemListElements={[
-//       {
-//         position: 1,
-//         name: "Home",
-//         item: "https://setoxarts.com",
-//       },
-//       {
-//         position: 2,
-//         name: "Branding",
-//         item: "https://setoxarts.com/en/service/branding",
-//       },
-//       {
-//         position: 3,
-//         name: "Web Design",
-//         item: "https://setoxarts.com/en/service/web-design",
-//       },
-//       {
-//         position: 4,
-//         name: "Contact",
-//         item: "https://setoxarts.com/en/contact",
-//       },
-//     ]}
-//   />
-// );
