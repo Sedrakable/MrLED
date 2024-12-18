@@ -239,7 +239,6 @@ export const sitemapArticlesQuery = (): string => {
 
 export const sitemapProjectsQuery = (type: string): string => {
   return `*[_type == '${type}Project']{
-  path,
   image,
   }`;
 };
