@@ -143,13 +143,6 @@ export const formQuery = (slug: string, locale: LangType): string => {
   return `*[_type == '${slug}Form' && lang == '${locale}'][0]`;
 };
 
-// export const flashFormQuery = (locale: LangType): string => {
-//   return `*[_type == 'flashForm' && lang == '${locale}'][0]{
-//     title,
-//     subTitle,
-//   }`;
-// };
-
 export const boutiquePageQuery = (locale: LangType): string => {
   return `*[_type == 'boutiquePage' && lang == '${locale}'][0] {
         meta,
@@ -225,4 +218,28 @@ export const policiesPageQuery = (locale: LangType): string => {
 
 export const notFoundPageQuery = (locale: LangType): string => {
   return `*[_type == 'notFoundPage' && lang == '${locale}'][0]`;
+};
+
+//FOR SITE MAP
+export const sitemapProductsQuery = (): string => {
+  return `*[_type == 'product']{
+  path,
+  images,
+  _updatedAt,
+  }`;
+};
+
+export const sitemapArticlesQuery = (): string => {
+  return `*[_type == 'articlePage']{
+  path,
+  customImage,
+  _updatedAt,
+  }`;
+};
+
+export const sitemapProjectsQuery = (type: string): string => {
+  return `*[_type == '${type}Project']{
+  path,
+  image,
+  }`;
 };
