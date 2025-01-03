@@ -19,12 +19,10 @@ export const Blog: React.FC<IBlog> = ({ articles }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
 
-  const {
-    filteredArticles,
-    filterHandlers,
-    filterOptions,
-    sortOptions,
-  } = useArticleFilters(articles, translations);
+  const { filteredArticles, filterHandlers, filterOptions } = useArticleFilters(
+    articles,
+    translations
+  );
 
   useEffect(() => {
     setToLocalStorage(ARTICLES_ORDER_STORAGE_KEY, filteredArticles);
@@ -48,7 +46,6 @@ export const Blog: React.FC<IBlog> = ({ articles }) => {
                 filterOptions={filterOptions}
                 filterHandlers={filterHandlers}
                 translations={translations}
-                sortOptions={sortOptions}
               />
             </div>
           </FlexDiv>

@@ -22,6 +22,7 @@ export type VersionType = 1 | 2 | 3;
 
 interface HeroProps extends IHomeHero {
   version?: VersionType;
+  fitContent?: boolean;
 }
 
 const imageQuality: Record<VersionType, number> = {
@@ -34,6 +35,7 @@ export const Hero: React.FC<HeroProps> = ({
   backgroundImage,
   foregroundImage,
   title,
+  fitContent = false,
   subTitle,
   subTitle2,
   desc,
@@ -147,7 +149,11 @@ export const Hero: React.FC<HeroProps> = ({
 
   return (
     <header
-      className={cn(styles.hero, styles["version" + version])}
+      className={cn(
+        styles.hero,
+        styles["version" + version],
+        fitContent && styles.fitContent
+      )}
       ref={heroRef}
     >
       {!vertical && version !== 3 && (

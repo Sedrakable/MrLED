@@ -65,7 +65,7 @@ export const frTranslations: Translations = {
     services: "Services",
     tattoo: "Tattoo",
     henna: "Henna",
-    testTattoo: "Test Tatouage",
+    testTattoo: "Test ton tattoo",
     courses: "Cours",
     online: "En ligne",
     inPerson: "En personne",

@@ -122,6 +122,13 @@
     }
   }
 }
+
+.fitContent {
+  height: fit-content !important;
+  .content {
+    height: fit-content !important;
+  }
+}
 .hero {
   @include vars;
   @include flexColumn(flex-start, flex-start);

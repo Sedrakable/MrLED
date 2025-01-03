@@ -15,10 +15,9 @@ import {
 
 export const ArticleFilters: FC<{
   filterOptions: IArticleFilterOptions;
-  sortOptions: IFilter[];
   filterHandlers: IArticleFilterChangeHandlers;
   translations: Translations;
-}> = ({ filterOptions, filterHandlers, sortOptions, translations }) => {
+}> = ({ filterOptions, filterHandlers, translations }) => {
   return (
     <FlexDiv
       gapArray={[3, 4, 4, 4]}
@@ -27,17 +26,10 @@ export const ArticleFilters: FC<{
       className={cn(styles.selectWrapper)}
     >
       <Filter
-        options={filterOptions.yearFilterOptions}
-        onChange={filterHandlers.handleYearFilterChange}
-        placeholder={translations.select.year || "Select Year"}
-      />
-      <Filter
         options={filterOptions.typeFilterOptions}
         onChange={filterHandlers.handleTypeFilterChange}
         placeholder={translations.select.articleType || "Select Article"}
       />
-
-      <Sort options={sortOptions} onChange={filterHandlers.handleSortChange} />
     </FlexDiv>
   );
 };

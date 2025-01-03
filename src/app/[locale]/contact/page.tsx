@@ -151,7 +151,9 @@ export default async function ContactPage({
 
   return (
     <>
-      {contactPageData?.hero && <Hero {...contactPageData?.hero} version={2} />}
+      {contactPageData?.hero && (
+        <Hero {...contactPageData?.hero} version={2} fitContent />
+      )}
       <Block variant="default" illustrations>
         {/* {data?.notification && <Notification {...data.notification} />} */}
         {formData && <Contact {...contactData} />}

@@ -124,6 +124,7 @@ export const PricePlan: FC<PricePlanProps> = ({
               color={image ? "cream-white" : "burgundy"}
               weight={400}
               className={styles.desc}
+              differentColorForStrongText={false}
               textAlign="justify"
               paddingBottomArray={[3]}
             />

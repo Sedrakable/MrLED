@@ -5,6 +5,7 @@ import { ColorType, TextWeightType } from "../Heading";
 
 interface PortableTextContentProps extends Omit<ParagraphProps, "children"> {
   value: any;
+  differentColorForStrongText?: boolean;
 }
 
 export const PortableTextContent: React.FC<PortableTextContentProps> = ({
@@ -13,10 +14,12 @@ export const PortableTextContent: React.FC<PortableTextContentProps> = ({
   textAlign = "left",
   weight = 300,
   level = "regular",
+  differentColorForStrongText = true,
   className,
 }) => {
+  const contastColor = differentColorForStrongText ? `var(--burgundy)` : color;
   const quote = (
-    <strong style={{ fontWeight: 500, color: `var(--burgundy)` }}>"</strong>
+    <strong style={{ fontWeight: 500, color: contastColor }}>"</strong>
   );
   const myComponents: PortableTextComponents = {
     block: {
@@ -53,7 +56,7 @@ export const PortableTextContent: React.FC<PortableTextContentProps> = ({
           <a
             style={{
               fontWeight: weight + 100,
-              color: `var(--burgundy)`,
+              color: contastColor,
               textDecoration: "underline",
             }}
             {...value}
@@ -64,7 +67,7 @@ export const PortableTextContent: React.FC<PortableTextContentProps> = ({
         );
       },
       strong: ({ children }) => (
-        <strong style={{ fontWeight: weight + 200, color: `var(--burgundy)` }}>
+        <strong style={{ fontWeight: weight + 200, color: contastColor }}>
           {children}
         </strong>
       ),

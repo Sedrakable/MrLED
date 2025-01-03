@@ -108,7 +108,7 @@ const SiteMap: FC<{ locale: LangType }> = ({ locale }) => {
         <FlexDiv
           flex={{ direction: "column", x: "flex-end" }}
           key={index}
-          gapArray={[3]}
+          gapArray={[4]}
         >
           {link.link ? (
             <Link href={`/${locale}${link.link}`}>
@@ -130,7 +130,12 @@ const SiteMap: FC<{ locale: LangType }> = ({ locale }) => {
                   }`}
                   key={subIndex}
                 >
-                  <Paragraph level="big" color="cream-white" weight={300}>
+                  <Paragraph
+                    level="big"
+                    color="cream-white"
+                    weight={300}
+                    textAlign="left"
+                  >
                     {subLink.text}
                   </Paragraph>
                 </Link>

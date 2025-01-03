@@ -71,13 +71,13 @@ export default async function HomePage({
       {homePageData?.homeHero && (
         <Hero {...homePageData?.homeHero} version={1} />
       )}
+      {carouselData && <Carousel data={carouselData} />}
 
       {homePageData?.services && (
         <Block variant="full-width" illustrations>
           <Services services={homePageData.services} />
         </Block>
       )}
-      {carouselData && <Carousel data={carouselData} />}
       <Block variant="default" illustrations>
         {homePageData?.works && <Works worksData={homePageData?.works} />}
         {homePageData?.history && <History {...homePageData.history} />}

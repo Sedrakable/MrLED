@@ -108,7 +108,7 @@ export const Navbar: FC<NavbarProps> = ({ socials }) => {
 
           <FlexDiv
             flex={{ x: "space-between", y: "center" }}
-            gapArray={[5, 6, 7, 7]}
+            gapArray={[6, 6, 7, 7]}
           >
             {!isMobile && (
               <FlexDiv gapArray={[6]} as="ul">

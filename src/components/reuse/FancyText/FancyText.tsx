@@ -49,23 +49,27 @@ export const FancyText: React.FC<FancyTextProps> = ({
       }
     };
 
-    checkOverflowAndSetHeight();
+    const handleLoad = () => {
+      requestAnimationFrame(checkOverflowAndSetHeight);
+    };
+
+    handleLoad(); // Call on mount
     window.addEventListener("resize", checkOverflowAndSetHeight);
 
     return () => {
       window.removeEventListener("resize", checkOverflowAndSetHeight);
     };
-  }, [part1, part2, overflowText]);
+  }, [containerRef, overflowText]);
 
   return (
     <FlexDiv
-      ref={containerRef}
-      flex={{ direction: "row", x: "flex-start", y: "flex-start" }}
       className={cn(styles.title, {
         [styles.overflowing]: isOverflowing,
         [styles.reverse]: reverse,
         [styles.blocker]: blocker,
       })}
+      ref={containerRef}
+      flex={{ direction: "row", x: "flex-start", y: "flex-start" }}
       width100
       customStyle={{
         justifyContent: flexHorizontal,
