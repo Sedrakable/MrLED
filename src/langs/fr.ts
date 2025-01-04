@@ -80,6 +80,7 @@ export const frTranslations: Translations = {
     policies: "Politiques",
     terms: "Conditions d'utilisation",
     other: "Autre",
+    madeBy: "Site réalisé par Seto x Arts",
   },
   hours: {
     title: "Heures d’ouverture",

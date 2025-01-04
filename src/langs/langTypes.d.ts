@@ -87,6 +87,7 @@ interface Nav {
   blog: string;
   cart: string;
   privacy: string;
+  madeBy: string;
   policies: string;
   terms: string;
   other: string;

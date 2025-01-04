@@ -23,6 +23,8 @@ import Instagram from "@/assets/vector/Instagram.svg";
 import Tiktik from "@/assets/vector/TikTok.svg";
 import Facebook from "@/assets/vector/Facebook.svg";
 
+import SetoxArts from "@/assets/vector/SetoxArts.svg";
+
 const icons: {
   [key: string]: ReactNode;
 } = {
@@ -43,6 +45,7 @@ const icons: {
   trash: <Trash />,
   play: <Play />,
   upload: <Upload />,
+  setoxArts: <SetoxArts />,
 };
 
 export const IconTypeArray = Object.keys(icons) as Array<keyof typeof icons>;

@@ -14,6 +14,7 @@ import { Heading } from "../reuse/Heading";
 import { Translations } from "@/langs/langTypes";
 import { Line } from "../reuse/Line";
 import { useWindowResize } from "@/helpers/useWindowResize";
+import { Icon } from "../reuse/Icon";
 
 const legalLinks = (trans: Translations): (INavLink | ICta)[] => {
   return [
@@ -164,6 +165,19 @@ const Legal: FC<{ locale: LangType }> = ({ locale }) => {
           </Paragraph>
         </Link>
       ))}
+      <a
+        href="https://www.setoxarts.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FlexDiv gapArray={[2]} flex={{ y: "flex-start" }}>
+          <Paragraph level="small" color="light-burgundy">
+            {`${trans.nav.madeBy} -`}
+          </Paragraph>
+
+          <Icon icon="setoxArts" color="cream_white" size="small" />
+        </FlexDiv>
+      </a>
     </FlexDiv>
   );
 };
