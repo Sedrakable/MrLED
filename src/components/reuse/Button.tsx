@@ -107,7 +107,7 @@ export const Button: FC<PropsWithChildren<
     return (
       <a
         {...buttonProps}
-        href={`https://${href}`}
+        href={href}
         target={target || "_blank"}
         rel="noopener noreferrer"
       >
