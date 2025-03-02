@@ -41,7 +41,7 @@ const Work: FC<WorkProps> = ({ backgroundImage, title, path, reserve }) => {
         <SanityImage
           image={backgroundImage?.image}
           alt={backgroundImage?.alt}
-          figureclassname={cn(styles.image)}
+          figureClassName={cn(styles.image)}
           quality={50}
         />
 

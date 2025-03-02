@@ -96,6 +96,7 @@ export default async function HennaServicePage({
       img3: images[2],
     },
     plan: "Henna Approximatif",
+    locale,
   };
 
   return (

@@ -153,11 +153,7 @@ const Main: React.FC<MainProps> = ({
         flex={{ direction: "column" }}
       >
         {image && (
-          <SanityImage
-            {...image}
-            figureclassname={styles.image}
-            quality={100}
-          />
+          <SanityImage {...image} figureClassName={styles.image} quality={90} />
         )}
         {multiDescriptions && (
           <MultiDescription

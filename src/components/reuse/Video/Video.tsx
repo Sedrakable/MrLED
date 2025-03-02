@@ -30,7 +30,7 @@ export const Video: React.FC<IVideo> = ({
             <SanityImage
               image={thumbnail?.image}
               alt={caption || "Video thumbnail"}
-              figureclassname={styles.thumbnail}
+              figureClassName={styles.thumbnail}
               quality={100}
             />
             <div className={styles.playButton}>
@@ -66,7 +66,7 @@ export const Video: React.FC<IVideo> = ({
             <SanityImage
               image={thumbnail?.image}
               alt={caption || "Video thumbnail"}
-              figureclassname={styles.thumbnail}
+              figureClassName={styles.thumbnail}
               quality={50}
             />
             <div className={styles.playButton}>

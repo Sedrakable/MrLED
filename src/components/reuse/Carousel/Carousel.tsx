@@ -80,8 +80,8 @@ export const Carousel: FC<ICarouselProps> = ({ data, cta }) => {
                   <SanityImage
                     image={image?.image}
                     alt={image?.alt}
-                    figureclassname={cn(styles.image)}
-                    quality={100}
+                    figureClassName={cn(styles.image)}
+                    quality={30}
                   />
                 </div>
               )

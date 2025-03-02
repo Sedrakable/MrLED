@@ -46,9 +46,8 @@ export const TextWrapper: FC<TextWrapperProps> = ({
           loading="eager"
           fetchPriority="high"
           rel="preload"
-          sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw"
-          figureclassname={styles.backgroundImage}
-          quality={30}
+          figureClassName={styles.backgroundImage}
+          quality={50}
         />
       )}
       {version === 1 && (

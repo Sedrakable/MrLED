@@ -37,7 +37,7 @@
   border-radius: var(--border-radius);
   box-shadow: var(--drop-shadow);
   background: var(--light-burgundy);
-
+  overflow: hidden;
   > * {
     z-index: 1;
   }

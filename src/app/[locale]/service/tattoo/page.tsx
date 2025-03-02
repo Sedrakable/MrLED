@@ -102,6 +102,7 @@ export default async function TattooServicePage({
       img3: images[2],
     },
     plan: "Tattoo Approximatif",
+    locale,
   };
   return (
     tattooServicePageData && (

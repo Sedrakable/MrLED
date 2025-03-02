@@ -97,6 +97,7 @@ const generateClientEmailTemplate = (
 };
 
 export async function POST(request: Request) {
+  console.log("sending email");
   try {
     const {
       formData,
@@ -171,7 +172,6 @@ export async function POST(request: Request) {
    </html>
  `;
 
-    console.log("sending email");
     await transporter.sendMail({
       from: `"Adhenna Tattoo" <${process.env.EMAIL_BUSINESS}>`,
       to: formData.email,

@@ -57,8 +57,8 @@ export const ThumbCarousel: FC<ThumbCarouselProps> = ({ images, options }) => {
               <SanityImage
                 image={image?.image}
                 alt={image?.alt}
-                figureclassname={cn(styles.image)}
-                quality={90}
+                figureClassName={cn(styles.image)}
+                quality={80}
               />
             </div>
           ))}
@@ -100,8 +100,8 @@ export const Thumb: React.FC<ThumbProps> = ({ selected, image, onClick }) => {
       <SanityImage
         image={image?.image}
         alt={image?.alt}
-        figureclassname={cn(styles.image)}
-        quality={50}
+        figureClassName={cn(styles.image)}
+        quality={1}
       />
     </div>
   );

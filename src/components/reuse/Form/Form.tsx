@@ -141,7 +141,7 @@ export const FormSubmitMessage: FC<{
   translations: Translations;
 }> = ({ locale, translations }) => {
   return (
-    <FlexDiv flex={{ direction: "column" }}>
+    <FlexDiv flex={{ direction: "column" }} gapArray={[4, 4, 4, 5]}>
       <Heading
         as="h3"
         level="4"

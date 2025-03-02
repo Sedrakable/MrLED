@@ -50,7 +50,7 @@ export const ProductCard: React.FC<IProduct> = (props) => {
             <SanityImage
               image={images[0].image}
               alt={images[0].alt}
-              figureclassname={cn(styles.image)}
+              figureClassName={cn(styles.image)}
               quality={50}
             />
           )}

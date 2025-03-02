@@ -64,8 +64,8 @@ export const ProductTab: React.FC<ProductTabProps> = ({
           <SanityImage
             image={images[0].image}
             alt={images[0].alt}
-            figureclassname={cn(styles.image)}
-            quality={5}
+            figureClassName={cn(styles.image)}
+            quality={1}
           />
         )}
         <FlexDiv
@@ -75,15 +75,6 @@ export const ProductTab: React.FC<ProductTabProps> = ({
           <Paragraph level="big" color="dark-burgundy" weight={500}>
             {title}
           </Paragraph>
-          {/* <Paragraph
-            level="regular"
-            color="burgundy"
-            weight={400}
-            paddingBottomArray={[3]}
-            className={styles.desc}
-          >
-            {desc}
-          </Paragraph> */}
           <Paragraph level="regular" weight={500} color="burgundy">
             ${price}
           </Paragraph>

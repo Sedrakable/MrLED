@@ -94,7 +94,7 @@ export const Article: React.FC<IArticle> = ({
               gapArray={[2]}
               flex={{ direction: "column" }}
             >
-              <SanityImage {...customImage} />
+              <SanityImage {...customImage} quality={80} priority />
               {imageText && (
                 <Paragraph level="small" color="dark-burgundy">
                   {imageText}

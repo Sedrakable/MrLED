@@ -87,8 +87,9 @@ export const CanvasModal: FC<CanvasModalProps> = ({ project }) => {
       <SanityImage
         image={project?.image.image}
         alt={project?.image.alt}
-        figureclassname={cn(styles.modalImage, styles.image)}
+        figureClassName={cn(styles.modalImage, styles.image)}
         quality={100}
+        priority
       />
     </FlexDiv>
   );

@@ -112,7 +112,7 @@ export const Project: FC<ProjectProps> = ({ project, type }) => {
       <SanityImage
         image={project?.image.image}
         alt={project?.image.alt}
-        figureclassname={cn(styles.image)}
+        figureClassName={cn(styles.image)}
         quality={50}
         priority
       />

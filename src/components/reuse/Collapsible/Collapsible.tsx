@@ -79,6 +79,12 @@ export const Collapsible: React.FC<CollapsibleProps> = ({
                 <FlexDiv
                   className={styles.answer}
                   padding={{ top: [3], left: [4], right: [8] }}
+                  flex={{
+                    direction: "column",
+                    x: "flex-start",
+                    y: "flex-start",
+                  }}
+                  gapArray={[2]}
                 >
                   <PortableTextContent
                     level="regular"

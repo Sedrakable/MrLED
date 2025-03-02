@@ -176,13 +176,17 @@
   .content {
     position: relative;
     height: var(--hero-height-1);
-
+    .titleAnim {
+      @include flex;
+      width: 100% !important;
+    }
     .title {
       position: absolute;
       transform: rotate(90deg);
       transform-origin: 0 0;
       left: 100%;
       top: 0;
+      width: 135vw !important;
     }
 
     .image {
@@ -361,7 +365,7 @@
       }
     }
     .title {
-      width: 125% !important;
+      width: 135vw !important;
     }
     .subTitle {
       width: 75%;
@@ -476,10 +480,7 @@
       );
       backdrop-filter: blur(var(--pad-1));
     }
-    .titleAnim {
-      @include flex;
-      width: 100% !important;
-    }
+
     .title {
       justify-content: center !important;
       position: relative !important;

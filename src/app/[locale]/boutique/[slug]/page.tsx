@@ -15,10 +15,11 @@ const getProductData = async (slug: string) => {
 };
 
 export async function generateMetadata({
-  params: { locale, slug },
+  params,
 }: {
-  params: { locale: LangType; slug: string };
-}): Promise<Metadata> {
+  params: Promise<{ locale: LangType; slug: string }>;
+}) {
+  const { locale, slug } = await params; // Await the params
   const productPageData: IProduct = await getProductData(slug);
   const path = `${LocalPaths.BOUTIQUE}/${slug}`;
   const crawl = true;

@@ -45,14 +45,7 @@ export const FloatingImageWrapper: FC<FloatingImageWrapperProps> = ({
             flex={{ direction: "column" }}
           >
             {imagesArray.map((image, index) => {
-              return (
-                <SanityImage
-                  key={index}
-                  {...image}
-                  sizes="(max-width: 1680px) 320px, 240px"
-                  quality={100}
-                />
-              );
+              return <SanityImage key={index} {...image} quality={20} />;
             })}
           </FlexDiv>
         )}

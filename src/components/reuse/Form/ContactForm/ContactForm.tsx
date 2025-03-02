@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect, FC, ReactNode } from "react";
-
 import styles from "../Form.module.scss";
 import { Input, TextArea } from "@/components/reuse/Form/Input/Input";
 import { OptionType, Select } from "../Select";
@@ -10,13 +9,10 @@ import { useLocale } from "next-intl";
 import { LangType } from "@/i18n/request";
 import { ContactFormData, EncodedFileType, FormErrorData } from "../formTypes";
 import {
-  FormSteps,
-  FormSubmitButton,
-  FormSubmitMessage,
   FormTitleProps,
-  FormTitles,
   MultiColumn,
-  Step,
+  FormSubmitButton,
+  FormSteps,
 } from "../Form";
 import { Slider } from "../Slider/Slider";
 import { UploadButton } from "../UploadButton/UploadButton";
@@ -28,7 +24,9 @@ export interface ServicesAndPlans {
 export interface ContactFormProps extends FormTitleProps {
   servicesAndPlans: ServicesAndPlans[];
 }
-export const ContactForm: FC<ContactFormProps> = ({ servicesAndPlans }) => {
+export const ContactForm: FC<
+  ContactFormProps & { onSubmit: (submitted: boolean) => void }
+> = ({ servicesAndPlans, onSubmit }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
 
@@ -160,6 +158,7 @@ export const ContactForm: FC<ContactFormProps> = ({ servicesAndPlans }) => {
 
       if (response.ok) {
         setSubmit(translations.form.general.emailSent);
+        onSubmit(true);
         // Add success handling (e.g., show success message, reset form)
       } else {
         console.error("Failed to send request", response);
@@ -286,19 +285,15 @@ export const ContactForm: FC<ContactFormProps> = ({ servicesAndPlans }) => {
 
   return (
     <FlexDiv width100>
-      {submit === translations.form.general.emailSent ? (
-        <FormSubmitMessage locale={locale} translations={translations} />
-      ) : (
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <FormSteps steps={Steps} />
-          <FormSubmitButton
-            isValid={Object.keys(errors).length === 0}
-            translations={translations}
-            submitText={submit}
-            loading={loading}
-          />
-        </form>
-      )}
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <FormSteps steps={Steps} />
+        <FormSubmitButton
+          isValid={Object.keys(errors).length === 0}
+          translations={translations}
+          submitText={submit}
+          loading={loading}
+        />
+      </form>
     </FlexDiv>
   );
 };

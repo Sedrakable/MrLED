@@ -80,7 +80,7 @@ export const PricePlan: FC<PricePlanProps> = ({
           <SanityImage
             image={image?.image}
             alt={image?.alt}
-            figureclassname={cn(styles.image)}
+            figureClassName={cn(styles.image)}
             quality={50}
           />
         )}

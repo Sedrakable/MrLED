@@ -77,8 +77,8 @@ export const Display: React.FC<DisplayProps> = ({
         <SanityImage
           image={backgroundImage?.image}
           alt={backgroundImage?.alt}
-          figureclassname={cn(styles.image)}
-          quality={100}
+          figureClassName={cn(styles.image)}
+          quality={80}
         />
         <FlexDiv
           className={styles.content}

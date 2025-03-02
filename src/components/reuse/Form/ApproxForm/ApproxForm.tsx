@@ -13,9 +13,7 @@ import {
   FormSubmitButton,
   FormSubmitMessage,
   FormTitleProps,
-  FormTitles,
   MultiColumn,
-  Step,
 } from "../Form";
 import { Slider } from "../Slider/Slider";
 import { UploadButton } from "../UploadButton/UploadButton";
@@ -23,7 +21,9 @@ import { UploadButton } from "../UploadButton/UploadButton";
 interface ApproxFormProps extends FormTitleProps {
   plan: string;
 }
-export const ApproxForm: FC<ApproxFormProps> = ({ title, subTitle, plan }) => {
+export const ApproxForm: FC<
+  ApproxFormProps & { onSubmit: (submitted: boolean) => void }
+> = ({ plan, onSubmit }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
 
@@ -115,6 +115,8 @@ export const ApproxForm: FC<ApproxFormProps> = ({ title, subTitle, plan }) => {
 
       if (response.ok) {
         setSubmit(translations.form.general.emailSent);
+        onSubmit(true);
+
         // Add success handling (e.g., show success message, reset form)
       } else {
         console.error("Failed to send flash request", response);
@@ -213,20 +215,16 @@ export const ApproxForm: FC<ApproxFormProps> = ({ title, subTitle, plan }) => {
 
   return (
     <FlexDiv width100>
-      {submit === translations.form.general.emailSent ? (
-        <FormSubmitMessage locale={locale} translations={translations} />
-      ) : (
-        <form onSubmit={handleSubmit} className={styles.form}>
-          {/* <FormTitles title={title} subTitle={subTitle} /> */}
-          <FormSteps steps={Steps} />
-          <FormSubmitButton
-            submitText={submit}
-            isValid={Object.keys(errors).length === 0}
-            translations={translations}
-            loading={loading}
-          />
-        </form>
-      )}
+      <form onSubmit={handleSubmit} className={styles.form}>
+        {/* <FormTitles title={title} subTitle={subTitle} /> */}
+        <FormSteps steps={Steps} />
+        <FormSubmitButton
+          submitText={submit}
+          isValid={Object.keys(errors).length === 0}
+          translations={translations}
+          loading={loading}
+        />
+      </form>
     </FlexDiv>
   );
 };

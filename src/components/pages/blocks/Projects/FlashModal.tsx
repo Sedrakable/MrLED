@@ -59,7 +59,7 @@ export const FlashModal: FC<FlashModalProps> = ({ project, formData }) => {
           <SanityImage
             image={project?.image.image}
             alt={project?.image.alt}
-            figureclassname={cn(styles.modalImage, styles.image)}
+            figureClassName={cn(styles.modalImage, styles.image)}
             quality={100}
           />
         )}

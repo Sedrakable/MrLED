@@ -97,7 +97,7 @@ export const Hero: React.FC<HeroProps> = ({
           version === 3
             ? [0, 0, 0, 0]
             : version === 2
-            ? [2, 5, 0, 0]
+            ? [2, 3, 0, 0]
             : [7, 5, 0, 0],
       }}
       className={styles.main}
@@ -173,7 +173,7 @@ export const Hero: React.FC<HeroProps> = ({
         flex={{
           direction: "column",
           x: "flex-start",
-          y: "stretch",
+          y: "flex-start",
         }}
         width100
         padding={{
@@ -187,7 +187,8 @@ export const Hero: React.FC<HeroProps> = ({
             alt={backgroundImage?.alt}
             loading="eager"
             fetchPriority="high"
-            figureclassname={cn(styles.image, styles.backgroundImage)}
+            priority
+            figureClassName={cn(styles.image, styles.backgroundImage)}
             quality={imageQuality[version]}
           />
 
@@ -226,8 +227,9 @@ export const Hero: React.FC<HeroProps> = ({
               loading="eager"
               fetchPriority="high"
               sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, (max-width: 1680px) 100vw,33vw"
-              figureclassname={cn(styles.image, styles.foregroundImage)}
-              quality={90}
+              figureClassName={cn(styles.image, styles.foregroundImage)}
+              quality={100}
+              priority
               style={
                 {
                   "--scroll-progress": scrollProgress,

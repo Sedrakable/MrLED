@@ -12,10 +12,6 @@ import {
 } from "@/components/reuse/Collapsible/Collapsible";
 import { Block } from "@/components/reuse/containers/Block/Block";
 
-import {
-  Notification,
-  NotificationProps,
-} from "@/components/pages/blocks/Notification/Notification";
 import { getFormData } from "@/components/reuse/Form/getFormData";
 import { FormTitleProps } from "@/components/reuse/Form/Form";
 import {
@@ -29,6 +25,7 @@ import { getImagesFromWorks, shuffleArray } from "@/helpers/functions";
 import { setMetadata } from "@/components/SEO";
 import { Metadata } from "next";
 import { Hero } from "@/components/reuse/Hero/Hero";
+import { ClientLogger } from "@/helpers/clientLogger";
 
 export interface ContactPageProps {
   meta: ISeo;
@@ -147,10 +144,13 @@ export default async function ContactPage({
       img2: images[1],
       img3: images[2],
     },
+    locale,
   };
 
   return (
     <>
+      <ClientLogger slug={process.env.EMAIL_BUSINESS} />
+
       {contactPageData?.hero && (
         <Hero {...contactPageData?.hero} version={2} fitContent />
       )}

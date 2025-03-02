@@ -35,7 +35,7 @@ export const BigCTA: React.FC<BigCTAProps> = ({ title, backgroundImage }) => {
         >
           {title}
         </Heading>
-        <Button variant="primary" path={LocalPaths.CONTACT}>
+        <Button variant="primary" path={`/${locale}${LocalPaths.CONTACT}`}>
           {translations.nav.contact}
         </Button>
       </FlexDiv>
