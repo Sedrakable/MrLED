@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Inter } from "next/font/google";
 // import { GoogleAnalytics } from "@next/third-parties/google";
-import Script from "next/script";
 import styles from "./layout.module.scss";
 import "@/styles/Main.css";
 import "@/styles/ScrollBar.scss";
@@ -13,6 +12,8 @@ import { LangType } from "@/i18n/request";
 import { hoursQuery, socialsQuery } from "../api/generateSanityQueries";
 import { Navbar } from "@/components/navbar/Navbar/Navbar";
 import Footer from "@/components/footer/Footer";
+import { notFound, redirect } from "next/navigation";
+import { NotFoundComp } from "@/components/pages/NotFound";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,6 +41,12 @@ export default async function LocaleLayout({
   ]);
 
   const { locale } = await params; // Await the params
+
+  // If locale is not "fr", trigger Next.js' built-in 404
+  if (locale !== "fr") {
+    redirect(`/fr/404`);
+  }
+
   return (
     locale && (
       <html lang={locale}>

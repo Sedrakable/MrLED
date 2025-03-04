@@ -186,7 +186,6 @@
       transform-origin: 0 0;
       left: 100%;
       top: 0;
-      width: 135vw !important;
     }
 
     .image {
@@ -209,7 +208,7 @@
     .backgroundImage {
       z-index: 0;
       overflow-y: clip !important;
-      overflow-x: visible !important;
+      // overflow-x: visible !important;
       left: 0;
       right: 0;
       height: auto !important;
@@ -302,6 +301,7 @@
   }
   .title {
     z-index: 3 !important;
+    width: 135vw !important;
     h1 {
       font-size: var(--title-font-size) !important;
       line-height: var(--title-line-height) !important;
@@ -403,7 +403,7 @@
           inset: 0 !important;
           top: 50% !important;
           height: 100% !important;
-          transform: translateY(-50%) !important;
+          // transform: translateY(-50%) !important;
         }
         &::after {
           width: 100% !important;
@@ -454,6 +454,7 @@
   .content {
     background-color: var(--burgundy) !important;
     height: fit-content;
+    overflow: hidden !important;
     .backgroundImage {
       position: relative !important;
       width: var(--bg-img-width-3) !important;

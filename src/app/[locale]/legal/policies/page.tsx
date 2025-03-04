@@ -7,7 +7,6 @@ import {
   CollapsibleProps,
 } from "@/components/reuse/Collapsible/Collapsible";
 import { Block } from "@/components/reuse/containers/Block/Block";
-import { TitleWrapper } from "@/components/reuse/containers/TitleWrapper/TitleWrapper";
 import { getTranslations } from "@/helpers/langUtils";
 
 export interface PoliciesPageProps {
@@ -22,8 +21,7 @@ export default async function Policies({
   const trans = getTranslations(locale);
   const policiesQuery = policiesPageQuery(locale);
   const policiesPageData: PoliciesPageProps = await fetchPageData(
-    policiesQuery,
-    "policiesPage"
+    policiesQuery
   );
 
   return (

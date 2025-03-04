@@ -56,10 +56,10 @@ export const SanityImage: React.FC<ICustomImage> = (props) => {
         position: "relative",
         width: "100%",
         overflow: "hidden",
-        aspectRatio:
-          sanityWidth && sanityHeight
-            ? `${sanityWidth} / ${sanityHeight}`
-            : undefined,
+        // aspectRatio:
+        //   sanityWidth && sanityHeight
+        //     ? `${sanityWidth} / ${sanityHeight}`
+        //     : undefined,
       }}
     >
       <Img
