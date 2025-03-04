@@ -4,7 +4,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      disallow: "/", // No additional disallow rules unless needed
+      disallow: [], // No additional disallow rules unless needed
       allow: "/fr", // Allow crawling only for the French version
     },
     sitemap: `${
