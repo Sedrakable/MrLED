@@ -9,6 +9,7 @@ import { LangType } from "@/i18n/request";
 import { TextWrapper } from "../../../reuse/containers/TextWrapper/TextWrapper";
 import FlexDiv from "@/components/reuse/FlexDiv";
 import { ICustomImage } from "@/components/reuse/SanityImage/SanityImage";
+import { useGoogleEvent } from "@/app/api/sendGoogleEvent";
 
 export interface BigCTAProps {
   title: string;
@@ -18,10 +19,7 @@ export interface BigCTAProps {
 export const BigCTA: React.FC<BigCTAProps> = ({ title, backgroundImage }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
-
-  function sendEvent(arg0: string, arg1: any) {
-    throw new Error("Function not implemented.");
-  }
+  const sendEvent = useGoogleEvent();
 
   return (
     <TextWrapper version={2} backgroundImage={backgroundImage}>

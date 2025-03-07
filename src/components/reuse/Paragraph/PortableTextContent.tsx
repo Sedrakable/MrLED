@@ -1,7 +1,6 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import { Paragraph, ParagraphProps } from "./Paragraph";
-import { ColorType, TextWeightType } from "../Heading";
 
 interface PortableTextContentProps extends Omit<ParagraphProps, "children"> {
   value: any;

@@ -1,9 +1,10 @@
 import createNextIntlPlugin from "next-intl/plugin";
+
 const withNextIntl = createNextIntlPlugin();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack(config) {
-    // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg")
     );
@@ -18,6 +19,9 @@ const nextConfig = {
     
     return config;
   },
+  sassOptions: {
+    silenceDeprecations: ['mixed-decls','legacy-js-api'], 
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -25,7 +29,6 @@ const nextConfig = {
     ignoreBuildErrors: true
   },
   images: {
-    domains: ["cdn.sanity.io"],
     remotePatterns: [
       {
         protocol: "https",
@@ -34,12 +37,7 @@ const nextConfig = {
     ],
     deviceSizes: [640, 1200, 1680],
   },
-  // images: {
-  //   
-  //   
-  // },
-  // output: "export",  // <=== enables static exports
-  // distDir: "dist",  // <=== change the build directory
 };
-// export default withNextIntl(nextConfig);
+
+
 export default withNextIntl(nextConfig);

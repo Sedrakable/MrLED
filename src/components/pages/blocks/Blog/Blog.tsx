@@ -1,8 +1,8 @@
 "use client";
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./Blog.module.scss";
 import FlexDiv from "@/components/reuse/FlexDiv";
-import { IArticle, IBlog, LocalPaths } from "@/data.d";
+import { IBlog, LocalPaths } from "@/data.d";
 import { Block } from "../../../reuse/containers/Block/Block";
 import { TitleWrapper } from "@/components/reuse/containers/TitleWrapper/TitleWrapper";
 import { useLocale } from "next-intl";
@@ -14,10 +14,12 @@ import { useArticleFilters } from "../../../reuse/Form/CustomFilters/useArticleF
 import { ArticleFilters } from "@/components/reuse/Form/CustomFilters/ArticleFilters";
 import { setToLocalStorage } from "@/helpers/localStorage";
 import { ARTICLES_ORDER_STORAGE_KEY } from "../Article/Article";
+import { useGoogleEvent } from "@/app/api/sendGoogleEvent";
 
 export const Blog: React.FC<IBlog> = ({ articles }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
+  const sendEvent = useGoogleEvent();
 
   const { filteredArticles, filterHandlers, filterOptions } = useArticleFilters(
     articles,
@@ -57,6 +59,7 @@ export const Blog: React.FC<IBlog> = ({ articles }) => {
                 href={`/${locale}${LocalPaths.BLOG}/${article.path}`}
                 aria-label={article.path}
                 key={index}
+                onClick={() => sendEvent(`Click Article`, article.path)}
               >
                 <Display
                   backgroundImage={article.customImage}

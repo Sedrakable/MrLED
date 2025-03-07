@@ -3,7 +3,6 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styles from "./Block.module.scss";
 import cn from "classnames";
 import FlexDiv from "../../FlexDiv";
-import { generateStarPositions } from "../../Star/generateStars";
 import {
   calculateImagePositions,
   ImagePositions,

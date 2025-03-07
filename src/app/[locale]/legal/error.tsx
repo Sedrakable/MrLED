@@ -2,14 +2,7 @@
 
 import { LocalPaths } from "@/data.d";
 import { redirect } from "next/navigation";
-import { useEffect } from "react";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+export default function Error() {
   redirect(`/fr/${LocalPaths.LEGAL}`);
 }

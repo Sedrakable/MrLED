@@ -9,7 +9,7 @@ const emailTranslations = {
     subject: "🌸Réservation de Flash Tattoo🌸",
     title: "Votre réservation de Flash chez Adhenna!",
     greeting: (name: string) => `Cher/Chère ${name},`,
-    thankYouMessage: (name: string) =>
+    thankYouMessage: () =>
       `Merci d’avoir réservé un flash avec Adhenna Tattoo! Un courriel vous sera envoyé sous peu pour fixer un rendez-vous. Surveillez votre boîte de réception (et vos pourriels, au besoin).😊`,
     flashDetails: "Flash sélectionné:",
     bodyPosition: "Position sur le corps:",
@@ -45,7 +45,7 @@ const generateClientEmailTemplate = (
         
         <div class="thank-you">
           <p>${t.greeting(formData.firstName)}</p>
-          <p>${t.thankYouMessage(formData.firstName)}</p>
+          <p>${t.thankYouMessage()}</p>
         </div>
         
         <div class="thank-you">

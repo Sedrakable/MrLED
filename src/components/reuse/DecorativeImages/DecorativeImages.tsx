@@ -1,6 +1,6 @@
 "use client";
 import React, { useMemo } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import cn from "classnames";
 import styles from "./DecorativeImages.module.scss";
 import scull from "/public/photos/Scull.jpeg";
@@ -11,7 +11,7 @@ import pattern from "/public/photos/Pattern.jpeg";
 interface DecorativeImageProps {
   position: "left" | "right";
   topOffset: number;
-  src: any;
+  src: string | StaticImageData;
 }
 
 const DECORATIVE_IMAGES = [scull, ananas, girl, pattern];

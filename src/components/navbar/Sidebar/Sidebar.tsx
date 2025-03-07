@@ -5,7 +5,6 @@ import cn from "classnames";
 import FlexDiv from "../../reuse/FlexDiv";
 import { Button } from "../../reuse/Button";
 import { ICta, INavLink, ISocials, LocalPaths } from "../../../data.d";
-import { LangSwitcher } from "../LangSwitcher/LangSwitcher";
 import { atom, useAtom } from "jotai";
 import { getTranslations } from "../../../helpers/langUtils";
 import { LogoLink, dropDown, isCta } from "../Navbar/Navbar";
@@ -13,6 +12,7 @@ import TabButton from "../TabButton/TabButton";
 import { LangType } from "@/i18n/request";
 import { useLocale } from "next-intl";
 import { Socials } from "@/components/footer/Socials";
+import { useGoogleEvent } from "@/app/api/sendGoogleEvent";
 
 export const sidebarData = atom<boolean>(false);
 
@@ -25,10 +25,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, lang, socials }) => {
   const [sidebar, setSidebar] = useAtom(sidebarData);
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
+  const sendEvent = useGoogleEvent();
 
   const tabWrapper = (
     child: React.ReactNode,
-    onClick?: Function,
+    onClick?: () => void,
     key?: number
   ) => (
     <FlexDiv
@@ -84,7 +85,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, lang, socials }) => {
                 undefined,
                 key
               )
-            : tabWrapper(dropDown(link, lang), undefined, key);
+            : tabWrapper(
+                dropDown(link, lang),
+                () => sendEvent("Click Dropdown", link.link),
+                key
+              );
         })}
         <FlexDiv
           className={styles.bottom}
@@ -103,11 +108,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, lang, socials }) => {
                 variant="extra"
                 path={`/${locale}${LocalPaths.CART}`}
                 iconProps={{ icon: "cart" }}
+                onClick={() => sendEvent("Click Cart", LocalPaths.CART)}
               />
 
               <Button
                 variant="primary"
                 path={`/${locale}${LocalPaths.CONTACT}`}
+                onClick={() => sendEvent("Click Contact", LocalPaths.CONTACT)}
               >
                 {translations.nav.contact}
               </Button>

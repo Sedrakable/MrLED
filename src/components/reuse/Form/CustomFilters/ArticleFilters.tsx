@@ -4,10 +4,8 @@ import styles from "./CustomFilters.module.scss";
 import cn from "classnames";
 import FlexDiv from "../../FlexDiv";
 import { Filter } from "@/components/reuse/Form/Filter";
-import { Sort } from "@/components/reuse/Form/Sort";
 
 import { Translations } from "@/langs/langTypes";
-import { IFilter } from "@/data.d";
 import {
   IArticleFilterChangeHandlers,
   IArticleFilterOptions,

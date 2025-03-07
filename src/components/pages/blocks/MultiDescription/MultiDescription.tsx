@@ -3,7 +3,6 @@ import React, { CSSProperties } from "react";
 import FlexDiv from "../../../reuse/FlexDiv";
 
 import { TextWrapper } from "../../../reuse/containers/TextWrapper/TextWrapper";
-import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { Heading } from "@/components/reuse/Heading";
 import { useWindowResize } from "@/helpers/useWindowResize";
 import { ICta } from "@/data.d";
@@ -14,7 +13,7 @@ import { PortableTextContent } from "@/components/reuse/Paragraph/PortableTextCo
 
 export interface DescriptionProps {
   title: string;
-  desc: any;
+  desc: unknown;
   textAlign?: CSSProperties["textAlign"];
   cta?: ICta;
 }

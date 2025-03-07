@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, FC, ReactNode } from "react";
-
 import styles from "../Form.module.scss";
+
 import { Input, TextArea } from "@/components/reuse/Form/Input/Input";
 import FlexDiv from "../../FlexDiv";
 import { getTranslations } from "@/helpers/langUtils";
@@ -11,7 +11,6 @@ import { ApproxFormData, EncodedFileType, FormErrorData } from "../formTypes";
 import {
   FormSteps,
   FormSubmitButton,
-  FormSubmitMessage,
   FormTitleProps,
   MultiColumn,
 } from "../Form";
@@ -216,7 +215,6 @@ export const ApproxForm: FC<
   return (
     <FlexDiv width100>
       <form onSubmit={handleSubmit} className={styles.form}>
-        {/* <FormTitles title={title} subTitle={subTitle} /> */}
         <FormSteps steps={Steps} />
         <FormSubmitButton
           submitText={submit}

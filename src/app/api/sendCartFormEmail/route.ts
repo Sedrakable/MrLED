@@ -10,7 +10,7 @@ const emailTranslations = {
     subject: "🌸Thank You for Your Order! - Order Confirmation🌸",
     title: "Thank You for Your Order!",
     greeting: (name: string) => `Dear ${name},`,
-    thankYouMessage: (name: string) =>
+    thankYouMessage: () =>
       `Thank you for purchasing from Adhenna! I am excited to confirm that I've received your order and am processing it now. I'll make sure everything is perfect for you.`,
     orderDetails: "Order Details:",
     shippingInfo: "Shipping Information:",
@@ -25,7 +25,7 @@ const emailTranslations = {
     subject: "🌸Merci pour votre commande ! - Confirmation de commande🌸",
     title: "Merci pour votre commande !",
     greeting: (name: string) => `Cher/Chère ${name},`,
-    thankYouMessage: (name: string) =>
+    thankYouMessage: () =>
       `Merci d’avoir précommandé les produits Adhenna Tattoo! Vous recevrez bientôt un courriel avec les détails pour le paiement et la date de livraison. `,
     orderDetails: "Détails de la commande :",
     shippingInfo: "Informations de livraison :",
@@ -139,7 +139,7 @@ const generateClientEmailTemplate = (
         
         <div class="thank-you">
           <p>${t.greeting(formData.firstName)}</p>
-          <p>${t.thankYouMessage(formData.firstName)}</p>
+          <p>${t.thankYouMessage()}</p>
         </div>
         
         <div class="details-section">  

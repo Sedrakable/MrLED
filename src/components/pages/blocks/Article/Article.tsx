@@ -3,7 +3,7 @@ import styles from "./Article.module.scss";
 import FlexDiv from "@/components/reuse/FlexDiv";
 import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { Block } from "@/components/reuse/containers/Block/Block";
-import { IArticle, IBlock, ICartProduct, ICta, LocalPaths } from "@/data.d";
+import { IArticle, ICta, LocalPaths } from "@/data.d";
 import { Heading } from "@/components/reuse/Heading";
 import { SanityImage } from "@/components/reuse/SanityImage/SanityImage";
 import { ArticleNavigation } from "./ArticleNavigation/ArticleNavigation";
@@ -32,7 +32,7 @@ export const Article: React.FC<IArticle> = ({
     ARTICLES_ORDER_STORAGE_KEY,
     []
   );
-  console.log(pageOrder);
+
   // I want to take the article array and turn it into a CTA array
   const ctaPageOrder: ICta[] =
     pageOrder &&

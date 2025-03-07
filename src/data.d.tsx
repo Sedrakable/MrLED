@@ -118,7 +118,7 @@ export interface IArticle {
   customImage: ICustomImage;
   imageText?: string;
   title: string;
-  desc: any;
+  desc: unknown;
   date: string;
   type: IArticleType;
   content: IBlock[];

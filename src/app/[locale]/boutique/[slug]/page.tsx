@@ -3,9 +3,8 @@ import { fetchPageData } from "@/app/api/useFetchPage";
 import { ProductModal } from "@/components/pages/blocks/Products/ProductModal";
 import { Modal } from "@/components/reuse/Modal";
 import { setMetadata } from "@/components/SEO";
-import { IProduct, ISeo, LocalPaths } from "@/data.d";
+import { IProduct, LocalPaths } from "@/data.d";
 import { LangType } from "@/i18n/request";
-import { Metadata } from "next";
 
 const getProductData = async (slug: string) => {
   const getProductQuery = productQuery(slug);

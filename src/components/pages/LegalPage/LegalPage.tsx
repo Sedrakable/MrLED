@@ -3,7 +3,6 @@ import React from "react";
 import { ILegalPage } from "@/data.d";
 import { Block } from "../../reuse/containers/Block/Block";
 import { contentBlocks } from "@/components/reuse/ContentBlock/ContentBlock";
-import { TitleWrapper } from "@/components/reuse/containers/TitleWrapper/TitleWrapper";
 import FlexDiv from "@/components/reuse/FlexDiv";
 
 export const LegalPageComp: React.FC<ILegalPage> = ({ title, data }) => {

@@ -6,7 +6,9 @@ import { useParams } from "next/navigation";
 import FlexDiv from "@/components/reuse/FlexDiv";
 import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 
-export const LangSwitcher: React.FC<{ onClick?: Function }> = ({ onClick }) => {
+export const LangSwitcher: React.FC<{ onClick?: () => void }> = ({
+  onClick,
+}) => {
   const router = useRouter();
   const [, startTransition] = useTransition();
   const locale = useLocale();

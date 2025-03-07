@@ -63,6 +63,7 @@ export const Step: FC<PropsWithChildren<StepProps>> = ({
       flex={{ y: "flex-start" }}
       width100
       className={styles.step}
+      key={number}
     >
       <Heading
         as="h4"

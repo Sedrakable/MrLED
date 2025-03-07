@@ -10,12 +10,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { useWindowResize } from "@/helpers/useWindowResize";
+import { useGoogleEvent } from "@/app/api/sendGoogleEvent";
 
 export interface TabButtonProps {
   children: string;
   path: string;
   className?: string;
-  onClick?: Function;
+  onClick?: () => void;
   dropdown?: ICta[];
 }
 
@@ -29,6 +30,7 @@ const TabButton: FC<TabButtonProps> = ({
   const pathname = usePathname();
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const { isMobileOrTablet } = useWindowResize();
+  const sendEvent = useGoogleEvent();
 
   const handleDropdownToggle = () => {
     if (dropdown) {
@@ -49,6 +51,7 @@ const TabButton: FC<TabButtonProps> = ({
   };
 
   const handleClick = () => {
+    sendEvent("Click Navbar", path);
     if (isMobileOrTablet) {
       handleDropdownToggle();
     }
@@ -103,12 +106,7 @@ const TabButton: FC<TabButtonProps> = ({
         <div className={styles.line} />
       )}
       {dropDownOpen && dropdown && (
-        <DropDown
-          dropdown={dropdown}
-          parentPath={path}
-          isOpen={dropDownOpen}
-          onClose={() => setDropDownOpen(false)}
-        />
+        <DropDown dropdown={dropdown} parentPath={path} isOpen={dropDownOpen} />
       )}
     </FlexDiv>
   );

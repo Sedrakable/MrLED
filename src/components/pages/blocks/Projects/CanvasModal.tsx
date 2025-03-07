@@ -15,7 +15,6 @@ import { LangType } from "@/i18n/request";
 import { useLocale } from "next-intl";
 import { useCart } from "../Cart/useCart";
 import { Heading } from "@/components/reuse/Heading";
-import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 
 interface CanvasModalProps {
   project: ICanvas;

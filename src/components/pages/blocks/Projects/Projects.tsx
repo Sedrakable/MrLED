@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useMemo, useState } from "react";
+import React, { FC, useMemo } from "react";
 import styles from "./Projects.module.scss";
 import cn from "classnames";
 import FlexDiv from "../../../reuse/FlexDiv";

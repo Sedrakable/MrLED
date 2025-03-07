@@ -22,7 +22,7 @@ const emailTranslations = {
     subject: "🌸Confirmation de rendez-vous🌸",
     title: "Votre rendez-vous chez Adhenna!",
     greeting: (name: string) => `Cher/Chère ${name},`,
-    thankYouMessage: (name: string) =>
+    thankYouMessage: () =>
       `Merci d’avoir contacté Adhenna Tattoo pour votre prochain projet de henné ou de tatouage permanent ! Nous vous enverrons bientôt un courriel pour fixer une date afin de réaliser votre œuvre. Surveillez votre boîte de réception (et vos pourriels, au besoin). 😊`,
     serviceDetails: "Détails du service:",
     dimensions: "Dimensions demandées:",
@@ -57,7 +57,7 @@ const generateClientEmailTemplate = (
         
         <div class="thank-you">
           <p>${t.greeting(formData.firstName)}</p>
-          <p>${t.thankYouMessage(formData.firstName)}</p>
+          <p>${t.thankYouMessage()}</p>
         </div>
         
         <div class="thank-you">

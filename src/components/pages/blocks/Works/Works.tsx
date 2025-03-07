@@ -18,8 +18,7 @@ import { useWindowResize } from "@/helpers/useWindowResize";
 import { TitleWrapper } from "../../../reuse/containers/TitleWrapper/TitleWrapper";
 import { WorkPageProps } from "@/app/[locale]/portfolio/[projectType]/page";
 import { AnimatedWrapper } from "@/components/reuse/AnimatedWrapper/AnimatedWrapper";
-import { sendGAEvent } from "@next/third-parties/google";
-import { sendGoogleEvent } from "@/app/api/sendGoogleEvent";
+import { useGoogleEvent } from "@/app/api/sendGoogleEvent";
 
 export interface WorkProps {
   backgroundImage: ICustomImage;
@@ -32,6 +31,8 @@ const Work: FC<WorkProps> = ({ backgroundImage, title, path, reserve }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
   const { isMobileOrTablet } = useWindowResize();
+  const sendEvent = useGoogleEvent();
+
   return (
     <AnimatedWrapper from="inside">
       <Link
@@ -39,7 +40,7 @@ const Work: FC<WorkProps> = ({ backgroundImage, title, path, reserve }) => {
         key={path}
         className={styles.container}
         aria-label={title}
-        onClick={() => sendGoogleEvent("Click Work", path)}
+        onClick={() => sendEvent("Click Work", path)}
       >
         <SanityImage
           image={backgroundImage?.image}

@@ -13,12 +13,13 @@ import { boutiquePageQuery } from "@/app/api/generateSanityQueries";
 import { ProductGrid } from "@/components/pages/blocks/Products/Products";
 import { DisplayProps } from "@/components/reuse/Display/Display";
 import { Carousel } from "@/components/reuse/Carousel/Carousel";
+import { BlockDefinition } from "@sanity/types";
 
 export interface BoutiquePageProps {
   meta: ISeo;
   hero: IHero;
   displays: DisplayProps[];
-  desc: any;
+  desc: BlockDefinition[];
   products: IProduct[];
 }
 

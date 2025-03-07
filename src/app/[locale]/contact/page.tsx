@@ -25,6 +25,7 @@ import { getImagesFromWorks, shuffleArray } from "@/helpers/functions";
 import { setMetadata } from "@/components/SEO";
 import { Metadata } from "next";
 import { Hero } from "@/components/reuse/Hero/Hero";
+import { PricePlanProps } from "@/components/pages/blocks/PricePlans/PricePlans";
 
 export interface ContactPageProps {
   meta: ISeo;
@@ -43,7 +44,7 @@ const getContactPageData = async (locale: LangType) => {
 const getPlanData = async (pageType: string, locale: LangType) => {
   const planQuery = pricePlansQuery(pageType, locale);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const planData: any = await fetchPageData(planQuery);
+  const planData: ServicePlansProps = await fetchPageData(planQuery);
   return planData;
 };
 
@@ -68,6 +69,11 @@ export async function generateMetadata({
   });
 }
 
+interface ServicePlansProps {
+  pricePlans: PricePlanProps[];
+  pricePlans1: PricePlanProps[];
+  pricePlans2?: PricePlanProps[];
+}
 export default async function ContactPage({
   params,
 }: {
@@ -81,16 +87,20 @@ export default async function ContactPage({
   const getPlansForService = async (
     pageType: string
   ): Promise<OptionType[]> => {
-    const servicePlans = await getPlanData(pageType, locale);
+    const servicePlans: ServicePlansProps = await getPlanData(pageType, locale);
     if (servicePlans.pricePlans1 && servicePlans.pricePlans2) {
-      const pricePlans1 = servicePlans.pricePlans1.map((plan) => ({
-        label: plan.title,
-        value: plan.title,
-      }));
-      const pricePlans2 = servicePlans.pricePlans2.map((plan) => ({
-        label: plan.title,
-        value: plan.title,
-      }));
+      const pricePlans1 = servicePlans.pricePlans1.map(
+        (plan: PricePlanProps) => ({
+          label: plan.title,
+          value: plan.title,
+        })
+      );
+      const pricePlans2 = servicePlans.pricePlans2.map(
+        (plan: PricePlanProps) => ({
+          label: plan.title,
+          value: plan.title,
+        })
+      );
       return [...pricePlans1, ...pricePlans2];
     } else {
       return servicePlans.pricePlans.map((plan) => ({
@@ -100,12 +110,16 @@ export default async function ContactPage({
     }
   };
 
-  const tattooServicePagePlans = await getPlansForService("tattooServicePage");
-  const testTattooServicePagePlans = await getPlansForService(
+  const tattooServicePagePlans: OptionType[] = await getPlansForService(
+    "tattooServicePage"
+  );
+  const testTattooServicePagePlans: OptionType[] = await getPlansForService(
     "testTattooServicePage"
   );
-  const hennaServicePagePlans = await getPlansForService("hennaServicePage");
-  const inPersonCoursePagePlans = await getPlansForService(
+  const hennaServicePagePlans: OptionType[] = await getPlansForService(
+    "hennaServicePage"
+  );
+  const inPersonCoursePagePlans: OptionType[] = await getPlansForService(
     "inPersonCoursePage"
   );
   const carouselData: IWork[] = await getCarouselData();

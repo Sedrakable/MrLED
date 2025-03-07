@@ -32,7 +32,7 @@ export interface TestTattooServicePageProps {
   meta: ISeo;
   hero: IHero;
   display: DisplayProps;
-  desc: any;
+  desc: unknown;
   pricePlans: PricePlanProps[];
   bigCTA: BigCTAProps;
 }

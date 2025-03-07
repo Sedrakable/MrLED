@@ -1,7 +1,6 @@
 import { carouselQuery } from "@/app/api/generateSanityQueries";
 import { fetchPageData } from "@/app/api/useFetchPage";
-import { IProject, IWork } from "@/data.d";
-import { ICustomImage } from "../SanityImage/SanityImage";
+import { IWork } from "@/data.d";
 
 export const getCarouselData = async (workType?: string) => {
   const type = "carousel";

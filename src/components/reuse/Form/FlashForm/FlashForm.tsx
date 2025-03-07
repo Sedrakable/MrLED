@@ -1,13 +1,12 @@
 import React, { FC, ReactNode, useState } from "react";
 
-import { useRouter, usePathname } from "@/navigation";
+import { usePathname } from "@/navigation";
 import { useLocale } from "next-intl";
 import { Input, TextArea } from "@/components/reuse/Form/Input/Input";
 import { getTranslations } from "@/helpers/langUtils";
 import { LangType } from "@/i18n/request";
 import styles from "../Form.module.scss";
 import {
-  Step,
   MultiColumn,
   FormSubmitButton,
   FormTitles,

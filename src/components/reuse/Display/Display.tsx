@@ -15,13 +15,14 @@ import { SanityImage } from "../SanityImage/SanityImage";
 import { AnimatedWrapper } from "../AnimatedWrapper/AnimatedWrapper";
 import { PortableTextContent } from "../Paragraph/PortableTextContent";
 import { useGoogleEvent } from "@/app/api/sendGoogleEvent";
+import { BlockDefinition } from "@sanity/types";
 
 export type VersionType = "service" | "article";
 
 export interface DisplayProps extends Omit<IHero, "title" | "desc"> {
   date?: string;
   title?: IFancyText;
-  desc?: any;
+  desc?: BlockDefinition[];
   version: VersionType;
   reverse?: boolean;
 }

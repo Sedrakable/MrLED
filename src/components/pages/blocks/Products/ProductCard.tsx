@@ -16,6 +16,7 @@ import FlexDiv from "@/components/reuse/FlexDiv";
 import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { SanityImage } from "@/components/reuse/SanityImage/SanityImage";
 import { AnimatedWrapper } from "@/components/reuse/AnimatedWrapper/AnimatedWrapper";
+import { useGoogleEvent } from "@/app/api/sendGoogleEvent";
 
 export const ProductCard: React.FC<IProduct> = (props) => {
   const { images, title, price, quantityDesc, path } = props;
@@ -23,6 +24,7 @@ export const ProductCard: React.FC<IProduct> = (props) => {
   const translations = getTranslations(locale);
   const containerRef = useRef<HTMLDivElement>(null);
   const { addToCart } = useCart();
+  const sendEvent = useGoogleEvent();
 
   const handleAddToCart = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -39,6 +41,7 @@ export const ProductCard: React.FC<IProduct> = (props) => {
       <Link
         href={`/${locale}${LocalPaths.BOUTIQUE}/${path}`}
         aria-label={title}
+        onClick={() => sendEvent(`Clicked on Product`, title)}
       >
         <FlexDiv
           flex={{ direction: "column", x: "flex-start", y: "flex-start" }}
@@ -121,7 +124,9 @@ export const ProductCard: React.FC<IProduct> = (props) => {
               <Button
                 variant="transparent"
                 small
-                onClick={(e) => handleAddToCart(e)}
+                onClick={(e) => {
+                  handleAddToCart(e), sendEvent(`Added to Cart`, title);
+                }}
                 iconProps={{ icon: "cart" }}
                 fit="shrink"
               >

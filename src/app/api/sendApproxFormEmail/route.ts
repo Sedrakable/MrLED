@@ -1,6 +1,5 @@
 import {
   ApproxFormData,
-  ContactFormData,
   EncodedFileType,
 } from "@/components/reuse/Form/formTypes";
 import { LangType } from "@/i18n/request";
@@ -23,7 +22,7 @@ const emailTranslations = (plan: string) => ({
     subject: `🌸${plan} Approximatif - Adhenna🌸`,
     title: `Votre ${plan} chez Adhenna!`,
     greeting: (name: string) => `Cher/Chère ${name},`,
-    thankYouMessage: (name: string) =>
+    thankYouMessage: () =>
       `Merci d’avoir contacté Adhenna Tattoo! Vous recevrez bientôt un courriel avec une soumission pour votre ${plan}. Surveillez votre boîte de réception (et vos pourriels, au besoin). 😊`,
     dimensions: "Dimensions demandées:",
     additionalInfo: "Informations supplémentaires:",
@@ -57,7 +56,7 @@ const generateClientEmailTemplate = (
         
         <div class="details-section">
           <p>${t.greeting(formData.firstName)}</p>
-          <p>${t.thankYouMessage(formData.firstName)}</p>
+          <p>${t.thankYouMessage()}</p>
         </div>
         
         <div class="details-section">

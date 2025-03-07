@@ -8,13 +8,7 @@ import cn from "classnames";
 import FlexDiv from "../../reuse/FlexDiv";
 import Logo from "@/assets/vector/EyeLogo.svg";
 import { Button } from "../../reuse/Button";
-import {
-  ICta,
-  IExternalLink,
-  INavLink,
-  ISocials,
-  LocalPaths,
-} from "../../../data.d";
+import { ICta, INavLink, ISocials, LocalPaths } from "../../../data.d";
 import { useAtom } from "jotai";
 import { getTranslations } from "../../../helpers/langUtils";
 import { Translations } from "@/langs/langTypes";
@@ -24,6 +18,7 @@ import { useLocale } from "next-intl";
 import { LangType } from "@/i18n/request";
 import dynamic from "next/dynamic";
 import { Socials } from "@/components/footer/Socials";
+import { useGoogleEvent } from "@/app/api/sendGoogleEvent";
 
 const Sidebar = dynamic(
   () => import("../Sidebar/Sidebar").then((module) => module.Sidebar),
@@ -78,6 +73,7 @@ export const Navbar: FC<NavbarProps> = ({ socials }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
   const [sidebar, setSidebar] = useAtom(sidebarData);
+  const sendEvent = useGoogleEvent();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -139,12 +135,18 @@ export const Navbar: FC<NavbarProps> = ({ socials }) => {
                   path={`/${locale}${LocalPaths.CART}`}
                   iconProps={{ icon: "cart" }}
                   aria-label={translations.nav.cart}
+                  onClick={() =>
+                    sendEvent("Click Navbar Cart", LocalPaths.CART)
+                  }
                 />
               )}
 
               <Button
                 variant="primary"
                 path={`/${locale}${LocalPaths.CONTACT}`}
+                onClick={() =>
+                  sendEvent("Click Navbar Contact", LocalPaths.CONTACT)
+                }
               >
                 {translations.nav.contact}
               </Button>
@@ -177,12 +179,16 @@ export const LogoLink: React.FC<{ locale: LangType; light?: boolean }> = ({
 }) => {
   const translations = getTranslations(locale);
   const [, setSidebar] = useAtom(sidebarData);
+  const sendEvent = useGoogleEvent();
+
   return (
     <Link
       href={`/${locale}${LocalPaths.HOME}`}
       className={cn(styles.logo, { [styles.light]: light })}
       aria-label={translations.nav.home}
-      onClick={() => setSidebar(false)}
+      onClick={() => {
+        setSidebar(false), sendEvent("Click Logo", LocalPaths.HOME);
+      }}
     >
       <Logo />
     </Link>

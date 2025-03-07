@@ -36,15 +36,16 @@ import { BigCTA, BigCTAProps } from "@/components/pages/blocks/BigCTA/BigCTA";
 import FlexDiv from "@/components/reuse/FlexDiv";
 import styles from "./Main.module.scss";
 import { SpacingArrayType } from "@/helpers/SpacingGenerator";
+import { BlockDefinition } from "@sanity/types";
 
 export interface InPersonCoursePageProps {
   meta: ISeo;
   hero: IHero;
-  infoText: any;
+  infoText: BlockDefinition[];
   multiDescriptions: DescriptionProps[];
   image: ICustomImage;
   pricePlans1: PricePlanProps[];
-  experienceText: any;
+  experienceText: BlockDefinition[];
   pricePlans2: PricePlanProps[];
   bigCTA: BigCTAProps;
 }

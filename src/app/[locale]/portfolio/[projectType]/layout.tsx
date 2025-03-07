@@ -1,7 +1,6 @@
 import { LangType } from "@/i18n/request";
 import FlexDiv from "@/components/reuse/FlexDiv";
 import WorkPage from "./page";
-import { ClientLogger } from "@/helpers/clientLogger";
 
 export default function WorkLayout({
   children,

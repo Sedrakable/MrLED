@@ -16,7 +16,6 @@ import {
   FormSubmitMessage,
   FormTitles,
   MultiColumn,
-  Step,
 } from "../Form";
 import { CartProps } from "@/components/pages/blocks/Cart/Cart";
 import { ICartProduct, IDeliveryMethod } from "@/data.d";

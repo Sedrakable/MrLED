@@ -27,7 +27,7 @@ import { DisplayProps } from "@/components/reuse/Display/Display";
 export interface OnlineCoursePageProps extends VideoAndPriceProps {
   meta: ISeo;
   hero: IHero;
-  desc: any;
+  desc: unknown;
   features: DisplayProps[];
 }
 

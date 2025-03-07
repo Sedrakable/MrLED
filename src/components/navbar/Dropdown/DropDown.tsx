@@ -14,7 +14,6 @@ export interface DropDownProps {
   parentPath?: string;
   dropdown: ICta[];
   isOpen: boolean;
-  onClose: Function;
 }
 export const DropDown: React.FC<DropDownProps> = ({
   parentPath,

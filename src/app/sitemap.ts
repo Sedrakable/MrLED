@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 import type { SanityDocument } from "@sanity/client";
-import { client, urlFor } from "./api/client";
+import { urlFor } from "./api/client";
 import {
   sitemapArticlesQuery,
   sitemapProductsQuery,

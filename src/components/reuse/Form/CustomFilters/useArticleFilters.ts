@@ -1,8 +1,6 @@
 import { useState, useMemo } from "react";
 
 import {
-  dateSortArray,
-  IDateSort,
   IFilter,
   IArticle,
   articleTypeArray,
