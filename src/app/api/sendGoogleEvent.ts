@@ -9,7 +9,7 @@ export const useGoogleEvent = () => {
   const sendEvent = (event: string, pathTo: string) => {
     const eventString = `${event} - from ${pathname}`;
     console.log(`sendGoogleEvent | '${eventString}' to '${pathTo}'`);
-    sendGAEvent(eventString, { value: pathTo });
+    sendGAEvent("event", eventString, { value: pathTo });
   };
 
   return sendEvent;
