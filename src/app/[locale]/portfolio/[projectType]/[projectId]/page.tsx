@@ -4,7 +4,6 @@ import { CanvasModal } from "@/components/pages/blocks/Projects/CanvasModal";
 import { FlashModal } from "@/components/pages/blocks/Projects/FlashModal";
 import { ProjectModal } from "@/components/pages/blocks/Projects/ProjectModal";
 import { ICanvas, IFlash, IProject, LocalPaths, ProjectType } from "@/data.d";
-import { ClientLogger } from "@/helpers/clientLogger";
 import { getWorkPageData, WorkPageProps } from "../page";
 import { getFormData } from "@/components/reuse/Form/getFormData";
 import { FormTitleProps } from "@/components/reuse/Form/Form";
@@ -65,7 +64,6 @@ export default async function ProjectPage({
           : "image"
       }
     >
-      <ClientLogger slug={selectedProject} />
       {projectType === "flash" ? (
         workPageData &&
         formData && (
@@ -77,8 +75,5 @@ export default async function ProjectPage({
         <ProjectModal project={selectedProject} />
       )}
     </Modal>
-    // <Modal>
-    //
-    // </Modal>
   );
 }

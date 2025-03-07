@@ -19,6 +19,10 @@ export const BigCTA: React.FC<BigCTAProps> = ({ title, backgroundImage }) => {
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
 
+  function sendEvent(arg0: string, arg1: any) {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <TextWrapper version={2} backgroundImage={backgroundImage}>
       <FlexDiv
@@ -35,7 +39,11 @@ export const BigCTA: React.FC<BigCTAProps> = ({ title, backgroundImage }) => {
         >
           {title}
         </Heading>
-        <Button variant="primary" path={`/${locale}${LocalPaths.CONTACT}`}>
+        <Button
+          variant="primary"
+          path={`/${locale}${LocalPaths.CONTACT}`}
+          onClick={() => sendEvent("Click Carousel", LocalPaths.CONTACT)}
+        >
           {translations.nav.contact}
         </Button>
       </FlexDiv>

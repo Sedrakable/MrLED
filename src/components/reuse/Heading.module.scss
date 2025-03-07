@@ -1,9 +1,4 @@
-@import "@/styles/mixins.scss";
-
-@mixin sizing($size) {
-  font-size: var(--heading-h#{$size});
-  line-height: var(--heading-h#{$size}-line);
-}
+@use "@/styles/mixins.scss" as *;
 
 .heading {
   text-decoration: none !important;

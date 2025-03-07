@@ -1,4 +1,12 @@
-@import "./vars.scss";
+$tablet: 640px;
+$tablet-plus: 900px;
+$laptop: 1200px;
+$desktop: 1680px;
+
+@mixin sizing($size) {
+  font-size: var(--heading-h#{$size});
+  line-height: var(--heading-h#{$size}-line);
+}
 
 @mixin flex($x: center, $y: center) {
   display: flex;

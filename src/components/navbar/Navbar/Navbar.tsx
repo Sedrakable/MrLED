@@ -119,7 +119,7 @@ export const Navbar: FC<NavbarProps> = ({ socials }) => {
                       <li key={key}>
                         <TabButton
                           className={styles.tab}
-                          path={`/${locale}${link.link!}`}
+                          path={`/${locale}${link.link!.join("")}`}
                         >
                           {link.text}
                         </TabButton>

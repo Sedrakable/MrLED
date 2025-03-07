@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@use "@/styles/mixins.scss" as *;
 
 @mixin vars() {
   --main-color: var(--cream-white);
@@ -320,6 +320,11 @@
     @include switchToHorizontal;
 
     .content {
+      .backgroundImage {
+        &::after {
+          left: 0 !important;
+        }
+      }
       .image {
         left: unset !important;
         right: var(--profile-image-right) !important;

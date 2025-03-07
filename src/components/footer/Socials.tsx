@@ -1,9 +1,8 @@
 import React from "react";
 import { IconType } from "../reuse/Icon";
-import { Heading } from "../reuse/Heading";
 import { IconButton } from "../reuse/IconButton";
 import FlexDiv from "../reuse/FlexDiv";
-import { ICta, IExternalLink, ISocials } from "../../data.d";
+import { IExternalLink, ISocials } from "../../data.d";
 
 export const Socials: React.FC<ISocials> = ({ links }) => {
   return (

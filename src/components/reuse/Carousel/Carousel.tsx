@@ -65,6 +65,10 @@ export const Carousel: FC<ICarouselProps> = ({ data, cta }) => {
 
   if (!shuffledImages.length) return null;
 
+  function sendEvent(arg0: string, arg1: any) {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <FlexDiv
       flex={{ direction: "column", x: "center" }}
@@ -89,7 +93,11 @@ export const Carousel: FC<ICarouselProps> = ({ data, cta }) => {
         </div>
       </div>
       {cta && (
-        <Button variant="primary" path={`/${locale}${cta?.link?.join("")}`}>
+        <Button
+          variant="primary"
+          path={`/${locale}${cta?.link?.join("")}`}
+          onClick={() => sendEvent("Click Carousel", cta?.link?.join(""))}
+        >
           {cta?.text}
         </Button>
       )}

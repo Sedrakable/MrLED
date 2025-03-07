@@ -99,7 +99,12 @@ export const Button: FC<PropsWithChildren<
 
   if (path) {
     return (
-      <Link href={path} {...buttonProps} target={target}>
+      <Link
+        href={path}
+        {...buttonProps}
+        target={target}
+        onClick={(e) => handleClick(e as any)}
+      >
         {buttonContent}
       </Link>
     );

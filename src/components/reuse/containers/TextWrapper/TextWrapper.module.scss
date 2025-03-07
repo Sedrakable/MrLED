@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@use "@/styles/mixins.scss" as *;
 
 @mixin vars() {
   --grad: hsl(from var(--dark-burgundy) h s l / 0.4) 0%,

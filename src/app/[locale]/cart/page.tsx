@@ -35,7 +35,7 @@ export async function generateMetadata({
   const cartPageData = await getCartPageData(locale);
   const { metaTitle, metaDesc, metaKeywords } = cartPageData.meta;
   const path = LocalPaths.CART;
-  const crawl = true;
+  const crawl = false;
 
   return setMetadata({
     locale,

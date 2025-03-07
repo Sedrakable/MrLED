@@ -25,7 +25,6 @@ import { getImagesFromWorks, shuffleArray } from "@/helpers/functions";
 import { setMetadata } from "@/components/SEO";
 import { Metadata } from "next";
 import { Hero } from "@/components/reuse/Hero/Hero";
-import { ClientLogger } from "@/helpers/clientLogger";
 
 export interface ContactPageProps {
   meta: ISeo;
@@ -149,8 +148,6 @@ export default async function ContactPage({
 
   return (
     <>
-      <ClientLogger slug={process.env.EMAIL_BUSINESS} />
-
       {contactPageData?.hero && (
         <Hero {...contactPageData?.hero} version={2} fitContent />
       )}

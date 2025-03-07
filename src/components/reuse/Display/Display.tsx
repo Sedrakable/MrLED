@@ -14,6 +14,7 @@ import { Paragraph } from "../Paragraph/Paragraph";
 import { SanityImage } from "../SanityImage/SanityImage";
 import { AnimatedWrapper } from "../AnimatedWrapper/AnimatedWrapper";
 import { PortableTextContent } from "../Paragraph/PortableTextContent";
+import { useGoogleEvent } from "@/app/api/sendGoogleEvent";
 
 export type VersionType = "service" | "article";
 
@@ -37,6 +38,7 @@ export const Display: React.FC<DisplayProps> = ({
 }) => {
   const { isMobile } = useWindowResize();
   const locale = useLocale() as LangType;
+  const sendEvent = useGoogleEvent();
 
   const CTAs = () =>
     ctas && (
@@ -49,16 +51,32 @@ export const Display: React.FC<DisplayProps> = ({
         }}
         width100
       >
-        <Button variant="primary" path={`/${locale}${ctas.cta1?.link}`}>
+        <Button
+          variant="primary"
+          path={`/${locale}${ctas.cta1?.link!.join("")}`}
+          onClick={() => sendEvent(`Click Display`, ctas.cta1?.link!.join(""))}
+        >
           {ctas.cta1?.text}
         </Button>
         {ctas.cta2 && (
-          <Button variant="transparent" path={`/${locale}${ctas.cta2?.link}`}>
+          <Button
+            variant="transparent"
+            path={`/${locale}${ctas.cta2?.link!.join("")}`}
+            onClick={() =>
+              sendEvent(`Click Display`, ctas.cta2!.link!.join(""))
+            }
+          >
             {ctas.cta2?.text}
           </Button>
         )}
         {ctas.cta3 && (
-          <Button variant="transparent" path={`/${locale}${ctas.cta3?.link}`}>
+          <Button
+            variant="transparent"
+            path={`/${locale}${ctas.cta3?.link!.join("")}`}
+            onClick={() =>
+              sendEvent(`Click Display`, ctas.cta3!.link!.join(""))
+            }
+          >
             {ctas.cta3?.text}
           </Button>
         )}

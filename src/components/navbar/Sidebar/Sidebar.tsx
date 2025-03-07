@@ -76,7 +76,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, lang, socials }) => {
             ? tabWrapper(
                 <TabButton
                   className={styles.tab}
-                  path={`/${locale}${link.link!}`}
+                  path={`/${locale}${link.link!.join("")}`}
                   onClick={() => setSidebar(false)}
                 >
                   {link.text}

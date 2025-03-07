@@ -1,5 +1,5 @@
-@import-normalise;
-@import "./vars.scss";
+// @import-normalise;
+@use "@/styles/mixins.scss" as *;
 
 :root {
   --tablet: 640px;

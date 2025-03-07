@@ -17,6 +17,7 @@ import { FancyText } from "../FancyText/FancyText";
 import fishes from "/public/photos/Fishes.jpeg";
 import { AnimatedWrapper } from "../AnimatedWrapper/AnimatedWrapper";
 import { useParallaxScroll } from "@/helpers/useParallaxScroll";
+import { useGoogleEvent } from "@/app/api/sendGoogleEvent";
 
 export type VersionType = 1 | 2 | 3;
 
@@ -44,6 +45,7 @@ export const Hero: React.FC<HeroProps> = ({
 }) => {
   const { isMobile, isTablet, isMobileOrTablet } = useWindowResize();
   const locale = useLocale() as LangType;
+  const sendEvent = useGoogleEvent();
 
   const heroRef = useRef<HTMLDivElement>(null);
   const scrollProgress = useParallaxScroll(heroRef);
@@ -73,14 +75,21 @@ export const Hero: React.FC<HeroProps> = ({
         }}
         width100
       >
-        <Button
-          variant={version === 3 ? "extra" : "primary"}
-          path={`/${locale}${ctas.cta1?.link}`}
-        >
-          {ctas.cta1?.text}
-        </Button>
+        {ctas.cta1 && (
+          <Button
+            variant={version === 3 ? "extra" : "primary"}
+            path={`/${locale}${ctas.cta1.link!.join("")}`}
+            onClick={() => sendEvent("Click Hero", ctas.cta1.link!.join(""))}
+          >
+            {ctas.cta1?.text}
+          </Button>
+        )}
         {ctas.cta2 && version !== 3 && (
-          <Button variant="transparent" path={`/${locale}${ctas.cta2?.link}`}>
+          <Button
+            variant="transparent"
+            path={`/${locale}${ctas.cta2?.link!.join("")}`}
+            onClick={() => sendEvent("Click Hero", ctas.cta1.link!.join(""))}
+          >
             {ctas.cta2?.text}
           </Button>
         )}
