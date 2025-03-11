@@ -1,6 +1,4 @@
-import createNextIntlPlugin from "next-intl/plugin";
 
-const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -28,16 +26,8 @@ const nextConfig = {
   typescript:{
     ignoreBuildErrors: true
   },
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "cdn.sanity.io",
-      },
-    ],
-    deviceSizes: [640, 1200, 1680],
-  },
+
 };
 
 
-export default withNextIntl(nextConfig);
+export default nextConfig;

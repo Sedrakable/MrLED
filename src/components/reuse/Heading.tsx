@@ -6,21 +6,20 @@ import {
   SpacingArrayType,
   useSpacingGenerator,
 } from "../../helpers/SpacingGenerator";
-import { Josefin_Sans } from "next/font/google";
+import { Orbitron } from "next/font/google";
 
-export const josefin = Josefin_Sans({
+export const josefin = Orbitron({
   // variable: "--font-jose",
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
+  style: ["normal"],
   subsets: ["latin"],
 });
 
 export type ColorType =
-  | "cream-white"
-  | "light-burgundy"
-  | "burgundy"
-  | "dark-burgundy"
-  | "darkest-burgundy"
+  | "white"
+  | "green"
+  | "blue"
+  | "black"
+  | "turquoise"
   | "error";
 
 export const HeadingLevelArray = ["1", "2", "3", "4", "5", "6"] as const;
@@ -39,7 +38,7 @@ export const HeadingAsArray = [
 
 type HeadingAsType = typeof HeadingAsArray[number];
 
-export type TextWeightType = 300 | 400 | 500;
+export type TextWeightType = 400 | 500 | 600 | 700 | 800 | 900;
 
 export interface HeadingProps {
   children: string | JSX.Element;

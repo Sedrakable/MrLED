@@ -11,18 +11,10 @@ import {
   SpacingType,
 } from "../../helpers/SpacingGenerator";
 
-type Justify =
-  | "center"
-  | "flex-start"
-  | "flex-end"
-  | "space-between"
-  | "space-around"
-  | "space-evenly"
-  | "stretch";
 interface FlexProps {
   direction?: CSSProperties["flexDirection"];
-  x?: Justify;
-  y?: Justify;
+  x?: CSSProperties["justifyContent"];
+  y?: CSSProperties["justifyContent"];
 }
 export interface FlexDivProps<T extends ElementType = "div"> {
   gapArray?: SpacingArrayType;
@@ -30,7 +22,7 @@ export interface FlexDivProps<T extends ElementType = "div"> {
   flex?: FlexProps;
   height100?: boolean;
   width100?: boolean;
-  customStyle?: CSSProperties;
+  customStyle?: React.CSSProperties;
   wrap?: boolean;
   as?: T; // Add the 'as' prop
 }

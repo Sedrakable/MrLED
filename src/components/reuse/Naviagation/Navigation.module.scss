@@ -1,9 +1,0 @@
-@use "@/styles/mixins.scss" as *;
-
-.navButtons {
-  .title {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
-}

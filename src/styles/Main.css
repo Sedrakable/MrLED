@@ -3,7 +3,6 @@ body {
   overflow-x: hidden;
   width: 100%;
   background-size: cover;
-  background: var(--cream-white);
 }
 
 cite {

@@ -1,9 +1,0 @@
-@use "@/styles/mixins.scss" as *;
-
-.selectWrapper {
-  display: grid !important;
-  grid-template-columns: repeat(2, 1fr);
-  @media (min-width: $tablet) {
-    display: flex !important;
-  }
-}

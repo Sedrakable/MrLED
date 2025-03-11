@@ -9,24 +9,16 @@
   --transition-time: 200ms;
 
   --white: #ffffff;
-  --cream-white: #fff1eb;
-  --light-burgundy: #dcb2c1;
-  --light-burgundy-30: rgba(220, 178, 194, 0.3);
-  --burgundy: #853d57;
-  --dark-burgundy: #572839;
-  --darkest-burgundy: #2a131c;
+  --black: #2b2b33;
+  --green: #38d430;
+  --blue: #5090ff;
+  --turquoise: #44b297;
+  --grad: linear-gradient(90deg, var(--green) 0%, var(--blue) 100%);
   --error: #ff0000;
 
-  --jagua: #6d6db0;
-  --dark-jagua: #3c3c74;
-  --light-jagua: #8e8ec2;
-
-  --special-pink: #f4669a;
-  --special-jagua: #5d60ff;
-
-  --light-shadow: 0px 0px 4px 0px hsl(from var(--burgundy) h s l / 0.25);
-  --text-shadow: 0px 0px 8px rgba(87, 40, 57, 0.5);
-  --drop-shadow: 3px 3px 4px 0px hsl(from var(--light-burgundy) h s l / 0.35);
+  // --light-shadow: 0px 0px 4px 0px hsl(from var(--burgundy) h s l / 0.25);
+  // --text-shadow: 0px 0px 8px rgba(87, 40, 57, 0.5);
+  // --drop-shadow: 3px 3px 4px 0px hsl(from var(--light-burgundy) h s l / 0.35);
 
   --border-radius: 8px;
   --border-radius-large: calc(var(--border-radius) * 2);
@@ -53,8 +45,8 @@
   --heading-h2: 178px;
   --heading-h3: 110px;
   --heading-h4: 68px;
-  --heading-h5: 42px;
-  --heading-h6: 26px;
+  --heading-h5: 58px;
+  --heading-h6: 36px;
 
   --heading-h1-line: 0.9em;
   --heading-h2-line: 0.9em;

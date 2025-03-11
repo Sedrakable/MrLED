@@ -1,0 +1,40 @@
+@import "@/styles/mixins.scss";
+
+@mixin vars() {
+  --border-thickness: 2px;
+  --blur: 10px;
+  --corner-height: 60px;
+
+  @media (min-width: $tablet) {
+    --border-thickness: 3px;
+    --blur: 13px;
+    --corner-height: 80px;
+  }
+
+  @media (min-width: $laptop) {
+  }
+
+  @media (min-width: $desktop) {
+    --border-thickness: 4px;
+    --blur: 16px;
+    --corner-height: 100px;
+  }
+}
+
+.page {
+  position: relative;
+  .banner {
+    position: absolute !important;
+    background: var(--grad);
+
+    top: 0;
+    width: 100vw;
+    @media (min-width: $laptop) {
+      justify-content: flex-start !important;
+      right: 0;
+      top: 25%;
+      width: 50vw;
+      border-radius: 8px 0 0 8px;
+    }
+  }
+}

@@ -1,5 +1,7 @@
-import { Analytics } from "@vercel/analytics/react";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import styles from "./layout.module.scss";
+import "@/styles/Main.css";
+import "@/styles/index.scss";
+import PixelCorner from "@/assets/vector/PixelCorner.svg";
 
 export default async function RootLayout({
   children,
@@ -8,9 +10,23 @@ export default async function RootLayout({
 }>) {
   return (
     <>
-      {children}
-      <Analytics />
-      <GoogleAnalytics gaId="G-9L7V0EC0B8" />
+      <html lang={"fr"}>
+        <head></head>
+        <body>
+          <div id="root">
+            {/* <span className={styles.glow} /> */}
+            <span className={styles.border} />
+
+            <div className={styles.corners}>
+              <PixelCorner />
+              <PixelCorner />
+              <PixelCorner />
+              <PixelCorner />
+            </div>
+            <div className={styles.app}>{children}</div>
+          </div>
+        </body>
+      </html>
     </>
   );
 }
