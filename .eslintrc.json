@@ -1,18 +1,10 @@
 {
-  "extends": [
-    "next",
-    "next/core-web-vitals",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
-  "plugins": ["@typescript-eslint", "react", "unused-imports"],
+  "extends": ["next", "next/core-web-vitals", "eslint:recommended"],
+  "globals": {
+    "React": "readonly",
+    "JSX": true
+  },
   "rules": {
-    "unused-imports/no-unused-imports": "error",
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "error",
-    // "@typescript-eslint/no-explicit-any": "off", // Add this
-    "react/react-in-jsx-scope": "off",
-    "react/no-unescaped-entities": "off",
-    "@next/next/no-page-custom-font": "off"
+    "no-unused-vars": "warn"
   }
 }

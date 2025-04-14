@@ -1,0 +1,95 @@
+@use "@/styles/mixins.scss" as *;
+
+.workBlock {
+  --main-color: var(--white);
+  align-items: stretch !important;
+  row-gap: var(--pad-5) !important;
+
+  .card {
+    --transition: 200ms;
+    --box-shadow: 0 0 10px rgb(0, 0, 0, 0.4);
+    @include vari(height, auto, auto, 300px, 400px);
+    @include vari(aspect-ratio, 4/3, 4/3, unset);
+    position: relative;
+    overflow: visible;
+    overflow-x: clip;
+    border-radius: var(--border-radius);
+
+    &:after {
+      position: absolute;
+      content: "";
+      bottom: 0;
+      height: 16px;
+      width: 100%;
+      left: 0;
+      transform: translateY(100%);
+      background-color: var(--main-color);
+      z-index: 2;
+    }
+
+    cursor: default;
+
+    .image {
+      min-height: 100% !important;
+      border-radius: var(--border-radius);
+
+      img {
+        transition: var(--transition);
+      }
+      &:after {
+        transition: var(--transition);
+        position: absolute;
+        content: "";
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 1) 0%,
+          transparent 35%
+        );
+        mix-blend-mode: overlay;
+        box-shadow: inset var(--box-shadow);
+        opacity: 1;
+      }
+    }
+
+    .title {
+      position: absolute !important;
+      left: 0.2em;
+      bottom: -0.15em;
+      transition: calc(var(--transition) * 2);
+      z-index: 1;
+      max-width: 75%;
+      text-shadow: var(--box-shadow);
+      color: var(--main-color) !important;
+    }
+
+    &:hover {
+      .image {
+        img {
+          transform: scale(1.1);
+        }
+        &:after {
+          opacity: 0;
+        }
+      }
+      .title {
+        transform: translateX(-120%);
+      }
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &.yellow {
+    --main-color: var(--yellow);
+  }
+}
+
+.link {
+  display: block;
+  cursor: pointer;
+
+  .card {
+    cursor: pointer;
+  }
+}

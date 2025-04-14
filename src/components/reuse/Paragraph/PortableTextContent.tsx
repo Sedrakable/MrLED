@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import { Paragraph, ParagraphProps } from "./Paragraph";
 
@@ -9,16 +9,25 @@ interface PortableTextContentProps extends Omit<ParagraphProps, "children"> {
 
 export const PortableTextContent: React.FC<PortableTextContentProps> = ({
   value,
-  color = "burgundy", // default color
+  color = "black", // default color
   textAlign = "left",
   weight = 300,
   level = "regular",
   differentColorForStrongText = true,
   className,
+  paddingBottomArray,
 }) => {
-  const contastColor = differentColorForStrongText ? `var(--burgundy)` : color;
+  const contastColor = differentColorForStrongText ? `var(--black)` : color;
   const quote = (
-    <strong style={{ fontWeight: 500, color: contastColor }}>"</strong>
+    <strong
+      style={{
+        fontWeight: 900,
+        color: contastColor,
+      }}
+    >
+      {" "}
+      |{" "}
+    </strong>
   );
   const myComponents: PortableTextComponents = {
     block: {
@@ -28,6 +37,7 @@ export const PortableTextContent: React.FC<PortableTextContentProps> = ({
           weight={weight}
           color={color}
           textAlign={textAlign}
+          paddingBottomArray={paddingBottomArray}
           className={className}
         >
           {children}
@@ -39,38 +49,63 @@ export const PortableTextContent: React.FC<PortableTextContentProps> = ({
           weight={weight}
           color={color}
           textAlign={textAlign}
+          paddingBottomArray={paddingBottomArray}
           className={className}
         >
-          <em>
-            {quote}
-            {children}
-            {quote}
-          </em>
+          {quote}
+          {children}
+          {quote}
         </Paragraph>
       ),
     },
     marks: {
-      link: ({ children, value }) => {
-        return (
-          <a
-            style={{
-              fontWeight: weight + 100,
-              color: contastColor,
-              textDecoration: "underline",
-            }}
-            {...value}
-            target="_blank"
-          >
-            {children}
-          </a>
-        );
-      },
+      link: ({ children, value }) => (
+        <a
+          style={{
+            fontWeight: weight + 100,
+            color: contastColor,
+            textDecoration: "underline",
+          }}
+          {...value}
+          target="_blank"
+        >
+          {children}
+        </a>
+      ),
       strong: ({ children }) => (
         <strong style={{ fontWeight: weight + 200, color: contastColor }}>
           {children}
         </strong>
       ),
       em: ({ children }) => <em>{children}</em>,
+    },
+    list: {
+      bullet: ({ children }) => <ul className={className}>{children}</ul>,
+      number: ({ children }) => <ol className={className}>{children}</ol>,
+    },
+    listItem: {
+      bullet: ({ children }) => (
+        <Paragraph
+          as="li"
+          level={level}
+          weight={weight}
+          color={color}
+          paddingBottomArray={paddingBottomArray}
+        >
+          {children}
+        </Paragraph>
+      ),
+      number: ({ children }) => (
+        <Paragraph
+          as="li"
+          level={level}
+          weight={weight}
+          color={color}
+          paddingBottomArray={paddingBottomArray}
+        >
+          {children}
+        </Paragraph>
+      ),
     },
   };
 
