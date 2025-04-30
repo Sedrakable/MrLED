@@ -4,57 +4,37 @@ import styles from "./Questions.module.scss";
 import cn from "classnames";
 import { Block } from "@/components/containers/Block";
 import FlexDiv from "@/components/reuse/FlexDiv";
-import { Heading } from "@/components/reuse/Heading";
 import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
-import { IQuestion, ITheme } from "@/data.d";
-import { LangType } from "@/i18n";
+import { IQuestion } from "@/data.d";
+import { LangType } from "@/i18n/request";
 import { useLocale } from "next-intl";
-import { getTranslations } from "@/helpers/langUtils";
 import { PortableTextContent } from "@/components/reuse/Paragraph/PortableTextContent";
+import { Heading } from "@/components/reuse/Heading/Heading";
 
-const Question: React.FC<IQuestion> = ({
-  title,
-  desc,
-  extraNote,
-  theme = "light",
-}) => {
+const Question: React.FC<IQuestion> = ({ title, desc }) => {
   return (
     <FlexDiv
       flex={{ direction: "column", y: "flex-start" }}
       width100
-      gapArray={[1]}
+      gapArray={[3]}
       as="li"
     >
       <FlexDiv
-        padding={{ left: [3], bottom: [4], right: [4] }}
-        flex={{ y: "flex-start" }}
+        padding={{ horizontal: [5], bottom: [4], top: [3] }}
+        flex={{ y: "flex-start", x: "flex-start" }}
         className={styles.titleContainer}
         width100
       >
         <Heading
-          font="Outfit"
-          level="4"
+          font="title"
+          level="5"
           as="h3"
-          color="black"
-          weight={700}
+          color="grad"
+          weight={400}
           textAlign="left"
         >
           {title}
         </Heading>
-        {extraNote && (
-          <FlexDiv
-            padding={{ vertical: [2], right: [5] }}
-            className={styles.extraNote}
-          >
-            <Paragraph
-              level="regular"
-              color={theme === "dark" ? "white" : "black"}
-              textAlign="right"
-            >
-              {extraNote}
-            </Paragraph>
-          </FlexDiv>
-        )}
       </FlexDiv>
 
       <PortableTextContent
@@ -62,76 +42,61 @@ const Question: React.FC<IQuestion> = ({
         value={desc}
         className={styles.desc}
         differentColorForStrongText={false}
-        color={theme === "dark" ? "white" : "black"}
+        color={"white"}
       />
     </FlexDiv>
   );
 };
 
-export interface QuestionsProps {
-  theme: ITheme;
+export interface QuestionBlockProps {
+  title1: string;
+  title2: string;
   questions: IQuestion[];
 }
 
-export const Questions: React.FC<QuestionsProps> = ({
+export const Questions: React.FC<QuestionBlockProps> = ({
+  title1,
+  title2,
   questions,
-  theme = "dark",
 }) => {
   const locale = useLocale() as LangType;
-  const translations = getTranslations(locale);
 
   return (
-    <Block theme={theme} className={styles.block}>
-      <FlexDiv
-        flex={{ direction: "column", x: "stretch" }}
-        width100
-        padding={{ bottom: [4, 5, 5, 6], top: [7, 8, 8, 9] }}
-      >
+    <Block className={styles.block}>
+      <FlexDiv flex={{ direction: "column", x: "stretch" }} width100>
         <Heading
-          font="Outfit"
+          font="title"
           as="h3"
-          level="2"
-          color={theme === "dark" ? "white" : "black"}
-          className={styles.heading}
-          textAlign="left"
-          weight={400}
-        >
-          {translations.blockTitles.questionTitle1}
-        </Heading>
-        <Heading
-          font="Cursive"
-          as="h3"
-          level="2"
-          color="yellow"
-          className={styles.heading}
-          textAlign="right"
-          weight={400}
-          paddingBottomArray={[4, 5, 5, 6]}
-        >
-          {translations.blockTitles.questionTitle2}
-        </Heading>
-        <Heading
-          font="Outfit"
-          as="h3"
-          level="4"
-          color={theme === "dark" ? "white" : "black"}
+          level="3"
+          color="white"
           className={styles.heading}
           textAlign="center"
-          upperCase={false}
           weight={400}
         >
-          {translations.blockTitles.questionTitle3}
+          {title1}
+        </Heading>
+        <Heading
+          font="title"
+          as="h3"
+          level="3"
+          color="grad"
+          className={styles.heading}
+          textAlign="center"
+          weight={400}
+          paddingBottomArray={[6, 7, 7, 8]}
+        >
+          {title2}
         </Heading>
       </FlexDiv>
       <FlexDiv
         gapArray={[6, 7, 7, 8]}
         flex={{ y: "flex-start" }}
         width100
-        className={cn(styles.questions, styles[theme])}
+        className={cn(styles.questions)}
         as="ul"
       >
         {questions?.map((question: IQuestion, key) => {
-          return <Question {...question} key={key} theme={theme} />;
+          return <Question {...question} key={key} />;
         })}
       </FlexDiv>
     </Block>

@@ -6,6 +6,14 @@ body {
   background: var(--white);
 }
 
+/* [data-gradient="viewportGradient"] {
+  fill: url(#viewportGradient) !important;
+} */
+
+/* [data-gradient] {
+  fill: url(#viewportGradient) !important;
+} */
+
 html,
 body,
 #root {

@@ -1,6 +1,6 @@
 import { formQuery } from "@/app/api/generateSanityQueries";
 import { useFetchPage } from "@/app/api/useFetchPage";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 
 export const getFormData = async (slug: string, locale: LangType) => {
   const query = formQuery(slug, locale);

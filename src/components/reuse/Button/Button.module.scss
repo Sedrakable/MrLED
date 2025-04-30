@@ -1,13 +1,10 @@
 @use "@/styles/mixins.scss" as *;
 
 @mixin vars() {
-  --button-height-fancy: 42px;
-  --button-height: 42px;
-  --button-height-small: 26px;
+  --button-height: 40px;
   --button-width: 100%;
-  --button-padding: var(--pad-3);
-  --button-padding-fancy: var(--pad-4);
-  --transition-time: 0.7s;
+  --button-padding: 8px;
+  --button-text-padding: 16px;
 
   @media (min-width: $tablet) {
     --button-width: 112px;
@@ -17,11 +14,10 @@
   }
 
   @media (min-width: $desktop) {
-    --button-height-fancy: 48px;
     --button-height: 48px;
-    --button-height-small: 32px;
-    --button-padding: var(--pad-4);
-    --button-padding-fancy: var(--pad-5);
+    --button-padding: 12px;
+
+    --button-text-padding: 16px;
   }
 }
 
@@ -38,21 +34,29 @@
 .button {
   @include vars;
   @include flex;
-
+  $outline-width: 2px;
   position: relative;
 
   min-width: var(--button-width);
   width: fit-content;
   text-decoration: none;
   box-sizing: border-box;
-  padding: 12px;
+  padding: 0 var(--button-padding);
   transition: var(--transition-time-backoff);
 
+  min-height: var(--button-height);
+  height: var(--button-height);
+  border-radius: var(--border-radius-small);
+
   p {
-    padding: 0 var(--button-padding);
+    // @include vari(padding-bottom, 0, 0, 0, 0px);
+    padding: 0 var(--button-text-padding);
     width: auto !important;
     transition: var(--transition-time-backoff);
+    text-transform: uppercase !important;
+    letter-spacing: 0.15em;
   }
+
   &:disabled {
     cursor: not-allowed;
     background: var(--grey) !important;
@@ -93,21 +97,6 @@
       }
     }
   }
-
-  &.black,
-  &.white,
-  &.primary {
-    min-height: var(--button-height);
-    height: var(--button-height);
-    border-radius: calc(var(--button-height) / 2);
-    &:hover {
-      // background: var(--white);
-      transition: 200ms;
-      p {
-        transition: 200ms;
-      }
-    }
-  }
   &.primary {
     background: var(--grad);
 
@@ -118,7 +107,7 @@
     }
     &:hover {
       // background: var(--white);
-      box-shadow: 0px 0px 8px 0px #feb201, 0px 0px 16px 0px var(--yellow);
+      box-shadow: 0px 0px 8px 0px #feb201, 0px 0px 16px 0px var(--led-green);
       p {
         color: var(--white) !important;
         // font-weight: 900 !important;
@@ -131,115 +120,30 @@
     }
   }
 
-  &.black {
-    background: var(--black);
-    outline: 2px solid var(--black);
-    outline-offset: -2px;
-
-    svg,
-    path,
-    polygon {
-      fill: var(--white) !important;
-    }
-    &:hover {
-      background: var(--white);
-      p {
-        color: var(--black) !important;
-      }
-      svg,
-      path,
-      polygon {
-        fill: var(--black) !important;
-      }
-    }
-  }
-
-  &.white {
-    background: var(--white);
-
-    outline: 2px solid var(--black);
-    outline-offset: -2px;
-
-    svg,
-    path,
-    polygon {
-      fill: var(--black) !important;
-    }
-    &:hover {
-      // background: var(--white);
+  &.simple {
+    @include fixedGradBackground();
+    // outline: $outline-width solid var(--grad);
+    // outline-offset: -$outline-width;
+    &:after {
+      content: "";
+      @include absoluteMiddle();
+      width: calc(100% - ($outline-width * 2));
+      height: calc(100% - ($outline-width * 2));
       background: var(--black);
-
-      p {
-        color: var(--white) !important;
+      transition: var(--transition-time-backoff);
+      border-radius: 3px;
+      opacity: 0;
+      z-index: 0;
+    }
+    &:hover {
+      // background: transparent;
+      &:after {
+        opacity: 1;
       }
-
-      svg,
-      path,
-      polygon {
-        fill: var(--white) !important;
+      p {
+        @include fixedGradText();
+        z-index: 1;
       }
     }
-  }
-
-  &.small {
-    min-width: auto !important;
-    min-height: var(--button-height-small) !important;
-    height: var(--button-height-small) !important;
-    transition: 100ms;
-  }
-}
-
-.container {
-  width: 100%;
-  @media (min-width: $tablet) {
-    width: auto;
-  }
-}
-
-@-webkit-keyframes ani {
-  from {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
-
-  to {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-}
-
-@keyframes ani {
-  from {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
-
-  to {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-}
-
-@-webkit-keyframes ani2 {
-  from {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-
-  to {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
-}
-
-@keyframes ani2 {
-  from {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-
-  to {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
   }
 }

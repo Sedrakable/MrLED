@@ -19,15 +19,28 @@
 
 .container {
   @include vars;
+  $outline-width: 2px;
   .uploadButton {
+    @include fixedGradBackground();
     position: relative;
-    background: var(--grad);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius-small);
     cursor: pointer;
-    box-shadow: var(--drop-shadow);
-    outline: 2px solid transparent;
-    outline-offset: -2px;
+
+    // outline: $outline-width solid transparent;
+    // outline-offset: -$outline-width;
     transition: all var(--transition-time) ease;
+
+    &:after {
+      content: "";
+      @include absoluteMiddle();
+      width: calc(100% - ($outline-width * 2));
+      height: calc(100% - ($outline-width * 2));
+      background: var(--black);
+      transition: var(--transition-time-backoff);
+      border-radius: 3px;
+      opacity: 0;
+      z-index: 0;
+    }
 
     .icon {
       height: var(--icon-height);
@@ -36,11 +49,16 @@
     &:hover,
     &.dragActive,
     &.uploaded {
-      background: var(--white);
-      outline-color: var(--yellow);
+      // background: var(--balck);
+
       * {
-        color: var(--yellow) !important;
-        fill: var(--yellow) !important;
+        @include fixedGradText();
+        // color: var(--led-turq) !important;
+        fill: var(--led-turq) !important;
+        z-index: 2;
+      }
+      &:after {
+        opacity: 1;
       }
     }
 

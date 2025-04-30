@@ -21,8 +21,8 @@ interface ButtonIconProps extends IconProps {
 }
 
 export interface ButtonProps {
-  variant: "fancy" | "primary" | "black" | "white";
-  small?: boolean;
+  variant: "primary" | "secondary" | "simple";
+  // small?: boolean;
   fit?: "grow" | "shrink";
   iconProps?: ButtonIconProps;
   path?: string;
@@ -43,7 +43,6 @@ export const Button: FC<PropsWithChildren<
   path,
   href,
   disabled,
-  small,
   fit,
   scrollTarget,
   target,
@@ -51,22 +50,20 @@ export const Button: FC<PropsWithChildren<
   ...props
 }) => {
   const { isMobile } = useWindowResize();
-  const { scrollToTarget } = useScrollToTarget();
+  const { scrollToTarget: scrollToTargetFn } = useScrollToTarget();
 
   const handleClick = (
     event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => {
-    console.log(`Button clicked: path=${path}, scrollTarget=${scrollTarget}`);
     if (disabled) return;
 
-    if (scrollTarget) {
-      const scrolled = scrollToTarget(scrollTarget, path);
-      if (scrolled) {
-        event.preventDefault();
-        return;
-      }
+    // Handle scroll target if available
+    if (scrollTarget && scrollToTargetFn(scrollTarget, path)) {
+      event.preventDefault();
+      return;
     }
 
+    // Execute onClick handler if provided
     if (onClick) {
       onClick(event as React.MouseEvent<HTMLButtonElement>);
     }
@@ -75,9 +72,10 @@ export const Button: FC<PropsWithChildren<
   const ButtonHeading: React.FC<{ className?: string }> = ({ className }) => (
     <Paragraph
       level="regular"
-      color={variant === "black" ? "white" : "black"}
+      color={variant === "secondary" ? "grad" : "black"}
       className={className}
       textAlign="center"
+      weight={500}
     >
       {children as string}
     </Paragraph>
@@ -92,7 +90,6 @@ export const Button: FC<PropsWithChildren<
   );
 
   const buttonStyles = cn(styles.button, styles[variant], {
-    [styles.small]: small,
     [styles.onlyIcon]: iconProps && !children,
     [styles.withIcon]: iconProps && children,
     [styles.iconLeft]: iconProps?.side === "left",
@@ -135,12 +132,5 @@ export const Button: FC<PropsWithChildren<
       {buttonContent}
     </button>
   );
-  return variant === "fancy" ? (
-    <div className={styles.container}>
-      {buttonComp}
-      {buttonComp}
-    </div>
-  ) : (
-    buttonComp
-  );
+  return buttonComp;
 };

@@ -1,5 +1,5 @@
-import { LocalPaths, ICta, INavLink, LocalTargets } from "@/data.d";
-import { LangType } from "@/i18n";
+import { LocalPaths, ICta, LocalTargets } from "@/data.d";
+import { LangType } from "@/i18n/request";
 import { Translations } from "@/langs/langTypes";
 
 export const navContactButtonData = (
@@ -7,8 +7,9 @@ export const navContactButtonData = (
   trans: Translations
 ): ICta => {
   return {
-    path: `/${locale}${LocalPaths.CONTACT}`,
     text: trans.buttons.contact,
+    path: `/${locale}${LocalPaths.HOME}`,
+    scrollTarget: LocalTargets.HOMEFORM,
   };
 };
 // export const navWoodButtonData = (trans: Translations): ICta => {
@@ -61,23 +62,13 @@ export const chooseNavButtonData = (
   return navContactButtonData(locale, trans); // fallback
 };
 
-export const navLinkData = (trans: Translations): (INavLink | ICta)[] => {
-  return [
-    {
-      title: trans.nav.digital,
-      path: LocalPaths.DIGITAL,
-      ctaArray: [
-        {
-          text: trans.nav.branding,
-          path: LocalPaths.BRANDING,
-        } as ICta,
-        {
-          text: trans.nav.web,
-          path: LocalPaths.WEB,
-        } as ICta,
-      ],
-    } as INavLink,
-    { text: trans.nav.wood, path: LocalPaths.WOOD } as ICta,
-    { text: trans.nav.about, path: LocalPaths.ABOUT } as ICta,
-  ];
-};
+// export const navLinkData = (trans: Translations): ICta[] => {
+//   return [
+//     {
+//       title: trans.nav.digital,
+//       path: LocalPaths.DIGITAL,
+//     },
+//     { text: trans.nav.wood, path: LocalPaths.WOOD } as ICta,
+//     { text: trans.nav.about, path: LocalPaths.ABOUT } as ICta,
+//   ];
+// };

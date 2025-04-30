@@ -6,7 +6,7 @@
 // import { ElfsightWidget } from "react-elfsight-widget";
 // import { Block } from "../../containers/Block";
 // import { useLocale } from "next-intl";
-// import { LangType } from "@/i18n";
+// import { LangType } from "@/i18n/request";
 
 // export const Reviews: React.FC = () => {
 //   const locale = useLocale() as LangType;

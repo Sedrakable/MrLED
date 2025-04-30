@@ -1,269 +1,87 @@
 @use "@/styles/mixins.scss" as *;
 
-// Vertical Triangle Mixin (requires --grad-angle and --grad-percent)
-@mixin vertTriangle($colour: var(--white)) {
-  --x-move: tan(var(--grad-angle)) * 100vh;
-  content: "";
-  position: absolute;
-  width: calc(var(--grad-percent) + (var(--x-move) / 2));
-  height: 100%;
-  clip-path: polygon(0 0, 100% 0, calc(100% - (var(--x-move))) 100%, 0% 100%);
-  background-color: $colour;
-  z-index: 2;
-}
-
 // HeroV3 Styles
 .hero {
   // Shared Variables (used in calculations or multiple places)
-  @include vari(--grad-angle, 50deg, 10deg, 14deg, 10deg);
-  @include vari(--grad-percent, 10%, 45%, 50%, 50%);
-  @include vari(--image-width, 100%, 55vw, 55vw, 55vw);
-  @include vari(--graphic-width, 100px, 140px, 200px, 260px);
-
-  @include vari(max-height, calc(100vw * 1.5), 60vw, 56.25vw, 56.25vw);
+  @include vari(--image-width, 80vw, 50vw, 40vw, 40vw);
+  @include vari(max-height, calc(100vw * 1.5), 75vw, 56.25vw, 56.25vw);
   min-height: fit-content;
-  height: 100vh;
-  background-color: var(--white);
+  height: 75vh;
+  background-color: var(--black);
   position: relative;
   overflow-x: clip;
 
-  .backgroundContainer {
-    position: relative;
-    width: var(--image-width);
-    height: 100%;
-    min-height: 100vw;
-    overflow: hidden;
-    margin-top: calc(var(--pad-8) * -1);
-
-    .backgroundImage {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      filter: grayscale(1) brightness(0.4);
-    }
-
-    .message {
+  .imageContainer {
+    width: fit-content;
+    @include vari(height, 120vw, unset);
+    .backgroundImage,
+    .foregroundImage {
+      height: auto !important;
       position: absolute;
-      @include vari(width, 30vw, 16vw, 18vw, 20vw);
-      @include vari(font-size, 24px, 24px, 32px, 40px);
-
-      @include vari(bottom, 55%, 60%, 65%, 70%);
-
-      right: 2vw;
-      transform: rotate(-10deg);
+      top: 50% !important;
+      right: 0 !important;
+      left: unset !important;
     }
 
-    &::before {
-      @include vertTriangle(var(--white));
-      top: 0;
-      left: -1px;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
+    .foregroundImage {
+      @include vari(--y, -80%, -15%, -40%);
+      @include vari(--image-width, 100vw, 50vw, 40vw, 40vw);
+      width: var(--image-width) !important;
+      z-index: 2;
+      animation: pulse 4s ease-in-out infinite; // Added animation
     }
-  }
-
-  .backgroundImage,
-  .foregroundImage {
-    width: var(--image-width);
-    max-height: 106%;
-    height: auto;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    transform: translateY(5%);
-    object-fit: cover;
-  }
-
-  .foregroundImage {
-    z-index: 2;
+    .backgroundImage {
+      @include vari(--y, -50%, -48%);
+      @include vari(--image-width, 80vw, 60vw, 50vw, 50vw);
+      transform: translateY(var(--y)) !important;
+      width: var(--image-width) !important;
+      min-height: 155%;
+      z-index: 2;
+      mix-blend-mode: screen;
+    }
   }
 
   .logo {
-    width: var(--image-width);
-  }
-
-  .titles {
-    @include vari(width, 100%, 50%, 50%, 50%);
-  }
-
-  .stroke {
-    @include vari(height, 100px, 120px, 160px, 200px);
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 50%) rotate(2deg);
-    width: 120%;
-    z-index: 4;
-  }
-
-  .graphic {
-    position: absolute;
-    left: 40%;
-    transform: translateX(-50%) rotate(10deg);
-    width: var(--graphic-width);
-    bottom: calc(var(--graphic-width) / 8);
-    path {
-      &:nth-last-child(1) {
-        fill: var(--black);
-      }
-    }
-  }
-
-  @media (min-width: $tablet) {
-    flex-direction: row !important;
-    .backgroundContainer {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      min-height: unset;
-      margin-top: unset;
-    }
-  }
-
-  &.dark {
-    background-color: var(--black);
-    .backgroundContainer {
-      .backgroundImage {
-        filter: grayscale(1) brightness(2) contrast(0.4) sepia(10%);
-      }
-
-      &::before {
-        @include vertTriangle(var(--black));
-      }
-    }
-    .logo {
-      path {
-        &:nth-child(2),
-        &:nth-child(4),
-        &:last-child {
-          fill: var(--white);
-        }
-
-        @media (min-width: $tablet) {
-          &:last-child {
-            fill: var(--white);
-          }
-        }
-      }
-    }
-    .graphic {
-      path {
-        &:nth-last-child(1) {
-          fill: var(--white);
-        }
-      }
-    }
-  }
-}
-
-@mixin vertTriangle2($deg: 80deg, $color: var(--white), $height: 100%) {
-  content: "";
-  position: absolute;
-
-  height: $height;
-  clip-path: polygon(0 100%, calc(100% * tan($deg)) 100%, 0% 0%);
-  width: 100%;
-  background-color: $color;
-  z-index: 2;
-}
-
-// Hero Styles
-.heroV2 {
-  // Shared Variables (used in calculations or multiple places)
-  @include vari(--grad-angle, 50deg, 10deg, 14deg, 25deg);
-  @include vari(--image-width, 100%, 40vw, 45vw, 55vw);
-  @include vari(max-height, fit-content, 100vh);
-  height: fit-content;
-  max-width: 100vw;
-  background-color: var(--white);
-  position: relative;
-  overflow-x: clip;
-
-  .backgroundContainer {
-    position: relative;
-    width: var(--image-width);
-    height: 100%;
-    min-height: 100vw;
-    overflow: hidden;
-    margin-top: calc(var(--pad-10) * -1);
-    .backgroundImage {
-      width: var(--image-width);
-      max-height: 106%;
-      height: calc(100% - 1px) !important;
-      position: absolute;
-      top: 0;
-      right: 0;
-      object-fit: cover;
-      filter: grayscale(1) brightness(0.4);
-    }
-    .message {
-      position: absolute;
-      @include vari(width, 30vw, 16vw, 18vw, 20vw);
-      @include vari(font-size, 24px, 24px, 32px, 40px);
-
-      @include vari(bottom, 55%, 60%, 65%, 70%);
-
-      right: 2vw;
-      transform: rotate(-10deg);
-    }
-
-    &::before {
-      @include vari(--triangle-height, 20%, 100%);
-      @include vertTriangle2(
-        var(--grad-angle),
-        var(--white),
-        var(--triangle-height)
-      );
-
-      @include vari(left, 0, -1px);
-      @include vari(scale, 1 -1, 1);
-      top: 0;
-      z-index: 1;
-      pointer-events: none;
-    }
+    width: 100%;
   }
 
   .content {
-    z-index: 3;
-    .titles {
-      @include vari(--x, center, flex-start);
-      align-items: var(--x) !important;
-      width: 100%;
-    }
+    @include vari(width, 100%, 75vw, 60vw, 60vw);
+    box-sizing: content-box;
     .subTitle {
-      @include vari(width, 100%, 55%, 50%, 50%);
+      @include vari(
+        --font-size,
+        22px,
+        26px,
+        var(--heading-title-h6),
+        var(--heading-title-h5)
+      );
+      font-size: var(--font-size) !important;
     }
+
     .desc {
-      @include vari(width, 100%, 55%, 50%, 50%);
+      width: 90%;
     }
-
-    .ctas {
-      @include vari(--direction, column, row);
-      flex-direction: var(--direction) !important;
-    }
-  }
-
-  .stroke {
-    @include vari(height, 100px, 120px, 160px, 200px);
-    @include vari(bottom, -20px, -16px, 0, 0);
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0%) rotate(2deg);
-    width: 120%;
-    z-index: 4;
   }
 
   @media (min-width: $tablet) {
     flex-direction: row !important;
-    .backgroundContainer {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      min-height: unset;
-      margin-top: unset;
-    }
+  }
+}
+
+@keyframes pulse {
+  $anim-x: 1%;
+  $anim-scale: 1.05;
+  0% {
+    transform: translateY(var(--y)) scale(1) translateX(0);
+    filter: brightness(0.85);
+  }
+  50% {
+    transform: translateY(var(--y)) scale($anim-scale) translateX($anim-x);
+    filter: brightness(1.15);
+  }
+  100% {
+    transform: translateY(var(--y)) scale(1) translateX(0);
+    filter: brightness(0.85);
   }
 }

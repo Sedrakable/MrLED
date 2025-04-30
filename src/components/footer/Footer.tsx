@@ -9,8 +9,9 @@ import { ICta, IFooter, INavBar, LocalPaths } from "../../data.d";
 import { NavButton } from "../navbar/Navbar/Navbar";
 import { Socials } from "./Socials";
 import { useLocale } from "next-intl";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import Link from "next/link";
+import LogoWord from "@/assets/vector/Logo-Wordmark.svg";
 
 const Line: React.FC = () => {
   return <div className={styles.line} />;
@@ -61,11 +62,11 @@ const Logo: React.FC<{ trademark: string }> = ({ trademark }) => {
     <FlexDiv
       className={styles.logo}
       flex={{ direction: "column" }}
-      gapArray={[5]}
-      padding={{ bottom: [0, 0, 2] }}
+      gapArray={[2]}
+      padding={{ vertical: [5, 0, 0, 0] }}
     >
-      {/* <LogoHori /> */}
-      <Paragraph level="small" color="grey" textAlign="center">
+      <LogoWord />
+      <Paragraph level="small" color="white" textAlign="center">
         {trademark}
       </Paragraph>
     </FlexDiv>
@@ -81,7 +82,7 @@ const Legal: React.FC<{ legals: { title: string; path: string }[] }> = ({
       className={styles.legal}
       gapArray={[5]}
       wrap
-      flex={{ x: "flex-start" }}
+      flex={{ x: "flex-start", y: "flex-start" }}
     >
       {legals?.map((cta, key) => {
         return (
@@ -90,7 +91,7 @@ const Legal: React.FC<{ legals: { title: string; path: string }[] }> = ({
             key={key}
             aria-label={cta?.title}
           >
-            <Paragraph level="small" color="grey" clickable>
+            <Paragraph level="small" color="grad" clickable>
               {cta?.title}
             </Paragraph>
           </Link>
@@ -112,6 +113,7 @@ const DesktopFooter: React.FC<FooterProps> = ({
       className={styles.container}
       flex={{ y: "stretch" }}
       padding={{ vertical: [7] }}
+      gapArray={[6]}
     >
       <Nav links={links} navButton={navButton} />
       <Line />
@@ -124,7 +126,7 @@ const DesktopFooter: React.FC<FooterProps> = ({
         gapArray={[5]}
       >
         <Legal legals={legals} />
-        <Socials {...socials} />
+        {socials.links && <Socials {...socials} />}
       </FlexDiv>
     </FlexDiv>
   );
@@ -142,15 +144,15 @@ const TabletFooter: React.FC<FooterProps> = ({
       className={styles.container}
       flex={{ y: "stretch" }}
       padding={{ top: [7], bottom: [7] }}
+      gapArray={[6]}
     >
       <Logo trademark={trademark} />
       <Line />
-      <FlexDiv flex={{ direction: "column" }} gapArray={[4]}>
+      <FlexDiv flex={{ direction: "column", x: "flex-start" }} gapArray={[4]}>
         <Nav links={links} navButton={navButton} />
-        <FlexDiv flex={{ x: "center" }} gapArray={[4]} wrap width100>
-          <Legal legals={legals} />
-          <Socials {...socials} />
-        </FlexDiv>
+
+        <Legal legals={legals} />
+        {socials && <Socials {...socials} />}
       </FlexDiv>
     </FlexDiv>
   );
@@ -165,13 +167,13 @@ const MobileFooter: React.FC<FooterProps> = ({
   return (
     <FlexDiv
       className={styles.container}
-      flex={{ direction: "column" }}
+      flex={{ direction: "column", x: "center" }}
       padding={{ top: [6], bottom: [7] }}
-      gapArray={[6]}
+      gapArray={[4]}
     >
-      <Socials {...socials} />
       <Nav links={links} navButton={navButton} />
       <Logo trademark={trademark} />
+      {socials && <Socials {...socials} />}
       <Legal legals={legals} />
     </FlexDiv>
   );

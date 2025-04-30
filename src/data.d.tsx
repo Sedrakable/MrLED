@@ -20,38 +20,33 @@ export interface ISlug {
   _type: string;
 }
 
-export interface IHeroV2 {
-  title: string;
+export interface IHero {
   subTitle?: string;
+  title: string;
   desc: any;
-  backgroundImage: ICustomImage;
-  cta1?: ICta;
+  cta1: ICta;
   cta2?: ICta;
 }
 
-export type ITheme = "light" | "dark";
-
-export interface IHero {
-  backgroundImage: ICustomImage;
-  foregroundImage: ICustomImage;
-  subTitle?: string;
-  cta: ICta;
-  message?: string;
-  theme?: ITheme;
-}
-
 export interface IFeature {
-  customImage?: ICustomImage; // Optional image field
   svgName?: string; // Optional SVG name
   title: string;
   desc: string;
 }
 
+export interface IReviews {
+  reviews: IReview[];
+}
+
+export interface IReview {
+  name: string;
+  title: string;
+  review: string;
+}
+
 export interface IQuestion {
   title: string;
-  extraNote?: string;
   desc: any;
-  theme?: ITheme;
 }
 
 export interface IAbout {
@@ -76,11 +71,6 @@ export interface IWork {
   isFullWidth?: boolean; // For Branding
 }
 
-export interface INavBar {
-  navButton: ICta;
-  links: ICta[];
-  theme?: ITheme;
-}
 export interface ISocials {
   title?: string;
   links: ICta[];
@@ -98,6 +88,13 @@ export interface ILegalPage {
   title: string;
   data: IBlock[];
 }
+
+export interface INavBar {
+  navButton: ICta;
+  links?: ICta[];
+  socials?: ISocials;
+}
+
 export interface IFooter {
   legals: { title: string; path: string }[];
   trademark: string;
@@ -126,4 +123,5 @@ export enum LocalPaths {
 
 export enum LocalTargets {
   HOMEFORM = "#home-form",
+  HOMEFAQ = "#home-faq",
 }

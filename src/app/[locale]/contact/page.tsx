@@ -1,6 +1,6 @@
 import { ICollapsible, IHeroV2, ISeo, LocalPaths } from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Metadata } from "next";
 import { setMetadata } from "@/app/api/SEO";
 import { contactPageQuery } from "@/app/api/generateSanityQueries";
@@ -59,13 +59,14 @@ export default async function Contact({
   const data = await getContactPageData(locale);
   const formData: FormTitleProps = await getFormData("digital", locale);
   return (
-    <NavWrapperServer locale={locale} theme="dark">
-      {data.hero && <HeroV2 {...data.hero} />}
+    <NavWrapperServer locale={locale}>
+      <></>
+      {/* {data.hero && <HeroV2 {...data.hero} />}
       {formData && <ImageAndQuote {...formData} />}
 
       {data.collapsibles?.map((collapsible: ICollapsible, key) => {
         return <Collapsible {...collapsible} key={key} />;
-      })}
+      })} */}
     </NavWrapperServer>
   );
 }

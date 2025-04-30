@@ -2,43 +2,29 @@
 import React from "react";
 import styles from "./Features.module.scss";
 import cn from "classnames";
-import { Block } from "@/components/containers/Block";
 import FlexDiv from "@/components/reuse/FlexDiv";
-import { Heading } from "@/components/reuse/Heading";
-import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { SanityImage } from "@/components/reuse/SanityImage/SanityImage";
-import { IFeature, ITheme } from "@/data.d";
-import { LangType } from "@/i18n";
-import { useLocale } from "next-intl";
-import { getTranslations } from "@/helpers/langUtils";
+import { IFeature } from "@/data.d";
 import { useSvgComponent } from "@/helpers/useSvgComponent";
-import { useWindowResize } from "@/helpers/useWindowResize";
-import { getOptimalColumnCount } from "@/helpers/getOptimalColumnCount";
+import { Block } from "@/components/containers/Block";
+import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
+import GridDiv from "@/components/reuse/GridDiv";
+import { AnimatedWrapper } from "@/components/containers/AnimatedWrapper/AnimatedWrapper";
+import { Heading } from "@/components/reuse/Heading/Heading";
 
-interface FeatureProps extends IFeature {
-  className?: string;
-}
-const Feature: React.FC<FeatureProps> = ({
-  title,
-  customImage,
-  svgName,
-  desc,
-  className,
-}) => {
+const Feature: React.FC<IFeature> = ({ title, svgName, desc }) => {
   const SvgComponent = useSvgComponent(svgName || "Bulb");
 
   return (
     <FlexDiv
       flex={{ direction: "column", x: "flex-start" }}
       width100
-      className={cn(styles.container, className)}
+      className={cn(styles.container)}
       as="li"
-      gapArray={[3, 4, 4, 5]}
+      gapArray={[5, 4, 4, 5]}
     >
       <div className={styles.imgWrapper}>
-        {customImage ? (
-          <SanityImage {...customImage} />
-        ) : SvgComponent ? (
+        {SvgComponent ? (
           <SvgComponent />
         ) : (
           <div>Loading...</div> // You could replace this with a spinner or placeholder
@@ -50,17 +36,26 @@ const Feature: React.FC<FeatureProps> = ({
         className={styles.content}
         gapArray={[2]}
       >
-        <Heading
-          font="Outfit"
-          level="5"
-          as="h3"
-          color="black"
-          weight={700}
+        {/* <Paragraph
+          level="big"
+          color="white"
           textAlign="center"
+          capitalise
+          weight={600}
+        >
+          {title}
+        </Paragraph> */}
+        <Heading
+          as="h3"
+          level="5"
+          color="white"
+          textAlign="center"
+          weight={500}
+          className={styles.title}
         >
           {title}
         </Heading>
-        <Paragraph level="small" color="black" textAlign="center">
+        <Paragraph level="regular" color="white" textAlign="center">
           {desc}
         </Paragraph>
       </FlexDiv>
@@ -69,67 +64,41 @@ const Feature: React.FC<FeatureProps> = ({
 };
 
 export interface FeaturesProps {
-  theme: ITheme;
+  title: string;
   features: IFeature[];
 }
 
-export const Features: React.FC<FeaturesProps> = ({
-  features,
-  theme = "dark",
-}) => {
-  const { isMobile, isTablet, isLaptop } = useWindowResize();
-  const locale = useLocale() as LangType;
-  const translations = getTranslations(locale);
-
-  const getColumnRange = () => {
-    if (isMobile) {
-      return { min: 1, max: 1 };
-    } else if (isTablet) {
-      return { min: 2, max: 3 };
-    } else if (isLaptop) {
-      // Assuming laptop breakpoint at 1280px
-      return { min: 3, max: 4 };
-    } else {
-      return { min: 4, max: 5 }; // Desktop
-    }
-  };
-  const { min, max } = getColumnRange();
-  const columnCount = getOptimalColumnCount(features.length, min, max); // returns 4
-  const remainder = features.length % columnCount;
-
-  const firstOfLastRowIndex = features.length - remainder;
+export const Features: React.FC<FeaturesProps> = ({ features, title }) => {
   return (
     <Block
       title={{
-        children: translations.blockTitles.whatYouGet,
-        font: "Outfit",
-        color: "black",
-        weight: 900,
+        children: title,
+        font: "title",
+        color: "grad",
+        weight: 400,
       }}
-      theme={theme}
+      variant="green"
       className={styles.block}
     >
-      <FlexDiv
-        customStyle={{
-          ["--columns" as any]: columnCount,
-        }}
-        gapArray={[7, 8, 8, 8]}
-        flex={{ y: "flex-start" }}
+      <GridDiv
+        gapArray={[6, 6, 7, 8]}
+        columns={[
+          [1, 1],
+          [2, 2],
+          [3, 3],
+          [3, 3],
+        ]}
         width100
-        className={cn(styles.features, styles[theme])}
         as="ul"
       >
         {features?.map((feature: IFeature, key) => {
-          const isFirstOfLastRow = key === firstOfLastRowIndex;
           return (
-            <Feature
-              {...feature}
-              key={key}
-              className={cn({ [styles.lastRowItem]: isFirstOfLastRow })}
-            />
+            <AnimatedWrapper from="inside" key={key}>
+              <Feature {...feature} />
+            </AnimatedWrapper>
           );
         })}
-      </FlexDiv>
+      </GridDiv>
     </Block>
   );
 };

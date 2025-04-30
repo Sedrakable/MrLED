@@ -7,9 +7,8 @@ import { getTranslations } from "@/helpers/langUtils";
 import { Icon } from "../../Icon/Icon";
 import FlexDiv from "../../FlexDiv";
 import Image from "next/image";
-import { IconButton } from "../../IconButton";
-import { Button } from "../../Button";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
+import { Button } from "../../Button/Button";
 
 interface UploadButtonProps {
   onFilesSelect: (files: File[]) => void;
@@ -136,7 +135,7 @@ export const UploadButton: React.FC<UploadButtonProps> = ({
 
           <Icon
             icon="upload"
-            size="big"
+            size="regular"
             color="black"
             className={styles.icon}
           />
@@ -144,7 +143,7 @@ export const UploadButton: React.FC<UploadButtonProps> = ({
           <Paragraph level="big" color="black" weight={600} textAlign="center">
             {uploadedFiles.length > 0
               ? "remove uploaded file"
-              : translations.form.general.upload}
+              : translations.form.upload}
           </Paragraph>
           {required && (
             <Paragraph
@@ -172,8 +171,7 @@ export const UploadButton: React.FC<UploadButtonProps> = ({
                 className={styles.closeButtonWrapper}
               >
                 <Button
-                  variant="black"
-                  small
+                  variant="primary"
                   onClick={() => removeFile(index)}
                   iconProps={{ icon: "close", side: "right", size: "small" }}
                 />

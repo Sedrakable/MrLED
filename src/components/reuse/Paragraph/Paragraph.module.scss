@@ -22,34 +22,27 @@
 }
 
 .small {
-  // @include level(1, 1, 1, 2);
-  font-size: var(--paragraph-small);
-  line-height: var(--paragraph-small-line);
+  font-size: var(--paragraph-h8);
 }
 
 .regular {
-  font-size: var(--paragraph-small);
-  line-height: var(--paragraph-small-line);
+  font-size: var(--paragraph-h8);
   @media (min-width: $desktop) {
-    font-size: var(--paragraph-regular);
-    line-height: var(--paragraph-regular-line);
+    font-size: var(--paragraph-h7);
   }
 }
 
 .big {
-  font-size: var(--paragraph-regular);
-  line-height: var(--paragraph-regular-line);
-
+  font-size: var(--paragraph-h7);
   @media (min-width: $desktop) {
-    font-size: var(--paragraph-big);
-    line-height: var(--paragraph-big-line);
+    font-size: var(--paragraph-h6);
   }
 }
 
 .paragraph {
   // font-family: var(--font-outfit);
   width: 100%;
-  line-height: 1.25em;
+  line-height: var(--paragraph-line);
 }
 
 li.paragraph {
@@ -60,6 +53,10 @@ li.paragraph {
 
 .clickable {
   &:hover {
-    color: var(--yellow) !important;
+    color: var(--led-green) !important;
   }
+}
+
+.grad {
+  @include fixedGradText();
 }

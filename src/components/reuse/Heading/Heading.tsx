@@ -3,7 +3,7 @@ import React, { CSSProperties } from "react";
 import styles from "./Heading.module.scss";
 import cn from "classnames";
 
-import { Finger_Paint, Montserrat, Orbitron, Outfit } from "next/font/google";
+import { Orbitron } from "next/font/google";
 import {
   SpacingArrayType,
   useSpacingGenerator,
@@ -12,14 +12,21 @@ import {
 export const orbitron = Orbitron({
   variable: "--font-orbitron",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600"], // Support multiple weights
 });
 
-export type ColorType = "white" | "black" | "yellow" | "grey" | "error";
-
-export const HeadingLevelArray = ["1", "2", "3", "4", "5"] as const;
-
-type HeadingLevelType = typeof HeadingLevelArray[number];
+export type ColorType =
+  | "white"
+  | "black"
+  | "grad"
+  | "led-turq"
+  | "error"
+  | "led-green"
+  | "led-blue";
+export type HeadingLevelType = "1" | "2" | "3" | "4" | "5";
+export type HeadingAsType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span";
+export type FontType = "title" | "display"; // Add "display" if needed
+export type WeightType = 400 | 500 | 600;
 
 export const HeadingAsArray = [
   "h1",
@@ -31,14 +38,14 @@ export const HeadingAsArray = [
   "span",
 ] as const;
 
-type HeadingAsType = typeof HeadingAsArray[number];
+// type HeadingAsType = typeof HeadingAsArray[number];
 
 export interface HeadingProps {
-  font: "Display" | "Title";
+  font?: FontType;
   children: string | JSX.Element;
   level: HeadingLevelType;
-  as: HeadingAsType;
-  weight?: CSSProperties["fontWeight"];
+  as?: HeadingAsType;
+  weight?: WeightType; // Match Orbitron weights
   textAlign?: CSSProperties["textAlign"];
   paddingBottomArray?: SpacingArrayType;
   color?: ColorType;
@@ -53,21 +60,20 @@ export const capitalizeString = (str: string): string => {
 };
 
 export const Heading: React.FC<HeadingProps> = ({
-  font = "Title",
+  font = "title",
   children,
   level,
-  as,
+  as = `h${level}`,
   weight = "400",
   textAlign,
   paddingBottomArray,
   color = "white",
-  upperCase = true,
-  capitalise,
-  clickable,
+  upperCase = false,
+  capitalise = false,
+  clickable = false,
   className,
 }) => {
   const { spacingNum } = useSpacingGenerator(paddingBottomArray);
-
   const CustomHeading = as as keyof JSX.IntrinsicElements;
 
   let finalString =
@@ -83,11 +89,13 @@ export const Heading: React.FC<HeadingProps> = ({
         styles.heading,
         styles[`level${level}`],
         styles[color],
+        styles[font],
+
         {
-          [styles.gradient]: color.includes("grad"),
+          [styles.gradient]: color === "grad",
           [styles.clickable]: clickable,
 
-          [orbitron.className]: font === "Title",
+          [orbitron.className]: font === "title",
         },
         className
       )}

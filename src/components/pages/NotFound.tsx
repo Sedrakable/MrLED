@@ -2,7 +2,7 @@ import React from "react";
 import FlexDiv from "@/components/reuse/FlexDiv";
 import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { getTranslations } from "@/helpers/langUtils";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { INotFound, LocalPaths } from "@/data.d";
 import { Block } from "../containers/Block";
 import { Button } from "../reuse/Button/Button";

@@ -9,11 +9,11 @@ export const Socials: React.FC<ISocials> = ({ title, links }) => {
   return (
     <FlexDiv gapArray={[2]} wrap flex={{ x: "flex-start" }}>
       {title && (
-        <Heading font="Title" as="h3" level="3" color="white">
+        <Heading font="title" as="h3" level="3" color="white">
           {title}
         </Heading>
       )}
-      <FlexDiv gapArray={[4]} wrap flex={{ x: "flex-start" }}>
+      <FlexDiv gapArray={[4, 4, 4, 5]} wrap flex={{ x: "flex-start" }}>
         {links?.map((link: ICta, key) => {
           return (
             true && (
@@ -23,6 +23,7 @@ export const Socials: React.FC<ISocials> = ({ title, links }) => {
                 iconProps={{
                   icon: link.text as IconType,
                   size: "regular",
+                  color: "grad",
                 }}
                 target="_blank"
                 aria-label={link.text}

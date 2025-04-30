@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { ISeo } from "@/data.d";
 interface SEOProps extends ISeo {
   locale: LangType;

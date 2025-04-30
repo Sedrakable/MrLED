@@ -1,29 +1,11 @@
 @import "./mixins.scss";
 
-@mixin vars() {
-  --scrollbar-width: 6px;
-  @media (min-width: $tablet) {
-    --scrollbar-width: 8px;
-  }
-
-  @media (min-width: $laptop) {
-    --scrollbar-width: 10px;
-  }
-
-  @media (min-width: $desktop) {
-    --scrollbar-width: 10px;
-  }
-}
-
 ::-webkit-scrollbar {
-  @include vars;
-
   width: var(--scrollbar-width);
 }
 
 ::-webkit-scrollbar-thumb {
-  @include vars;
-  background: var(--yellow);
+  background: var(--led-blue);
   border-radius: calc(var(--scrollbar-width) / 2);
 }
 

@@ -1,15 +1,59 @@
 @use "@/styles/mixins.scss" as *;
 
 .embla {
+  @include vari(--height, 85vw, 320px, 320px, 400px);
   // overflow: hidden;
   padding: var(--pad-6) 0;
   width: 100%;
   overflow-x: clip;
+  position: relative;
+  z-index: 2;
+  &::before {
+    content: "";
+    // display: flex;
+    position: absolute;
+    width: 100vw;
+    height: 25%;
+    top: 50%;
+    transform: translateY(-50%);
+    @include fixedGradBackground;
+    filter: blur(48px);
+    opacity: 0.5;
+  }
+}
+.portals {
+  @include vari(--right, 0, 0, var(--scrollbar-width));
+  $width: 4px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: var(--right);
+  height: var(--height);
+  z-index: 2;
+
+  span {
+    width: $width;
+    height: calc(100% + (2 * $width));
+
+    &:first-child {
+      background-color: var(--led-green);
+      border-top-right-radius: $width;
+      border-bottom-right-radius: $width;
+      box-shadow: 0 0 16px 2px hsl(from var(--led-green) h s l / 0.75);
+    }
+    &:last-child {
+      background-color: var(--led-blue);
+      border-top-left-radius: $width;
+      border-bottom-left-radius: $width;
+      box-shadow: 0 0 16px 2px hsl(from var(--led-blue) h s l / 0.75);
+    }
+  }
+  z-index: 4;
 }
 .embla__container {
   display: flex;
-
-  @include vari(height, 90vw, 280px, 340px, 400px);
+  height: var(--height);
   gap: var(--pad-4);
 }
 .embla__slide {
@@ -23,7 +67,7 @@
   height: 100% !important;
   aspect-ratio: 1;
   border-radius: var(--border-radius);
-  box-shadow: var(--light-shadow);
+  box-shadow: var(--drop-shadow);
 
   // pointer-events: auto;
   transition: 1.2s ease;

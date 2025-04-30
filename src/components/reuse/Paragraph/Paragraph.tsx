@@ -16,7 +16,7 @@ export interface ParagraphProps {
   textAlign?: CSSProperties["textAlign"];
   paddingBottomArray?: SpacingArrayType;
   color?: ColorType;
-  weight?: 300 | 400 | 600;
+  weight?: 400 | 500 | 600;
   capitalise?: boolean;
   clickable?: boolean;
   className?: string;
@@ -51,6 +51,7 @@ export const Paragraph: React.FC<ParagraphProps> = ({
         styles[level],
         {
           [styles.clickable]: clickable,
+          [styles.grad]: color === "grad",
         },
         className
       )}

@@ -5,7 +5,6 @@ import FlexDiv from "../../FlexDiv";
 import { InputWrapper, InputWrapperProps } from "../InputWrapper/InputWrapper";
 import { BaseInputProps } from "../Input/Input";
 import { Paragraph } from "../../Paragraph/Paragraph";
-import { outfit } from "../../Heading";
 import ReactSlider, { ReactSliderProps } from "react-slider";
 
 interface SliderProps
@@ -44,9 +43,9 @@ export const Slider: React.FC<SliderProps> = ({
         {/* Minimum value marker */}
         <Paragraph
           level="small"
-          color={isInvalid ? "error" : "black"} // Gray color for min/max
+          color={isInvalid ? "error" : "white"} // Gray color for min/max
           className={styles.marker}
-          weight={600}
+          weight={500}
         >
           {isRange ? values[0] : values} {unit}
         </Paragraph>
@@ -71,9 +70,9 @@ export const Slider: React.FC<SliderProps> = ({
         {/* Max Value Marker */}
         <Paragraph
           level="small"
-          color={isInvalid ? "error" : "black"}
+          color={isInvalid ? "error" : "white"} // Gray color for min/max
           className={styles.marker}
-          weight={600}
+          weight={500}
         >
           {isRange ? values[1] : max} {unit}
         </Paragraph>

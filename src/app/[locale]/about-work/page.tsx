@@ -10,7 +10,7 @@ import {
   LocalTargets,
 } from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Metadata } from "next";
 import { setMetadata } from "@/app/api/SEO";
 import { aboutPageQuery } from "@/app/api/generateSanityQueries";
@@ -77,7 +77,7 @@ export default async function AboutPage({
                 id={
                   `#${workBlock.works[0].workType}-work-block` as LocalTargets
                 }
-                theme={key % 2 === 0 ? "light" : "yellow"}
+                theme={key % 2 === 0 ? "light" : "led-green"}
                 key={key}
               />
             );

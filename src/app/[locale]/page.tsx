@@ -1,13 +1,37 @@
-import { ISeo, IHero, ServiceType } from "@/data.d";
+import {
+  ISeo,
+  IHero,
+  IQuestion,
+  IFeature,
+  IReview,
+  ICollapsible,
+  LocalPaths,
+  LocalTargets,
+} from "@/data.d";
 import { useFetchPage } from "@/app/api/useFetchPage";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 
-import NavWrapperServer from "@/components/pages/NavWrapper/NavWrapperServer";
 import { homePageQuery } from "../api/generateSanityQueries";
+import { ICustomImage } from "@/components/reuse/SanityImage/SanityImage";
+import { getCarouselImages } from "@/components/reuse/Carousel/getCarouselData";
+import { Carousel } from "@/components/reuse/Carousel/Carousel";
+import { Questions } from "@/components/services/Questions/Questions";
+import { Features } from "@/components/services/Features/Features";
+import { Reviews } from "@/components/pages/Reviews/Reviews";
+import { getFormData } from "@/components/reuse/Form/getFormData";
+import { FormTitleProps } from "@/components/reuse/Form/Form";
+import { ImageAndForm } from "@/components/pages/ContactPage/ImageAndForm/ImageAndForm";
+import { Collapsible } from "@/components/reuse/Collapsible/Collapsible";
+import { Hero } from "@/components/reuse/Hero/Hero";
+import { getTranslations } from "@/helpers/langUtils";
 
 export interface HomePageProps {
   meta: ISeo;
   hero: IHero;
+  questionBlock: { questions: IQuestion[] };
+  featureBlock: { features: IFeature[] };
+  reviewBlock: { reviews: IReview[] };
+  collapsible: ICollapsible;
 }
 
 const getHomePageData = async (locale: LangType) => {
@@ -43,53 +67,44 @@ export default async function HomePage({
 }: {
   params: Promise<{ locale: LangType }>;
 }) {
-  // const translations = getTranslations(locale);
+  // const translations = getTranslations(locale);Para
   const { locale } = await params;
+  const translations = getTranslations(locale);
   const data = await getHomePageData(locale);
+  const carouselImages: ICustomImage[] = await getCarouselImages();
+  const formData: FormTitleProps = await getFormData("contact", locale);
 
   return (
-    <NavWrapperServer locale={locale} theme="light">
-      <></>
-      {/* {data && (
-        <>
+    data && (
+      <>
+        {data.hero && (
           <Hero
             {...data.hero}
-            cta={{
-              text: translations.buttons.buildSign,
-              path: `/${locale}${LocalPaths.WOOD}`,
-              scrollTarget: LocalTargets.WOODFORM,
+            cta1={{
+              text: translations.buttons.contact,
+              path: `/${locale}${LocalPaths.HOME}`,
+              scrollTarget: LocalTargets.HOMEFORM,
             }}
           />
-          {carouselImages && <Carousel images={carouselImages} />}
-          {data.questions && (
-            <Questions questions={data.questions} theme="light" />
-          )}
-
-          {data.solutionBlock && (
-            <SolutionBlock {...data.solutionBlock} theme="home" />
-          )}
-          {data.testimonials && (
-            <Testimonials testimonials={data.testimonials} theme="light" />
-          )}
-          {data.processBlock && (
-            <ProcessAndQuote
-              processes={data.processBlock.processes}
-              {...formData}
-              form={form}
-              video={{
-                firstIndex: 0,
-                lastIndex: 400,
-                folder: "home",
-                format: "webp",
-              }}
-            />
-          )}
-          {data.featureBlock && (
-            <Features features={data.featureBlock.features} theme="light" />
-          )}
-          {data.collapsible && <Collapsible {...data.collapsible} />}
-        </>
-      )} */}
-    </NavWrapperServer>
+        )}
+        {carouselImages && <Carousel images={carouselImages} />}
+        {data.questionBlock && (
+          <Questions
+            questions={data.questionBlock.questions}
+            title1="Arrête de rester dans l’ombre"
+            title2="Commence à illuminer la place"
+          />
+        )}
+        {data.featureBlock && (
+          <Features
+            features={data.featureBlock.features}
+            title="Ce que tu obtiens"
+          />
+        )}
+        {data.reviewBlock && <Reviews reviews={data.reviewBlock.reviews} />}
+        {<ImageAndForm {...formData} />}
+        {data.collapsible && <Collapsible {...data.collapsible} />}
+      </>
+    )
   );
 }

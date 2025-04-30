@@ -1,13 +1,13 @@
 import React from "react";
 import FlexDiv from "@/components/reuse/FlexDiv";
-import { Heading } from "@/components/reuse/Heading";
-import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { ILegalPage } from "@/data.d";
-import { Block } from "../../containers/Block";
+import { Block } from "@/components/containers/Block";
+import { Heading } from "@/components/reuse/Heading/Heading";
+import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 
 export const LegalPageComp: React.FC<ILegalPage> = ({ title, data }) => {
   return (
-    <Block title={title} theme="dark">
+    <Block title={{ font: "title", children: title, color: "grad" }}>
       <FlexDiv flex={{ direction: "column", x: "flex-start" }}>
         {data?.map((block) => {
           return (
@@ -15,11 +15,11 @@ export const LegalPageComp: React.FC<ILegalPage> = ({ title, data }) => {
               {block.children?.map((child) =>
                 child.marks[0] === "strong" ? (
                   <Heading
-                    font="Seto"
+                    font="title"
                     key={child._key}
                     as="h5"
                     level="5"
-                    color="yellow"
+                    color="grad"
                     paddingBottomArray={[1, 2, 2, 3]}
                   >
                     {child.text}

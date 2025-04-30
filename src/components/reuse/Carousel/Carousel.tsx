@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
@@ -7,22 +7,27 @@ import AutoScroll from "embla-carousel-auto-scroll";
 import styles from "./Carousel.module.scss";
 import cn from "classnames";
 
-import { ICustomImage, SanityImage } from "../SanityImage/SanityImage";
 import { ICta, LocalPaths, LocalTargets } from "@/data.d";
-import FlexDiv from "../FlexDiv";
-import { Button } from "../Button";
+
 import { useShuffleArray } from "@/helpers/useShuffleArray";
 import { useLocale } from "next-intl";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { getTranslations } from "@/helpers/langUtils";
+import { Button } from "@/components/reuse/Button/Button";
+import FlexDiv from "@/components/reuse/FlexDiv";
+import {
+  ICustomImage,
+  SanityImage,
+} from "@/components/reuse/SanityImage/SanityImage";
 
 const OPTIONS: EmblaOptionsType = { dragFree: true, loop: true };
 
 interface ICarouselProps {
   images: ICustomImage[];
+  cta?: ICta;
 }
 
-export const Carousel: FC<ICarouselProps> = ({ images }) => {
+export const Carousel: FC<ICarouselProps> = ({ images, cta }) => {
   const locale = useLocale() as LangType;
   const translate = getTranslations(locale);
 
@@ -80,34 +85,23 @@ export const Carousel: FC<ICarouselProps> = ({ images }) => {
                     alt={image?.alt}
                     figureclassname={cn(styles.image)}
                     quality={80}
+                    sizes={["90vw", 280, 340, 400]}
                   />
                 </div>
               )
           )}
         </div>
+        <FlexDiv flex={{ x: "space-between" }} className={styles.portals}>
+          <span />
+          <span />
+        </FlexDiv>
       </div>
 
-      <FlexDiv
-        flex={{ x: "center" }}
-        width100
-        padding={{ horizontal: [6, 0] }}
-        gapArray={[2, 3, 3, 4]}
-      >
-        <Button
-          variant="primary"
-          path={`/${locale}${LocalPaths.ABOUT}${LocalTargets.WORK}`}
-          target="_blank"
-        >
-          {translate.buttons.viewMyWork}
+      {cta && (
+        <Button variant="primary" path={cta.path} target="_blank">
+          {cta.text}
         </Button>
-        <Button
-          variant="black"
-          path={"https://www.instagram.com/seto.arts"}
-          target="_blank"
-        >
-          {translate.buttons.viewInstagram}
-        </Button>
-      </FlexDiv>
+      )}
     </FlexDiv>
   );
 };

@@ -1,4 +1,4 @@
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 
 export const navbarPageQuery = (locale: LangType, type: string): string => {
   return `*[_type == 'navbar' && lang == '${locale}' && type == '${type}'][0]`;
@@ -19,36 +19,31 @@ export const footerPageQuery = (locale: LangType): string => {
 };
 
 export const homePageQuery = (locale: LangType): string => {
-  return `*[_type == 'woodPage' && lang == '${locale}'][0] {
+  return `*[_type == 'homePage' && lang == '${locale}'][0] {
         meta,
         hero,
         featureBlock->{
           features[]->,
         },
-        questions[]->,
-        solutionBlock->,
-        testimonials[]->,
-        processBlock->,
+        questionBlock->{
+          questions[]->,
+        },
+        reviewBlock->{
+          reviews[]->,
+        },
         collapsible->,
       }`;
 };
 
 export const carouselQuery = `
-  *[_type == "woodWork"] {
-    customImages[]
+  *[_type == "work"] {
+    images[]
   }
 `;
 
 export const aboutPageQuery = (locale: LangType): string => {
   return `*[_type == 'aboutPage' && lang == '${locale}'][0] {
 
-  }`;
-};
-
-export const workPageQuery = (slug: string): string => {
-  return `*[_type == 'work' && slug.current == '${slug}'][0]{
-    ...,
-    meta,
   }`;
 };
 

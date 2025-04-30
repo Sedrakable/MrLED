@@ -1,27 +1,30 @@
 interface Titles {}
 
-interface Buttons {}
+interface Buttons {
+  contact: string;
+  submit: string;
+}
 
 interface Form {
-  general: {
-    select: string;
-    service: string;
-    servicePlaceholder: string;
-    firstName: string;
-    firstNamePlaceholder: string;
-    lastName: string;
-    lastNamePlaceholder: string;
-    email: string;
-    emailPlaceholder: string;
-    requiredAlert: string;
-    emailSent: string;
-    emailNotSent: string;
-    additionalInfo: string;
-    details: string;
-    detailsPlaceholder: string;
-    referanceImage: string;
-    upload: string;
-  };
+  select: string;
+  service: string;
+  servicePlaceholder: string;
+  firstName: string;
+  firstNamePlaceholder: string;
+  lastName: string;
+  lastNamePlaceholder: string;
+  email: string;
+  emailPlaceholder: string;
+  requiredAlert: string;
+  emailSent: string;
+  emailNotSent: string;
+  additionalInfo: string;
+  details: string;
+  detailsPlaceholder: string;
+  referanceImage: string;
+  upload: string;
+  budget: string;
+  currency: string;
 }
 
 interface Nav {

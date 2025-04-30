@@ -3,46 +3,34 @@
 .block {
   z-index: 2;
 }
-.features {
-  display: grid !important;
-  // grid-template-columns: repeat(var(--columns), 1fr);
-  grid-template-columns: repeat(
-    var(--columns),
-    minmax(0, 1fr)
-  ); // 💡 ensures equal width
-  align-items: stretch !important;
-  justify-content: center !important;
 
-  .container {
-    @include flexColumn(flex-start, flex-start);
-    // overflow: hidden;
-    &.lastRowItem {
-      grid-column: 2 / span 1;
-    }
+.container {
+  @include flexColumn(flex-start, flex-start);
 
-    .imgWrapper {
-      aspect-ratio: 1;
+  .imgWrapper {
+    @include flex(center, flex-end);
+    @include vari(aspect-ratio, unset, 1);
 
-      width: 100%;
-      max-width: 100%;
-      svg {
-        height: 100%;
-        width: 100%;
-        path {
-          &:nth-child(1) {
-            fill: var(--black);
-          }
-          &:nth-child(2) {
-            fill: var(--yellow);
-          }
+    width: 100%;
+    max-width: 100%;
+    svg {
+      @include vari(width, 90%, 90%);
+      // width: 90%;
+      max-height: 100%;
+      path {
+        &:nth-child(1) {
+          fill: var(--white);
+        }
+        &:nth-child(2) {
+          fill: var(--green);
         }
       }
     }
-    .content {
-      flex: 1;
-      p {
-        @include paragraphMaxLines(5);
-      }
+  }
+  .content {
+    flex: 1;
+    p {
+      @include paragraphMaxLines(5);
     }
   }
 }

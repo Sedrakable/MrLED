@@ -2,35 +2,29 @@ import styles from "./LangSwitcher.module.scss";
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/navigation";
 import { useTransition } from "react";
-import { useParams } from "next/navigation";
 import FlexDiv from "@/components/reuse/FlexDiv";
 
-import { Heading } from "@/components/reuse/Heading/Heading";
+import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 
 export const LangSwitcher: React.FC<{ onClick?: Function }> = ({ onClick }) => {
   const router = useRouter();
   const [, startTransition] = useTransition();
   const locale = useLocale();
   const pathname = usePathname();
-  const params = useParams();
 
   const langClick = () => {
     const newLang = locale === "en" ? "fr" : "en";
     startTransition(() => {
-      router.replace({ pathname, params }, { locale: newLang });
+      router.replace({ pathname }, { locale: newLang });
     });
     onClick && onClick();
   };
 
   return (
     <FlexDiv gapArray={[3]} className={styles.langWrapper} onClick={langClick}>
-      <Heading as="span" level="5" font="Title" color="yellow" weight={300}>
+      <Paragraph level="big" color="grad">
         {locale?.toUpperCase()}
-      </Heading>
-      {/* <Paragraph level="big" color="yellow">
-        {locale?.toUpperCase()}
-      </Paragraph> */}
-      {/* <Icon icon="internet" size="regular" /> */}
+      </Paragraph>
     </FlexDiv>
   );
 };

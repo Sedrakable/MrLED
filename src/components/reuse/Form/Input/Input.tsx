@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import styles from "./Input.module.scss";
 import cn from "classnames";
 import { InputWrapper, InputWrapperProps } from "../InputWrapper/InputWrapper";
-import { outfit } from "../../Heading";
+import { montserrat } from "../../Paragraph/Paragraph";
 
 export interface BaseInputProps {
   // eslint-disable-next-line no-unused-vars
@@ -27,16 +27,18 @@ export const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <InputWrapper label={label} required={required} isInvalid={isInvalid}>
-      <input
-        type={type}
-        value={value}
-        id={type}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className={cn(styles.input, outfit.className, {
-          [styles.invalid]: isInvalid,
-        })} // Apply font and invalid styles
-      />
+      <div className={styles.inputContainer}>
+        <input
+          type={type}
+          value={value}
+          id={type}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          className={cn(styles.input, montserrat.className, {
+            [styles.invalid]: isInvalid,
+          })} // Apply font and invalid styles
+        />
+      </div>
     </InputWrapper>
   );
 };
@@ -73,15 +75,17 @@ export const TextArea: React.FC<TextAreaProps> = ({
 
   return (
     <InputWrapper label={label} required={required} isInvalid={isInvalid}>
-      <textarea
-        ref={textareaRef}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className={cn(styles.textarea, outfit.className, {
-          [styles.invalid]: isInvalid,
-        })} // Apply font and invalid styles
-      />
+      <div className={styles.inputContainer}>
+        <textarea
+          ref={textareaRef}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          className={cn(styles.textarea, montserrat.className, {
+            [styles.invalid]: isInvalid,
+          })} // Apply font and invalid styles
+        />
+      </div>
     </InputWrapper>
   );
 };

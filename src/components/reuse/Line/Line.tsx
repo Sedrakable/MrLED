@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Line.module.scss";
-import { ColorType } from "./Heading";
+import { ColorType } from "../Heading/Heading";
 
 interface LineProps {
   color?: ColorType;

@@ -4,11 +4,12 @@ import styles from "./Collapsible.module.scss";
 
 import FlexDiv from "../../reuse/FlexDiv";
 import cn from "classnames";
-import { Heading } from "../../reuse/Heading";
 import { Paragraph } from "../Paragraph/Paragraph";
 import { PortableTextContent } from "../Paragraph/PortableTextContent";
 import { ICollapsible } from "@/data.d";
 import { Block } from "@/components/containers/Block";
+import { Heading } from "../Heading/Heading";
+import { Icon } from "../Icon/Icon";
 
 export const Collapsible: React.FC<ICollapsible> = ({ title, questions }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -17,16 +18,23 @@ export const Collapsible: React.FC<ICollapsible> = ({ title, questions }) => {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
   return (
-    <Block theme="light" contentSize="small">
+    <Block>
       <FlexDiv
         flex={{ direction: "column", x: "flex-start", y: "flex-start" }}
         width100
         gapArray={[4]}
       >
         {title && (
-          <Heading font="Cursive" level="3" as="h3" color="yellow" weight={700}>
-            {title}
-          </Heading>
+          <FlexDiv
+            className={styles.titleWrapper}
+            width100
+            flex={{ x: "flex-start" }}
+            padding={{ all: [3], left: [4] }}
+          >
+            <Heading font="title" level="4" as="h3" color="black" weight={400}>
+              {title}
+            </Heading>
+          </FlexDiv>
         )}
         <FlexDiv
           flex={{ direction: "column", x: "flex-start", y: "flex-start" }}
@@ -39,7 +47,7 @@ export const Collapsible: React.FC<ICollapsible> = ({ title, questions }) => {
               width100
               flex={{ direction: "column", x: "flex-start", y: "flex-start" }}
               className={styles.question}
-              padding={{ horizontal: [4], vertical: [5, 5, 5, 6] }}
+              padding={{ horizontal: [4], vertical: [3, 3, 3, 4] }}
             >
               <button
                 className={styles.questionToggle}
@@ -47,34 +55,29 @@ export const Collapsible: React.FC<ICollapsible> = ({ title, questions }) => {
               >
                 <Paragraph
                   level="big"
-                  color="black"
+                  color="white"
                   textAlign="left"
                   weight={openIndex === index ? 600 : 400}
                 >
                   {q.question}
                 </Paragraph>
-
-                <Heading
-                  font="Cursive"
-                  level={openIndex === index ? "4" : "5"}
-                  as="span"
-                  color={openIndex === index ? "black" : "yellow"}
-                  weight={700}
+                <Icon
+                  icon={openIndex === index ? "minus" : "plus"}
+                  size="extra-small"
                   className={cn(
                     styles.toggleIcon,
                     openIndex === index ? styles.minus : styles.plus
                   )}
-                >
-                  {openIndex === index ? "-" : "+"}
-                </Heading>
+                  color={openIndex === index ? "white" : "grad"}
+                />
               </button>
               {openIndex === index && (
                 <FlexDiv
                   className={styles.answer}
-                  padding={{ top: [3], left: [4], right: [8] }}
+                  padding={{ vertical: [3], left: [4], right: [8] }}
                 >
                   <PortableTextContent
-                    level="regular"
+                    level="small"
                     value={q.answer}
                     color="black"
                     weight={400}

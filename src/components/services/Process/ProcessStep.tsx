@@ -26,7 +26,13 @@ export const ProcessStep = React.forwardRef<HTMLDivElement, ProcessStepProps>(
       >
         {/* Step number circle */}
         <FlexDiv className={cn(styles.number)}>
-          <Heading font="Outfit" level="2" as="h4" color="yellow" weight={900}>
+          <Heading
+            font="Outfit"
+            level="2"
+            as="h4"
+            color="led-green"
+            weight={900}
+          >
             {(number + 1).toString()}
           </Heading>
         </FlexDiv>

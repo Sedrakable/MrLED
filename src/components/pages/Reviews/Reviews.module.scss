@@ -1,0 +1,5 @@
+@use "@/styles/mixins.scss" as *;
+
+.reviews {
+  @include vari(flex-direction, column, column, row);
+}

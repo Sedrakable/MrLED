@@ -25,9 +25,10 @@ export const InputWrapper: React.FC<PropsWithChildren<InputWrapperProps>> = ({
       as="label"
     >
       <Paragraph
-        level="regular"
-        color={isInvalid ? "error" : "black"} // Red color on invalid
+        level="small"
+        color={isInvalid ? "error" : "grad"} // Red color on invalid
         className={styles.label}
+        weight={500}
       >
         {label} {required && <span className={styles.required}>*</span>}
       </Paragraph>

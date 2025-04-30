@@ -5,18 +5,20 @@ import TabButton from "../TabButton/TabButton";
 import { useWindowResize } from "../../../helpers/useWindowResize";
 import cn from "classnames";
 import FlexDiv from "../../reuse/FlexDiv";
-// import Logo from "@/assets/vector/LogoSmall.svg";
-import { ICta, INavBar, ITheme } from "../../../data.d";
+
+import Logo from "@/assets/vector/Logo-Wordmark.svg";
+import { ICta, INavBar } from "../../../data.d";
 import { LangSwitcher } from "../LangSwitcher/LangSwitcher";
 import { useAtom } from "jotai";
 import { getTranslations } from "../../../helpers/langUtils";
 import { sidebarData } from "../Sidebar/Sidebar";
 import Link from "next/link";
 import { useLocale } from "next-intl";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import dynamic from "next/dynamic";
 import { IconButton } from "@/components/reuse/IconButton/IconButton";
 import { Button } from "@/components/reuse/Button/Button";
+import { Socials } from "@/components/footer/Socials";
 
 const Sidebar = dynamic(
   () => import("../Sidebar/Sidebar").then((module) => module.Sidebar),
@@ -25,11 +27,7 @@ const Sidebar = dynamic(
   }
 );
 
-export const Navbar: React.FC<INavBar> = ({
-  links,
-  navButton,
-  theme = "light",
-}) => {
+export const Navbar: React.FC<INavBar> = ({ links, navButton, socials }) => {
   const { isMobile, isMobileOrTablet } = useWindowResize();
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
@@ -52,7 +50,7 @@ export const Navbar: React.FC<INavBar> = ({
   return (
     <>
       <nav
-        className={cn(styles.navbarWrapper, styles[theme], {
+        className={cn(styles.navbarWrapper, {
           [styles.scrolled]: scrolled,
         })}
         ref={navRef}
@@ -66,7 +64,7 @@ export const Navbar: React.FC<INavBar> = ({
 
           <FlexDiv
             flex={{ x: "space-between", y: "center" }}
-            gapArray={[3, 5, 6, 7]}
+            gapArray={[4, 5, 5, 6]}
             height100
           >
             {!isMobile && (
@@ -78,7 +76,6 @@ export const Navbar: React.FC<INavBar> = ({
                         <TabButton
                           className={styles.tab}
                           path={`/${locale}${link.path!}`}
-                          theme={theme}
                         >
                           {link.text}
                         </TabButton>
@@ -86,24 +83,31 @@ export const Navbar: React.FC<INavBar> = ({
                     )
                   );
                 })}
-                <li>
+
+                <li style={{ visibility: scrolled ? "visible" : "hidden" }}>
                   <NavButton {...navButton} />
                 </li>
               </FlexDiv>
             )}
             {!isMobile && <LangSwitcher />}
+
             {isMobileOrTablet && (
               <IconButton
                 onClick={() => setSidebar(true)}
-                iconProps={{ icon: "burger", size: "regular" }}
-                background="white"
+                iconProps={{
+                  icon: "burger",
+                  size: "regular",
+                  color: "grad",
+                }}
                 aria-label="burger menu"
               />
             )}
+            {/* TODP ;Actual social Data */}
+            {!isMobileOrTablet && socials && <Socials {...socials} />}
           </FlexDiv>
         </FlexDiv>
       </nav>
-      {isMobileOrTablet && <Sidebar links={links} lang={locale} />}
+      {isMobileOrTablet && <Sidebar links={links} socials={socials} />}
     </>
   );
 };
@@ -119,22 +123,15 @@ export const LogoLink: React.FC<{ locale: LangType }> = ({ locale }) => {
       aria-label={translations.nav.home}
       onClick={() => setSidebar(false)}
     >
-      {/* <Logo /> */}
+      <Logo />
     </Link>
   );
 };
 
 // Helper components
 export const NavButton: React.FC<ICta> = ({ text, path, scrollTarget }) => {
-  const { isMobile } = useWindowResize();
-
   return (
-    <Button
-      variant="primary"
-      small={isMobile}
-      path={path}
-      scrollTarget={scrollTarget}
-    >
+    <Button variant="simple" path={path} scrollTarget={scrollTarget}>
       {text}
     </Button>
   );

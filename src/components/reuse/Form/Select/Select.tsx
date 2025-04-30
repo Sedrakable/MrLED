@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from "./Select.module.scss";
 import cn from "classnames";
 import { getTranslations } from "@/helpers/langUtils";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { useLocale } from "next-intl";
 import FlexDiv from "../../FlexDiv";
 import { Icon } from "../../Icon/Icon";
@@ -178,7 +178,7 @@ export const Select: React.FC<SelectProps> = ({
           width100
           padding={{ left: [4], right: [5] }}
         >
-          <Paragraph level="regular" color={selected ? "black" : "yellow"}>
+          <Paragraph level="regular" color={selected ? "black" : "led-green"}>
             {selectedLabel}
           </Paragraph>
           <Icon

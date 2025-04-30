@@ -3,7 +3,7 @@ import { useFetchPage } from "@/app/api/useFetchPage";
 import { Modal } from "@/components/reuse/Modal";
 import { setMetadata } from "@/app/api/SEO";
 import { ISeo, IWork, LocalPaths } from "@/data.d";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { Metadata } from "next";
 
 export interface WorkProps extends IWork {

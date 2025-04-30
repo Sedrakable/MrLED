@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import styles from "./layout.module.scss";
@@ -7,9 +5,9 @@ import "@/styles/Main.css";
 import "@/styles/ScrollBar.scss";
 import "@/styles/index.scss";
 import { NextIntlClientProvider } from "next-intl";
-import { LangType } from "@/i18n";
-
-const inter = Inter({ subsets: ["latin"] });
+import { LangType } from "@/i18n/request";
+import { montserrat } from "@/components/reuse/Paragraph/Paragraph";
+import NavWrapperServer from "@/components/pages/NavWrapper/NavWrapperServer";
 
 export default async function LocaleLayout({
   children,
@@ -56,9 +54,12 @@ export default async function LocaleLayout({
             />
           </noscript>
         </head>
-        <body className={inter.className}>
+        <body className={montserrat.className}>
+          {/* <ViewportGradient /> */}
           <div id="root">
-            <div className={styles.app}>{children}</div>
+            <NavWrapperServer locale={locale}>
+              <div className={styles.app}>{children}</div>
+            </NavWrapperServer>
           </div>
         </body>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ID!} />

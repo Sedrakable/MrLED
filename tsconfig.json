@@ -32,7 +32,8 @@
     ".next/types/**/*.ts",
     "./dist/types/**/*.ts",
     "src/app/api/generateSanityQueries.js",
-    "src/app/api/dataBackup.js"
+    "schemas/reuse components/languagets"
+    // "migrations/renameArticle.ts"
   ],
   "exclude": ["node_modules"]
 }

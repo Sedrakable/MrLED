@@ -1,8 +1,20 @@
-// src/i18n/request.ts
-import { getRequestConfig } from "next-intl/server";
-import { getTranslations } from "@/helpers/langUtils";
+export const langs = ["en", "fr"] as const;
+export type LangType = typeof langs[number];
 
-export default getRequestConfig(async ({ locale }) => ({
-  locale: locale || "en", // Provide a fallback locale
-  messages: getTranslations((locale || "en") as "en" | "fr"),
-}));
+import { getRequestConfig } from "next-intl/server";
+import { routing } from "./routing";
+
+export default getRequestConfig(async ({ requestLocale }) => {
+  // This typically corresponds to the `[locale]` segment
+  let locale = await requestLocale;
+
+  // Ensure that a valid locale is used
+  if (!locale || !routing.locales.includes(locale as any)) {
+    locale = routing.defaultLocale;
+  }
+
+  return {
+    locale,
+    messages: undefined,
+  };
+});

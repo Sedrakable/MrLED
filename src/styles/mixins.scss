@@ -52,13 +52,32 @@ $desktop: 1680px;
   transform: translate(-50%, -50%);
 }
 
-@mixin blurEffect($blur: 1px) {
-  &::before {
-    content: "";
-    @include absoluteFill;
-    opacity: 1;
-    backdrop-filter: blur($blur);
-    background-color: rgba(0, 0, 0, 0.6);
+@mixin fixedGradBackground() {
+  background: var(--grad-main);
+  background-attachment: fixed;
+  background-size: 100vw;
+  background-repeat: no-repeat;
+}
+
+@mixin fixedGradText() {
+  color: var(--grad-main); /* Fallback */
+  background: linear-gradient(90deg, var(--led-green) 0%, var(--led-blue) 100%);
+  background-attachment: fixed;
+  background-size: 100vw;
+  -webkit-background-clip: text;
+  -moz-background-clip: text; /* Rarely needed, but optional */
+  background-clip: text; /* Standard, future-proof */
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin fixedGradSvg() {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  background: transparent;
+
+  path {
+    fill: url(#viewport-gradient) !important;
   }
 }
 

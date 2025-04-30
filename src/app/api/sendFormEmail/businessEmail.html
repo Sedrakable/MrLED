@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="${locale}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🔥 New LED Sign Inquiry</title>
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+    "
+  >
+    <table
+      width="100%"
+      border="0"
+      cellspacing="0"
+      cellpadding="0"
+      style="background-color: #f5f5f5; padding: 20px"
+    >
+      <tr>
+        <td align="center">
+          <table
+            width="100%"
+            border="0"
+            cellspacing="0"
+            cellpadding="0"
+            style="max-width: 650px"
+          >
+            <tr>
+              <td
+                align="center"
+                style="
+                  padding: 10px;
+                  background: linear-gradient(-90deg, #5090ff 0%, #38d430 100%);
+                  border-top-left-radius: 4px;
+                  border-top-right-radius: 4px;
+                "
+              >
+                <h1
+                  style="
+                    margin: 0;
+                    color: #ffffff;
+                    font-size: 48px;
+                    font-weight: 900;
+                    text-transform: uppercase;
+                    font-family: 'Orbitron', Arial, sans-serif;
+                  "
+                >
+                  MR LED
+                </h1>
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  background-color: #11181a;
+                  padding: 40px;
+                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                "
+              >
+                <h2
+                  style="
+                    color: #44b297;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    margin-top: 0;
+                    margin-bottom: 25px;
+                    font-size: 24px;
+                    border-bottom: 2px solid #44b297;
+                    padding-bottom: 10px;
+                  "
+                >
+                  🔥 New LED Sign Inquiry
+                </h2>
+                <div
+                  style="
+                    margin-bottom: 30px;
+                    color: #ffffff;
+                    font-size: 16px;
+                    line-height: 1.6;
+                  "
+                >
+                  <h3 style="color: #44b297; font-size: 18px; font-weight: 700">
+                    Client Info:
+                  </h3>
+                  <p style="margin: 0">
+                    Name:
+                    <strong>${formData.firstName} ${formData.lastName}</strong>
+                  </p>
+                  <p style="margin: 0">
+                    Email: <strong>${formData.email}</strong>
+                  </p>
+                  <p style="margin: 0">Locale: <strong>${locale}</strong></p>
+                </div>
+                <div
+                  style="
+                    margin-bottom: 30px;
+                    color: #ffffff;
+                    font-size: 16px;
+                    line-height: 1.6;
+                  "
+                >
+                  <h3 style="color: #44b297; font-size: 18px; font-weight: 700">
+                    Project Details:
+                  </h3>
+                  <p style="margin: 0">
+                    Details: <strong>${formData.details}</strong>
+                  </p>
+                  <p style="margin: 0">
+                    Budget Range:
+                    <strong
+                      >$${formData.budgetMin} – $${formData.budgetMax}</strong
+                    >
+                  </p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td
+                align="center"
+                style="
+                  padding: 20px;
+                  background: linear-gradient(-90deg, #5090ff 0%, #38d430 100%);
+                  border-bottom-left-radius: 4px;
+                  border-bottom-right-radius: 4px;
+                  color: #11181a;
+                "
+              >
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 14px;
+                    color: #ffffff;
+                    font-weight: 700;
+                  "
+                >
+                  © 2025 MR LED. All Rights Reserved.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

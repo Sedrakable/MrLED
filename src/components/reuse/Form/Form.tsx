@@ -1,16 +1,16 @@
 import React, { PropsWithChildren, FC, ReactNode } from "react";
 
 import styles from "./Form.module.scss";
-import { Button } from "@/components/reuse/Button";
 import FlexDiv from "../FlexDiv";
-import { Heading } from "../Heading";
 import { Alert } from "../Alert/Alert";
 import { useWindowResize } from "@/helpers/useWindowResize";
 import { StepProps } from "./formTypes";
 import { Paragraph } from "../Paragraph/Paragraph";
 import { Translations } from "@/langs/langTypes";
 import { LocalPaths } from "@/data.d";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
+import { Button } from "../Button/Button";
+import { Heading } from "../Heading/Heading";
 
 export interface FormTitleProps {
   title: string;
@@ -32,11 +32,11 @@ export const FormTitles: FC<FormTitleProps> = ({
       className={styles.formTitles}
     >
       <Heading
-        font="Outfit"
+        font="title"
         as="h3"
-        level="4"
-        color="black"
-        weight={700}
+        level="5"
+        color="grad"
+        weight={600}
         textAlign={alignText}
       >
         {title}
@@ -44,8 +44,8 @@ export const FormTitles: FC<FormTitleProps> = ({
       {subTitle && (
         <Paragraph
           level="regular"
-          color="black"
-          weight={300}
+          color="white"
+          weight={400}
           textAlign={alignText}
         >
           {subTitle}
@@ -67,7 +67,7 @@ export const Step: FC<PropsWithChildren<StepProps>> = ({
     >
       {number && (
         <Heading
-          font="Cursive"
+          font="display"
           as="h4"
           level="4"
           color="black"
@@ -107,12 +107,12 @@ export const FormSubmitButton: FC<{
 
   return (
     <FlexDiv className={styles.submitWrapper} gapArray={[2]}>
-      <Button type="submit" variant="primary">
+      <Button type="submit" variant="simple">
         {title}
       </Button>
       {!isValid && (
         <Alert arrow={isMobile ? "bottom" : "left"}>
-          {translations.form.general.requiredAlert}
+          {translations.form.requiredAlert}
         </Alert>
       )}
       {submitText && (
@@ -149,18 +149,18 @@ export const FormSubmitMessage: FC<{
   return (
     <FlexDiv flex={{ direction: "column" }}>
       <Heading
-        font="Outfit"
+        font="title"
         as="h3"
         level="4"
-        color="black"
+        color="grad"
         weight={500}
         textAlign="center"
       >
-        {translations.form.general.emailSent}
-      </Heading>{" "}
-      <Button variant="black" path={`/${locale}${LocalPaths.HOME}`}>
+        {translations.form.emailSent}
+      </Heading>
+      {/* <Button variant="simple" path={`/${locale}${LocalPaths.HOME}`}>
         {translations.nav.home}
-      </Button>
+      </Button> */}
     </FlexDiv>
   );
 };

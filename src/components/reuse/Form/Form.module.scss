@@ -6,14 +6,6 @@
   > * {
     z-index: 1;
   }
-  &::before {
-    content: "";
-    position: absolute;
-    inset: calc(var(--pad-6) * -1);
-    background: white;
-    filter: blur(var(--pad-4));
-    z-index: 0;
-  }
 }
 .form {
   @include flexColumn(flex-start, flex-start);
@@ -44,7 +36,7 @@
 .spinner {
   width: 24px;
   height: 24px;
-  border: 2px solid var(--yellow);
+  border: 2px solid var(--led-green);
   border-top: 2px solid var(--white);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;

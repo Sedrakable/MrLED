@@ -9,7 +9,7 @@ import { SanityImage } from "../../reuse/SanityImage/SanityImage";
 import { useWindowResize } from "../../../helpers/useWindowResize";
 import { getTranslations } from "../../../helpers/langUtils";
 import { useLocale } from "next-intl";
-import { LangType } from "@/i18n";
+import { LangType } from "@/i18n/request";
 import { PortableTextContent } from "@/components/reuse/Paragraph/PortableTextContent";
 
 export const About: React.FC<IAbout> = ({
@@ -50,7 +50,7 @@ export const About: React.FC<IAbout> = ({
             font="Cursive"
             as="h1"
             level="2"
-            color="yellow"
+            color="led-green"
             weight={900}
             paddingBottomArray={[2, 3, 3, 4]}
           >

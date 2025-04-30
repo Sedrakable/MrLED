@@ -13,11 +13,11 @@ export const PortableTextContent: React.FC<PortableTextContentProps> = ({
   textAlign = "left",
   weight = 300,
   level = "regular",
-  differentColorForStrongText = true,
+  // differentColorForStrongText = true,
   className,
   paddingBottomArray,
 }) => {
-  const contastColor = differentColorForStrongText ? `var(--black)` : color;
+  const contastColor = color;
   const quote = (
     <strong
       style={{
@@ -34,7 +34,7 @@ export const PortableTextContent: React.FC<PortableTextContentProps> = ({
       normal: ({ children }) => (
         <Paragraph
           level={level}
-          weight={weight}
+          weight={weight as ParagraphProps["weight"]}
           color={color}
           textAlign={textAlign}
           paddingBottomArray={paddingBottomArray}
@@ -46,7 +46,7 @@ export const PortableTextContent: React.FC<PortableTextContentProps> = ({
       blockquote: ({ children }) => (
         <Paragraph
           level={level}
-          weight={weight}
+          weight={weight as ParagraphProps["weight"]}
           color={color}
           textAlign={textAlign}
           paddingBottomArray={paddingBottomArray}
@@ -88,7 +88,7 @@ export const PortableTextContent: React.FC<PortableTextContentProps> = ({
         <Paragraph
           as="li"
           level={level}
-          weight={weight}
+          weight={weight as ParagraphProps["weight"]}
           color={color}
           paddingBottomArray={paddingBottomArray}
         >
@@ -99,7 +99,7 @@ export const PortableTextContent: React.FC<PortableTextContentProps> = ({
         <Paragraph
           as="li"
           level={level}
-          weight={weight}
+          weight={weight as ParagraphProps["weight"]}
           color={color}
           paddingBottomArray={paddingBottomArray}
         >

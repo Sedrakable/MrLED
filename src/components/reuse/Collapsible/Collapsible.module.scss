@@ -1,39 +1,42 @@
 @use "@/styles/mixins.scss" as *;
 
+.titleWrapper {
+  @include fixedGradBackground();
+  border-radius: var(--border-radius-small);
+}
 .questionToggle {
   @include flex(space-between, center);
   width: 100%;
-  gap: var(--pad-3);
+  gap: var(--pad-5);
   height: fit-content;
 }
 
-.questionToggle:hover .plus {
+.questionToggle:hover .toggleIcon {
   transform: rotate(90deg);
+  svg path {
+    fill: var(--white) !important;
+  }
 }
 
 .question {
   border-bottom: 1px solid var(--grey);
 
+  .toggleIcon {
+    width: fit-content !important;
+  }
   &:has(.minus) {
-    background: var(--grad);
-    border-radius: var(--border-radius);
+    @include fixedGradBackground();
+    border-radius: var(--border-radius-small);
     border-bottom: unset;
   }
-
-  /* Unset border-bottom for the previous question if the next one is open */
-  &:has(+ .question .minus) {
-    border-bottom: unset;
+  .minus {
+    transition: transform var(--transition-time) ease;
+    animation: rotateIcon var(--transition-time) ease;
   }
-
-  /* Remove border-bottom for the last item */
-  &:last-child {
-    border-bottom: unset;
+  .plus {
+    transition: transform var(--transition-time) ease;
+    animation: rotateIcon var(--transition-time) ease;
   }
-}
-
-.plus {
-  transition: transform var(--transition-time) ease;
-  animation: rotateIcon var(--transition-time) ease;
 }
 
 @keyframes rotateIcon {
