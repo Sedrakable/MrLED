@@ -1,33 +1,62 @@
 @use "@/styles/mixins.scss" as *;
 
-@mixin vars() {
-  --font-size-big: var(--paragraph-regular);
+@mixin sizing($level) {
+  font-size: var(--paragraph-p#{$level});
+  line-height: var(--paragraph-line-p#{$level});
+}
+
+@mixin level($desk, $lap, $tab, $mob) {
+  @include sizing($mob);
 
   @media (min-width: $tablet) {
-    --font-size-big: var(--heading-h6);
+    @include sizing($tab);
+  }
+
+  @media (min-width: $laptop) {
+    @include sizing($lap);
+  }
+
+  @media (min-width: $desktop) {
+    @include sizing($desk);
   }
 }
 
 .small {
-  font-size: var(--paragraph-small);
+  font-size: var(--paragraph-h8);
 }
 
 .regular {
-  font-size: var(--paragraph-regular);
+  font-size: var(--paragraph-h8);
+  @media (min-width: $desktop) {
+    font-size: var(--paragraph-h7);
+  }
 }
 
 .big {
-  @include vars;
-  font-size: var(--font-size-big);
+  font-size: var(--paragraph-h7);
+  @media (min-width: $desktop) {
+    font-size: var(--paragraph-h6);
+  }
 }
 
 .paragraph {
+  // font-family: var(--font-outfit);
   width: 100%;
-  line-height: 1.25em;
+  line-height: var(--paragraph-line);
+}
+
+li.paragraph {
+  display: list-item;
+  margin-top: 0.5em;
+  list-style-type: disc !important;
 }
 
 .clickable {
   &:hover {
-    color: var(--burgundy) !important;
+    color: var(--led-green) !important;
   }
+}
+
+.grad {
+  @include fixedGradText();
 }

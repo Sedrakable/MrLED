@@ -1,0 +1,105 @@
+@use "@/styles/mixins.scss" as *;
+
+.inputContainer {
+  width: 100%;
+  position: relative;
+  max-height: fit-content;
+  // overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--border-radius-small);
+
+    @include fixedGradBackground();
+    opacity: 0.1;
+    z-index: -1;
+  }
+  // Apply ::after on hover or when input/textarea is focused
+  &:hover::after,
+  &:has(:focus-visible)::after {
+    $spread: 6px;
+    content: "";
+    position: absolute;
+    inset: -$spread;
+    @include fixedGradBackground();
+    opacity: 0.2;
+    z-index: -2;
+    filter: blur($spread);
+  }
+}
+
+.input,
+.textarea {
+  // Layout
+  width: 100%;
+  padding: 0 var(--pad-4);
+  box-sizing: border-box;
+  border: none;
+  background: transparent;
+  border-radius: var(--border-radius-small);
+  @include vari(height, 56px, 56px, 48px, 56px);
+
+  // Typography
+  @include vari(
+    font-size,
+    var(--paragraph-regular),
+    var(--paragraph-regular),
+    var(--paragraph-small),
+    var(--paragraph-regular)
+  );
+  color: var(--white) !important;
+  text-decoration: none !important;
+
+  // Placeholder
+  &::placeholder {
+    color: var(--white);
+    opacity: 0.4;
+  }
+
+  // States
+  &:focus-visible {
+    background: var(--black) !important;
+    border: 2px solid var(--led-turq);
+    outline: none;
+    box-shadow: none;
+    color: var(--led-turq) !important;
+  }
+
+  &:hover {
+    // Added: Subtle hover effect for better UX
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &:disabled {
+    // Added: Disabled state for accessibility
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // // Apply ::after on hover or focus-visible
+  // &:hover ~ .inputContainer::after,
+  // &:focus-visible ~ .inputContainer::after {
+  //   content: "";
+  //   position: absolute;
+  //   inset: -10px;
+  //   @include fixedGradBackground();
+  //   opacity: 0.3;
+  //   z-index: -2;
+  //   filter: blur(10px);
+  // }
+}
+
+.textarea {
+  @include vari(min-height, 200px, 150px, 150px, 200px);
+  @include vari(max-height, 400px, 300px, 350px, 400px);
+  padding-top: var(--pad-4);
+  overflow-y: hidden; // Prevent scrollbars
+  resize: none; // Disable manual resizing
+}
+
+.invalid {
+  border: 2px solid var(--error);
+  box-shadow: inset -16px 0px 0 var(--error);
+}

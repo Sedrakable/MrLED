@@ -1,0 +1,87 @@
+@use "@/styles/mixins.scss" as *;
+
+// HeroV3 Styles
+.hero {
+  // Shared Variables (used in calculations or multiple places)
+  @include vari(--image-width, 80vw, 50vw, 40vw, 40vw);
+  @include vari(max-height, calc(100vw * 1.5), 75vw, 56.25vw, 56.25vw);
+  min-height: fit-content;
+  height: 75vh;
+  background-color: var(--black);
+  position: relative;
+  overflow-x: clip;
+
+  .imageContainer {
+    width: fit-content;
+    @include vari(height, 120vw, unset);
+    .backgroundImage,
+    .foregroundImage {
+      height: auto !important;
+      position: absolute;
+      top: 50% !important;
+      right: 0 !important;
+      left: unset !important;
+    }
+
+    .foregroundImage {
+      @include vari(--y, -80%, -15%, -40%);
+      @include vari(--image-width, 100vw, 50vw, 40vw, 40vw);
+      width: var(--image-width) !important;
+      z-index: 2;
+      animation: pulse 4s ease-in-out infinite; // Added animation
+    }
+    .backgroundImage {
+      @include vari(--y, -50%, -48%);
+      @include vari(--image-width, 80vw, 60vw, 50vw, 50vw);
+      transform: translateY(var(--y)) !important;
+      width: var(--image-width) !important;
+      min-height: 155%;
+      z-index: 2;
+      mix-blend-mode: screen;
+    }
+  }
+
+  .logo {
+    width: 100%;
+  }
+
+  .content {
+    @include vari(width, 100%, 75vw, 60vw, 60vw);
+    box-sizing: content-box;
+    .subTitle {
+      @include vari(
+        --font-size,
+        22px,
+        26px,
+        var(--heading-title-h6),
+        var(--heading-title-h5)
+      );
+      font-size: var(--font-size) !important;
+    }
+
+    .desc {
+      width: 90%;
+    }
+  }
+
+  @media (min-width: $tablet) {
+    flex-direction: row !important;
+  }
+}
+
+@keyframes pulse {
+  $anim-x: 1%;
+  $anim-scale: 1.05;
+  0% {
+    transform: translateY(var(--y)) scale(1) translateX(0);
+    filter: brightness(0.85);
+  }
+  50% {
+    transform: translateY(var(--y)) scale($anim-scale) translateX($anim-x);
+    filter: brightness(1.15);
+  }
+  100% {
+    transform: translateY(var(--y)) scale(1) translateX(0);
+    filter: brightness(0.85);
+  }
+}

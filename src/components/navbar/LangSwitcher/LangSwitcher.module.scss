@@ -1,0 +1,14 @@
+@use "@/styles/mixins.scss" as *;
+
+.langWrapper {
+  cursor: pointer;
+
+  &:hover {
+    p {
+      color: var(--black) !important;
+    }
+    path {
+      fill: var(--black) !important;
+    }
+  }
+}

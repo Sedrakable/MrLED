@@ -1,0 +1,65 @@
+@use "@/styles/mixins.scss" as *;
+
+.block {
+  position: relative;
+  flex: 1;
+  .content {
+    z-index: 1;
+  }
+
+  .corner {
+    @include vari(width, 80px, 96px, 96px, 132px);
+
+    position: absolute;
+    bottom: 4px;
+  }
+
+  &.var-green {
+    background: radial-gradient(
+      180% 150% at 0% 100%,
+      hsl(from var(--led-green) h s l / 0.3) 0%,
+      hsl(from var(--led-blue) h s l / 0) 66%
+    );
+    .corner {
+      @include vari(left, 4px, 4px, 5px, 6px);
+      path {
+        fill: var(--led-green) !important;
+      }
+    }
+  }
+
+  &.var-blue {
+    background: radial-gradient(
+      180% 150% at 100% 100%,
+      hsl(from var(--led-blue) h s l / 0.3) 0%,
+      hsl(from var(--led-green) h s l / 0) 66%
+    );
+    .corner {
+      @include vari(right, 4px, 4px, 11px, 12px);
+      transform: scaleX(-1);
+      path {
+        fill: var(--led-blue) !important;
+      }
+    }
+  }
+
+  &.size_small {
+    .content {
+      max-width: var(--screen-width-small);
+    }
+  }
+
+  &.size_default {
+    .content {
+      max-width: var(--screen-width-large);
+    }
+  }
+  .title {
+    position: relative;
+    box-sizing: content-box;
+    width: fit-content;
+    .heading {
+      z-index: 1;
+    }
+  }
+}

@@ -1,0 +1,149 @@
+@use "@/styles/mixins.scss" as *;
+
+@mixin vars() {
+  --button-height: 40px;
+  --button-width: 100%;
+  --button-padding: 8px;
+  --button-text-padding: 16px;
+
+  @media (min-width: $tablet) {
+    --button-width: 112px;
+  }
+
+  @media (min-width: $laptop) {
+  }
+
+  @media (min-width: $desktop) {
+    --button-height: 48px;
+    --button-padding: 12px;
+
+    --button-text-padding: 16px;
+  }
+}
+
+@mixin button($bcolor, $url, $x1, $y1, $bor, $col) {
+  background: $bcolor;
+  -webkit-mask: url($url);
+  mask: url($url);
+  -webkit-mask-size: $x1 $y1;
+  mask-size: $x1 $y1;
+  border: $bor;
+  color: $col;
+}
+
+.button {
+  @include vars;
+  @include flex;
+  $outline-width: 2px;
+  position: relative;
+
+  min-width: var(--button-width);
+  width: fit-content;
+  text-decoration: none;
+  box-sizing: border-box;
+  padding: 0 var(--button-padding);
+  transition: var(--transition-time-backoff);
+
+  min-height: var(--button-height);
+  height: var(--button-height);
+  border-radius: var(--border-radius-small);
+
+  p {
+    // @include vari(padding-bottom, 0, 0, 0, 0px);
+    padding: 0 var(--button-text-padding);
+    width: auto !important;
+    transition: var(--transition-time-backoff);
+    text-transform: uppercase !important;
+    letter-spacing: 0.15em;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background: var(--grey) !important;
+  }
+
+  &.onlyIcon {
+    min-width: var(--button-height) !important;
+    height: var(--button-height);
+    width: var(--button-height) !important;
+    box-sizing: content-box;
+    &.small {
+      height: var(--button-height-small) !important;
+      width: var(--button-height-small) !important;
+      box-sizing: border-box;
+    }
+  }
+
+  &.withIcon {
+    gap: var(--pad-3);
+    &.iconRight {
+      > * {
+        &:first-child {
+          padding-right: 0px;
+        }
+        &:last-child {
+          padding-right: var(--pad-1);
+        }
+      }
+    }
+    &.iconLeft {
+      > * {
+        &:first-child {
+          padding-left: 0px;
+        }
+        &:last-child {
+          padding-left: var(--pad-1);
+        }
+      }
+    }
+  }
+  &.primary {
+    background: var(--grad);
+
+    svg,
+    path,
+    polygon {
+      fill: var(--black) !important;
+    }
+    &:hover {
+      // background: var(--white);
+      box-shadow: 0px 0px 8px 0px #feb201, 0px 0px 16px 0px var(--led-green);
+      p {
+        color: var(--white) !important;
+        // font-weight: 900 !important;
+      }
+      svg,
+      path,
+      polygon {
+        fill: var(--white) !important;
+      }
+    }
+  }
+
+  &.simple {
+    @include fixedGradBackground();
+    // outline: $outline-width solid var(--grad);
+    // outline-offset: -$outline-width;
+    &:after {
+      content: "";
+      @include absoluteMiddle();
+      width: calc(100% - ($outline-width * 2));
+      height: calc(100% - ($outline-width * 2));
+      background: var(--black);
+      transition: var(--transition-time-backoff);
+      border-radius: 3px;
+      opacity: 0;
+      z-index: 0;
+    }
+    &:hover {
+      // background: transparent;
+      &:after {
+        opacity: 1;
+      }
+      p {
+        @include fixedGradText();
+        z-index: 1;
+      }
+    }
+  }
+}

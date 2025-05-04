@@ -1,0 +1,55 @@
+@use "@/styles/mixins.scss" as *;
+
+@mixin sizing($font, $size) {
+  font-size: var(--heading-#{$font}-h#{$size});
+  line-height: var(--heading-#{$font}-line);
+}
+
+@mixin level($font, $desk, $lap, $tab, $mob) {
+  @include sizing($font, $mob);
+
+  @media (min-width: $tablet) {
+    @include sizing($font, $tab);
+  }
+
+  @media (min-width: $laptop) {
+    @include sizing($font, $lap);
+  }
+
+  @media (min-width: $desktop) {
+    @include sizing($font, $desk);
+  }
+}
+
+.heading {
+  text-decoration: none !important;
+  &.clickable:hover {
+    color: var(--led-green) !important;
+  }
+}
+
+.title {
+  @for $i from 1 through 5 {
+    &.level#{$i} {
+      @include level(title, $i, $i + 1, $i + 1, $i + 2);
+    }
+    &.level5 {
+      @include level(title, 5, 6, 6, 6);
+    }
+  }
+}
+
+.display {
+  @for $i from 1 through 5 {
+    &.level#{$i} {
+      @include level(title, $i, $i + 1, $i + 1, $i + 1);
+    }
+    &.level5 {
+      @include level(title, 5, 6, 6, 6);
+    }
+  }
+}
+
+.gradient {
+  @include fixedGradText();
+}

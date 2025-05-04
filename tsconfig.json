@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "downlevelIteration": true,
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -30,12 +29,11 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.d.ts",
-    "**/*.d.tsx",
     ".next/types/**/*.ts",
     "./dist/types/**/*.ts",
     "src/app/api/generateSanityQueries.js",
-    "src/app/api/dataBackup.js"
+    "schemas/reuse components/languagets"
+    // "migrations/renameArticle.ts"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,0 +1,49 @@
+@use "@/styles/mixins.scss" as *;
+
+.titleWrapper {
+  @include fixedGradBackground();
+  border-radius: var(--border-radius-small);
+}
+.questionToggle {
+  @include flex(space-between, center);
+  width: 100%;
+  gap: var(--pad-5);
+  height: fit-content;
+}
+
+.questionToggle:hover .toggleIcon {
+  transform: rotate(90deg);
+  svg path {
+    fill: var(--white) !important;
+  }
+}
+
+.question {
+  border-bottom: 1px solid var(--grey);
+
+  .toggleIcon {
+    width: fit-content !important;
+  }
+  &:has(.minus) {
+    @include fixedGradBackground();
+    border-radius: var(--border-radius-small);
+    border-bottom: unset;
+  }
+  .minus {
+    transition: transform var(--transition-time) ease;
+    animation: rotateIcon var(--transition-time) ease;
+  }
+  .plus {
+    transition: transform var(--transition-time) ease;
+    animation: rotateIcon var(--transition-time) ease;
+  }
+}
+
+@keyframes rotateIcon {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
+  }
+}

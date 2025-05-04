@@ -1,0 +1,59 @@
+<svg
+  id="Layer_2"
+  data-name="Layer 2"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 368.000000001433364 464"
+>
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #44b297;
+      }
+
+      .cls-2 {
+        fill: #5090ff;
+      }
+
+      .cls-3 {
+        fill: #38d430;
+      }
+
+      .cls-4 {
+        fill: url(#New_Gradient_Swatch_1);
+      }
+    </style>
+    <linearGradient
+      id="New_Gradient_Swatch_1"
+      data-name="New Gradient Swatch 1"
+      x1="0"
+      y1="0"
+      x2="0"
+      y2="288.000000000716682"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0" stop-color="#5090ff" />
+      <stop offset="1" stop-color="#38d430" />
+    </linearGradient>
+  </defs>
+  <g id="Web_Assets" data-name="Web Assets">
+    <g id="led-animation">
+      <path
+        class="cls-4"
+        d="M32,0v464H0V0h32ZM264.000000000716682,24h-48v416h48V24M268.000000000716682,20v424h-56V20h56ZM284.000000000716682,4h-88v456h88V4M288.000000000716682,0v464h-96V0h96ZM256,32v399.999999999998181h-32V32h32Z"
+      />
+      <path
+        class="cls-3"
+        d="M112,240h32v224h-32v-224ZM336,464h32v-56l-32-32v88ZM367.999999999996362.000000000001819h-31.999999999996362v55.999999999998181l31.999999999996362,31.999999999998181V.000000000001819Z"
+      />
+      <path
+        class="cls-2"
+        d="M112,0h32v224h-32V0ZM336,208l32,32V104l-32-32v136Z"
+      />
+      <polygon
+        class="cls-1"
+        points="368.000000001433364 255.999999998562998 336 224 335.996449062731699 359.99748923064908 367.996449064168701 391.997489229212078 368.000000001433364 255.999999998562998"
+      />
+    </g>
+  </g>
+</svg>

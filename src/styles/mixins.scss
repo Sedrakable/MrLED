@@ -1,11 +1,27 @@
 $tablet: 640px;
-$tablet-plus: 900px;
 $laptop: 1200px;
 $desktop: 1680px;
 
-@mixin sizing($size) {
-  font-size: var(--heading-h#{$size});
-  line-height: var(--heading-h#{$size}-line);
+@mixin vari(
+  $property,
+  $mobile,
+  $tablet-val,
+  $laptop-val: $tablet-val,
+  $desktop-val: $laptop-val
+) {
+  #{$property}: #{$mobile}; // Mobile (base value, applies below $tablet)
+
+  @media (min-width: #{$tablet}) {
+    #{$property}: #{$tablet-val}; // Tablet size
+  }
+
+  @media (min-width: #{$laptop}) {
+    #{$property}: #{$laptop-val}; // Laptop size
+  }
+
+  @media (min-width: #{$desktop}) {
+    #{$property}: #{$desktop-val}; // Desktop size
+  }
 }
 
 @mixin flex($x: center, $y: center) {
@@ -36,13 +52,32 @@ $desktop: 1680px;
   transform: translate(-50%, -50%);
 }
 
-@mixin blurEffect($blur: 1px) {
-  &::before {
-    content: "";
-    @include absoluteFill;
-    opacity: 1;
-    backdrop-filter: blur($blur);
-    background-color: rgba(0, 0, 0, 0.6);
+@mixin fixedGradBackground() {
+  background: var(--grad-main);
+  background-attachment: fixed;
+  background-size: 100vw;
+  background-repeat: no-repeat;
+}
+
+@mixin fixedGradText() {
+  color: var(--grad-main); /* Fallback */
+  background: linear-gradient(90deg, var(--led-green) 0%, var(--led-blue) 100%);
+  background-attachment: fixed;
+  background-size: 100vw;
+  -webkit-background-clip: text;
+  -moz-background-clip: text; /* Rarely needed, but optional */
+  background-clip: text; /* Standard, future-proof */
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin fixedGradSvg() {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  background: transparent;
+
+  path {
+    fill: url(#viewport-gradient) !important;
   }
 }
 
@@ -51,20 +86,4 @@ $desktop: 1680px;
   display: -webkit-box;
   -webkit-line-clamp: $n;
   -webkit-box-orient: vertical;
-}
-
-@mixin level($desk, $lap, $tab, $mob) {
-  @include sizing($mob);
-
-  @media (min-width: $tablet) {
-    @include sizing($tab);
-  }
-
-  @media (min-width: $laptop) {
-    @include sizing($lap);
-  }
-
-  @media (min-width: $desktop) {
-    @include sizing($desk);
-  }
 }

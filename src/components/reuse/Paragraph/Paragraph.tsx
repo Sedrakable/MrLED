@@ -6,34 +6,29 @@ import {
   SpacingArrayType,
   useSpacingGenerator,
 } from "../../../helpers/SpacingGenerator";
-import { ColorType, josefin, TextWeightType } from "../Heading";
+import { ColorType } from "../Heading/Heading";
+import { Montserrat } from "next/font/google";
 
 export interface ParagraphProps {
+  as?: "p" | "li" | "span"; // ✅ Allow different HTML elements
   children: string | ReactNode;
   level: "small" | "regular" | "big";
   textAlign?: CSSProperties["textAlign"];
   paddingBottomArray?: SpacingArrayType;
   color?: ColorType;
-  weight?: TextWeightType;
+  weight?: 400 | 500 | 600;
   capitalise?: boolean;
   clickable?: boolean;
   className?: string;
 }
 
-const processChildren = (children: string | ReactNode) => {
-  if (typeof children === "string") {
-    // Replace newline characters with <br /> elements
-    return children.split("\n")?.map((line, index) => (
-      <React.Fragment key={index}>
-        {line}
-        <br />
-      </React.Fragment>
-    ));
-  }
-  return children;
-};
-
+export const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
 export const Paragraph: React.FC<ParagraphProps> = ({
+  as = "p", // ✅ Allow different HTML elements
   children,
   level = "regular",
   textAlign,
@@ -46,14 +41,17 @@ export const Paragraph: React.FC<ParagraphProps> = ({
 }) => {
   const { spacingNum } = useSpacingGenerator(paddingBottomArray);
 
+  const CustomTag = as as keyof JSX.IntrinsicElements; // ✅ Dynamic HTML tag
+
   return (
-    <p
+    <CustomTag
       className={cn(
         styles.paragraph,
-        josefin.className,
+        montserrat.className,
         styles[level],
         {
           [styles.clickable]: clickable,
+          [styles.grad]: color === "grad",
         },
         className
       )}
@@ -65,7 +63,7 @@ export const Paragraph: React.FC<ParagraphProps> = ({
         paddingBottom: spacingNum && `var(--pad-${spacingNum})`,
       }}
     >
-      {processChildren(children)}
-    </p>
+      {children}
+    </CustomTag>
   );
 };
