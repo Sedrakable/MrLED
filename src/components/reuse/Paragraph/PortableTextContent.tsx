@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import { Paragraph, ParagraphProps } from "./Paragraph";
 

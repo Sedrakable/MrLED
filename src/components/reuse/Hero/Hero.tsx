@@ -1,12 +1,11 @@
 "use client";
-import React, { useRef } from "react";
+import React from "react";
 import styles from "./Hero.module.scss";
 import cn from "classnames";
 import Image from "next/image";
 
 import { IHero } from "../../../data.d";
 import FlexDiv from "../FlexDiv";
-// import Logo from "@/assets/vector/LogoBig.svg";
 
 import { useWindowResize } from "../../../helpers/useWindowResize";
 import TitleFrench from "@/assets/vector/Titles/LedTaVie.svg";
@@ -14,20 +13,13 @@ import { LangType } from "@/i18n/request";
 import { useLocale } from "next-intl";
 import { Button } from "../Button/Button";
 import { Heading } from "../Heading/Heading";
-import { useParallaxScroll } from "@/helpers/useParallaxScroll";
 import { PortableTextContent } from "../Paragraph/PortableTextContent";
 import GradientSvgWrapper from "@/components/containers/GradientSvgWrapper/GradientSvgWrapper";
 
-export const Hero: React.FC<IHero> = ({
-  subTitle,
-  title,
-  desc,
-  cta1,
-  cta2,
-}) => {
+export const Hero: React.FC<IHero> = ({ subTitle, desc, cta1, cta2 }) => {
   const locale = useLocale() as LangType;
   // const translations = getTranslations(locale);
-  const { isMobile, isMobileOrTablet } = useWindowResize();
+  const { isMobileOrTablet } = useWindowResize();
   // const heroRef = useRef<HTMLDivElement>(null);
   // const scrollProgress = useParallaxScroll(heroRef);
 

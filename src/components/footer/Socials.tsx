@@ -3,7 +3,7 @@ import { IconType } from "../reuse/Icon/Icon";
 import FlexDiv from "../reuse/FlexDiv";
 import { ICta, ISocials } from "../../data.d";
 import { IconButton } from "../reuse/IconButton/IconButton";
-import { Heading } from "../reuse/Heading/Heading";
+import { Heading } from "@/components/reuse/Heading/Heading";
 
 export const Socials: React.FC<ISocials> = ({ title, links }) => {
   return (

@@ -1,6 +1,6 @@
 "use client";
 import React, { FC, useState } from "react";
-// import { Heading } from "../../reuse/Heading";
+// import { Heading } from "@/components/reuse/Heading/Heading";
 import styles from "./TabButton.module.scss";
 import cn from "classnames";
 import FlexDiv from "../../reuse/FlexDiv";

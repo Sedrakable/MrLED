@@ -6,7 +6,7 @@ import { LangType } from "@/i18n/request";
 import { INotFound, LocalPaths } from "@/data.d";
 import { Block } from "../containers/Block";
 import { Button } from "../reuse/Button/Button";
-import { Heading } from "../reuse/Heading/Heading";
+import { Heading } from "@/components/reuse/Heading/Heading";
 
 export const NotFoundComp: React.FC<{ data: INotFound; locale: LangType }> = ({
   data,

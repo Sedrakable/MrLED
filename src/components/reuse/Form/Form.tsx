@@ -7,7 +7,6 @@ import { useWindowResize } from "@/helpers/useWindowResize";
 import { StepProps } from "./formTypes";
 import { Paragraph } from "../Paragraph/Paragraph";
 import { Translations } from "@/langs/langTypes";
-import { LocalPaths } from "@/data.d";
 import { LangType } from "@/i18n/request";
 import { Button } from "../Button/Button";
 import { Heading } from "../Heading/Heading";

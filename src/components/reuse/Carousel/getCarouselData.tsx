@@ -1,10 +1,10 @@
 import { carouselQuery } from "@/app/api/generateSanityQueries";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPage } from "@/app/api/fetchPage";
 import { IWork } from "@/data.d";
 
 export const getCarouselData = async () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const carouselData: IWork[] = await useFetchPage(carouselQuery);
+   
+  const carouselData: IWork[] = await fetchPage(carouselQuery);
 
   return carouselData;
 };

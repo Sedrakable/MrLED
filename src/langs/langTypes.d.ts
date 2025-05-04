@@ -1,5 +1,3 @@
-interface Titles {}
-
 interface Buttons {
   contact: string;
   submit: string;

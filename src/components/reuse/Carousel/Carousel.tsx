@@ -7,7 +7,7 @@ import AutoScroll from "embla-carousel-auto-scroll";
 import styles from "./Carousel.module.scss";
 import cn from "classnames";
 
-import { ICta, LocalPaths, LocalTargets } from "@/data.d";
+import { ICta } from "@/data.d";
 
 import { useShuffleArray } from "@/helpers/useShuffleArray";
 import { useLocale } from "next-intl";

@@ -2,8 +2,8 @@ import React, { PropsWithChildren, forwardRef } from "react";
 import styles from "./Block.module.scss";
 import FlexDiv from "../reuse/FlexDiv";
 import cn from "classnames";
-import { Heading, HeadingProps } from "../reuse/Heading/Heading";
-import Corner from "@/assets/vector/Corner.svg";
+import { Heading, HeadingProps } from "@/components/reuse/Heading/Heading";
+import Corner from "@/assets/vector/Graphics/Corner.svg";
 
 interface BlockProps {
   title?: Omit<HeadingProps, "level" | "as">;

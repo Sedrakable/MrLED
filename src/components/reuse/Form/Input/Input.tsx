@@ -6,7 +6,7 @@ import { InputWrapper, InputWrapperProps } from "../InputWrapper/InputWrapper";
 import { montserrat } from "../../Paragraph/Paragraph";
 
 export interface BaseInputProps {
-  // eslint-disable-next-line no-unused-vars
+   
   onChange: (value: string | number) => void;
   placeholder?: string;
   value: string | number;
@@ -44,7 +44,7 @@ export const Input: React.FC<InputProps> = ({
 };
 
 interface TextAreaProps extends InputWrapperProps, BaseInputProps {
-  // eslint-disable-next-line no-unused-vars
+   
   onChange: (value: string) => void;
   placeholder?: string;
   value: string;

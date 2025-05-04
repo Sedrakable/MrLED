@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 interface GradientSvgWrapperProps {
   SvgComponent: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   className?: string;
+  print?: boolean;
 }
 
 export const useViewportGradient = (
@@ -78,10 +79,13 @@ export const LinearGradientSVG: React.FC<{
 const GradientSvgWrapper = ({
   SvgComponent,
   className,
+  print = false,
 }: GradientSvgWrapperProps) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const { gradientId, offset, windowWidth } = useViewportGradient(svgRef);
-
+  if (print) {
+    console.log(gradientId, offset, windowWidth); // Debugging line
+  }
   return (
     <>
       {gradientId && (

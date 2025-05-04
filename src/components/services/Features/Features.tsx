@@ -3,7 +3,6 @@ import React from "react";
 import styles from "./Features.module.scss";
 import cn from "classnames";
 import FlexDiv from "@/components/reuse/FlexDiv";
-import { SanityImage } from "@/components/reuse/SanityImage/SanityImage";
 import { IFeature } from "@/data.d";
 import { useSvgComponent } from "@/helpers/useSvgComponent";
 import { Block } from "@/components/containers/Block";

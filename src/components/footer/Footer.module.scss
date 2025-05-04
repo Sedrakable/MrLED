@@ -9,14 +9,40 @@
   align-self: stretch;
 }
 
+.grid {
+  position: absolute;
+  top: 0;
+  z-index: 0;
+}
 .footer {
   @include flex;
-
+  position: relative;
   --border-width: 4px;
   width: 100vw;
   background: var(--black);
-  border-top: var(--border-width) solid var(--led-green);
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    @include fixedGradBackground();
+    left: 0;
+    right: 0;
+    height: var(--border-width);
+    z-index: 2;
+    // transition-delay: var(--transition-time);
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      hsl(from var(--black) h s l / 0.75) 0%,
+      hsl(from var(--black) h s l / 1) 50%
+    );
 
+    z-index: 1;
+  }
   .container {
     // @include vari(--container-gap, 0px, 0px, 0px, 0px);
     width: var(--screen-width-large);
@@ -24,7 +50,7 @@
     // padding-bottom: var(--container-gap);
     margin: 0 auto;
     position: relative;
-
+    z-index: 2;
     .legal {
       @include vari(--flex-wrap, wrap, nowrap, wrap);
       @include vari(--flex-direction, column, column, row);

@@ -6,7 +6,7 @@ import { useWindowResize } from "../../../helpers/useWindowResize";
 import cn from "classnames";
 import FlexDiv from "../../reuse/FlexDiv";
 
-import Logo from "@/assets/vector/Logo-Wordmark.svg";
+import Logo from "@/assets/vector/Logos/Logo-Wordmark.svg";
 import { ICta, INavBar } from "../../../data.d";
 import { LangSwitcher } from "../LangSwitcher/LangSwitcher";
 import { useAtom } from "jotai";

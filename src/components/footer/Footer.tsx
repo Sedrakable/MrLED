@@ -11,7 +11,9 @@ import { Socials } from "./Socials";
 import { useLocale } from "next-intl";
 import { LangType } from "@/i18n/request";
 import Link from "next/link";
-import LogoWord from "@/assets/vector/Logo-Wordmark.svg";
+import LogoWord from "@/assets/vector/Logos/Logo-Wordmark.svg";
+import Grid from "@/assets/vector/Graphics/footer-grid.svg";
+import GradientSvgWrapper from "../containers/GradientSvgWrapper/GradientSvgWrapper";
 
 const Line: React.FC = () => {
   return <div className={styles.line} />;
@@ -185,6 +187,7 @@ export const Footer: React.FC<FooterProps> = (props) => {
 
   return (
     <footer className={styles.footer}>
+      <GradientSvgWrapper SvgComponent={Grid} className={styles.grid} print />
       {isMobile ? (
         <MobileFooter {...props} />
       ) : isTablet ? (

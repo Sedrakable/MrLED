@@ -8,7 +8,7 @@ import {
   LocalPaths,
   LocalTargets,
 } from "@/data.d";
-import { useFetchPage } from "@/app/api/useFetchPage";
+import { fetchPage } from "@/app/api/fetchPage";
 import { LangType } from "@/i18n/request";
 
 import { homePageQuery } from "../api/generateSanityQueries";
@@ -36,8 +36,7 @@ export interface HomePageProps {
 
 const getHomePageData = async (locale: LangType) => {
   const homeQuery = homePageQuery(locale);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const data: HomePageProps = await useFetchPage(homeQuery);
+  const data: HomePageProps = await fetchPage(homeQuery);
 
   return data;
 };

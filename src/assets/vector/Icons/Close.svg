@@ -1,0 +1,20 @@
+<svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect
+    x="1.57465"
+    y="41.5969"
+    width="56.6"
+    height="4"
+    rx="2"
+    transform="rotate(-45 1.57465 41.5969)"
+    fill="#44B297"
+  />
+  <rect
+    x="4.40308"
+    y="1.57466"
+    width="56.6"
+    height="4"
+    rx="2"
+    transform="rotate(45 4.40308 1.57466)"
+    fill="#44B297"
+  />
+</svg>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./WorkBlock.module.scss";
 import cn from "classnames";
 import FlexDiv from "../../reuse/FlexDiv";
-import { Heading } from "../../../reuse/Heading";
+import { Heading } from "@/components/reuse/Heading/Heading";
 import { Block } from "../../containers/Block";
 import { SanityImage } from "../../reuse/SanityImage/SanityImage";
 import { useScrollToTarget } from "@/helpers/useScrollToTarget";

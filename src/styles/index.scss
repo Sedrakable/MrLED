@@ -73,16 +73,18 @@
   --screen-width-large: 100%;
   --max-height: 1600px;
   --screen-width-large: calc(100vw - var(--pad-8));
-
+  --scrollbar-width: 6px;
   @media (min-width: $tablet) {
     --max-height: 1600px;
     --screen-width-large: calc(100vw - var(--pad-10));
+    --scrollbar-width: 6px;
   }
 
   @media (min-width: $laptop) {
     --navbar-height: 80px;
     --max-height: 1920px;
     --screen-width-large: calc(100vw - var(--pad-11));
+    --scrollbar-width: 6px;
   }
 
   @media (min-width: $desktop) {
@@ -90,5 +92,6 @@
     --screen-width-small: var(--laptop);
     --screen-width-large: calc(var(--desktop) - var(--pad-11));
     --max-height: 2160px !important;
+    --scrollbar-width: 8px;
   }
 }

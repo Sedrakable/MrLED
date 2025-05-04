@@ -1,16 +1,11 @@
 import React, {
-  useState,
   FC,
   PropsWithChildren,
-  ChangeEvent,
-  KeyboardEvent,
   ReactNode,
 } from "react";
 import styles from "./Alert.module.scss";
 import cn from "classnames";
-import { Icon } from "../Icon/Icon";
 import FlexDiv from "../FlexDiv";
-import { josefin } from "../Heading";
 import { Paragraph } from "../Paragraph/Paragraph";
 
 export interface AlertProps {

@@ -8,15 +8,15 @@ import React, {
 import styles from "./Icon.module.scss";
 import cn from "classnames";
 
-import Burger from "@/assets/vector/Burger.svg";
-import Close from "@/assets/vector/Close.svg";
-import Star from "@/assets/vector/Star.svg";
-import Upload from "@/assets/vector/Upload.svg";
-import Minus from "@/assets/vector/Minus.svg";
-import Plus from "@/assets/vector/Plus.svg";
+import Burger from "@/assets/vector/Icons/Burger.svg";
+import Close from "@/assets/vector/Icons/Close.svg";
+import Star from "@/assets/vector/Icons/Star.svg";
+import Upload from "@/assets/vector/Icons/Upload.svg";
+import Minus from "@/assets/vector/Icons/Minus.svg";
+import Plus from "@/assets/vector/Icons/Plus.svg";
 
-import Instagram from "@/assets/vector/Instagram.svg";
-import Facebook from "@/assets/vector/Facebook.svg";
+import Instagram from "@/assets/vector/Icons/Instagram.svg";
+import Facebook from "@/assets/vector/Icons/Facebook.svg";
 
 import { ColorType } from "../Heading/Heading";
 import {

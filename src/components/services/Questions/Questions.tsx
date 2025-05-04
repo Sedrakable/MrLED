@@ -4,7 +4,6 @@ import styles from "./Questions.module.scss";
 import cn from "classnames";
 import { Block } from "@/components/containers/Block";
 import FlexDiv from "@/components/reuse/FlexDiv";
-import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { IQuestion } from "@/data.d";
 import { LangType } from "@/i18n/request";
 import { useLocale } from "next-intl";
