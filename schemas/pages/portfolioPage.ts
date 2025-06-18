@@ -1,8 +1,8 @@
 import { defineType } from "sanity";
 
 export default defineType({
-  name: "aboutPage",
-  title: "About Page",
+  name: "portfolioPage",
+  title: "Portfolio Page",
   type: "document",
   fields: [
     {
@@ -23,17 +23,16 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "about",
-      title: "About",
-      type: "reference",
-      to: { type: "aboutBlock" },
+      name: "portfolioHero",
+      title: "Portfolio Hero",
+      type: "portfolioHero",
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "workBlocks",
-      title: "Work Blocks",
-      type: "array",
-      of: [{ type: "reference", to: { type: "workBlock" } }],
+      name: "workBlock",
+      title: "Work Block",
+      type: "reference",
+      to: { type: "workBlock" },
       validation: (Rule) => Rule.required(),
     },
   ],

@@ -22,6 +22,7 @@
     "embla-carousel-auto-scroll": "^8.5.2",
     "embla-carousel-autoplay": "^8.5.2",
     "embla-carousel-react": "^8.5.2",
+    "fitty": "^2.4.2",
     "framer-motion": "^10.15.1",
     "jotai": "^2.8.0",
     "next": "^15.3.0",

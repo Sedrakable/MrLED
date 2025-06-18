@@ -27,9 +27,13 @@ interface Form {
 
 interface Nav {
   home: string;
-  about: string;
+  portfolio: string;
   contact: string;
   work: string;
+}
+
+interface Other {
+  contactInfo: string;
 }
 
 export interface Translations {
@@ -37,4 +41,5 @@ export interface Translations {
   titles: Titles;
   form: Form;
   nav: Nav;
+  other: Other;
 }

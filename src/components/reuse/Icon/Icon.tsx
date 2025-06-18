@@ -1,10 +1,4 @@
-import React, {
-  cloneElement,
-  ReactElement,
-  ReactNode,
-  useEffect,
-  useRef,
-} from "react";
+import React, { ReactNode } from "react";
 import styles from "./Icon.module.scss";
 import cn from "classnames";
 
@@ -14,19 +8,23 @@ import Star from "@/assets/vector/Icons/Star.svg";
 import Upload from "@/assets/vector/Icons/Upload.svg";
 import Minus from "@/assets/vector/Icons/Minus.svg";
 import Plus from "@/assets/vector/Icons/Plus.svg";
-
 import Instagram from "@/assets/vector/Icons/Instagram.svg";
 import Facebook from "@/assets/vector/Icons/Facebook.svg";
 
 import { ColorType } from "../Heading/Heading";
-import {
-  LinearGradientSVG,
-  useViewportGradient,
-} from "@/components/containers/GradientSvgWrapper/GradientSvgWrapper";
+import GradientSvgWrapper from "@/components/containers/GradientSvgWrapper/GradientSvgWrapper";
 
-const icons: {
-  [key: string]: ReactNode;
-} = {
+// Create gradient-enabled versions of each icon
+const GradientBurger = () => <GradientSvgWrapper SvgComponent={Burger} />;
+const GradientClose = () => <GradientSvgWrapper SvgComponent={Close} />;
+const GradientStar = () => <GradientSvgWrapper SvgComponent={Star} />;
+const GradientUpload = () => <GradientSvgWrapper SvgComponent={Upload} />;
+const GradientMinus = () => <GradientSvgWrapper SvgComponent={Minus} />;
+const GradientPlus = () => <GradientSvgWrapper SvgComponent={Plus} />;
+const GradientInstagram = () => <GradientSvgWrapper SvgComponent={Instagram} />;
+const GradientFacebook = () => <GradientSvgWrapper SvgComponent={Facebook} />;
+
+const icons: { [key: string]: ReactNode } = {
   instagram: <Instagram />,
   facebook: <Facebook />,
   burger: <Burger />,
@@ -37,16 +35,23 @@ const icons: {
   plus: <Plus />,
 };
 
+const gradientIcons: { [key: string]: ReactNode } = {
+  instagram: <GradientInstagram />,
+  facebook: <GradientFacebook />,
+  burger: <GradientBurger />,
+  close: <GradientClose />,
+  star: <GradientStar />,
+  upload: <GradientUpload />,
+  minus: <GradientMinus />,
+  plus: <GradientPlus />,
+};
+
 export const IconTypeArray = Object.keys(icons) as Array<keyof typeof icons>;
-
 export type IconType = typeof IconTypeArray[number];
-
 export const isIcon = (x: any): x is IconType => IconTypeArray.includes(x);
 
 export const Rotations = [90, 180, 270] as const;
-
 export type RotateType = typeof Rotations[number];
-
 export type IconSizes = "extra-small" | "small" | "regular";
 
 export interface IconProps {
@@ -64,48 +69,22 @@ export const Icon: React.FC<IconProps> = ({
   size = "regular",
   className,
 }) => {
-  const svgRef = useRef<SVGSVGElement>(null);
-  const { gradientId, offset, windowWidth } = useViewportGradient(
-    svgRef,
-    color === "grad"
-  );
-
   if (!isIcon(icon)) {
     console.error(`Icon ${icon} not found`);
     return null;
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    if (svgRef.current && color === "grad") {
-      // Apply fill to all svg, path, and polygon elements
-      const elements = svgRef.current.querySelectorAll(
-        "svg, path, polygon,rect"
-      );
-      elements.forEach((element) => {
-        element.setAttribute("fill", `url(#${gradientId})`);
-      });
-    }
-  }, [gradientId, color]);
+  const iconToRender = color === "grad" ? gradientIcons[icon] : icons[icon];
 
   return (
-    <>
-      {color === "grad" && (
-        <LinearGradientSVG
-          gradientId={gradientId}
-          offset={offset}
-          windowWidth={windowWidth}
-        />
-      )}
-      <span
-        className={cn(styles.icon, className, {
-          [styles[`rotate_${rotate}deg`]]: rotate,
-          [styles[`icon_${color}`]]: color !== "grad" && color, // Apply color only if gradient is false
-          [styles[size]]: size,
-        })}
-      >
-        {cloneElement(icons[icon] as ReactElement, { ref: svgRef })}
-      </span>
-    </>
+    <span
+      className={cn(styles.icon, className, {
+        [styles[`rotate_${rotate}deg`]]: rotate,
+        [styles[`icon_${color}`]]: color !== "grad" && color,
+        [styles[size]]: size,
+      })}
+    >
+      {iconToRender}
+    </span>
   );
 };

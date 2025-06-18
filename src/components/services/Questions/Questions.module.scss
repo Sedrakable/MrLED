@@ -39,6 +39,10 @@
   }
   .desc {
     z-index: 1;
+    padding: 0 var(--pad-4);
+    width: 100%;
+    box-sizing: border-box;
+    text-align: justify !important;
   }
   ul,
   ol {

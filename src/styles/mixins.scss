@@ -60,8 +60,9 @@ $desktop: 1680px;
 }
 
 @mixin fixedGradText() {
-  color: var(--grad-main); /* Fallback */
+  color: var(--grad-main) !important; /* Fallback */
   background: linear-gradient(90deg, var(--led-green) 0%, var(--led-blue) 100%);
+  background-position: 0 0;
   background-attachment: fixed;
   background-size: 100vw;
   -webkit-background-clip: text;

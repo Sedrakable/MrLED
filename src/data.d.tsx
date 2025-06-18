@@ -6,7 +6,7 @@ export type DigitalServiceType = "branding" | "web-design";
 export interface ISeo {
   metaTitle: string;
   metaDesc: string;
-  metaKeywords: string[];
+  metaImage?: string;
 }
 
 export interface ICta {
@@ -26,6 +26,13 @@ export interface IHero {
   desc: any;
   cta1: ICta;
   cta2?: ICta;
+}
+
+export interface IHeroV2 {
+  title: string;
+  subTitle?: string;
+  desc: any;
+  images: ICustomImage[]; // Sanity image asset
 }
 
 export interface IFeature {
@@ -57,18 +64,19 @@ export interface IAbout {
 }
 
 export interface IWorkBlock {
-  title: string;
+  titleFR: string;
+  titleEN: string;
   works: IWork[];
-  id: LocalTargets; // For anchor scrolling
 }
 
 export interface IWork {
-  title?: string; // Optional for gallery
+  // title: string; // Optional for gallery
+  descEN?: any; // Optional description in English
+  descFR?: any;
   thumbnailImage: ICustomImage; // Sanity image asset
-  slug?: ISlug; // Optional for internal links
-  link?: string; // External URL (e.g., Behance, Kickstarter)
+  slug: ISlug; // Optional for internal links
   images?: ICustomImage[]; // For modal slider (Wood Signs)
-  isFullWidth?: boolean; // For Branding
+  date?: string; // Optional date for projects
 }
 
 export interface ISocials {
@@ -116,12 +124,12 @@ export interface INotFound {
 
 export enum LocalPaths {
   HOME = "/",
-  WORK = "/work",
+  PORTFOLIO = "/portfolio",
   CONTACT = "/contact",
   LEGAL = "/legal",
 }
 
 export enum LocalTargets {
-  HOMEFORM = "#home-form",
+  CONTACTFORM = "#contact-form",
   HOMEFAQ = "#home-faq",
 }

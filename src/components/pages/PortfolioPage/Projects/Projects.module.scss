@@ -1,0 +1,42 @@
+@use "@/styles/mixins.scss" as *;
+
+.projects {
+}
+
+.card {
+  position: relative;
+  @include fixedGradBackground();
+  border-radius: 8px;
+  &:hover {
+    &::before {
+      inset: 0px;
+      filter: blur(16px);
+      transition: var(--transition-time) ease;
+    }
+    .image {
+      img {
+        transform: scale(1.05);
+        transition: var(--transition-time) ease;
+      }
+    }
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    transition: var(--transition-time-backoff);
+    @include fixedGradBackground;
+    filter: blur(12px);
+  }
+  .text {
+    z-index: 1;
+  }
+  .image {
+    aspect-ratio: 4/3;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    img {
+      transition: var(--transition-time-backoff);
+    }
+  }
+}

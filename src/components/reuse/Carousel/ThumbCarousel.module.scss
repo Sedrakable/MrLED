@@ -47,7 +47,8 @@
 .thumbs {
   @include vars;
   .viewport {
-    overflow: hidden;
+    overflow: visible;
+    overflow-x: clip;
     .container {
       height: var(--thumb-height);
     }
@@ -55,8 +56,36 @@
 }
 
 .thumb {
+  position: relative;
   height: 100%;
   aspect-ratio: 1;
+  cursor: pointer;
+  &.selected {
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0px;
+      outline: 2px solid var(--led-turq);
+      outline-offset: -2px;
+      border-radius: var(--border-radius);
+      background: hsl(from var(--led-turq) h s l / 0.5);
+    }
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    transition: var(--transition-time-backoff);
+    @include fixedGradBackground;
+    filter: blur(6px);
+    opacity: 0;
+  }
+  &:hover {
+    &::before {
+      opacity: 1;
+      transition: var(--transition-time) ease;
+    }
+  }
   .image {
     height: 100% !important;
     width: 100% !important;

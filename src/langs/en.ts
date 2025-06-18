@@ -29,8 +29,12 @@ export const enTranslations: Translations = {
   },
   nav: {
     home: "Home",
-    about: "About + Work",
+
+    portfolio: "Portfolio",
     contact: "Contact",
     work: "Work",
+  },
+  other: {
+    contactInfo: "Contact Information",
   },
 };

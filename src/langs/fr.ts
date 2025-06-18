@@ -29,8 +29,11 @@ export const frTranslations: Translations = {
   },
   nav: {
     home: "Accueil",
-    about: "À propos+Travail",
+    portfolio: "Portfolio",
     contact: "Contact",
     work: "Travail",
+  },
+  other: {
+    contactInfo: "Informations de contact",
   },
 };

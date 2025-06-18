@@ -24,6 +24,8 @@ import { ImageAndForm } from "@/components/pages/ContactPage/ImageAndForm/ImageA
 import { Collapsible } from "@/components/reuse/Collapsible/Collapsible";
 import { Hero } from "@/components/reuse/Hero/Hero";
 import { getTranslations } from "@/helpers/langUtils";
+import { Metadata } from "next";
+import { setMetadata } from "../api/SEO";
 
 export interface HomePageProps {
   meta: ISeo;
@@ -35,32 +37,39 @@ export interface HomePageProps {
 }
 
 const getHomePageData = async (locale: LangType) => {
-  const homeQuery = homePageQuery(locale);
-  const data: HomePageProps = await fetchPage(homeQuery);
+  try {
+    const homeQuery = homePageQuery(locale);
+    const data: HomePageProps = await fetchPage(homeQuery);
 
-  return data;
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch landing page data:", error);
+    return null;
+  }
 };
 
-// export async function generateMetadata({
-//   params: { locale },
-// }: {
-//   params: { locale: LangType };
-// }): Promise<Metadata> {
-//   const path = `${LocalPaths.WOOD}`;
-//   const crawl = true;
-//   const data: HomePageProps = await getHomePageData(locale);
-//   const { metaTitle, metaDesc, metaKeywords } = data.meta;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: LangType }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const path = "";
+  const crawl = true;
+  const homePageData = await getHomePageData(locale);
 
-//   return setMetadata({
-//     locale,
-//     metaTitle,
-//     metaDesc,
-//     metaKeywords,
-//     path,
-//     crawl,
-//   });
-// }
+  // Add fallback values in case landingPageData is null
+  const metaTitle = homePageData?.meta?.metaTitle || "MR LED";
+  const metaDesc = homePageData?.meta?.metaDesc || "MR LED";
 
+  return setMetadata({
+    locale,
+    metaTitle,
+    metaDesc,
+    path,
+    crawl,
+  });
+}
 export default async function HomePage({
   params,
 }: {
@@ -82,7 +91,7 @@ export default async function HomePage({
             cta1={{
               text: translations.buttons.contact,
               path: `/${locale}${LocalPaths.HOME}`,
-              scrollTarget: LocalTargets.HOMEFORM,
+              scrollTarget: LocalTargets.CONTACTFORM,
             }}
           />
         )}

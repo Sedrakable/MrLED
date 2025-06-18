@@ -6,7 +6,7 @@
     height="4"
     rx="2"
     transform="rotate(-45 1.57465 41.5969)"
-    fill="#44B297"
+    data-gradient="gradient"
   />
   <rect
     x="4.40308"
@@ -15,6 +15,6 @@
     height="4"
     rx="2"
     transform="rotate(45 4.40308 1.57466)"
-    fill="#44B297"
+    data-gradient="gradient"
   />
 </svg>
