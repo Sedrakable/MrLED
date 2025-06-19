@@ -21,14 +21,14 @@ export const InputWrapper: React.FC<PropsWithChildren<InputWrapperProps>> = ({
     <FlexDiv
       className={styles.inputContainer}
       flex={{ direction: "column" }}
-      gapArray={[2]}
+      gapArray={[1, 2]}
       as="label"
     >
       <Paragraph
         level="small"
-        color={isInvalid ? "error" : "grad"} // Red color on invalid
+        color={isInvalid ? "error" : "white"} // Red color on invalid
         className={styles.label}
-        weight={500}
+        weight={400}
       >
         {label} {required && <span className={styles.required}>*</span>}
       </Paragraph>

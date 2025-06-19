@@ -1,0 +1,22 @@
+@use "@/styles/mixins.scss" as *;
+
+.backdrop {
+  @include absoluteFill;
+  @include flex(center, flex-start);
+
+  backdrop-filter: blur(2px);
+  @include fixedGradBackground();
+  background: linear-gradient(
+    -90deg,
+    hsl(from var(--led-blue) h s l / 0.1) 0%,
+    hsl(from var(--led-green) h s l / 0.1) 100%
+  ) !important;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  overflow-y: scroll;
+  padding: var(--pad-9) 0;
+  box-sizing: border-box;
+  cursor: pointer;
+}

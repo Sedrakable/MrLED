@@ -8,8 +8,8 @@ import navbar from "./ref components/navbar";
 import aboutBlock from "./blocks/aboutBlock";
 import customImage from "./reuse components/customImage";
 import language from "./reuse components/language";
-// import aboutPage from "./pages/aboutPage";
-// import contactPage from "./pages/contactPage";
+import contactPage from "./pages/contactPage";
+import contactHero from "./reuse components/contactHero";
 import formfields from "./reuse components/formfields";
 import socials from "./ref components/socials";
 import notFoundPage from "./pages/notFoundPage";
@@ -30,20 +30,25 @@ import featureBlock from "./blocks/featureBlock";
 import localTarget from "./reuse components/localTarget";
 import questionBlock from "./blocks/questionBlock";
 import reviewBlock from "./blocks/reviewBlock";
+import portfolioPage from "./pages/portfolioPage";
+import portfolioHero from "./reuse components/portfolioHero";
+import workBlock from "./blocks/workBlock";
 
 export const schemaTypes = [
   homePage,
-  // aboutPage,
-  // contactPage,
+  portfolioPage,
+  contactPage,
   notFoundPage,
   legalPage,
   navbar,
   footer,
   hero,
-
+  contactHero,
+  portfolioHero,
   aboutBlock,
   // workBlock,
   work,
+  workBlock,
   featureBlock,
   questionBlock,
   reviewBlock,

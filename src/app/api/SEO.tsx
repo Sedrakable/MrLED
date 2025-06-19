@@ -1,97 +1,41 @@
 import { Metadata } from "next";
 import { LangType } from "@/i18n/request";
 import { ISeo } from "@/data.d";
+
 interface SEOProps extends ISeo {
   locale: LangType;
   path: string;
   crawl?: boolean;
 }
+
 export const setMetadata = ({
   locale,
   metaTitle,
   metaDesc,
-  metaKeywords,
+  metaImage = "https://i.imgur.com/u9EH6vH.png",
   path,
-  crawl,
+  crawl = true,
 }: SEOProps): Metadata => {
-  const metadata: Metadata = {
-    title: metaTitle,
-    description: metaDesc,
-    keywords: metaKeywords,
-    authors: [
-      {
-        name: "Sedrak Nadzharyan",
-        url: "https://www.linkedin.com/in/sedrak-n/",
-      },
-    ],
-    robots: {
-      index: crawl,
-      follow: crawl,
-    },
+  const baseUrl = process.env.BASE_NAME;
+  const canonicalUrl = `${baseUrl}/${locale}${path}`;
+  return {
+    title: metaTitle || "MR LED",
+    description: metaDesc || "Explore work by MR LED.",
+    robots: { index: crawl, follow: crawl },
     openGraph: {
-      url: `https://www.setoxarts.com/${locale}${path}`,
+      url: canonicalUrl,
       type: "website",
-      title: metaTitle,
-      description: metaDesc,
-      locale: locale,
-      images: [
-        {
-          url: "https://i.imgur.com/u9EH6vH.png",
-          width: 1200,
-          height: 630,
-          alt: "Seto X Arts",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: metaTitle,
-      description: metaDesc,
-      site: "@SetoXArts",
-      images: [
-        {
-          url: "https://i.imgur.com/u9EH6vH.png",
-          width: 1200,
-          height: 630,
-          alt: "Seto X Arts",
-        },
-      ],
+      title: metaTitle || "MR LED",
+      description: metaDesc || "Explore work by MR LED.",
+      locale,
+      images: [{ url: metaImage, width: 1200, height: 630, alt: "MR LED" }],
     },
     alternates: {
-      canonical: `https://www.setoxarts.com/${locale}${path}`,
+      canonical: canonicalUrl,
       languages: {
-        en: `https://www.setoxarts.com/en${path}`,
-        fr: `https://www.setoxarts.com/fr${path}`,
+        en: `https://www.mrled.com/en${path}`,
+        fr: `https://www.mrled.com/fr${path}`,
       },
     },
   };
-
-  return metadata;
 };
-
-// export const JsonLD = () => (
-//   <DynamicBreadcrumbJsonLd
-//     itemListElements={[
-//       {
-//         position: 1,
-//         name: "Home",
-//         item: "https://setoxarts.com",
-//       },
-//       {
-//         position: 2,
-//         name: "Branding",
-//         item: "https://setoxarts.com/en/service/branding",
-//       },
-//       {
-//         position: 3,
-//         name: "Web Design",
-//         item: "https://setoxarts.com/en/service/web-design",
-//       },
-//       {
-//         position: 4,
-//         name: "Contact",
-//         item: "https://setoxarts.com/en/contact",
-//       },
-//     ]}
-//   />
-// );

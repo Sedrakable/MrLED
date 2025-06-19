@@ -1,6 +1,7 @@
 // svgo.config.mjs
 export default {
   multipass: true,
+
   plugins: [
     {
       name: "removeDimensions",

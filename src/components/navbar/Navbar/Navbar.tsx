@@ -75,7 +75,7 @@ export const Navbar: React.FC<INavBar> = ({ links, navButton, socials }) => {
                       <li key={key}>
                         <TabButton
                           className={styles.tab}
-                          path={`/${locale}${link.path!}`}
+                          path={`${link.path!}`}
                         >
                           {link.text}
                         </TabButton>
@@ -84,7 +84,7 @@ export const Navbar: React.FC<INavBar> = ({ links, navButton, socials }) => {
                   );
                 })}
 
-                <li style={{ visibility: scrolled ? "visible" : "hidden" }}>
+                <li>
                   <NavButton {...navButton} />
                 </li>
               </FlexDiv>

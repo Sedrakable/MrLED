@@ -12,7 +12,7 @@ import { Button } from "../Button/Button";
 import { Heading } from "../Heading/Heading";
 
 export interface FormTitleProps {
-  title: string;
+  title?: string;
   subTitle?: string;
   alignText?: "left" | "center";
 }
@@ -22,35 +22,38 @@ export const FormTitles: FC<FormTitleProps> = ({
   alignText = "center",
 }) => {
   return (
-    <FlexDiv
-      width100
-      flex={{
-        direction: "column",
-        x: alignText == "center" ? "center" : "flex-start",
-      }}
-      className={styles.formTitles}
-    >
-      <Heading
-        font="title"
-        as="h3"
-        level="5"
-        color="grad"
-        weight={600}
-        textAlign={alignText}
+    title && (
+      <FlexDiv
+        width100
+        flex={{
+          direction: "column",
+          x: alignText == "center" ? "center" : "flex-start",
+        }}
+        className={styles.formTitles}
       >
-        {title}
-      </Heading>
-      {subTitle && (
-        <Paragraph
-          level="regular"
-          color="white"
-          weight={400}
+        <Heading
+          font="title"
+          as="h3"
+          level="5"
+          color="grad"
+          weight={600}
           textAlign={alignText}
+          paddingBottomArray={[3, 2, 3, 4]}
         >
-          {subTitle}
-        </Paragraph>
-      )}
-    </FlexDiv>
+          {title}
+        </Heading>
+        {subTitle && (
+          <Paragraph
+            level="regular"
+            color="white"
+            weight={400}
+            textAlign={alignText}
+          >
+            {subTitle}
+          </Paragraph>
+        )}
+      </FlexDiv>
+    )
   );
 };
 export const Step: FC<PropsWithChildren<StepProps>> = ({
@@ -89,7 +92,7 @@ export const Step: FC<PropsWithChildren<StepProps>> = ({
 
 export const MultiColumn: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <FlexDiv gapArray={[3, 3, 3, 4]} width100 wrap>
+    <FlexDiv gapArray={[4, 3, 3, 4]} width100 wrap>
       {children}
     </FlexDiv>
   );
