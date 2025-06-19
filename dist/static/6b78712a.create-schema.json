@@ -162,6 +162,199 @@
   {
     "fields": [
       {
+        "name": "hiddenTitle",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "meta",
+        "type": "seo"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "English",
+              "value": "en"
+            },
+            {
+              "title": "French",
+              "value": "fr"
+            }
+          ],
+          "layout": "dropdown"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "en",
+                  "fr"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "lang",
+        "type": "language",
+        "title": "Language"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "portfolioHero",
+        "type": "portfolioHero"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "workBlock"
+          }
+        ],
+        "name": "workBlock",
+        "type": "reference"
+      }
+    ],
+    "name": "portfolioPage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "hiddenTitle",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "meta",
+        "type": "seo"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "English",
+              "value": "en"
+            },
+            {
+              "title": "French",
+              "value": "fr"
+            }
+          ],
+          "layout": "dropdown"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "en",
+                  "fr"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "lang",
+        "type": "language",
+        "title": "Language"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "contactHero",
+        "type": "contactHero"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "collapsible"
+          }
+        ],
+        "name": "collapsible",
+        "type": "reference",
+        "title": "Collapsible FAQ"
+      }
+    ],
+    "name": "contactPage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
         "options": {
           "list": [
             {
@@ -674,14 +867,92 @@
         "name": "desc",
         "type": "customParagraph",
         "title": "Description"
-      },
-      {
-        "name": "cta1",
-        "type": "cta",
-        "title": "Call to Action"
       }
     ],
     "name": "hero",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "subTitle",
+        "type": "string",
+        "title": "Subtitle"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "contactInfos",
+        "type": "array"
+      }
+    ],
+    "name": "contactHero",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "desc",
+        "type": "text",
+        "title": "description"
+      }
+    ],
+    "name": "portfolioHero",
     "type": "document"
   },
   {
@@ -770,7 +1041,7 @@
               },
               {
                 "flag": "presence",
-                "constraint": "optional"
+                "constraint": "required"
               }
             ],
             "level": "error"
@@ -794,6 +1065,16 @@
         "type": "seo"
       },
       {
+        "name": "descEN",
+        "type": "text",
+        "title": "Description English"
+      },
+      {
+        "name": "descFR",
+        "type": "text",
+        "title": "Description French"
+      },
+      {
         "validation": [
           {
             "rules": [
@@ -807,10 +1088,6 @@
         ],
         "name": "thumbnailImage",
         "type": "customImage"
-      },
-      {
-        "name": "title",
-        "type": "string"
       },
       {
         "validation": [
@@ -846,44 +1123,78 @@
         "title": "Additional Images"
       },
       {
+        "name": "date",
+        "type": "date"
+      }
+    ],
+    "name": "work",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "hiddenTitle",
+        "type": "string"
+      },
+      {
         "validation": [
           {
             "rules": [
               {
-                "flag": "uri",
-                "constraint": {
-                  "options": {
-                    "scheme": [
-                      "/^http$/",
-                      "/^https$/"
-                    ],
-                    "allowRelative": false,
-                    "relativeOnly": false,
-                    "allowCredentials": false
-                  }
-                }
+                "flag": "presence",
+                "constraint": "required"
               }
             ],
             "level": "error"
           }
         ],
-        "description": "External URL (e.g., Behance, Kickstarter). Optional.",
-        "name": "link",
-        "type": "url",
-        "title": "External Link"
+        "name": "title",
+        "type": "string"
       },
       {
-        "name": "descEN",
-        "type": "text",
-        "title": "Description English"
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "titleFR",
+        "type": "string",
+        "title": "Title French"
       },
       {
-        "name": "descFR",
-        "type": "text",
-        "title": "Description French"
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "to": [
+              {
+                "type": "work"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to work"
+          }
+        ],
+        "name": "works",
+        "type": "array"
       }
     ],
-    "name": "work",
+    "name": "workBlock",
     "type": "document"
   },
   {
@@ -1621,21 +1932,6 @@
             "/privacy-policy"
           ]
         },
-        "validation": [
-          {
-            "rules": [
-              {
-                "flag": "valid",
-                "constraint": [
-                  "/",
-                  "/terms-and-conditions",
-                  "/privacy-policy"
-                ]
-              }
-            ],
-            "level": "error"
-          }
-        ],
         "name": "link",
         "type": "localPath"
       },
@@ -1647,21 +1943,6 @@
             "#wood-faq"
           ]
         },
-        "validation": [
-          {
-            "rules": [
-              {
-                "flag": "valid",
-                "constraint": [
-                  "#branding-faq",
-                  "#web-faq",
-                  "#wood-faq"
-                ]
-              }
-            ],
-            "level": "error"
-          }
-        ],
         "name": "target",
         "type": "localTarget"
       }
@@ -1677,21 +1958,6 @@
         "/privacy-policy"
       ]
     },
-    "validation": [
-      {
-        "rules": [
-          {
-            "flag": "valid",
-            "constraint": [
-              "/",
-              "/terms-and-conditions",
-              "/privacy-policy"
-            ]
-          }
-        ],
-        "level": "error"
-      }
-    ],
     "name": "localPath",
     "type": "string"
   },
@@ -1703,21 +1969,6 @@
         "#wood-faq"
       ]
     },
-    "validation": [
-      {
-        "rules": [
-          {
-            "flag": "valid",
-            "constraint": [
-              "#branding-faq",
-              "#web-faq",
-              "#wood-faq"
-            ]
-          }
-        ],
-        "level": "error"
-      }
-    ],
     "name": "localTarget",
     "type": "string"
   },
