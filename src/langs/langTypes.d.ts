@@ -38,7 +38,6 @@ interface Other {
 
 export interface Translations {
   buttons: Buttons;
-  titles: Titles;
   form: Form;
   nav: Nav;
   other: Other;

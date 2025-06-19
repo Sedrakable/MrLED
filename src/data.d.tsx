@@ -1,8 +1,5 @@
 import { ICustomImage } from "./components/reuse/SanityImage/SanityImage";
 
-export type ServiceType = "wood" | "digital";
-export type DigitalServiceType = "branding" | "web-design";
-
 export interface ISeo {
   metaTitle: string;
   metaDesc: string;
@@ -28,13 +25,6 @@ export interface IHero {
   cta2?: ICta;
 }
 
-export interface IHeroV2 {
-  title: string;
-  subTitle?: string;
-  desc: any;
-  images: ICustomImage[]; // Sanity image asset
-}
-
 export interface IFeature {
   svgName?: string; // Optional SVG name
   title: string;
@@ -53,13 +43,6 @@ export interface IReview {
 
 export interface IQuestion {
   title: string;
-  desc: any;
-}
-
-export interface IAbout {
-  profileImage: ICustomImage;
-  title: string;
-  subTitle: string;
   desc: any;
 }
 

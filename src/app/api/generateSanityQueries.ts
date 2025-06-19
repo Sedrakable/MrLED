@@ -73,6 +73,12 @@ export const workPageQuery = (slug: string): string => {
   }`;
 };
 
+export const sitemapWorkQuery: string = `*[_type == 'work']{
+  images,
+  slug,
+  _updatedAt,
+  }`;
+
 export const formQuery = (slug: string, locale: LangType): string => {
   return `*[_type == '${slug}Form' && lang == '${locale}'][0]`;
 };

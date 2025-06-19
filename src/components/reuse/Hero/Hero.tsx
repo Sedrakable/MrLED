@@ -107,6 +107,7 @@ export const Hero: React.FC<IHero> = ({ subTitle, desc, cta1, cta2 }) => {
       <div className={styles.imageContainer}>
         <Image
           src={`/photos/hero-background.png`}
+          priority
           fill
           alt="stroke"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -114,6 +115,7 @@ export const Hero: React.FC<IHero> = ({ subTitle, desc, cta1, cta2 }) => {
         />
         <Image
           src={`/photos/hero-foreground.png`}
+          priority
           fill
           alt="stroke"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

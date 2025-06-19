@@ -84,6 +84,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, socials }) => {
         level={isSubTab ? "regular" : "big"}
         className={isSubTab ? styles.subTab : undefined}
         weight={500}
+        as="li"
       >
         {text}
       </Paragraph>,
@@ -123,7 +124,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, socials }) => {
 
         {/* Cleanup: Reordered LangSwitcher and Button for logical flow */}
         {renderTabWrapper(
-          <FlexDiv flex={{ x: "space-between" }} gapArray={[4]} width100>
+          <FlexDiv
+            flex={{ x: "space-between" }}
+            gapArray={[4]}
+            width100
+            as={"li"}
+          >
             <LangSwitcher onClick={() => setIsOpen(false)} />
             {socials && <Socials {...socials} />}
           </FlexDiv>
@@ -133,6 +139,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, socials }) => {
             variant="simple"
             path={`/${locale}${LocalPaths.CONTACT}`}
             onClick={() => setIsOpen(false)}
+            as={"li"}
           >
             {translations.buttons.contact}
           </Button>

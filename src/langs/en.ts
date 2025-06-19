@@ -1,7 +1,6 @@
 import { Translations } from "./langTypes";
 
 export const enTranslations: Translations = {
-  titles: {},
   buttons: {
     contact: "Contact",
     submit: "Submit",
