@@ -31,7 +31,7 @@ export const Collapsible: React.FC<ICollapsible> = ({ title, questions }) => {
             flex={{ x: "flex-start" }}
             padding={{ all: [3], left: [4] }}
           >
-            <Heading font="title" level="4" as="h3" color="black" weight={400}>
+            <Heading font="title" level="4" as="h2" color="black" weight={400}>
               {title}
             </Heading>
           </FlexDiv>

@@ -17,7 +17,6 @@ const Question: React.FC<IQuestion> = ({ title, desc }) => {
       flex={{ direction: "column", y: "flex-start" }}
       width100
       gapArray={[4, 4, 4, 4]}
-      as="li"
     >
       <FlexDiv
         padding={{ horizontal: [5], bottom: [3], top: [3] }}
@@ -102,7 +101,7 @@ export const Questions: React.FC<QuestionBlockProps> = ({
       >
         {questions?.map((question: IQuestion, key) => {
           return (
-            <AnimatedWrapper from="inside" key={key}>
+            <AnimatedWrapper from="inside" key={key} as="li">
               <Question {...question} />
             </AnimatedWrapper>
           );

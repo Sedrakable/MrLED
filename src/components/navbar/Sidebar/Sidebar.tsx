@@ -48,7 +48,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, socials }) => {
         })}
         flex={{ x: "flex-start" }}
         padding={{ horizontal: [6, 8], vertical: [5, 5] }}
-        as="li"
+        as={path ? "div" : "li"}
         width100
       >
         {child}
@@ -56,15 +56,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, socials }) => {
     );
     if (path) {
       return (
-        <Link
-          href={path}
-          aria-label={path}
-          style={{ width: "100%" }}
-          key={key}
-          onClick={() => setIsOpen(false)}
-        >
-          {content}
-        </Link>
+        <li>
+          <Link
+            href={path}
+            aria-label={path}
+            style={{ width: "100%" }}
+            key={key}
+            onClick={() => setIsOpen(false)}
+          >
+            {content}
+          </Link>
+        </li>
       );
     } else {
       return content;
@@ -84,7 +86,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, socials }) => {
         level={isSubTab ? "regular" : "big"}
         className={isSubTab ? styles.subTab : undefined}
         weight={500}
-        as="li"
       >
         {text}
       </Paragraph>,
@@ -124,12 +125,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, socials }) => {
 
         {/* Cleanup: Reordered LangSwitcher and Button for logical flow */}
         {renderTabWrapper(
-          <FlexDiv
-            flex={{ x: "space-between" }}
-            gapArray={[4]}
-            width100
-            as={"li"}
-          >
+          <FlexDiv flex={{ x: "space-between" }} gapArray={[4]} width100>
             <LangSwitcher onClick={() => setIsOpen(false)} />
             {socials && <Socials {...socials} />}
           </FlexDiv>
@@ -139,7 +135,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, socials }) => {
             variant="simple"
             path={`/${locale}${LocalPaths.CONTACT}`}
             onClick={() => setIsOpen(false)}
-            as={"li"}
           >
             {translations.buttons.contact}
           </Button>

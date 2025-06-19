@@ -46,7 +46,9 @@
 
 .tabs {
   overflow: hidden;
-
+  li {
+    width: 100%;
+  }
   .tabWrapper {
     position: relative;
     background-color: var(--black);

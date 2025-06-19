@@ -3,6 +3,7 @@
 .blockContainer {
   position: relative;
   @include vari(--stroke-width, 2px, 3px, 3px, 4px);
+  min-height: 100vh;
 
   .left {
     .grid {

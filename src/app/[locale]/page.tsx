@@ -12,20 +12,18 @@ import { fetchPage } from "@/app/api/fetchPage";
 import { LangType } from "@/i18n/request";
 
 import { homePageQuery } from "../api/generateSanityQueries";
-import { ICustomImage } from "@/components/reuse/SanityImage/SanityImage";
 import { getCarouselImages } from "@/components/reuse/Carousel/getCarouselData";
 import { Carousel } from "@/components/reuse/Carousel/Carousel";
 import { Questions } from "@/components/services/Questions/Questions";
 import { Features } from "@/components/services/Features/Features";
 import { Reviews } from "@/components/pages/Reviews/Reviews";
 import { getFormData } from "@/components/reuse/Form/getFormData";
-import { FormTitleProps } from "@/components/reuse/Form/Form";
 import { ImageAndForm } from "@/components/pages/ContactPage/ImageAndForm/ImageAndForm";
 import { Collapsible } from "@/components/reuse/Collapsible/Collapsible";
 import { Hero } from "@/components/reuse/Hero/Hero";
 import { getTranslations } from "@/helpers/langUtils";
 import { Metadata } from "next";
-import { setMetadata } from "../api/SEO";
+import { setMetadata } from "@/app/api/SEO";
 
 export interface HomePageProps {
   meta: ISeo;
@@ -77,10 +75,14 @@ export default async function HomePage({
 }) {
   // const translations = getTranslations(locale);Para
   const { locale } = await params;
-  const translations = getTranslations(locale);
-  const data = await getHomePageData(locale);
-  const carouselImages: ICustomImage[] = await getCarouselImages();
-  const formData: FormTitleProps = await getFormData("contact", locale);
+
+  // Fetch data in parallel instead of sequential
+  const [data, carouselImages, formData, translations] = await Promise.all([
+    getHomePageData(locale),
+    getCarouselImages(),
+    getFormData("contact", locale),
+    Promise.resolve(getTranslations(locale)), // Make sync function async-compatible
+  ]);
 
   return (
     data && (
@@ -95,7 +97,13 @@ export default async function HomePage({
             }}
           />
         )}
-        {carouselImages && <Carousel images={carouselImages} />}
+        <Carousel
+          images={carouselImages}
+          cta={{
+            text: translations.buttons.viewPortfolio,
+            path: `/${locale}${LocalPaths.PORTFOLIO}`,
+          }}
+        />
         {data.questionBlock && (
           <Questions
             questions={data.questionBlock.questions}

@@ -13,7 +13,7 @@ import { Block } from "@/components/containers/Block";
 export const Review: React.FC<IReview> = ({ name, review, title }) => {
   return (
     <FlexDiv flex={{ direction: "column" }} className={styles.review}>
-      <Heading as="h5" level="5" color="grad" textAlign="center">
+      <Heading as="span" level="5" color="grad" textAlign="center">
         {name}
       </Heading>
       <Paragraph

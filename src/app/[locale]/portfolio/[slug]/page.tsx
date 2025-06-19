@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 import { LangType } from "@/i18n/request";
 import { ProjectModalContent } from "@/components/pages/PortfolioPage/ProjectModal/ProjectModal";
 import { Modal } from "@/components/reuse/Modal/Modal";
+import { Metadata } from "next";
+import { setMetadata } from "@/app/api/SEO";
 
 export interface WorkProps extends IWork {
   meta: ISeo;
@@ -19,23 +21,27 @@ const getWorkPageData = async (slug: string): Promise<WorkProps | null> => {
   }
 };
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: Promise<{ locale: LangType; slug: string }>;
-// }): Promise<Metadata> {
-//   const { locale, slug } = await params;
-//   const path = `${LocalPaths.PORTFOLIO}/${slug}`;
-//   const workPageData = await getWorkPageData(slug);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: LangType; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const path = `${LocalPaths.PORTFOLIO}/${slug}`;
+  const crawl = true;
+  const workPageData = await getWorkPageData(slug);
 
-//   return setMetadata({
-//     locale,
-//     metaTitle: workPageData?.meta.metaTitle || "Work | Seto X Arts",
-//     metaDesc: workPageData?.meta.metaDesc || "Explore our creative work.",
-//     path,
-//     crawl: true,
-//   });
-// }
+  // Add fallback values in case landingPageData is null
+  const metaTitle = workPageData?.meta?.metaTitle || "MR LED";
+  const metaDesc = workPageData?.meta?.metaDesc || "MR LED";
+  return setMetadata({
+    locale,
+    metaTitle,
+    metaDesc,
+    path,
+    crawl,
+  });
+}
 
 export default async function WorkModal({
   params,

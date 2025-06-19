@@ -1,6 +1,7 @@
 interface Buttons {
   contact: string;
   submit: string;
+  viewPortfolio: string;
 }
 
 interface Form {

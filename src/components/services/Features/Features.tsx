@@ -19,7 +19,6 @@ const Feature: React.FC<IFeature> = ({ title, svgName, desc }) => {
       flex={{ direction: "column", x: "flex-start" }}
       width100
       className={cn(styles.container)}
-      as="li"
       gapArray={[5, 4, 4, 5]}
     >
       <div className={styles.imgWrapper}>
@@ -92,7 +91,7 @@ export const Features: React.FC<FeaturesProps> = ({ features, title }) => {
       >
         {features?.map((feature: IFeature, key) => {
           return (
-            <AnimatedWrapper from="inside" key={key}>
+            <AnimatedWrapper from="inside" key={key} as="li">
               <Feature {...feature} />
             </AnimatedWrapper>
           );

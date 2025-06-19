@@ -9,7 +9,7 @@ import { montserrat } from "@/components/reuse/Paragraph/Paragraph";
 import { Navbar } from "@/components/navbar/Navbar/Navbar";
 import { Footer } from "@/components/footer/Footer";
 import { getTranslations } from "@/helpers/langUtils";
-import { IFooter, INavBar, LocalPaths } from "@/data.d";
+import { INavBar, LocalPaths } from "@/data.d";
 import { footerPageQuery } from "../api/generateSanityQueries";
 import { fetchPage } from "../api/fetchPage";
 
@@ -21,9 +21,12 @@ export default async function LocaleLayout({
   params: Promise<{ locale: LangType }>;
 }>) {
   const { locale } = await params;
-  const trans = getTranslations(locale);
-  const footerQuery = footerPageQuery(locale);
-  const footerData: IFooter = await fetchPage(footerQuery);
+  // Fetch in parallel
+  const [trans, footerData] = await Promise.all([
+    Promise.resolve(getTranslations(locale)),
+    fetchPage(footerPageQuery(locale)),
+  ]);
+
   const navbarData: INavBar = {
     navButton: {
       text: trans.buttons.contact,

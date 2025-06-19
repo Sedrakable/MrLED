@@ -23,7 +23,7 @@ export const HeroWrapper: FC<IHeroWrapperProps> = ({
   rightContentSmall,
   rightContentBig,
 }) => {
-  const { isMobileOrTablet } = useWindowResize();
+  const { isMobileOrTablet = true } = useWindowResize();
 
   return (
     <FlexDiv

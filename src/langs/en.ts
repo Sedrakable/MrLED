@@ -4,6 +4,7 @@ export const enTranslations: Translations = {
   buttons: {
     contact: "Contact",
     submit: "Submit",
+    viewPortfolio: "View Portfolio",
   },
   form: {
     select: "Select",

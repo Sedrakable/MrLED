@@ -1,4 +1,4 @@
-import { ISeo, ICollapsible } from "@/data.d";
+import { ISeo, ICollapsible, LocalPaths } from "@/data.d";
 import { fetchPage } from "@/app/api/fetchPage";
 import { LangType } from "@/i18n/request";
 
@@ -8,6 +8,8 @@ import {
   HeroAndForm,
   IHeroAndFormProps,
 } from "@/components/pages/ContactPage/HeroAndForm/HeroAndForm";
+import { Metadata } from "next";
+import { setMetadata } from "@/app/api/SEO";
 
 export interface ContactPageProps {
   meta: ISeo;
@@ -22,25 +24,28 @@ const getContactPageData = async (locale: LangType) => {
   return data;
 };
 
-// export async function generateMetadata({
-//   params: { locale },
-// }: {
-//   params: { locale: LangType };
-// }): Promise<Metadata> {
-//   const path = `${LocalPaths.WOOD}`;
-//   const crawl = true;
-//   const data: HomePageProps = await getHomePageData(locale);
-//   const { metaTitle, metaDesc, metaKeywords } = data.meta;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: LangType }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const path = LocalPaths.CONTACT;
+  const crawl = true;
+  const data = await getContactPageData(locale);
 
-//   return setMetadata({
-//     locale,
-//     metaTitle,
-//     metaDesc,
-//     metaKeywords,
-//     path,
-//     crawl,
-//   });
-// }
+  // Add fallback values in case landingPageData is null
+  const metaTitle = data?.meta?.metaTitle || "MR LED";
+  const metaDesc = data?.meta?.metaDesc || "MR LED";
+
+  return setMetadata({
+    locale,
+    metaTitle,
+    metaDesc,
+    path,
+    crawl,
+  });
+}
 
 export default async function ContactPage({
   params,
