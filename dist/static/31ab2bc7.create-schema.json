@@ -932,6 +932,21 @@
             "level": "error"
           }
         ],
+        "name": "profileImage",
+        "type": "customImage"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
         "name": "title",
         "type": "string"
       },
@@ -1209,6 +1224,21 @@
             "rules": [
               {
                 "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
                 "constraint": "optional"
               }
             ],
@@ -1245,6 +1275,36 @@
             "rules": [
               {
                 "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title1",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title2",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
                 "constraint": "optional"
               }
             ],
@@ -1273,6 +1333,21 @@
     "fields": [
       {
         "name": "hiddenTitle",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
         "type": "string"
       },
       {
@@ -1789,8 +1864,9 @@
         "type": "string"
       },
       {
-        "name": "link",
-        "type": "string"
+        "name": "path",
+        "type": "string",
+        "title": "Link"
       }
     ],
     "name": "cta",
