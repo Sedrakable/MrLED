@@ -3,20 +3,27 @@
 .container {
   position: relative;
   height: auto;
-  img {
+  width: 100%;
+  .imageContainer {
+    width: 100%;
     position: sticky;
     top: calc(var(--navbar-height) + var(--pad-5));
-    display: none;
-    filter: drop-shadow(32px 32px 12px rgba(0, 0, 0, 0.3)) hue-rotate(-10deg);
-    // transform-style: preserve-3d;
-    animation: depthPulse 5s ease-in-out infinite;
-    transform-origin: center;
+    img {
+      display: none;
+      filter: drop-shadow(32px 32px 12px rgba(0, 0, 0, 0.3)) hue-rotate(-10deg);
+      // transform-style: preserve-3d;
+      animation: depthPulse 5s ease-in-out infinite;
+      transform-origin: center;
+    }
   }
   @media (min-width: $laptop) {
     flex-direction: row !important;
     align-items: flex-start !important;
-    img {
-      display: block;
+    .imageContainer {
+      img {
+        width: 75%;
+        display: block;
+      }
     }
   }
 }

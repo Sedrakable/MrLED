@@ -203,7 +203,7 @@ export const Footer: React.FC<FooterProps> = (props) => {
             SvgComponent={GridTablet}
             className={styles.grid}
           />
-          <TabletFooter {...props} />{" "}
+          <TabletFooter {...props} />
         </>
       ) : (
         <>
@@ -211,7 +211,7 @@ export const Footer: React.FC<FooterProps> = (props) => {
             SvgComponent={GridDesktop}
             className={styles.grid}
           />
-          <DesktopFooter {...props} />{" "}
+          <DesktopFooter {...props} />
         </>
       )}
     </footer>

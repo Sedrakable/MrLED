@@ -52,6 +52,31 @@ $desktop: 1680px;
   transform: translate(-50%, -50%);
 }
 
+@mixin gradBorderWrapper() {
+  @include fixedGradBackground();
+  border-radius: var(--border-radius);
+  position: relative;
+  z-index: 0;
+
+  &::before {
+    @include fixedGradBackground();
+    content: "";
+    position: absolute;
+    inset: 0;
+    filter: blur(8px);
+    z-index: -1;
+    opacity: 0.25;
+  }
+  &::after {
+    background: var(--black);
+    border-radius: var(--border-radius);
+    content: "";
+    position: absolute;
+    inset: 1.5px;
+    z-index: -1;
+  }
+}
+
 @mixin fixedGradBackground() {
   background: var(--grad-main);
   background-attachment: fixed;

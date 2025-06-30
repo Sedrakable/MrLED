@@ -14,27 +14,42 @@
       grid-row-gap: var(--pad-4);
       width: 100%;
       aspect-ratio: 564/448;
+      grid-template-areas:
+        "Grad Grad Profile Profile Profile"
+        "Green Blue Profile Profile Profile"
+        "Logo Logo Profile Profile Profile"
+        "Logo Logo White White White";
+      div,
       img {
         border-radius: 4px;
-        grid-area: 1 / 2 / 5 / 6;
       }
-      span {
-        border-radius: 4px;
-        &:nth-child(2) {
-          grid-area: 1 / 1 / 3 / 2;
-          background-color: var(--led-green);
-        }
-        &:nth-child(3) {
-          grid-area: 3 / 1 / 4 / 2;
-          background-color: var(--white);
-        }
-        &:nth-child(4) {
-          grid-area: 4 / 1 / 5 / 2;
-          outline-width: var(--stroke-width);
-          outline-color: var(--led-green);
-          outline-offset: calc(var(--stroke-width) * -1);
-          outline-style: solid;
-        }
+      .logo {
+        grid-area: Logo;
+      }
+      .profile {
+        grid-area: Profile;
+      }
+      .green {
+        grid-area: Green;
+        outline-width: var(--stroke-width);
+        outline-color: var(--led-green-turq);
+        outline-offset: calc(var(--stroke-width) * -1);
+        outline-style: solid;
+      }
+      .blue {
+        grid-area: Blue;
+        outline-width: var(--stroke-width);
+        outline-color: var(--led-blue-turq);
+        outline-offset: calc(var(--stroke-width) * -1);
+        outline-style: solid;
+      }
+      .white {
+        grid-area: White;
+        background-color: var(--white);
+      }
+      .grad {
+        grid-area: Grad;
+        background: var(--grad-main);
       }
     }
   }

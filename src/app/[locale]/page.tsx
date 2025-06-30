@@ -1,12 +1,12 @@
 import {
   ISeo,
   IHero,
-  IQuestion,
-  IFeature,
-  IReview,
   ICollapsible,
   LocalPaths,
   LocalTargets,
+  IReviewBlock,
+  IFeatureBlock,
+  IQuestionBlock,
 } from "@/data.d";
 import { fetchPage } from "@/app/api/fetchPage";
 import { LangType } from "@/i18n/request";
@@ -28,9 +28,9 @@ import { setMetadata } from "@/app/api/SEO";
 export interface HomePageProps {
   meta: ISeo;
   hero: IHero;
-  questionBlock: { questions: IQuestion[] };
-  featureBlock: { features: IFeature[] };
-  reviewBlock: { reviews: IReview[] };
+  questionBlock: IQuestionBlock;
+  featureBlock: IFeatureBlock;
+  reviewBlock: IReviewBlock;
   collapsible: ICollapsible;
 }
 
@@ -104,20 +104,9 @@ export default async function HomePage({
             path: `/${locale}${LocalPaths.PORTFOLIO}`,
           }}
         />
-        {data.questionBlock && (
-          <Questions
-            questions={data.questionBlock.questions}
-            title1="Arrête de rester dans l’ombre"
-            title2="Commence à illuminer la place"
-          />
-        )}
-        {data.featureBlock && (
-          <Features
-            features={data.featureBlock.features}
-            title="Ce que tu obtiens"
-          />
-        )}
-        {data.reviewBlock && <Reviews reviews={data.reviewBlock.reviews} />}
+        {data.questionBlock && <Questions {...data.questionBlock} />}
+        {data.featureBlock && <Features {...data.featureBlock} />}
+        {data.reviewBlock && <Reviews {...data.reviewBlock} />}
         {<ImageAndForm {...formData} />}
         {data.collapsible && <Collapsible {...data.collapsible} />}
       </>

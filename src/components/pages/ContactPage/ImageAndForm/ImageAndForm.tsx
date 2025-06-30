@@ -19,12 +19,14 @@ export const ImageAndForm: FC<FormTitleProps> = ({ title, subTitle }) => {
         flex={{ direction: "column" }}
       >
         <ContactForm title={title} subTitle={subTitle} />
-        <Image
-          src={`/photos/FulllLogoTransparent.png`}
-          alt="form image"
-          width={500}
-          height={500}
-        />
+        <FlexDiv className={styles.imageContainer}>
+          <Image
+            src={`/photos/FulllLogoTransparent.png`}
+            alt="form image"
+            width={500}
+            height={500}
+          />
+        </FlexDiv>
       </FlexDiv>
     </Block>
   );

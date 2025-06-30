@@ -23,12 +23,15 @@ export const homePageQuery = (locale: LangType): string => {
         meta,
         hero,
         featureBlock->{
+          ...,
           features[]->,
         },
         questionBlock->{
+          ...,
           questions[]->,
         },
         reviewBlock->{
+          ...,
           reviews[]->,
         },
         collapsible->,

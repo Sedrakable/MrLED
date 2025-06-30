@@ -56,12 +56,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, socials }) => {
     );
     if (path) {
       return (
-        <li>
+        <li key={key}>
           <Link
             href={path}
             aria-label={path}
             style={{ width: "100%" }}
-            key={key}
             onClick={() => setIsOpen(false)}
           >
             {content}

@@ -31,8 +31,9 @@ export interface IFeature {
   desc: string;
 }
 
-export interface IReviews {
-  reviews: IReview[];
+export interface IFeatureBlock {
+  title: string;
+  features: IFeature[];
 }
 
 export interface IReview {
@@ -41,9 +42,20 @@ export interface IReview {
   review: string;
 }
 
+export interface IReviewBlock {
+  title: string;
+  reviews: IReview[];
+}
+
 export interface IQuestion {
   title: string;
   desc: any;
+}
+
+export interface IQuestionBlock {
+  title1: string;
+  title2: string;
+  questions: IQuestion[];
 }
 
 export interface IWorkBlock {

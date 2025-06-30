@@ -1,7 +1,7 @@
 @use "@/styles/mixins.scss" as *;
 
 .embla {
-  @include vari(--height, 85vw, 320px, 320px, 400px);
+  @include vari(--height, 85vw, 260px, 320px, 400px);
   // overflow: hidden;
   padding: var(--pad-6) 0;
   width: 100%;

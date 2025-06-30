@@ -10,12 +10,21 @@ import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
 import { HeroWrapper } from "@/components/reuse/HeroWrapper/HeroWrapper";
 import Image from "next/image";
 import { useWindowResize } from "@/helpers/useWindowResize";
+import {
+  ICustomImage,
+  SanityImage,
+} from "@/components/reuse/SanityImage/SanityImage";
 
 export interface IPortfolioHeroProps {
   title: string;
   desc: string;
+  profileImage: ICustomImage;
 }
-export const PortfolioHero: FC<IPortfolioHeroProps> = ({ title, desc }) => {
+export const PortfolioHero: FC<IPortfolioHeroProps> = ({
+  title,
+  desc,
+  profileImage,
+}) => {
   const { isMobileOrTablet } = useWindowResize();
 
   const leftContent = (
@@ -31,10 +40,19 @@ export const PortfolioHero: FC<IPortfolioHeroProps> = ({ title, desc }) => {
           alt="Logomark Grad"
           width={800}
           height={800}
+          className={styles.logo}
         />
-        <span />
-        <span />
-        <span />
+        <SanityImage
+          {...profileImage}
+          quality={100}
+          // sizes={imageWidthsByColumns[columnCount]}
+          figureclassname={styles.profile} // Note: Kept your prop name as-is
+        />
+
+        <div className={styles.green} />
+        <div className={styles.blue} />
+        <div className={styles.white} />
+        <div className={styles.grad} />
       </div>
     </FlexDiv>
   );

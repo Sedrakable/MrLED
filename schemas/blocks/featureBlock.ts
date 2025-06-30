@@ -11,6 +11,12 @@ export default defineType({
       type: "string",
     },
     {
+      name: "title",
+      title: "Title",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: "features",
       title: "Features",
       type: "array",

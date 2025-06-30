@@ -7,12 +7,11 @@ interface SEOProps extends ISeo {
   path: string;
   crawl?: boolean;
 }
-
 export const setMetadata = ({
   locale,
   metaTitle,
   metaDesc,
-  metaImage = "https://i.imgur.com/u9EH6vH.png",
+  metaImage = "https://i.imgur.com/Ktd6V2h.png",
   path,
   crawl = true,
 }: SEOProps): Metadata => {

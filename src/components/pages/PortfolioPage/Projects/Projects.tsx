@@ -36,16 +36,16 @@ export const Project: FC<IWork> = ({
 
       <FlexDiv
         padding={{
-          horizontal: [3, 3, 3, 4],
-          bottom: [3, 3, 3, 4],
-          top: [4, 3, 3, 4],
+          vertical: [3, 3, 3, 3],
+
+          horizontal: [4, 4, 4, 4],
         }}
         flex={{ direction: "column" }}
         className={styles.text}
       >
         <Paragraph
-          level="regular"
-          color="black"
+          level="small"
+          color="white"
           className={styles.desc}
           weight={500}
         >

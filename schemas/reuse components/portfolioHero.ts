@@ -6,6 +6,12 @@ export default defineType({
   type: "document",
   fields: [
     {
+      name: "profileImage",
+      title: "Profile Image",
+      type: "customImage",
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: "title",
       title: "Title",
       type: "string",

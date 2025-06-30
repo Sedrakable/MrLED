@@ -1,11 +1,8 @@
 @use "@/styles/mixins.scss" as *;
 
-.projects {
-}
-
 .card {
   position: relative;
-  @include fixedGradBackground();
+  @include gradBorderWrapper();
   border-radius: 8px;
   &:hover {
     &::before {
@@ -20,18 +17,23 @@
       }
     }
   }
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 4px;
-    transition: var(--transition-time-backoff);
-    @include fixedGradBackground;
-    filter: blur(12px);
-  }
+
   .text {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      top: -1.5px;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      @include fixedGradBackground;
+    }
     z-index: 1;
   }
   .image {
+    margin: 1.5px;
+    width: calc(100% - 3px) !important;
     aspect-ratio: 4/3;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
