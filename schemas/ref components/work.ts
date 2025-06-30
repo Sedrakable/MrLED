@@ -13,7 +13,7 @@ export default defineType({
         source: "title",
         maxLength: 96,
       },
-      validation: (Rule) => Rule.optional(),
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "meta",
@@ -29,47 +29,12 @@ export default defineType({
         }),
     },
     // {
-    //   name: "workType",
-    //   title: "Work Type",
+    //   name: "title",
+    //   title: "Title",
     //   type: "string",
-    //   options: {
-    //     list: [
-    //       { title: "Wood Signs", value: "wood" },
-    //       { title: "Branding", value: "branding" },
-    //       { title: "Website", value: "website" },
-    //       { title: "Playing Cards", value: "cards" },
-    //       { title: "Gallery", value: "gallery" },
-    //     ],
-    //   },
     //   validation: (Rule) => Rule.required(),
+    //   // Optional, no validation
     // },
-    {
-      name: "thumbnailImage",
-      title: "Thumbnail Image",
-      type: "customImage",
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      name: "title",
-      title: "Title",
-      type: "string",
-      // Optional, no validation
-    },
-    {
-      name: "images",
-      title: "Additional Images",
-      type: "array",
-      of: [{ type: "customImage" }],
-      description: "Images for modal display (e.g., Wood Signs). Optional.",
-      validation: (Rule) => Rule.max(30), // Optional, max 30
-    },
-    {
-      name: "link",
-      title: "External Link",
-      type: "url",
-      description: "External URL (e.g., Behance, Kickstarter). Optional.",
-      validation: (Rule) => Rule.uri({ scheme: ["http", "https"] }), // Optional, but must be valid URL if provided
-    },
     {
       name: "descEN",
       title: "Description English",
@@ -82,19 +47,30 @@ export default defineType({
       type: "text",
       // Optional, no validation
     },
+    {
+      name: "thumbnailImage",
+      title: "Thumbnail Image",
+      type: "customImage",
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "images",
+      title: "Additional Images",
+      type: "array",
+      of: [{ type: "customImage" }],
+      description: "Images for modal display (e.g., Wood Signs). Optional.",
+      validation: (Rule) => Rule.max(30), // Optional, max 30
+    },
+    {
+      name: "date",
+      title: "Date",
+      type: "date",
+    },
   ],
   preview: {
     select: {
-      title: "title",
-      workType: "workType",
+      title: "descFR",
       media: "thumbnailImage",
-    },
-    prepare({ title, workType, media }) {
-      return {
-        title: title || "Untitled Work",
-        subtitle: workType,
-        media,
-      };
     },
   },
 });

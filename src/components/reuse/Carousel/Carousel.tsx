@@ -10,9 +10,6 @@ import cn from "classnames";
 import { ICta } from "@/data.d";
 
 import { useShuffleArray } from "@/helpers/useShuffleArray";
-import { useLocale } from "next-intl";
-import { LangType } from "@/i18n/request";
-import { getTranslations } from "@/helpers/langUtils";
 import { Button } from "@/components/reuse/Button/Button";
 import FlexDiv from "@/components/reuse/FlexDiv";
 import {
@@ -28,9 +25,7 @@ interface ICarouselProps {
 }
 
 export const Carousel: FC<ICarouselProps> = ({ images, cta }) => {
-  const locale = useLocale() as LangType;
-  const translate = getTranslations(locale);
-
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [
     AutoScroll({ playOnInit: true }),
   ]);
@@ -64,6 +59,12 @@ export const Carousel: FC<ICarouselProps> = ({ images, cta }) => {
 
   // Use useShuffleArray hook here, directly passing the array
   const shuffledImages = useShuffleArray(images);
+  useEffect(() => {
+    if (shuffledImages.length > 0) {
+      const timer = setTimeout(() => setImagesLoaded(true), 50);
+      return () => clearTimeout(timer);
+    }
+  }, [shuffledImages]);
 
   if (!shuffledImages.length) return null;
 
@@ -74,7 +75,10 @@ export const Carousel: FC<ICarouselProps> = ({ images, cta }) => {
       padding={{ top: [2, 3, 5, 6], bottom: [7, 7, 7, 8] }}
       customStyle={{ zIndex: 4 }}
     >
-      <div className={styles.embla} ref={emblaRef}>
+      <div
+        className={cn(styles.embla, { [styles.loaded]: imagesLoaded })}
+        ref={emblaRef}
+      >
         <div className={styles.embla__container}>
           {shuffledImages.map(
             (image, index) =>

@@ -1,12 +1,9 @@
 import { ICustomImage } from "./components/reuse/SanityImage/SanityImage";
 
-export type ServiceType = "wood" | "digital";
-export type DigitalServiceType = "branding" | "web-design";
-
 export interface ISeo {
   metaTitle: string;
   metaDesc: string;
-  metaKeywords: string[];
+  metaImage?: string;
 }
 
 export interface ICta {
@@ -34,8 +31,9 @@ export interface IFeature {
   desc: string;
 }
 
-export interface IReviews {
-  reviews: IReview[];
+export interface IFeatureBlock {
+  title: string;
+  features: IFeature[];
 }
 
 export interface IReview {
@@ -44,31 +42,36 @@ export interface IReview {
   review: string;
 }
 
+export interface IReviewBlock {
+  title: string;
+  reviews: IReview[];
+}
+
 export interface IQuestion {
   title: string;
   desc: any;
 }
 
-export interface IAbout {
-  profileImage: ICustomImage;
-  title: string;
-  subTitle: string;
-  desc: any;
+export interface IQuestionBlock {
+  title1: string;
+  title2: string;
+  questions: IQuestion[];
 }
 
 export interface IWorkBlock {
-  title: string;
+  titleFR: string;
+  titleEN: string;
   works: IWork[];
-  id: LocalTargets; // For anchor scrolling
 }
 
 export interface IWork {
-  title?: string; // Optional for gallery
+  // title: string; // Optional for gallery
+  descEN?: any; // Optional description in English
+  descFR?: any;
   thumbnailImage: ICustomImage; // Sanity image asset
-  slug?: ISlug; // Optional for internal links
-  link?: string; // External URL (e.g., Behance, Kickstarter)
+  slug: ISlug; // Optional for internal links
   images?: ICustomImage[]; // For modal slider (Wood Signs)
-  isFullWidth?: boolean; // For Branding
+  date?: string; // Optional date for projects
 }
 
 export interface ISocials {
@@ -116,12 +119,12 @@ export interface INotFound {
 
 export enum LocalPaths {
   HOME = "/",
-  WORK = "/work",
+  PORTFOLIO = "/portfolio",
   CONTACT = "/contact",
   LEGAL = "/legal",
 }
 
 export enum LocalTargets {
-  HOMEFORM = "#home-form",
+  CONTACTFORM = "#contact-form",
   HOMEFAQ = "#home-faq",
 }

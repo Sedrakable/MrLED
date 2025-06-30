@@ -1,10 +1,10 @@
 import { Translations } from "./langTypes";
 
 export const frTranslations: Translations = {
-  titles: {},
   buttons: {
     contact: "Contactez",
     submit: "Soumettre",
+    viewPortfolio: "Voir le Portfolio",
   },
   form: {
     select: "Sélectionner",
@@ -29,8 +29,11 @@ export const frTranslations: Translations = {
   },
   nav: {
     home: "Accueil",
-    about: "À propos+Travail",
+    portfolio: "Portfolio",
     contact: "Contact",
     work: "Travail",
+  },
+  other: {
+    contactInfo: "Informations de contact",
   },
 };

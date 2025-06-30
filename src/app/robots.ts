@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/en/legal/"],
+      disallow: ["/en/legal/", "/fr/legal/"],
     },
-    sitemap: `${process.env.BASE_NAME}/sitemap.xml`,
+    sitemap: `${process.env.BASE_NAME || "http://www.mrled.ca"}/sitemap.xml`,
   };
 }

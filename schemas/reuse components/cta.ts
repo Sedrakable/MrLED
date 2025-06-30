@@ -12,7 +12,7 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "link",
+      name: "path",
       title: "Link",
       type: "string",
     },

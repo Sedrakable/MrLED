@@ -12,7 +12,14 @@
 .grid {
   position: absolute;
   top: 0;
+  width: 100%;
+  left: 0;
+
+  opacity: 0.5;
   z-index: 0;
+  @media (min-width: $desktop) {
+    height: unset;
+  }
 }
 .footer {
   @include flex;
@@ -20,6 +27,7 @@
   --border-width: 4px;
   width: 100vw;
   background: var(--black);
+  overflow: hidden;
   &::before {
     content: "";
     position: absolute;
@@ -38,7 +46,7 @@
     background: linear-gradient(
       180deg,
       hsl(from var(--black) h s l / 0.75) 0%,
-      hsl(from var(--black) h s l / 1) 50%
+      hsl(from var(--black) h s l / 1) 33%
     );
 
     z-index: 1;

@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./Features.module.scss";
 import cn from "classnames";
 import FlexDiv from "@/components/reuse/FlexDiv";
-import { IFeature } from "@/data.d";
+import { IFeature, IFeatureBlock } from "@/data.d";
 import { useSvgComponent } from "@/helpers/useSvgComponent";
 import { Block } from "@/components/containers/Block";
 import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
@@ -19,7 +19,6 @@ const Feature: React.FC<IFeature> = ({ title, svgName, desc }) => {
       flex={{ direction: "column", x: "flex-start" }}
       width100
       className={cn(styles.container)}
-      as="li"
       gapArray={[5, 4, 4, 5]}
     >
       <div className={styles.imgWrapper}>
@@ -35,15 +34,6 @@ const Feature: React.FC<IFeature> = ({ title, svgName, desc }) => {
         className={styles.content}
         gapArray={[2]}
       >
-        {/* <Paragraph
-          level="big"
-          color="white"
-          textAlign="center"
-          capitalise
-          weight={600}
-        >
-          {title}
-        </Paragraph> */}
         <Heading
           as="h3"
           level="5"
@@ -62,12 +52,7 @@ const Feature: React.FC<IFeature> = ({ title, svgName, desc }) => {
   );
 };
 
-export interface FeaturesProps {
-  title: string;
-  features: IFeature[];
-}
-
-export const Features: React.FC<FeaturesProps> = ({ features, title }) => {
+export const Features: React.FC<IFeatureBlock> = ({ features, title }) => {
   return (
     <Block
       title={{
@@ -80,7 +65,7 @@ export const Features: React.FC<FeaturesProps> = ({ features, title }) => {
       className={styles.block}
     >
       <GridDiv
-        gapArray={[6, 6, 7, 8]}
+        gapArray={[9, 6, 7, 8]}
         columns={[
           [1, 1],
           [2, 2],
@@ -92,7 +77,7 @@ export const Features: React.FC<FeaturesProps> = ({ features, title }) => {
       >
         {features?.map((feature: IFeature, key) => {
           return (
-            <AnimatedWrapper from="inside" key={key}>
+            <AnimatedWrapper from="inside" key={key} as="li">
               <Feature {...feature} />
             </AnimatedWrapper>
           );

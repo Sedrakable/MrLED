@@ -14,9 +14,10 @@ import { LangSwitcher } from "../LangSwitcher/LangSwitcher";
 import { LogoLink } from "../Navbar/Navbar";
 
 import { LangType } from "@/i18n/request";
-import { usePathname, useRouter } from "@/navigation";
+import { usePathname } from "@/navigation";
 import { Socials } from "@/components/footer/Socials";
 import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
+import Link from "next/link";
 
 // Define sidebar atom
 export const sidebarData = atom<boolean>(false);
@@ -28,7 +29,6 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ links, socials }) => {
   const pathname = usePathname();
-  const router = useRouter();
   const [isOpen, setIsOpen] = useAtom(sidebarData); // Cleanup: Renamed `sidebar` to `isOpen` for clarity
   const locale = useLocale() as LangType;
   const translations = getTranslations(locale);
@@ -39,24 +39,37 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, socials }) => {
     key?: number,
     path?: string
   ) => {
-    const wrapperOnClick = () => {
-      setIsOpen(false);
-      if (path) router.push(path as "/");
-    };
-    return (
+    const content = (
       <FlexDiv
         key={key}
         className={cn(styles.tabWrapper, {
           [styles.selected]: path && pathname == path,
+          [styles.linkTab]: path,
         })}
         flex={{ x: "flex-start" }}
         padding={{ horizontal: [6, 8], vertical: [5, 5] }}
-        onClick={() => wrapperOnClick()}
-        as="li"
+        as={path ? "div" : "li"}
+        width100
       >
         {child}
       </FlexDiv>
     );
+    if (path) {
+      return (
+        <li key={key}>
+          <Link
+            href={path}
+            aria-label={path}
+            style={{ width: "100%" }}
+            onClick={() => setIsOpen(false)}
+          >
+            {content}
+          </Link>
+        </li>
+      );
+    } else {
+      return content;
+    }
   };
 
   // Cleanup: Extracted common link rendering logic to reduce duplication
@@ -68,9 +81,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, socials }) => {
   ) => {
     return renderTabWrapper(
       <Paragraph
-        color="black"
+        color="grad"
         level={isSubTab ? "regular" : "big"}
         className={isSubTab ? styles.subTab : undefined}
+        weight={500}
       >
         {text}
       </Paragraph>,
@@ -106,9 +120,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, socials }) => {
       >
         {/* Cleanup: Streamlined link rendering with early return for last link */}
         {links &&
-          links
-            .slice(0, -1)
-            .map((link, key) => renderLink(link.path!, link.text, key))}
+          links.map((link, key) => renderLink(link.path!, link.text, key))}
 
         {/* Cleanup: Reordered LangSwitcher and Button for logical flow */}
         {renderTabWrapper(
@@ -118,7 +130,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ links, socials }) => {
           </FlexDiv>
         )}
         {renderTabWrapper(
-          <Button variant="simple" path={`/${locale}${LocalPaths.CONTACT}`}>
+          <Button
+            variant="simple"
+            path={`/${locale}${LocalPaths.CONTACT}`}
+            onClick={() => setIsOpen(false)}
+          >
             {translations.buttons.contact}
           </Button>
         )}

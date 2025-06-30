@@ -4,41 +4,74 @@
 .hero {
   // Shared Variables (used in calculations or multiple places)
   @include vari(--image-width, 80vw, 50vw, 40vw, 40vw);
-  @include vari(max-height, calc(100vw * 1.5), 75vw, 56.25vw, 56.25vw);
+  @include vari(max-height, fit-content, fit-content, 56.25vw, 56.25vw);
   min-height: fit-content;
   height: 75vh;
   background-color: var(--black);
   position: relative;
   overflow-x: clip;
+  min-width: 100vw !important;
 
   .imageContainer {
-    width: fit-content;
-    @include vari(height, 120vw, unset);
-    .backgroundImage,
-    .foregroundImage {
-      height: auto !important;
+    position: absolute;
+    @include vari(top, 100px, 150px, 0);
+    right: 0;
+    width: 100vw;
+    z-index: 0;
+
+    &::before {
+      content: "";
       position: absolute;
-      top: 50% !important;
-      right: 0 !important;
-      left: unset !important;
+      inset: 0;
+      @include fixedGradBackground();
+      z-index: -2; // Move this behind
+      @include vari(opacity, 0.4, 0.6);
     }
 
-    .foregroundImage {
-      @include vari(--y, -80%, -15%, -40%);
-      @include vari(--image-width, 100vw, 50vw, 40vw, 40vw);
-      width: var(--image-width) !important;
-      z-index: 2;
-      animation: pulse 4s ease-in-out infinite; // Added animation
+    .pixelGrid {
+      z-index: 1;
+      path {
+        fill: var(--black);
+      }
+
+      // Set all rects (pixels) to opacity 0 by default
+      rect {
+        opacity: 0;
+        animation: pixelFlicker 12s infinite;
+      }
+
+      // Create staggered animations for different pixels
+      @for $i from 2 through 18 {
+        rect:nth-child(#{$i}) {
+          animation-delay: #{($i - 2) * 0.7}s;
+        }
+      }
     }
-    .backgroundImage {
-      @include vari(--y, -50%, -48%);
-      @include vari(--image-width, 80vw, 60vw, 50vw, 50vw);
-      transform: translateY(var(--y)) !important;
-      width: var(--image-width) !important;
-      min-height: 155%;
-      z-index: 2;
-      mix-blend-mode: screen;
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        ellipse at center right,
+        transparent 0%,
+        transparent 10%,
+        hsl(from var(--black) h s l / 0.7) 30%,
+        var(--black) 70%
+      );
+
+      z-index: -1; // Move this behind
     }
+  }
+
+  @keyframes pixelFlicker {
+    0%,
+    95% {
+      opacity: 0;
+    } // Visible only 5% of the time
+    5%,
+    10% {
+      opacity: 1;
+    } // Brief appearance
   }
 
   .logo {
@@ -46,7 +79,8 @@
   }
 
   .content {
-    @include vari(width, 100%, 75vw, 60vw, 60vw);
+    max-width: var(--screen-width-large);
+    @include vari(width, 100%, 75vw, 80vw, 80vw);
     box-sizing: content-box;
     .subTitle {
       @include vari(
@@ -60,7 +94,7 @@
     }
 
     .desc {
-      width: 90%;
+      @include vari(width, 100%, 75%);
     }
   }
 

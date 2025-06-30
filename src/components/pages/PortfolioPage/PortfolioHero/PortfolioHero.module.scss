@@ -1,0 +1,56 @@
+@use "@/styles/mixins.scss" as *;
+
+.blockContainer {
+  position: relative;
+  @include vari(--stroke-width, 2px, 3px, 3px, 4px);
+  min-height: 100vh;
+
+  .left {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      grid-column-gap: var(--pad-4);
+      grid-row-gap: var(--pad-4);
+      width: 100%;
+      aspect-ratio: 564/448;
+      grid-template-areas:
+        "Grad Grad Profile Profile Profile"
+        "Green Blue Profile Profile Profile"
+        "Logo Logo Profile Profile Profile"
+        "Logo Logo White White White";
+      div,
+      img {
+        border-radius: 4px;
+      }
+      .logo {
+        grid-area: Logo;
+      }
+      .profile {
+        grid-area: Profile;
+      }
+      .green {
+        grid-area: Green;
+        outline-width: var(--stroke-width);
+        outline-color: var(--led-green-turq);
+        outline-offset: calc(var(--stroke-width) * -1);
+        outline-style: solid;
+      }
+      .blue {
+        grid-area: Blue;
+        outline-width: var(--stroke-width);
+        outline-color: var(--led-blue-turq);
+        outline-offset: calc(var(--stroke-width) * -1);
+        outline-style: solid;
+      }
+      .white {
+        grid-area: White;
+        background-color: var(--white);
+      }
+      .grad {
+        grid-area: Grad;
+        background: var(--grad-main);
+      }
+    }
+  }
+}

@@ -203,7 +203,11 @@ export const ContactForm: FC<FormTitleProps> = ({ title, subTitle }) => {
   ];
 
   return (
-    <FlexDiv width100 id={LocalTargets.HOMEFORM} className={styles.container}>
+    <FlexDiv
+      width100
+      id={LocalTargets.CONTACTFORM}
+      className={styles.container}
+    >
       {submit === translations.form.emailSent ? (
         <FormSubmitMessage locale={locale} translations={translations} />
       ) : (

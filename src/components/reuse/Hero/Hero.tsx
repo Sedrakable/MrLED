@@ -2,26 +2,26 @@
 import React from "react";
 import styles from "./Hero.module.scss";
 import cn from "classnames";
-import Image from "next/image";
 
 import { IHero } from "../../../data.d";
 import FlexDiv from "../FlexDiv";
 
 import { useWindowResize } from "../../../helpers/useWindowResize";
-import TitleFrench from "@/assets/vector/Titles/LedTaVie.svg";
+
 import { LangType } from "@/i18n/request";
 import { useLocale } from "next-intl";
 import { Button } from "../Button/Button";
 import { Heading } from "../Heading/Heading";
 import { PortableTextContent } from "../Paragraph/PortableTextContent";
+import TitleFrench from "@/assets/vector/Titles/LedTaVie.svg";
+import TitleEnglish from "@/assets/vector/Titles/LedYourLife.svg";
+import PixelGrid from "@/assets/vector/Graphics/pixel-grid.svg";
+import PixelGridMobile from "@/assets/vector/Graphics/pixel-grid-mobile.svg";
 import GradientSvgWrapper from "@/components/containers/GradientSvgWrapper/GradientSvgWrapper";
 
 export const Hero: React.FC<IHero> = ({ subTitle, desc, cta1, cta2 }) => {
   const locale = useLocale() as LangType;
-  // const translations = getTranslations(locale);
-  const { isMobileOrTablet } = useWindowResize();
-  // const heroRef = useRef<HTMLDivElement>(null);
-  // const scrollProgress = useParallaxScroll(heroRef);
+  const { isMobile } = useWindowResize();
 
   return (
     <FlexDiv
@@ -29,20 +29,16 @@ export const Hero: React.FC<IHero> = ({ subTitle, desc, cta1, cta2 }) => {
       flex={{ direction: "column-reverse", x: "flex-start", y: "center" }}
       as={"header"}
       width100
-      // ref={heroRef}
-      // customStyle={
-      //   {
-      //     "--scroll-progress": scrollProgress,
-      //   } as React.CSSProperties
-      // }
+      padding={{
+        horizontal: [6, 8, 9, 10],
+      }}
     >
       <FlexDiv
         padding={{
-          left: [6, 7, 8, 10],
-          right: [6, 0],
-          bottom: [6, 10, 0, 0],
+          bottom: [6, 9, 0, 0],
+          top: [10, 10, 0, 0],
         }}
-        gapArray={[3, 3, 3, 4]}
+        gapArray={[4, 3, 4, 4]}
         flex={{ direction: "column", x: "flex-start", y: "flex-start" }}
         customStyle={{ zIndex: 3 }}
         className={styles.content}
@@ -66,12 +62,14 @@ export const Hero: React.FC<IHero> = ({ subTitle, desc, cta1, cta2 }) => {
             className={styles.logo}
           />
         ) : (
-          // <TitleFrench className={cn(styles.logo, styles.logoFrench)} />
-          <TitleFrench className={cn(styles.logo, styles.logoFrench)} />
+          <GradientSvgWrapper
+            SvgComponent={TitleEnglish}
+            className={styles.logo}
+          />
         )}
         {desc && (
           <PortableTextContent
-            level={isMobileOrTablet ? "regular" : "big"}
+            level="regular"
             value={desc}
             color="white"
             className={styles.desc}
@@ -105,20 +103,11 @@ export const Hero: React.FC<IHero> = ({ subTitle, desc, cta1, cta2 }) => {
         )}
       </FlexDiv>
       <div className={styles.imageContainer}>
-        <Image
-          src={`/photos/hero-background.png`}
-          fill
-          alt="stroke"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className={styles.backgroundImage}
-        />
-        <Image
-          src={`/photos/hero-foreground.png`}
-          fill
-          alt="stroke"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className={styles.foregroundImage}
-        />
+        {isMobile ? (
+          <PixelGridMobile className={styles.pixelGrid} />
+        ) : (
+          <PixelGrid className={styles.pixelGrid} />
+        )}
       </div>
     </FlexDiv>
   );

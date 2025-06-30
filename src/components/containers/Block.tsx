@@ -4,10 +4,12 @@ import FlexDiv from "../reuse/FlexDiv";
 import cn from "classnames";
 import { Heading, HeadingProps } from "@/components/reuse/Heading/Heading";
 import Corner from "@/assets/vector/Graphics/Corner.svg";
+import Image from "next/image";
+import { AnimatedWrapper } from "./AnimatedWrapper/AnimatedWrapper";
 
 interface BlockProps {
   title?: Omit<HeadingProps, "level" | "as">;
-  variant?: "green" | "blue";
+  variant?: "green" | "blue" | "split";
   contentSize?: "small" | "default";
   className?: string;
   id?: string;
@@ -40,10 +42,22 @@ export const Block = forwardRef<HTMLDivElement, PropsWithChildren<BlockProps>>(
         as="article"
         id={id}
       >
+        {variant === "split" && (
+          <FlexDiv className={cn(styles.imgContainer)}>
+            <Image
+              src={"/photos/LavalMap.png"}
+              alt="map image"
+              width={800}
+              height={800}
+            />
+          </FlexDiv>
+        )}
         {title && (
-          <Heading {...title} as="h2" level="3" textAlign="center">
-            {title.children}
-          </Heading>
+          <AnimatedWrapper from="left" className={styles.titleWrapper}>
+            <Heading {...title} as="h2" level="3" textAlign="center">
+              {title.children}
+            </Heading>
+          </AnimatedWrapper>
         )}
 
         <FlexDiv
@@ -53,7 +67,7 @@ export const Block = forwardRef<HTMLDivElement, PropsWithChildren<BlockProps>>(
         >
           {children}
         </FlexDiv>
-        {variant && <Corner className={styles.corner} />}
+        {variant !== "split" && variant && <Corner className={styles.corner} />}
       </FlexDiv>
     );
   }

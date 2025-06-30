@@ -1,0 +1,15 @@
+@use "@/styles/mixins.scss" as *;
+
+.projectModal {
+  @include vari(width, 100%, 50vh, 50vh, 50vh);
+}
+
+.desc {
+  width: 100%;
+  flex: 1;
+}
+
+.content {
+  // width: 100%;
+  flex-shrink: 1;
+}

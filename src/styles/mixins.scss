@@ -52,6 +52,31 @@ $desktop: 1680px;
   transform: translate(-50%, -50%);
 }
 
+@mixin gradBorderWrapper() {
+  @include fixedGradBackground();
+  border-radius: var(--border-radius);
+  position: relative;
+  z-index: 0;
+
+  &::before {
+    @include fixedGradBackground();
+    content: "";
+    position: absolute;
+    inset: 0;
+    filter: blur(8px);
+    z-index: -1;
+    opacity: 0.25;
+  }
+  &::after {
+    background: var(--black);
+    border-radius: var(--border-radius);
+    content: "";
+    position: absolute;
+    inset: 1.5px;
+    z-index: -1;
+  }
+}
+
 @mixin fixedGradBackground() {
   background: var(--grad-main);
   background-attachment: fixed;
@@ -60,8 +85,9 @@ $desktop: 1680px;
 }
 
 @mixin fixedGradText() {
-  color: var(--grad-main); /* Fallback */
+  color: var(--grad-main) !important; /* Fallback */
   background: linear-gradient(90deg, var(--led-green) 0%, var(--led-blue) 100%);
+  background-position: 0 0;
   background-attachment: fixed;
   background-size: 100vw;
   -webkit-background-clip: text;

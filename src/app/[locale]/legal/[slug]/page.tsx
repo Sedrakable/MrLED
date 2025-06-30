@@ -11,6 +11,6 @@ export default async function LegalPage({
   params: { locale: LangType; slug: string };
 }) {
   const legalQuery = legalPageQuery(locale, slug);
-  const legalPageData: ILegalPage = await fetchPage(legalQuery, slug);
+  const legalPageData: ILegalPage = await fetchPage(legalQuery);
   return legalPageData && <LegalPageComp {...legalPageData} />;
 }

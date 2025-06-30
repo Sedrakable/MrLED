@@ -3,6 +3,10 @@
 .block {
   position: relative;
   flex: 1;
+
+  .titleWrapper {
+    @include flex();
+  }
   .content {
     z-index: 1;
   }
@@ -39,6 +43,54 @@
       transform: scaleX(-1);
       path {
         fill: var(--led-blue) !important;
+      }
+    }
+  }
+
+  &.var-split {
+    .imgContainer {
+      position: absolute;
+      top: 0;
+      width: 100vw;
+      img {
+        object-fit: cover;
+        opacity: 0.4;
+        mix-blend-mode: luminosity;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, transparent, var(--black));
+      }
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        180% 150% at 100% 100%,
+        hsl(from var(--led-blue) h s l / 0.3) 0%,
+        hsl(from var(--led-green) h s l / 0) 66%
+      );
+    }
+    @media (min-width: $laptop) {
+      .imgContainer {
+        position: absolute;
+        left: 0;
+        height: 100%;
+        width: 50vw;
+        &::after {
+          background: radial-gradient(
+            180% 150% at 100% 100%,
+            hsl(from var(--led-blue) h s l / 0.3) 0%,
+            hsl(from var(--led-green) h s l / 0) 66%
+          );
+        }
+      }
+      &::after {
+        content: unset;
       }
     }
   }

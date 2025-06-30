@@ -23,12 +23,15 @@ export const homePageQuery = (locale: LangType): string => {
         meta,
         hero,
         featureBlock->{
+          ...,
           features[]->,
         },
         questionBlock->{
+          ...,
           questions[]->,
         },
         reviewBlock->{
+          ...,
           reviews[]->,
         },
         collapsible->,
@@ -50,10 +53,34 @@ export const aboutPageQuery = (locale: LangType): string => {
 export const contactPageQuery = (locale: LangType): string => {
   return `*[_type == 'contactPage' && lang == '${locale}'][0] {
     meta,
-    hero,
-    collapsibles[]->,
+    contactHero,
+    collapsible->,
   }`;
 };
+
+export const portfolioPageQuery = (locale: LangType): string => {
+  return `*[_type == 'portfolioPage' && lang == '${locale}'][0] {
+    meta,
+    portfolioHero,
+    workBlock->{
+      ...,
+      works[]->,
+    },
+  }`;
+};
+
+export const workPageQuery = (slug: string): string => {
+  return `*[_type == 'work' && slug.current == '${slug}'][0]{
+    ...,
+    meta,
+  }`;
+};
+
+export const sitemapWorkQuery: string = `*[_type == 'work']{
+  images,
+  slug,
+  _updatedAt,
+  }`;
 
 export const formQuery = (slug: string, locale: LangType): string => {
   return `*[_type == '${slug}Form' && lang == '${locale}'][0]`;

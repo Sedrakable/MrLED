@@ -12,7 +12,9 @@ import { useLocale } from "next-intl";
 import { LangType } from "@/i18n/request";
 import Link from "next/link";
 import LogoWord from "@/assets/vector/Logos/Logo-Wordmark.svg";
-import Grid from "@/assets/vector/Graphics/footer-grid.svg";
+import GridMobile from "@/assets/vector/Graphics/footer/footer-grid-mobile.svg";
+import GridTablet from "@/assets/vector/Graphics/footer/footer-grid-tablet.svg";
+import GridDesktop from "@/assets/vector/Graphics/footer/footer-grid-desktop.svg";
 import GradientSvgWrapper from "../containers/GradientSvgWrapper/GradientSvgWrapper";
 
 const Line: React.FC = () => {
@@ -187,13 +189,30 @@ export const Footer: React.FC<FooterProps> = (props) => {
 
   return (
     <footer className={styles.footer}>
-      <GradientSvgWrapper SvgComponent={Grid} className={styles.grid} print />
       {isMobile ? (
-        <MobileFooter {...props} />
+        <>
+          <GradientSvgWrapper
+            SvgComponent={GridMobile}
+            className={styles.grid}
+          />
+          <MobileFooter {...props} />
+        </>
       ) : isTablet ? (
-        <TabletFooter {...props} />
+        <>
+          <GradientSvgWrapper
+            SvgComponent={GridTablet}
+            className={styles.grid}
+          />
+          <TabletFooter {...props} />
+        </>
       ) : (
-        <DesktopFooter {...props} />
+        <>
+          <GradientSvgWrapper
+            SvgComponent={GridDesktop}
+            className={styles.grid}
+          />
+          <DesktopFooter {...props} />
+        </>
       )}
     </footer>
   );

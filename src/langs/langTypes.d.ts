@@ -1,6 +1,7 @@
 interface Buttons {
   contact: string;
   submit: string;
+  viewPortfolio: string;
 }
 
 interface Form {
@@ -27,14 +28,18 @@ interface Form {
 
 interface Nav {
   home: string;
-  about: string;
+  portfolio: string;
   contact: string;
   work: string;
 }
 
+interface Other {
+  contactInfo: string;
+}
+
 export interface Translations {
   buttons: Buttons;
-  titles: Titles;
   form: Form;
   nav: Nav;
+  other: Other;
 }

@@ -35,10 +35,5 @@ export default defineType({
       type: "customParagraph",
       validation: (Rule) => Rule.required(),
     },
-    {
-      name: "cta1",
-      title: "Call to Action",
-      type: "cta",
-    },
   ],
 });

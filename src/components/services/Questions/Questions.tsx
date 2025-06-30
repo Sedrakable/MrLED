@@ -4,40 +4,38 @@ import styles from "./Questions.module.scss";
 import cn from "classnames";
 import { Block } from "@/components/containers/Block";
 import FlexDiv from "@/components/reuse/FlexDiv";
-import { IQuestion } from "@/data.d";
-import { LangType } from "@/i18n/request";
-import { useLocale } from "next-intl";
+import { IQuestion, IQuestionBlock } from "@/data.d";
 import { PortableTextContent } from "@/components/reuse/Paragraph/PortableTextContent";
 import { Heading } from "@/components/reuse/Heading/Heading";
+import { AnimatedWrapper } from "@/components/containers/AnimatedWrapper/AnimatedWrapper";
 
 const Question: React.FC<IQuestion> = ({ title, desc }) => {
   return (
     <FlexDiv
       flex={{ direction: "column", y: "flex-start" }}
       width100
-      gapArray={[3]}
-      as="li"
+      gapArray={[2, 2, 2, 3]}
+      padding={{
+        top: [3, 3, 3, 3],
+        bottom: [5, 5, 5, 5],
+        horizontal: [4, 4, 4, 4],
+      }}
+      className={styles.question}
     >
-      <FlexDiv
-        padding={{ horizontal: [5], bottom: [4], top: [3] }}
-        flex={{ y: "flex-start", x: "flex-start" }}
-        className={styles.titleContainer}
-        width100
+      <Heading
+        font="title"
+        level="5"
+        as="h3"
+        color="grad"
+        weight={400}
+        textAlign="left"
       >
-        <Heading
-          font="title"
-          level="5"
-          as="h3"
-          color="grad"
-          weight={400}
-          textAlign="left"
-        >
-          {title}
-        </Heading>
-      </FlexDiv>
+        {title}
+      </Heading>
 
       <PortableTextContent
-        level="regular"
+        level="small"
+        weight={400}
         value={desc}
         className={styles.desc}
         differentColorForStrongText={false}
@@ -47,45 +45,41 @@ const Question: React.FC<IQuestion> = ({ title, desc }) => {
   );
 };
 
-export interface QuestionBlockProps {
-  title1: string;
-  title2: string;
-  questions: IQuestion[];
-}
-
-export const Questions: React.FC<QuestionBlockProps> = ({
+export const Questions: React.FC<IQuestionBlock> = ({
   title1,
   title2,
   questions,
 }) => {
-  const locale = useLocale() as LangType;
-
   return (
     <Block className={styles.block}>
-      <FlexDiv flex={{ direction: "column", x: "stretch" }} width100>
-        <Heading
-          font="title"
-          as="h3"
-          level="3"
-          color="white"
-          className={styles.heading}
-          textAlign="center"
-          weight={400}
-        >
-          {title1}
-        </Heading>
-        <Heading
-          font="title"
-          as="h3"
-          level="3"
-          color="grad"
-          className={styles.heading}
-          textAlign="center"
-          weight={400}
-          paddingBottomArray={[6, 7, 7, 8]}
-        >
-          {title2}
-        </Heading>
+      <FlexDiv flex={{ direction: "column", x: "center" }} width100>
+        <AnimatedWrapper from="left">
+          <Heading
+            font="title"
+            as="h3"
+            level="3"
+            color="white"
+            className={styles.heading}
+            textAlign="center"
+            weight={400}
+          >
+            {title1}
+          </Heading>
+        </AnimatedWrapper>
+        <AnimatedWrapper from="right">
+          <Heading
+            font="title"
+            as="h3"
+            level="3"
+            color="grad"
+            className={styles.heading}
+            textAlign="center"
+            weight={400}
+            paddingBottomArray={[6, 7, 7, 8]}
+          >
+            {title2}
+          </Heading>
+        </AnimatedWrapper>
       </FlexDiv>
       <FlexDiv
         gapArray={[6, 7, 7, 8]}
@@ -95,7 +89,11 @@ export const Questions: React.FC<QuestionBlockProps> = ({
         as="ul"
       >
         {questions?.map((question: IQuestion, key) => {
-          return <Question {...question} key={key} />;
+          return (
+            <AnimatedWrapper from="inside" key={key} as="li">
+              <Question {...question} />
+            </AnimatedWrapper>
+          );
         })}
       </FlexDiv>
     </Block>

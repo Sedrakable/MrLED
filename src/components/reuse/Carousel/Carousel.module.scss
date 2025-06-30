@@ -1,13 +1,19 @@
 @use "@/styles/mixins.scss" as *;
 
 .embla {
-  @include vari(--height, 85vw, 320px, 320px, 400px);
+  @include vari(--height, 85vw, 260px, 320px, 400px);
   // overflow: hidden;
   padding: var(--pad-6) 0;
   width: 100%;
   overflow-x: clip;
   position: relative;
   z-index: 2;
+  min-height: var(--height);
+  opacity: 0;
+  transition: var(--transition-time);
+  &.loaded {
+    opacity: 1;
+  }
   &::before {
     content: "";
     // display: flex;
@@ -66,6 +72,8 @@
 .image {
   height: 100% !important;
   aspect-ratio: 1;
+  max-width: var(--height); // Constrain width to container height
+  min-width: var(--height); // Ensure consistent width
   border-radius: var(--border-radius);
   box-shadow: var(--drop-shadow);
 

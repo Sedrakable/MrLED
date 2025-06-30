@@ -1,0 +1,42 @@
+@use "@/styles/mixins.scss" as *;
+
+.content {
+  .textSplit {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .heading {
+      @include fixedGradBackground();
+      width: 100%;
+      position: relative;
+      color: var(--black) !important;
+      -webkit-background-clip: text;
+      -webkit-text-stroke: var(--stroke-width) transparent;
+
+      @include vari(
+        font-size,
+        clamp(0.5rem, 16vw, 7.3rem),
+        clamp(1rem, 8.4vw, 6.9rem),
+        clamp(2rem, 8.8vw, 9.9rem),
+        clamp(2rem, 8.8vw, 9.7rem)
+      );
+
+      &::before {
+        content: attr(data-text);
+        @include fixedGradText();
+        position: absolute;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        mask-image: linear-gradient(to right, black 50%, transparent 50%);
+        -webkit-mask-image: linear-gradient(
+          to right,
+          black 50%,
+          transparent 50%
+        );
+      }
+    }
+  }
+}

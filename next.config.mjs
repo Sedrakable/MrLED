@@ -1,3 +1,4 @@
+// File: next.config.mjs
 import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
@@ -13,12 +14,12 @@ const nextConfig = {
       use: ["@svgr/webpack"],
     });
 
-    fileLoaderRule.exclude = /\.svg$/i
-    
+    fileLoaderRule.exclude = /\.svg$/i;
+
     return config;
   },
-  typescript:{
-    ignoreBuildErrors: true
+  typescript: {
+    ignoreBuildErrors: true,
   },
   images: {
     domains: ["cdn.sanity.io"],
@@ -31,8 +32,8 @@ const nextConfig = {
     deviceSizes: [640, 1200, 1680],
   },
   // images: {
-  //   
-  //   
+  //
+  //
   // },
   // output: "export",  // <=== enables static exports
   // distDir: "dist",  // <=== change the build directory

@@ -5,7 +5,7 @@ import FlexDiv from "@/components/reuse/FlexDiv";
 import { Heading } from "@/components/reuse/Heading/Heading";
 import { Icon } from "@/components/reuse/Icon/Icon";
 import { Paragraph } from "@/components/reuse/Paragraph/Paragraph";
-import { IReview, IReviews } from "@/data.d";
+import { IReview, IReviewBlock } from "@/data.d";
 
 import { TextWrapper } from "@/components/containers/TextWrapper/TextWrapper";
 import { Block } from "@/components/containers/Block";
@@ -13,7 +13,7 @@ import { Block } from "@/components/containers/Block";
 export const Review: React.FC<IReview> = ({ name, review, title }) => {
   return (
     <FlexDiv flex={{ direction: "column" }} className={styles.review}>
-      <Heading as="h5" level="5" color="grad" textAlign="center">
+      <Heading as="span" level="5" color="grad" textAlign="center">
         {name}
       </Heading>
       <Paragraph
@@ -42,7 +42,7 @@ export const Review: React.FC<IReview> = ({ name, review, title }) => {
   );
 };
 
-export const Reviews: React.FC<IReviews> = ({ reviews }) => {
+export const Reviews: React.FC<IReviewBlock> = ({ reviews }) => {
   return (
     <Block
       title={{

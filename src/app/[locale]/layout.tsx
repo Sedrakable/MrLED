@@ -1,5 +1,4 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
-import Script from "next/script";
 import styles from "./layout.module.scss";
 import "@/styles/Main.css";
 import "@/styles/ScrollBar.scss";
@@ -7,7 +6,12 @@ import "@/styles/index.scss";
 import { NextIntlClientProvider } from "next-intl";
 import { LangType } from "@/i18n/request";
 import { montserrat } from "@/components/reuse/Paragraph/Paragraph";
-import NavWrapperServer from "@/components/pages/NavWrapper/NavWrapperServer";
+import { Navbar } from "@/components/navbar/Navbar/Navbar";
+import { Footer } from "@/components/footer/Footer";
+import { getTranslations } from "@/helpers/langUtils";
+import { INavBar, LocalPaths } from "@/data.d";
+import { footerPageQuery } from "../api/generateSanityQueries";
+import { fetchPage } from "../api/fetchPage";
 
 export default async function LocaleLayout({
   children,
@@ -17,49 +21,45 @@ export default async function LocaleLayout({
   params: Promise<{ locale: LangType }>;
 }>) {
   const { locale } = await params;
+  // Fetch in parallel
+  const [trans, footerData] = await Promise.all([
+    Promise.resolve(getTranslations(locale)),
+    fetchPage(footerPageQuery(locale)),
+  ]);
+
+  const navbarData: INavBar = {
+    navButton: {
+      text: trans.buttons.contact,
+      path: `/${locale}${LocalPaths.CONTACT}`,
+    },
+    links: [
+      {
+        text: trans.nav.portfolio,
+        path: `/${locale}${LocalPaths.PORTFOLIO}`,
+      },
+    ],
+  };
+
   return (
     <html lang={locale}>
       <NextIntlClientProvider locale={locale}>
         <head>
-          <meta name="theme-color" content="#fec301" />
-          <meta
-            name="facebook-domain-verification"
-            content="z6nna7jlyl6ehzowkxc3qp1oha3wb6"
-          />
-          <Script
-            id="facebook-pixel"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '764726835805460');
-            fbq('track', 'PageView');
-            `,
-            }}
-          />
-          <noscript>
-            <img
-              alt="facebook-pixel"
-              height="1"
-              width="1"
-              style={{ display: "none" }}
-              src="https://www.facebook.com/tr?id=764726835805460&ev=PageView&noscript=1"
-            />
-          </noscript>
+          <meta name="theme-color" content="#44B297" />
         </head>
         <body className={montserrat.className}>
           {/* <ViewportGradient /> */}
           <div id="root">
-            <NavWrapperServer locale={locale}>
-              <div className={styles.app}>{children}</div>
-            </NavWrapperServer>
+            <Navbar
+              {...navbarData}
+              socials={{ links: footerData?.socials?.links }}
+            />
+            <div className={styles.app}>{children}</div>
+            <Footer
+              {...navbarData}
+              legals={footerData?.legals}
+              trademark={footerData?.trademark}
+              socials={{ links: footerData?.socials?.links }}
+            />
           </div>
         </body>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ID!} />

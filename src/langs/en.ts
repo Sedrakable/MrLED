@@ -1,10 +1,10 @@
 import { Translations } from "./langTypes";
 
 export const enTranslations: Translations = {
-  titles: {},
   buttons: {
     contact: "Contact",
     submit: "Submit",
+    viewPortfolio: "View Portfolio",
   },
   form: {
     select: "Select",
@@ -29,8 +29,12 @@ export const enTranslations: Translations = {
   },
   nav: {
     home: "Home",
-    about: "About + Work",
+
+    portfolio: "Portfolio",
     contact: "Contact",
     work: "Work",
+  },
+  other: {
+    contactInfo: "Contact Information",
   },
 };
