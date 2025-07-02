@@ -72,6 +72,13 @@
     top: 0;
     right: 0;
     z-index: 2;
+    .closeButton {
+      &:hover {
+        svg {
+          fill: var(--led-turq) !important;
+        }
+      }
+    }
   }
   .imageWrapper {
     position: relative;
