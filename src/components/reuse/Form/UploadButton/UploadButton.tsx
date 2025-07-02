@@ -171,9 +171,15 @@ export const UploadButton: React.FC<UploadButtonProps> = ({
                 className={styles.closeButtonWrapper}
               >
                 <Button
-                  variant="primary"
+                  variant="simple"
                   onClick={() => removeFile(index)}
-                  iconProps={{ icon: "close", side: "right", size: "small" }}
+                  className={styles.closeButton}
+                  iconProps={{
+                    icon: "close",
+                    side: "right",
+                    size: "small",
+                    color: "grad",
+                  }}
                 />
               </FlexDiv>
               {previewUrls[index] && (
